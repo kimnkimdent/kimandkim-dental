@@ -5,8 +5,6 @@ import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
 import Mark from '../components/Mark.astro';
-import { Image } from 'astro:assets';
-import doctor from '../assets/doctor-kim.jpg';
 import { SITE, url, tel } from '../site';
 import { allQna, qna } from '../qna';
 
@@ -25,22 +23,36 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
 ---
 
 <Layout keywords={["파주 치과", "운정 치과", "야당동 치과", "운정신도시 치과"]}>
-  <section class="relative overflow-hidden bg-gradient-to-br from-primary-surface via-background to-surface-accent">
-    <Container class="grid items-center gap-8 pt-14 md:grid-cols-[1.1fr_0.9fr] md:pt-16">
-      <div class="pb-6 md:pb-20">
-        <Mark class="mb-5 h-[6.4rem] w-auto md:h-[8.4rem]" />
-        <p class="t-mid font-semibold text-primary">{SITE.slogan}</p>
-        <h1 class="mt-3 t-display font-bold">한 가족의 시간을<br />함께해 온 치과</h1>
-        <p class="mt-5 max-w-[48rem] t-mid text-foreground-muted">
+  <!-- 첫 화면: 진료 장면 영상 배경(소리 없음·자동 반복). 영상 파일: public/video/ (PC 1920px 약 4MB, 휴대폰 세로 약 1MB)
+       "동작 줄이기" 설정이면 영상 대신 첫 장면 사진만 보인다. -->
+  <section style={`--poster: url(${url("/video/hero-poster.jpg")})`} class="hero-video relative isolate flex min-h-[calc(100svh-7.6rem)] items-center overflow-hidden bg-secondary lg:min-h-[calc(100svh-10.4rem)]">
+    <video
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster={url('/video/hero-poster.jpg')}
+      aria-hidden="true"
+    >
+      <source src={url('/video/hero-mobile.mp4')} type="video/mp4" media="(max-width: 767px)" />
+      <source src={url('/video/hero-desktop.mp4')} type="video/mp4" />
+    </video>
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-t from-[hsl(214_45%_12%/0.85)] via-[hsl(214_45%_12%/0.45)] to-[hsl(214_45%_12%/0.2)] md:bg-gradient-to-r md:from-[hsl(214_45%_12%/0.8)] md:via-[hsl(214_45%_12%/0.4)] md:to-transparent"></div>
+
+    <Container class="py-16 text-white">
+      <div class="max-w-[60rem] max-md:pt-[16svh] max-md:pb-10">
+        <Mark tone="white" class="mb-5 h-[6rem] w-auto md:h-[8.4rem]" />
+        <p class="t-mid font-semibold text-primary-bright">{SITE.slogan}</p>
+        <h1 class="mt-3 t-display font-bold drop-shadow-sm">한 가족의 시간을<br />함께해 온 치과</h1>
+        <p class="mt-5 max-w-[48rem] t-mid opacity-90">
           아이의 첫 이부터 부모님의 틀니까지, {SITE.since}년부터 파주 운정 가족의 치아 건강을 돌봐왔습니다.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <Button href={SITE.contact.booking} variant="naver" size="lg">네이버 예약</Button>
-          <Button href={tel} variant="secondary" size="lg">전화 상담 {SITE.contact.phone}</Button>
+          <Button href={tel} variant="white" size="lg">전화 상담 {SITE.contact.phone}</Button>
         </div>
-      </div>
-      <div class="relative mx-auto w-full max-w-[44rem] self-end">
-        <Image src={doctor} alt="김앤김치과 대표원장 김정민" widths={[400, 700]} sizes="(min-width: 768px) 44rem, 90vw" class="relative aspect-[4/5] w-full rounded-t-[16rem] object-cover object-top" loading="eager" />
       </div>
     </Container>
   </section>
