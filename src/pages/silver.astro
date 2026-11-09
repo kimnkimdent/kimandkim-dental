@@ -6,6 +6,7 @@ import Note from '../components/Note.astro';
 import Process from '../components/Process.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
+import doctorWarm from '../assets/photos/doctor-warm.jpg';
 
 const worries = ['빠진 이가 많아 식사가 불편해요', '쓰던 틀니가 헐겁거나 잇몸이 아파요', '당뇨·고혈압 약을 먹고 있어 치료가 걱정돼요', '잇몸이 내려가고, 이가 시리고, 입이 자주 말라요'];
 // TODO(원장님 확인): 임플란트 틀니 설명
@@ -28,7 +29,7 @@ const dentures = [
 
   <div class="bg-background">
     <div class="mx-auto max-w-site px-gutter">
-      <Photo alt="식탁에서 손주와 웃으며 식사하는 실버 부부" ratio="aspect-[21/9]" />
+      <Photo src={doctorWarm} alt="진료실에서 웃고 있는 대표원장 김정민" ratio="aspect-[21/9]" class="[&_img]:object-[50%_30%]" />
     </div>
   </div>
 

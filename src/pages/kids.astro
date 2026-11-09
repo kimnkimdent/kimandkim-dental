@@ -5,6 +5,7 @@ import Section from '../components/Section.astro';
 import Note from '../components/Note.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
+import kidCheckup from '../assets/photos/kid-checkup.jpg';
 
 const checkups = [
   { t: '1차', d: '생후 18~29개월' },
@@ -25,7 +26,7 @@ const checkups = [
 
   <div class="bg-background">
     <div class="mx-auto max-w-site px-gutter">
-      <Photo alt="엄마 손을 잡고 들어서며 스탭에게 손 흔드는 아이" ratio="aspect-[21/9]" />
+      <Photo src={kidCheckup} alt="아이와 눈을 맞추며 진료 전 설명하는 대표원장" ratio="aspect-[21/9]" class="[&_img]:object-[50%_35%]" />
     </div>
   </div>
 

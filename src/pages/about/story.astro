@@ -5,9 +5,32 @@ import Section from '../../components/Section.astro';
 import Photo from '../../components/Photo.astro';
 import SubTabs from '../../components/SubTabs.astro';
 import { SITE } from '../../site';
+import deskWide from '../../assets/photos/desk-wide.jpg';
+import kidCheckup from '../../assets/photos/kid-checkup.jpg';
+import consultWoman from '../../assets/photos/consult-woman.jpg';
+import consultMan from '../../assets/photos/consult-man.jpg';
+import consultRoom from '../../assets/photos/consult-room.jpg';
+import doctorTeam from '../../assets/photos/doctor-team.jpg';
+import treatmentRoom from '../../assets/photos/treatment-room.jpg';
+import surgeryRoom from '../../assets/photos/surgery-room.jpg';
+import xrayRoom from '../../assets/photos/xray-room.jpg';
+import exterior from '../../assets/photos/exterior.jpg';
 
 const tabs = SITE.nav[0].children!;
-const family = ['아이 첫 검진', '엄마 상담', '아버지 임플란트 상담', '할머니 틀니 조정'];
+const family = [
+  { alt: '아이 첫 검진', src: kidCheckup },
+  { alt: '엄마 상담', src: consultWoman },
+  { alt: '아버지 임플란트 상담', src: consultMan },
+  { alt: '상담실', src: consultRoom },
+];
+const tour = [
+  { alt: '건물 외관 (대홍프라자 5층)', src: exterior },
+  { alt: '접수 데스크', src: deskWide },
+  { alt: '진료실', src: treatmentRoom },
+  { alt: '수술실', src: surgeryRoom },
+  { alt: '상담실', src: consultRoom },
+  { alt: '엑스레이·CT 촬영실', src: xrayRoom },
+];
 ---
 
 <Layout
@@ -27,13 +50,13 @@ const family = ['아이 첫 검진', '엄마 상담', '아버지 임플란트 �
 
   <div class="bg-background">
     <div class="mx-auto max-w-site px-gutter">
-      <Photo alt="병원 입구와 접수 데스크" ratio="aspect-[21/9]" />
+      <Photo src={deskWide} alt="김앤김치과 접수 데스크" ratio="aspect-[21/9]" />
     </div>
   </div>
 
   <Section eyebrow="처음엔 혼자, 다음엔 가족과" title="한 가족의 시간이 쌓여 지금의 김앤김치과가 되었습니다">
     <ul class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-      {family.map((f) => <li><Photo alt={f} ratio="aspect-square" /></li>)}
+      {family.map((f) => <li><Photo src={f.src} alt={f.alt} ratio="aspect-square" /></li>)}
     </ul>
     <p class="mt-3 t-body text-foreground-subtle">연출 사진 (실제 환자 아님)</p>
     <p class="mt-10 max-w-prose t-mid leading-relaxed text-foreground-muted">
@@ -43,8 +66,14 @@ const family = ['아이 첫 검진', '엄마 상담', '아버지 임플란트 �
 
   <Section tone="surface" eyebrow="Smile & Trust" title={'공감은 따뜻하게,\n진단은 정확하게'}>
     <div class="grid items-center gap-10 md:grid-cols-2">
-      <Photo alt="원장·스탭 단체 사진" />
+      <Photo src={doctorTeam} alt="접수 데스크 앞에서 웃고 있는 대표원장 김정민" />
       <p class="t-mid leading-relaxed text-foreground-muted">모두가 환하게 웃으며 인사하는 동네 치과로 함께하겠습니다.</p>
     </div>
+  </Section>
+
+  <Section eyebrow="병원 둘러보기" title="편안하게 머무실 수 있도록">
+    <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+      {tour.map((t) => <li><Photo src={t.src} alt={t.alt} caption={t.alt} /></li>)}
+    </ul>
   </Section>
 </Layout>
