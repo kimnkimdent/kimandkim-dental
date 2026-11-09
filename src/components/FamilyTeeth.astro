@@ -10,18 +10,20 @@ const d =
 const all = [
   { x: 0, y: 0, s: 1.25, fill: '#0a659c' }, // 남색(가장 큰, 뒤)
   { x: 26, y: 18, s: 1.0, fill: '#49d7ef' }, // 하늘색(중간, 앞 오른쪽)
-  { x: 8, y: 30, s: 0.75, fill: '#e8eef3' }, // 연회색(작은, 맨 앞 왼쪽)
+  { x: 8, y: 30, s: 0.75, fill: '#b9c4ce' }, // 회색(작은, 맨 앞 왼쪽)
 ];
 // 1개: 하늘색 / 2개: 하늘색 + 작은 연회색 / 3개: 남색 + 하늘색 + 연회색
 const pick = { 1: [1], 2: [1, 2], 3: [0, 1, 2] }[count];
 const teeth = pick.map((i) => all[i]);
-// 보이는 치아들을 감싸는 상자에 맞춰 viewBox를 잡아 원 가운데에 오게 한다
-const minX = Math.min(...teeth.map((t) => t.x));
-const minY = Math.min(...teeth.map((t) => t.y));
-const maxX = Math.max(...teeth.map((t) => t.x + 40 * t.s));
-const maxY = Math.max(...teeth.map((t) => t.y + 44 * t.s));
-const w = maxX - minX, h = maxY - minY, side = Math.max(w, h);
-const vb = `${minX - (side - w) / 2} ${minY - (side - h) / 2} ${side} ${side}`;
+// 치아 크기는 개수와 상관없이 그대로(3개일 때 기준) 두고, 보이는 치아 묶음만 가운데로 옮긴다
+const box = (ts: typeof all) => {
+  const minX = Math.min(...ts.map((t) => t.x)), minY = Math.min(...ts.map((t) => t.y));
+  const maxX = Math.max(...ts.map((t) => t.x + 40 * t.s)), maxY = Math.max(...ts.map((t) => t.y + 44 * t.s));
+  return { cx: (minX + maxX) / 2, cy: (minY + maxY) / 2, side: Math.max(maxX - minX, maxY - minY) };
+};
+const S = box(all).side;
+const { cx, cy } = box(teeth);
+const vb = `${cx - S / 2} ${cy - S / 2} ${S} ${S}`;
 ---
 
 <svg aria-hidden="true" viewBox={vb} class={className}>
