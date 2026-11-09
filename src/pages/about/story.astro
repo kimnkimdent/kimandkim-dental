@@ -111,12 +111,11 @@ const chapters = [
                 {/* 곡선 조각: 이 장면의 맨 위 가운데에서 시작해 한쪽으로 휘었다가 다음 장면 맨 위 가운데로 이어진다 */}
                 {!last && (
                   <svg aria-hidden="true" class="pointer-events-none absolute inset-0 -z-0 hidden h-full w-full md:block" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d={`M50 0 C ${bend} 25, ${bend} 75, 50 100`} fill="none" stroke="var(--color-surface-accent)" stroke-width="6" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-                    <path class="story-path" d={`M50 0 C ${bend} 25, ${bend} 75, 50 100`} pathLength="1" fill="none" stroke="var(--color-primary-bright)" stroke-width="6" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+                    <path d={`M50 0 C ${bend} 25, ${bend} 75, 50 100`} fill="none" stroke="var(--color-primary-bright)" stroke-opacity="0.35" stroke-width="4" vector-effect="non-scaling-stroke" stroke-linecap="round" />
                   </svg>
                 )}
                 {/* 휴대폰: 왼쪽 세로 줄 */}
-                {!last && <span aria-hidden="true" class="absolute top-0 bottom-0 left-[1.7rem] w-1 rounded-full bg-surface-accent md:hidden"><span class="story-line block h-full w-full rounded-full bg-primary-bright"></span></span>}
+                {!last && <span aria-hidden="true" class="absolute top-0 bottom-0 left-[1.7rem] w-1 rounded-full bg-primary-bright/35 md:hidden"></span>}
 
                 {/* 표지(곡선 위 동그라미) */}
                 <div class="relative z-10 row-span-2 md:col-start-2 md:row-span-1 md:row-start-1 md:flex md:justify-center">
@@ -244,22 +243,6 @@ const chapters = [
       animation: pulse 1.8s 2.9s ease-in-out infinite;
     }
     @supports (animation-timeline: view()) {
-      /* 곡선: 그 장면이 화면을 지나가는 동안 위에서 아래로 그려진다 */
-      .story-row {
-        view-timeline-name: --row;
-      }
-      .story-path {
-        stroke-dasharray: 1;
-        animation: draw linear both;
-        animation-timeline: --row;
-        animation-range: cover 25% cover 75%;
-      }
-      .story-line {
-        transform-origin: top;
-        animation: grow linear both;
-        animation-timeline: --row;
-        animation-range: cover 20% cover 70%;
-      }
       .story-dot {
         animation: pop ease-out both;
         animation-timeline: view();
