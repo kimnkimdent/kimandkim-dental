@@ -39,17 +39,17 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
       <source src={url('/video/hero-mobile.mp4')} type="video/mp4" media="(max-width: 767px)" />
       <source src={url('/video/hero-desktop.mp4')} type="video/mp4" />
     </video>
-    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-t from-[hsl(214_45%_12%/0.85)] via-[hsl(214_45%_12%/0.45)] to-[hsl(214_45%_12%/0.2)] md:bg-gradient-to-r md:from-[hsl(214_45%_12%/0.8)] md:via-[hsl(214_45%_12%/0.4)] md:to-transparent"></div>
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,hsl(214_45%_12%/0.65)_0%,hsl(214_45%_12%/0.45)_60%,hsl(214_45%_12%/0.6)_100%)]"></div>
 
     <Container class="py-16 text-white">
-      <div class="max-w-[60rem] max-md:pt-[16svh] max-md:pb-10">
-        <Mark tone="white" class="mb-5 h-[6rem] w-auto md:h-[8.4rem]" />
+      <div class="mx-auto flex max-w-[64rem] flex-col items-center text-center">
+        <Mark tone="white" class="mb-6 h-[7.2rem] w-auto md:h-[10rem]" />
         <p class="t-mid font-semibold text-primary-bright">{SITE.slogan}</p>
         <h1 class="mt-3 t-display font-bold drop-shadow-sm">한 가족의 시간을<br />함께해 온 치과</h1>
-        <p class="mt-5 max-w-[48rem] t-mid opacity-90">
+        <p class="mt-5 max-w-[50rem] t-mid opacity-90">
           아이의 첫 이부터 부모님의 틀니까지, {SITE.since}년부터 파주 운정 가족의 치아 건강을 돌봐왔습니다.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
           <Button href={SITE.contact.booking} variant="naver" size="lg">네이버 예약</Button>
           <Button href={tel} variant="white" size="lg">전화 상담 {SITE.contact.phone}</Button>
         </div>
