@@ -1,27 +1,13 @@
 ---
 // 역지사지 진료 노트: 대표원장 1인칭 인용.
+// align="left"면 페이지 제목 아래처럼 왼쪽 정렬된 곳에 맞춰 붙는다(기본은 가운데).
 import { Image } from 'astro:assets';
 import doctor from '../assets/doctor-kim.jpg';
-import doctorWhite from '../assets/photos/doctor-white.jpg';
-interface Props { quote: string; variant?: 'card' | 'aside' }
-const { quote, variant = 'card' } = Astro.props;
+interface Props { quote: string; align?: 'center' | 'left' }
+const { quote, align = 'center' } = Astro.props;
 ---
 
-{variant === 'aside' ? (
-  // 제목 옆에 붙는 인용: 왼쪽 굵은 선 + 큰 따옴표 + 아래 원장 사진·이름
-  <figure class="relative rounded-3xl bg-background/85 p-7 shadow-md backdrop-blur md:p-9">
-    <span aria-hidden="true" class="absolute top-8 bottom-8 left-0 w-1.5 rounded-r-full bg-primary"></span>
-    <p class="t-body font-semibold text-primary">역지사지 진료 노트</p>
-    <span aria-hidden="true" class="mt-5 block h-[2.8rem] font-serif text-[5.6rem] leading-[0.9] text-primary-bright">“</span>
-    <blockquote class="mt-2 font-serif text-[1.9rem] leading-relaxed font-bold md:text-[2.2rem]">{quote}</blockquote>
-    <figcaption class="mt-6 flex items-center gap-3">
-      <Image src={doctorWhite} alt="대표원장 김정민" width={160} height={160} class="size-14 rounded-full bg-white object-cover object-top ring-2 ring-primary-surface" />
-      <span class="t-body"><strong class="font-bold">김정민</strong> <span class="text-foreground-muted">대표원장</span></span>
-    </figcaption>
-  </figure>
-) : (
-
-<figure class="mx-auto flex max-w-[88rem] flex-col items-center gap-6 rounded-3xl border border-border bg-background p-8 text-center shadow-sm md:flex-row md:gap-10 md:p-12 md:text-left">
+<figure class:list={['flex max-w-[88rem] flex-col items-center gap-6 rounded-3xl border border-border bg-background p-8 text-center shadow-sm md:flex-row md:gap-10 md:p-12 md:text-left', align === 'center' && 'mx-auto']}>
   <Image src={doctor} alt="대표원장 김정민" width={240} height={240} class="size-24 shrink-0 rounded-full bg-primary-surface object-cover object-top md:size-32" />
   <div>
     <p class="t-body font-semibold text-primary">역지사지 진료 노트</p>
@@ -29,4 +15,3 @@ const { quote, variant = 'card' } = Astro.props;
     <figcaption class="mt-4 t-body text-foreground-muted">— 대표원장 김정민</figcaption>
   </div>
 </figure>
-)}
