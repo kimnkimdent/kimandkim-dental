@@ -55,7 +55,7 @@ const abs = (path: string, site: URL) => new URL(url(path), site).href;
 export const ids = (site: URL) => ({
   dentist: abs('/#dentist', site),
   website: abs('/#website', site),
-  doctor: abs('/about/doctor/#doctor', site),
+  doctor: abs('/about/story/#doctor', site),
 });
 
 // 모든 페이지 공통: 치과(병원) + 원장 + 웹사이트
@@ -114,7 +114,7 @@ export function baseSchema(site: URL) {
       honorificSuffix: '원장',
       description: `${SITE.fullName} 대표원장. ${DOCTOR.career.join(', ')}.`,
       image: abs('/doctor.jpg', site),
-      url: abs('/about/doctor/', site),
+      url: abs('/about/story/#doctor', site),
       worksFor: { '@id': id.dentist },
       alumniOf: { '@type': 'CollegeOrUniversity', name: DOCTOR.alumni },
       memberOf: DOCTOR.memberOf.map((m) => ({ '@type': 'Organization', name: m.name, alternateName: m.alt })),

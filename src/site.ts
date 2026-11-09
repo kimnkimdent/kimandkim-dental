@@ -22,7 +22,7 @@ export const SITE = {
       label: '병원소개',
       children: [
         { href: '/about/story/', label: '김앤김 이야기' },
-        { href: '/about/doctor/', label: '대표원장 소개' },
+        { href: '/about/story/#doctor', label: '대표원장 소개' },
       ],
     },
     { href: '/philosophy/', label: '진료철학' },

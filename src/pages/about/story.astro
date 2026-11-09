@@ -9,6 +9,10 @@ import Photo from '../../components/Photo.astro';
 import Mark from '../../components/Mark.astro';
 import FamilyTeeth from '../../components/FamilyTeeth.astro';
 import { SITE } from '../../site';
+import { Image } from 'astro:assets';
+import Section from '../../components/Section.astro';
+import doctor from '../../assets/photos/doctor-profile.jpg';
+import { DOCTOR } from '../../seo'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다
 import kidCheckup from '../../assets/photos/kid-checkup.jpg';
 import chairTalk from '../../assets/photos/chair-talk.jpg';
 import deskSmile from '../../assets/photos/desk-lean.jpg';
@@ -17,6 +21,7 @@ import modelExplain from '../../assets/photos/model-explain.jpg';
 import exterior from '../../assets/photos/exterior.jpg';
 
 // 지금 연도: 사이트를 올릴(반영할) 때의 연도로 자동으로 바뀐다(2027년에 다시 올리면 2027).
+const { career, fields } = DOCTOR;
 const NOW = Math.max(2026, new Date().getFullYear());
 const years = NOW - SITE.since; // 14
 
@@ -66,8 +71,8 @@ const chapters = [
 
 <Layout
   title="김앤김 이야기"
-  description="2012년 파주 운정 야당동에서 시작해 2026년 지금까지 14년, 같은 자리에서 한 가족의 시간을 함께해 온 김앤김치과 이야기."
-  keywords={["김앤김치과 소개", "운정 야당동 치과", "2012년 개원"]}
+  description="2012년 파주 운정 야당동에서 시작해 지금도 같은 자리에서 한 가족의 시간을 함께하는 김앤김치과 이야기와 대표원장 김정민 소개(경희대 치과대학, AAID·ICOI·AACD 정회원)."
+  keywords={["김앤김치과 소개", "운정 야당동 치과", "2012년 개원", "김정민 원장"]}
   crumbs={[{ name: '병원소개', path: '/about/story/' }, { name: '김앤김 이야기', path: '/about/story/' }]}
 >
   <PageHero
@@ -166,6 +171,31 @@ const chapters = [
     </Container>
   </section>
 
+  <!-- 대표원장 소개(같은 페이지 아래). 메뉴의 '대표원장 소개'가 여기(#doctor)로 온다 -->
+  <Section id="doctor" tone="surface" eyebrow="대표원장 소개" title="상담부터 치료 후 점검까지, 직접 봅니다">
+    <div class="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+      <div class="overflow-hidden rounded-3xl bg-primary-surface">
+        <Image src={doctor} alt="김앤김치과 대표원장 김정민" widths={[400, 800]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full" />
+      </div>
+      <div>
+        <h2 class="t-headline font-bold">안녕하세요,<br />김앤김치과 대표원장 김정민입니다.</h2>
+        <div class="mt-6 space-y-3 t-mid leading-relaxed text-foreground-muted">
+          <p>첫 상담과 진단, 수술, 치료 후 경과 확인까지 제가 직접 진료합니다.</p>
+          <p>오래 믿고 다니실 수 있는 치과가 되도록, 한 분 한 분 끝까지 책임지겠습니다.</p>
+        </div>
+
+        <h3 class="mt-12 t-head font-bold">약력 · 학회</h3>
+        <ul class="mt-4 space-y-2.5">
+          {career.map((c) => <li class="flex items-center gap-3 t-mid"><Mark class="h-6 w-auto" />{c}</li>)}
+        </ul>
+
+        <h3 class="mt-12 t-head font-bold">주요 진료 분야</h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {fields.map((f) => <li class="rounded-full bg-primary-surface px-5 py-2 t-body font-semibold text-primary">{f}</li>)}
+        </ul>
+      </div>
+    </div>
+  </Section>
 </Layout>
 
 <style>
