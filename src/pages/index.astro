@@ -42,11 +42,11 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
     <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,hsl(214_45%_12%/0.65)_0%,hsl(214_45%_12%/0.45)_60%,hsl(214_45%_12%/0.6)_100%)]"></div>
 
     <Container class="py-16 text-white">
-      <div class="mx-auto flex max-w-[64rem] flex-col items-center text-center">
+      <div class="mx-auto flex flex-col items-center text-center">
         <Mark tone="white" class="mb-6 h-[7.2rem] w-auto md:h-[10rem]" />
         <p class="t-mid font-semibold text-primary-bright">{SITE.slogan}</p>
-        <h1 class="mt-3 t-display font-bold drop-shadow-sm">한 가족의 시간을<br />함께해 온 치과</h1>
-        <p class="mt-5 max-w-[50rem] t-mid opacity-90">
+        <h1 class="mt-3 text-[clamp(2.2rem,6.4vw,5.2rem)] leading-tight font-bold whitespace-nowrap drop-shadow-sm">한 가족의 시간을 함께해 온 치과</h1>
+        <p class="mt-5 t-mid opacity-90 lg:whitespace-nowrap">
           아이의 첫 이부터 부모님의 틀니까지, {SITE.since}년부터 파주 운정 가족의 치아 건강을 돌봐왔습니다.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
