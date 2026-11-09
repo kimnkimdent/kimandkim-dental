@@ -6,23 +6,44 @@ import Footer from '../components/Footer.astro';
 import QuickMenu from '../components/QuickMenu.astro';
 import VisitInfo from '../components/VisitInfo.astro';
 import Disclaimer from '../components/Disclaimer.astro';
-import { baseSchema, breadcrumb } from '../seo';
+import { baseSchema, breadcrumb, pageSchema, topics } from '../seo';
+import { qnaUpdated } from '../qna';
 
 interface Props {
   title?: string; // 페이지 제목. 없으면 홈 제목
-  description?: string;
+  description?: string; // 검색 결과에 나오는 설명(80~150자 권장)
   image?: string;
   noindex?: boolean;
   crumbs?: { name: string; path: string }[]; // 검색엔진용 페이지 위치
-  schema?: object[]; // 이 페이지에만 붙일 구조화데이터(FAQ 등). 병원 정보는 모든 페이지에 자동으로 붙는다.
-  treatment?: boolean; // 진료 페이지면 하단에 부작용 안내 문구를 붙인다
+  schema?: object[]; // 이 페이지에만 붙일 구조화데이터(FAQ 등). 병원·원장 정보는 모든 페이지에 자동으로 붙는다.
+  treatment?: boolean; // 진료 페이지: 하단 부작용 안내 문구 + 의료 페이지 구조화데이터(원장 검수)
+  procedures?: string[]; // 진료 페이지가 다루는 진료 항목
+  keywords?: string[]; // 이 페이지 핵심 검색어(병원 공통 검색어 앞에 붙는다)
 }
 
-const { title, description = SITE.description, image = SITE.ogImage, noindex = false, crumbs = [], schema = [], treatment = false } = Astro.props;
-const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | 파주 운정 야당동 치과 · 임플란트 · 틀니 · 어린이 치과 진료`;
+const {
+  title,
+  description = SITE.description,
+  image = SITE.ogImage,
+  noindex = false,
+  crumbs = [],
+  schema = [],
+  treatment = false,
+  procedures = [],
+  keywords = [],
+} = Astro.props;
+const fullTitle = title ? `${title} | 파주 운정 ${SITE.name}` : `${SITE.name} | 파주 운정 야당동 치과 · 임플란트 · 틀니 · 어린이 치과 진료`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url(image), Astro.site);
-const jsonLd = [...baseSchema(Astro.site!), ...(crumbs.length ? [breadcrumb(Astro.site!, crumbs)] : []), ...schema];
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
+const modified = qnaUpdated; // 원고 최종 검수일. 내용을 크게 고치면 src/qna.ts의 qnaUpdated를 갱신한다.
+const jsonLd = [
+  ...baseSchema(Astro.site!),
+  ...(noindex ? [] : [pageSchema(Astro.site!, { path, title: fullTitle, description, image, medical: treatment, procedures, modified })]),
+  ...(crumbs.length ? [breadcrumb(Astro.site!, crumbs)] : []),
+  ...schema,
+];
+const kw = [...new Set([...keywords, SITE.name, ...topics.slice(0, 8)])].join(', ');
 ---
 
 <!doctype html>
@@ -32,11 +53,16 @@ const jsonLd = [...baseSchema(Astro.site!), ...(crumbs.length ? [breadcrumb(Astr
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={kw} />
+    <meta name="author" content={SITE.fullName} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <meta name="geo.region" content="KR-41" />
+    <meta name="geo.placename" content="경기도 파주시 야당동" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
-    <link rel="sitemap" href={url('/sitemap-index.xml')} />
-    <link rel="alternate" type="text/markdown" title="llms.txt" href={url('/llms.txt')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+    <link rel="sitemap" type="application/xml" href={url('/sitemap-index.xml')} />
+    <link rel="alternate" type="text/plain" title="llms.txt (AI용 병원 요약)" href={url('/llms.txt')} />
     <meta name="theme-color" content="#ffffff" />
 
     <meta property="og:type" content="website" />
@@ -48,7 +74,11 @@ const jsonLd = [...baseSchema(Astro.site!), ...(crumbs.length ? [breadcrumb(Astr
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.fullName} — ${SITE.concept}`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     {SITE.verification.google && <meta name="google-site-verification" content={SITE.verification.google} />}
     {SITE.verification.naver && <meta name="naver-site-verification" content={SITE.verification.naver} />}
 

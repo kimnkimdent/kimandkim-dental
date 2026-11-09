@@ -15,7 +15,7 @@ description: 홈페이지를 GitHub Pages에 배포(공개)한다. 처음이면 
 1. `.git`이 없으면 `git init -b main`을 실행한다.
 2. git 사용자 정보가 없으면(`git config user.email`이 비었으면) `gh api user`로 login과 id를 얻어 `git config user.name "<login>"`, `git config user.email "<id>+<login>@users.noreply.github.com"`을 설정한다.
 3. 저장소 이름을 사용자에게 묻는다(영문 소문자와 하이픈, 예: `my-company`). 주소가 `https://아이디.github.io/저장소이름/`이 된다고 알려준다. 저장소 이름을 `아이디.github.io`로 하면 주소가 `https://아이디.github.io/`가 된다는 것도 알려준다. 검색 노출이 목적이면 `아이디.github.io`를 **추천**한다(robots.txt가 제대로 적용되고 주소도 짧다). 계정당 하나만 만들 수 있다.
-4. `git add -A && git commit -m "첫 홈페이지"` 후 `gh repo create <이름> --public --source . --push`.
+4. `git add -A && git commit -m "첫 홈페이지"` 후 `gh repo create kimnkimdent/<이름> --public --source . --push` (김앤김치과는 반드시 GitHub 조직 kimnkimdent 아래에 만든다. 이름 추천: kimnkim-homepage).
    - 무료 계정은 GitHub Pages에 **public 저장소**가 필요하다고 한 줄로 알려준다.
 5. Pages를 Actions 방식으로 켠다: `gh api -X POST repos/{owner}/{repo}/pages -f build_type=workflow`(이미 켜져 있다는 오류는 무시).
 6. 첫 push 때 Pages가 꺼져 있어서 실패한 실행이 있을 수 있으니 `gh workflow run deploy.yml`로 다시 돌린다.

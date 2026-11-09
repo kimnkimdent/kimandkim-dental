@@ -22,7 +22,7 @@ const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
     {crumbs.length > 0 && <p class="t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
     {eyebrow && <p class="mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}
     <h1 class:list={['t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
-    {lead && <p class="mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{lead}</p>}
+    {lead && <p data-speakable class="mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{lead}</p>}
     <slot />
   </Container>
 </section>
