@@ -1,7 +1,6 @@
 ---
 // 하위 페이지 맨 위 큰 제목 영역(h1). 경로 표시 · 작은 라벨 · 제목 · 설명.
-// watermark: 배경에 크게 깔리는 장식 글자(예: 易地思之).
-// slot="aside": 넓은 화면에서 제목 오른쪽(휴대폰은 아래)에 놓이는 내용. 예: <Note variant="aside" slot="aside" />
+// 제목 묶음 뒤 왼쪽에 장식이 크게 깔린다: watermark(글자, 예: 易地思之)가 있으면 그 글자, 없으면 KIM+ 심볼.
 import Container from './Container.astro';
 import Mark from './Mark.astro';
 interface Props {
@@ -12,27 +11,30 @@ interface Props {
   watermark?: string;
 }
 const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
-const hasAside = Astro.slots.has('aside');
 ---
 
 <section class="relative overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
-  {!watermark && !hasAside && <Mark tone="faint" class="pointer-events-none absolute top-1/2 right-[-4rem] h-[26rem] w-auto -translate-y-1/2 md:right-[4%] md:h-[38rem]" />}
   <Container class="relative">
-    {/* 장식 글자: 왼쪽 글 바로 뒤에 크게 깔린다 */}
-    {watermark && (
-      <p aria-hidden="true" class="pointer-events-none absolute top-[62%] left-[-0.06em] -translate-y-1/2 font-serif text-[11rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[16rem] md:text-[22rem]">
-        {watermark}
-      </p>
-    )}
-    {crumbs.length > 0 && <p class="relative t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
-    <div class:list={[hasAside && 'grid items-end gap-10 lg:grid-cols-[1fr_minmax(0,46rem)] lg:gap-16']}>
-    <div>
-    {eyebrow && <p class="relative mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}
-    <h1 class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
-    {lead && <p data-speakable class="relative mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{lead}</p>}
-    <slot />
+    {crumbs.length > 0 && <p class="relative z-10 t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
+
+    <!-- 제목 묶음: 장식은 이 묶음 왼쪽 뒤에 붙는다 -->
+    <div class="relative">
+      {
+        watermark ? (
+          <p aria-hidden="true" class="pointer-events-none absolute top-1/2 left-[-0.06em] -translate-y-1/2 font-serif text-[11rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[16rem] md:text-[22rem]">
+            {watermark}
+          </p>
+        ) : (
+          <Mark tone="faint" class="pointer-events-none absolute top-1/2 left-[-1.6rem] h-[17rem] w-auto -translate-y-1/2 sm:h-[22rem] md:left-[-3rem] md:h-[30rem]" />
+        )
+      }
+      {eyebrow && <p class="relative mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}
+      <h1 class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
+      {lead && <p data-speakable class="relative mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{lead}</p>}
     </div>
-    {hasAside && <div class="relative"><slot name="aside" /></div>}
+
+    <div class="relative">
+      <slot />
     </div>
   </Container>
 </section>
