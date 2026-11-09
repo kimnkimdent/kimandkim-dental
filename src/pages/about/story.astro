@@ -141,9 +141,11 @@ const chapters = [
 
                 {/* 글 */}
                 <div class:list={['story-in relative z-10 col-start-2 mt-6 md:row-start-1 md:mt-0 md:self-center', right ? 'md:col-start-1 md:pr-10 md:text-right' : 'md:col-start-3 md:pl-10']}>
-                  {c.year ? (
+                  {c.now ? (
+                    <p class="font-serif text-[4.8rem] leading-none font-bold tracking-[0.08em] text-primary md:text-[7.6rem]">NOW</p>
+                  ) : c.year ? (
                     <p class:list={['font-serif text-[4rem] leading-none font-bold md:text-[6.4rem]', c.now ? 'text-primary' : 'text-primary-bright']}>
-                      {c.year}{c.now && <span class="ml-2 align-middle font-sans text-[1.4rem] font-bold tracking-widest text-primary md:text-[1.6rem]">NOW</span>}
+                      {c.year}
                     </p>
                   ) : (
                     <p class="t-body font-bold tracking-widest text-primary">{c.mark}</p>
