@@ -11,14 +11,13 @@ interface Props {
   title: string;
   lead?: string;
   watermark?: string;
-  clinic?: 'silver' | 'adult' | 'kids'; // 진료 과목 픽토그램(라벨 옆 + 오른쪽 큰 배경)
+  clinic?: 'silver' | 'adult' | 'kids'; // 진료 과목 픽토그램(라벨 옆)
 }
 const { crumbs = [], eyebrow, title, lead, watermark, clinic } = Astro.props;
 ---
 
 <section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
-  {clinic && <ClinicIcon clinic={clinic} class="pointer-events-none absolute top-[-4rem] right-[-10rem] -z-10 h-[38rem] opacity-[0.1] sm:right-[-8rem] sm:h-[48rem] md:top-[-8rem] md:right-[-4rem] md:h-[64rem] lg:right-[4%]" />}
-  {!watermark && !clinic && <Mark tone="faint" class="pointer-events-none absolute top-[-4rem] right-[-12rem] -z-10 h-[38rem] w-auto sm:right-[-10rem] sm:h-[48rem] md:top-[-8rem] md:right-[-6rem] md:h-[64rem] lg:right-[2%]" />}
+  {!watermark && <Mark tone="faint" class="pointer-events-none absolute top-[-4rem] right-[-12rem] -z-10 h-[38rem] w-auto sm:right-[-10rem] sm:h-[48rem] md:top-[-8rem] md:right-[-6rem] md:h-[64rem] lg:right-[2%]" />}
   <Container class="relative">
     {crumbs.length > 0 && <p class="relative z-10 t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
 
