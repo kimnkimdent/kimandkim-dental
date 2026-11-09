@@ -128,8 +128,8 @@ const chapters = [
                     c.year ? 'size-14 bg-primary text-[1.3rem] text-primary-foreground md:size-24 md:text-[2rem]' : 'size-14 bg-primary-surface text-[1.1rem] text-primary md:size-24 md:text-[1.4rem]',
                   ]}>
                     {c.now ? <Mark tone="white" class="h-8 w-auto md:h-12" /> : c.teeth ? (
-                      <span class="flex items-end justify-center gap-[0.2rem] md:gap-[0.4rem]" role="img" aria-label={c.mark}>
-                        {['h-[2.6rem] md:h-[4.2rem]', 'h-[2rem] md:h-[3.2rem]', 'h-[1.5rem] md:h-[2.4rem]'].slice(0, c.teeth).map((h) => <Tooth class={`${h} w-auto`} />)}
+                      <span class="flex items-end justify-center" role="img" aria-label={c.mark}>
+                        {['h-[2.5rem] md:h-[4.4rem]', 'h-[2rem] md:h-[3.5rem]', 'h-[1.6rem] md:h-[2.8rem]'].slice(0, c.teeth).map((h, k) => <Tooth class={`${h} w-auto ${k ? "-ml-[0.6rem] md:-ml-[1.1rem]" : ""}`} />)}
                       </span>
                     ) : <span class="px-1 text-center leading-tight">{c.mark}</span>}
                   </span>
