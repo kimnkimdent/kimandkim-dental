@@ -7,7 +7,7 @@ import PageHero from '../../components/PageHero.astro';
 import Container from '../../components/Container.astro';
 import Photo from '../../components/Photo.astro';
 import Mark from '../../components/Mark.astro';
-import Tooth from '../../components/Tooth.astro';
+import FamilyTeeth from '../../components/FamilyTeeth.astro';
 import { SITE } from '../../site';
 import kidCheckup from '../../assets/photos/kid-checkup.jpg';
 import chairTalk from '../../assets/photos/chair-talk.jpg';
@@ -30,14 +30,14 @@ const chapters = [
   },
   {
     mark: '처음엔 혼자',
-    teeth: 1, // 표지 안 치아 수 = 가족 수(혼자 → 가족 → 세 세대)
+    teeth: 1 as const, // 표지 안 치아 수 = 가족 수(혼자 → 가족 → 세 세대)
     title: '처음엔\n혼자 오셨습니다',
     text: '치과 문을 열기까지 망설이셨던 분이 상담을 받고, 치료를 마치고, 다음 검진 날짜를 잡고 가셨습니다.',
     photos: [{ src: chairTalk, alt: '진료 의자에 앉은 여성 환자와 이야기하는 대표원장' }],
   },
   {
     mark: '가족과 함께',
-    teeth: 2,
+    teeth: 2 as const,
     title: '다음엔\n가족과 함께',
     text: '처음 혼자 오셨던 분이 어느새 배우자분과, 자녀분과, 부모님까지 모시고 오십니다.',
     photos: [
@@ -47,7 +47,7 @@ const chapters = [
   },
   {
     mark: '세 세대',
-    teeth: 3,
+    teeth: 3 as const,
     title: '할머니의 틀니,\n손주의 첫 불소',
     text: '할머니가 틀니를 맞추시던 날, 손주는 첫 불소를 바르고 갑니다. 그 믿음이 쌓여 지금의 김앤김치과가 되었습니다.',
     photos: [{ src: kidCheckup, alt: '아이 첫 검진을 하는 대표원장' }],
@@ -128,9 +128,7 @@ const chapters = [
                     c.year ? 'size-14 bg-primary text-[1.3rem] text-primary-foreground md:size-24 md:text-[2rem]' : 'size-14 bg-primary-surface text-[1.1rem] text-primary md:size-24 md:text-[1.4rem]',
                   ]}>
                     {c.now ? <Mark tone="white" class="h-8 w-auto md:h-12" /> : c.teeth ? (
-                      <span class="flex items-end justify-center" role="img" aria-label={c.mark}>
-                        {['h-[2.5rem] md:h-[4.4rem]', 'h-[2rem] md:h-[3.5rem]', 'h-[1.6rem] md:h-[2.8rem]'].slice(0, c.teeth).map((h, k) => <Tooth class={`${h} w-auto ${k ? "-ml-[0.6rem] md:-ml-[1.1rem]" : ""}`} />)}
-                      </span>
+                      <span role="img" aria-label={c.mark} class="flex items-center justify-center"><FamilyTeeth count={c.teeth} class="size-[3.4rem] md:size-[6rem]" /></span>
                     ) : <span class="px-1 text-center leading-tight">{c.mark}</span>}
                   </span>
                 </div>

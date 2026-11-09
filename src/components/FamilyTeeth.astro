@@ -1,0 +1,27 @@
+---
+// 가족 치아 픽토그램(면으로 채운 치아가 겹친 모양). count: 1(혼자) · 2(가족) · 3(세 세대).
+// 뒤 남색 큰 치아 → 앞 하늘색 중간 치아 → 맨 앞 연회색 작은 치아. 색은 로고 남색·하늘색. 장식용.
+interface Props { count: 1 | 2 | 3; class?: string }
+const { count, class: className = 'size-16' } = Astro.props;
+
+const d =
+  'M20 7.5C16.2 3.6 9.6 2.6 6.4 6.4 2.6 11 3.8 18.6 5.8 24.8c1.8 5.6 3 11.6 4.8 15 1.4 2.6 4.4 2.2 5.4-.4l2-5.6c.8-2.2 3.2-2.2 4 0l2 5.6c1 2.6 4 3 5.4.4 1.8-3.4 3-9.4 4.8-15 2-6.2 3.2-13.8-.6-18.4C30.4 2.6 23.8 3.6 20 7.5Z';
+// 각 치아: 위치(x,y)와 크기(배율). 기준 치아는 40×44.
+const all = [
+  { x: 0, y: 0, s: 1.25, fill: '#0a659c' }, // 남색(가장 큰, 뒤)
+  { x: 26, y: 18, s: 1.0, fill: '#49d7ef' }, // 하늘색(중간, 앞 오른쪽)
+  { x: 8, y: 30, s: 0.75, fill: '#e8eef3' }, // 연회색(작은, 맨 앞 왼쪽)
+];
+const teeth = all.slice(0, count);
+// 보이는 치아들을 감싸는 상자에 맞춰 viewBox를 잡아 원 가운데에 오게 한다
+const minX = Math.min(...teeth.map((t) => t.x));
+const minY = Math.min(...teeth.map((t) => t.y));
+const maxX = Math.max(...teeth.map((t) => t.x + 40 * t.s));
+const maxY = Math.max(...teeth.map((t) => t.y + 44 * t.s));
+const w = maxX - minX, h = maxY - minY, side = Math.max(w, h);
+const vb = `${minX - (side - w) / 2} ${minY - (side - h) / 2} ${side} ${side}`;
+---
+
+<svg aria-hidden="true" viewBox={vb} class={className}>
+  {teeth.map((t) => <path d={d} fill={t.fill} transform={`translate(${t.x} ${t.y}) scale(${t.s})`} />)}
+</svg>
