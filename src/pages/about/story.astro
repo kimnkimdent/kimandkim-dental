@@ -4,22 +4,16 @@
 // 장면을 추가하려면 chapters 배열에 { mark, year, title, text, photos, side }를 넣는다. 원고에 없는 연도·사실은 넣지 않는다.
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import Section from '../../components/Section.astro';
 import Container from '../../components/Container.astro';
 import Photo from '../../components/Photo.astro';
 import SubTabs from '../../components/SubTabs.astro';
 import Mark from '../../components/Mark.astro';
 import { SITE } from '../../site';
-import deskWide from '../../assets/photos/desk-wide.jpg';
 import kidCheckup from '../../assets/photos/kid-checkup.jpg';
 import consultMan from '../../assets/photos/consult-man.jpg';
-import consultRoom from '../../assets/photos/consult-room.jpg';
 import doctorTeam from '../../assets/photos/doctor-team.jpg';
 import kidFriendly from "../../assets/photos/kid-friendly.jpg";
 import modelExplain from '../../assets/photos/model-explain.jpg';
-import treatmentRoom from '../../assets/photos/treatment-room.jpg';
-import surgeryRoom from '../../assets/photos/surgery-room.jpg';
-import xrayRoom from '../../assets/photos/xray-room.jpg';
 import exterior from '../../assets/photos/exterior.jpg';
 
 const tabs = SITE.nav[0].children!;
@@ -65,14 +59,6 @@ const chapters = [
   },
 ];
 
-const tour = [
-  { alt: '접수 데스크', src: deskWide },
-  { alt: '진료실', src: treatmentRoom },
-  { alt: '수술실', src: surgeryRoom },
-  { alt: '상담실', src: consultRoom },
-  { alt: '엑스레이·CT 촬영실', src: xrayRoom },
-  { alt: '건물 외관 (대홍프라자 5층)', src: exterior },
-];
 ---
 
 <Layout
@@ -166,11 +152,6 @@ const tour = [
     </Container>
   </section>
 
-  <Section tone="surface" eyebrow="병원 둘러보기" title="편안하게 머무실 수 있도록">
-    <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-      {tour.map((t) => <li><Photo src={t.src} alt={t.alt} caption={t.alt} /></li>)}
-    </ul>
-  </Section>
 </Layout>
 
 <style>
