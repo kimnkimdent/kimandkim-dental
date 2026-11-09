@@ -1,62 +1,51 @@
 // 검색엔진·AI가 읽는 구조화데이터(JSON-LD). 화면에는 보이지 않는다.
-// 회사 정보는 src/site.ts, 사람·서비스는 src/content.ts에서 가져오므로 그쪽만 고치면 여기도 따라 바뀐다.
+// 병원 정보는 src/site.ts에서 가져오므로 그쪽만 고치면 여기도 따라 바뀐다.
 import { SITE, url } from './site';
-import { people, services } from './content';
+import type { QA } from './qna';
 
-// 회사가 다루는 주제(검색·AI가 "무엇을 하는 회사인지" 판단하는 단서)
-export const topics = [
-  '병원 마케팅',
-  '병원 브랜딩',
-  '병원 전문 마케팅',
-  '의료 마케팅',
-  '치과 마케팅',
-  '피부과 마케팅',
-  '성형외과 마케팅',
-  '네이버 플레이스 마케팅',
-  '병원 블로그 마케팅',
-  'AI 검색 최적화(GEO)',
-  '의료광고 의료법 검수',
-];
+export const topics = ['파주 치과', '운정 치과', '운정신도시 치과', '야당동 치과', '임플란트', '보험 임플란트', '틀니', '보험 틀니', '자연치아 보존', '신경 치료', '사랑니 발치', '어린이 치과', '영유아 구강검진'];
 
 const abs = (path: string, site: URL) => new URL(url(path), site).href;
 
-// 모든 페이지 공통: 회사(병원 마케팅 전문 회사) + 웹사이트
+// 모든 페이지 공통: 치과 + 웹사이트
 export function baseSchema(site: URL) {
-  const orgId = abs('/#organization', site);
+  const orgId = abs('/#dentist', site);
+  const c = SITE.contact;
   return [
     {
       '@context': 'https://schema.org',
-      '@type': 'ProfessionalService',
+      '@type': 'Dentist',
       '@id': orgId,
-      name: SITE.name,
-      alternateName: ['루트', 'ROOT', 'ROOTBXM', 'ROOT BxM', '루트 브랜딩 마케팅'],
+      name: SITE.fullName,
+      alternateName: [SITE.name, '김앤김 치과', '파주 운정 김앤김치과'],
       description: SITE.description,
       url: abs('/', site),
-      logo: abs('/favicon.svg', site),
       image: abs(SITE.ogImage, site),
-      telephone: SITE.contact.phone,
-      email: SITE.contact.email,
-      areaServed: { '@type': 'Country', name: '대한민국' },
-      knowsAbout: topics,
-      founder: people
-        .filter((p) => p.role === '대표')
-        .map((p) => ({ '@type': 'Person', name: p.name, jobTitle: `${p.role} · ${p.title}` })),
-      employee: people.map((p) => ({ '@type': 'Person', name: p.name, jobTitle: `${p.role} · ${p.title}`, description: p.tag })),
-      taxID: SITE.legal.businessNumber,
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: '병원 브랜딩·마케팅 서비스',
-        itemListElement: services.items.map((s) => ({
-          '@type': 'Offer',
-          itemOffered: { '@type': 'Service', name: s.title.replace(/\n/g, ' '), description: s.description.replace(/\n/g, ', ') },
-        })),
+      telephone: c.phone,
+      foundingDate: String(SITE.since),
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: c.street,
+        addressLocality: c.city,
+        addressRegion: c.region,
+        addressCountry: 'KR',
       },
-      ...(SITE.contact.address ? { address: { '@type': 'PostalAddress', streetAddress: SITE.contact.address, addressCountry: 'KR' } } : {}),
+      // TODO: 좌표(geo)·네이버 플레이스·블로그 주소를 받으면 sameAs와 함께 추가
+      openingHoursSpecification: SITE.hours.map((h) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: h.days,
+        opens: h.open,
+        closes: h.close,
+      })),
+      founder: { '@type': 'Person', name: SITE.legal.representative, jobTitle: '대표원장' },
+      medicalSpecialty: 'Dentistry',
+      knowsAbout: topics,
+      areaServed: ['파주시', '운정신도시', '야당동'],
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: SITE.name,
+      name: SITE.fullName,
       url: abs('/', site),
       inLanguage: 'ko-KR',
       publisher: { '@id': orgId },
@@ -75,5 +64,14 @@ export function breadcrumb(site: URL, items: { name: string; path: string }[]) {
       name: it.name,
       item: abs(it.path, site),
     })),
+  };
+}
+
+// 자주 묻는 질문
+export function faqSchema(items: QA[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((it) => ({ '@type': 'Question', name: it.q, acceptedAnswer: { '@type': 'Answer', text: it.a } })),
   };
 }

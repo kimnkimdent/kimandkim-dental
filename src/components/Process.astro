@@ -1,0 +1,18 @@
+---
+// 번호가 붙은 진료 과정(가로 흐름, 휴대폰은 2열). items: { title, text? }
+interface Props { items: { title: string; text?: string }[] }
+const { items } = Astro.props;
+const cols = { 4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5', 6: 'lg:grid-cols-6' }[items.length] ?? 'lg:grid-cols-4';
+---
+
+<ol class:list={['grid grid-cols-2 gap-3 md:gap-4', cols]}>
+  {
+    items.map((it, i) => (
+      <li class="rounded-2xl border border-border bg-background p-5 md:p-6">
+        <span class="flex size-9 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span>
+        <p class="mt-4 t-mid font-bold">{it.title}</p>
+        {it.text && <p class="mt-1.5 t-body text-foreground-muted">{it.text}</p>}
+      </li>
+    ))
+  }
+</ol>

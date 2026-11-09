@@ -1,45 +1,78 @@
 ---
-// 상단 메뉴. 넓은 화면에서는 가로 앵커 메뉴 + "문의하기" 버튼, 좁은 화면에서는 ☰ 버튼을 누르면 펼쳐진다(자바스크립트 없이 <details>로 동작).
+// 상단 메뉴(GNB). 로고(좌) · 메뉴 6개 · [네이버 예약](우측 강조). 스크롤해도 흰 바탕으로 위에 고정된다.
+// 넓은 화면: 하위 메뉴가 있는 항목에 마우스를 올리면 펼쳐진다. 좁은 화면: ☰ 버튼(<details>, 자바스크립트 없음).
 import { SITE, url } from '../site';
 import Button from './Button.astro';
-import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
+import Logo from './Logo.astro';
 
-const linkClass =
-  'flex min-h-11 items-center rounded-lg px-3 t-body font-medium text-foreground-muted transition-colors hover:bg-surface hover:text-foreground';
+const current = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
+const isActive = (item: (typeof SITE.nav)[number]) =>
+  [item.href, ...(item.children?.map((c) => c.href) ?? [])].some((h) => current.startsWith(h));
 ---
 
 <header class="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-  <div class="mx-auto flex min-h-16 max-w-site items-center lg:min-h-[6.7rem] justify-between gap-4 px-gutter">
-    <a href={url('/')} class="flex min-h-11 items-center">
-      <Image src={logo} alt={SITE.name} class="h-9 w-auto lg:h-[3.8rem]" loading="eager" />
+  <div class="mx-auto flex min-h-16 max-w-site items-center justify-between gap-4 px-gutter lg:min-h-[8rem]">
+    <a href={url('/')} class="flex min-h-11 items-center" aria-label={`${SITE.name} 홈`}>
+      <Logo />
     </a>
 
-    <nav aria-label="주요 메뉴" class="hidden items-center gap-1 lg:flex">
-      {SITE.nav.map(({ href, label }) => <a href={url(href)} class={`${linkClass} lg:min-h-[4.5rem] lg:text-[1.54rem]`}>{label}</a>)}
-      <Button href={SITE.contact.form} size="sm" class="ml-3 lg:min-h-[3.6rem] lg:px-[1.8rem] lg:py-1 lg:text-[1.4rem]">우리 병원 브랜딩 제안 받기</Button>
+    <nav aria-label="주요 메뉴" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          SITE.nav.map((item) => (
+            <li class="group relative">
+              <a
+                href={url(item.href)}
+                class:list={[
+                  'flex min-h-[8rem] items-center px-3.5 text-[1.6rem] font-semibold transition-colors hover:text-primary',
+                  isActive(item) ? 'text-primary' : 'text-foreground',
+                ]}
+              >
+                {item.label}
+              </a>
+              {item.children && (
+                <ul class="invisible absolute top-full left-1/2 min-w-48 -translate-x-1/2 rounded-2xl border border-border bg-background p-2 opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={url(c.href)} class="flex min-h-11 items-center rounded-lg px-4 t-body whitespace-nowrap text-foreground-muted hover:bg-surface hover:text-primary">
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ul>
     </nav>
 
-    <div class="flex items-center gap-1 lg:hidden">
-    <Button href={SITE.contact.form} size="sm" class="max-sm:px-3 max-sm:t-body">우리 병원 브랜딩 제안 받기</Button>
-    <details class="group relative">
-      <summary
-        class="flex size-11 cursor-pointer items-center justify-center rounded-lg text-foreground hover:bg-surface"
-        aria-label="메뉴 열기"
-      >
-        <svg aria-hidden="true" class="group-open:hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        <svg aria-hidden="true" class="hidden group-open:block" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
-      </summary>
-      <nav
-        aria-label="주요 메뉴"
-        class="absolute top-full right-0 mt-2 w-[min(32rem,calc(100vw-3.2rem))] rounded-2xl border border-border-accent bg-background p-2 shadow-lg"
-      >
-        {SITE.nav.map(({ href, label }) => <a href={url(href)} class={linkClass}>{label}</a>)}
-        <div class="mt-2 border-t border-border pt-2">
-          <Button href={SITE.contact.form} full>우리 병원 브랜딩 제안 받기</Button>
-        </div>
-      </nav>
-    </details>
+    <div class="flex items-center gap-1">
+      <Button href={SITE.contact.booking} variant="naver" size="sm" class="max-sm:px-3.5 lg:min-h-12 lg:px-6">네이버 예약</Button>
+      <details class="group relative lg:hidden">
+        <summary class="flex size-11 cursor-pointer items-center justify-center rounded-lg text-foreground hover:bg-surface" aria-label="메뉴 열기">
+          <svg aria-hidden="true" class="group-open:hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg aria-hidden="true" class="hidden group-open:block" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </summary>
+        <nav aria-label="주요 메뉴" class="absolute top-full right-0 mt-2 max-h-[calc(100svh-9rem)] w-[min(32rem,calc(100vw-3.2rem))] overflow-y-auto rounded-2xl border border-border-accent bg-background p-3 shadow-lg">
+          <ul>
+            {
+              SITE.nav.map((item) => (
+                <li class="border-b border-border last:border-0">
+                  <a href={url(item.href)} class="flex min-h-12 items-center px-2 t-mid font-bold text-foreground">{item.label}</a>
+                  {item.children && (
+                    <ul class="pb-2">
+                      {item.children.map((c) => (
+                        <li><a href={url(c.href)} class="flex min-h-10 items-center px-4 t-body text-foreground-muted">· {c.label}</a></li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </details>
     </div>
   </div>
 </header>

@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Photo from '../../components/Photo.astro';
+import SubTabs from '../../components/SubTabs.astro';
+import { SITE } from '../../site';
+
+const tabs = SITE.nav[0].children!;
+const family = ['아이 첫 검진', '엄마 상담', '아버지 임플란트 상담', '할머니 틀니 조정'];
+---
+
+<Layout
+  title="김앤김 이야기"
+  description="2012년 파주 운정 야당동에서 시작한 김앤김치과. 우리 동네 가족들이 믿고 다닐 수 있는 치과라는 약속을 지켜 왔습니다."
+  crumbs={[{ name: '병원소개', path: '/about/story/' }, { name: '김앤김 이야기', path: '/about/story/' }]}
+>
+  <PageHero
+    crumbs={['병원소개', '김앤김 이야기']}
+    eyebrow="김앤김 이야기"
+    title={'2012년, 운정 야당동의\n작은 약속에서 시작했습니다'}
+    lead="우리 동네 가족들이 믿고 다닐 수 있는 치과. 그 약속을 지키며 한자리에서 가족의 시간을 함께해 왔습니다."
+  >
+    <SubTabs items={tabs} current="/about/story/" />
+  </PageHero>
+
+  <div class="bg-background">
+    <div class="mx-auto max-w-site px-gutter">
+      <Photo alt="병원 입구와 접수 데스크" ratio="aspect-[21/9]" />
+    </div>
+  </div>
+
+  <Section eyebrow="처음엔 혼자, 다음엔 가족과" title="한 가족의 시간이 쌓여 지금의 김앤김치과가 되었습니다">
+    <ul class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+      {family.map((f) => <li><Photo alt={f} ratio="aspect-square" /></li>)}
+    </ul>
+    <p class="mt-3 t-body text-foreground-subtle">연출 사진 (실제 환자 아님)</p>
+    <p class="mt-10 max-w-prose t-mid leading-relaxed text-foreground-muted">
+      처음 혼자 오셨던 분이 어느새 배우자분과, 자녀분과, 부모님까지 모시고 오십니다. 할머니가 틀니를 맞추시던 날, 손주는 첫 불소를 바르고 갑니다. 그 믿음이 쌓여 지금의 김앤김치과가 되었습니다.
+    </p>
+  </Section>
+
+  <Section tone="surface" eyebrow="Smile & Trust" title={'공감은 따뜻하게,\n진단은 정확하게'}>
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <Photo alt="원장·스탭 단체 사진" />
+      <p class="t-mid leading-relaxed text-foreground-muted">모두가 환하게 웃으며 인사하는 동네 치과로 함께하겠습니다.</p>
+    </div>
+  </Section>
+</Layout>

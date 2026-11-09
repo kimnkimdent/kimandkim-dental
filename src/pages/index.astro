@@ -1,199 +1,94 @@
 ---
-// 첫 페이지(원페이지). 섹션을 빼려면 해당 <Section> 블록을 지우고, 순서를 바꾸려면 블록을 옮긴다. 글은 src/content.ts, 회사 정보는 src/site.ts.
-import { Image, getImage } from 'astro:assets';
+// HOME: 첫 화면 → 병원 요약(AI 인용용) → 메뉴 바로가기 카드 6개 → 최근 Q&A 3개
 import Layout from '../layouts/Layout.astro';
-import campaignsCollage from '../assets/campaigns-collage-cutout.png';
-import logoYonsei from '../assets/logo-yonsei-emblem.png';
-import logoJogak from '../assets/logo-jogak.png';
-import logoBoryung from '../assets/logo-campaign-2.png';
-import logoMohw from '../assets/logo-campaign-3.png';
-import logoLg from '../assets/logo-campaign-4.png';
-import logoCnp from '../assets/logo-cnp.png';
-import logoVidivici from '../assets/logo-vidivici.png';
-import logoAmore from '../assets/logo-amore.png';
-import type { ImageMetadata } from 'astro';
-
-const collageBg = await getImage({ src: campaignsCollage, width: 1047, format: 'webp', quality: 80 });
-
-const campaignLogos: { src: ImageMetadata; alt: string; caption?: string; h?: string; project: string }[] = [
-  { src: logoYonsei, alt: '연세대학교 의과대학', caption: '연세대학교 의과대학', project: '연세대학교 의과대학\n통합 캠페인' },
-  { src: logoBoryung, alt: '보령제약', project: '보령제약\n기업 홍보 및 캠페인' },
-  { src: logoMohw, alt: '보건복지부', h: 'max-h-[6.2rem] max-w-[12.2rem]', project: '보건복지부\n금연 캠페인' },
-  { src: logoLg, alt: 'LG생활건강', h: 'max-h-[4.8rem] max-w-[12.2rem]', project: 'LG생활건강\n건기식 및 화장품 브랜딩' },
-];
-
-// 흰 상자 아래 줄: 뷰티·브랜드 런칭 프로젝트. 더조각 스킨메디는 로고 파일이 없어 이름을 글자로 보여 준다
-const beautyLogos: { src?: ImageMetadata; alt: string; h?: string; project: string }[] = [
-  { src: logoCnp, alt: 'CNP Laboratory', h: 'max-w-[10.6rem]', project: 'CNP 차앤박\n화장품 브랜드 런칭' },
-  { src: logoVidivici, alt: 'VIDIVICI', h: 'max-w-[9.4rem]', project: 'VIDIVICI 코스메틱\n상품 브랜드 매니지먼트' },
-  { src: logoJogak, alt: 'The Jogak 더조각 스킨메디', h: 'max-h-[5.8rem] max-w-[11.3rem]', project: '더조각 스킨메디\n브랜드 런칭 및\n해외 사업 매니지먼트' },
-  { src: logoAmore, alt: 'AMOREPACIFIC', h: 'max-w-[12.2rem]', project: '아모레퍼시픽\n상품 브랜드 매니지먼트' },
-];
-import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
-import Stats from '../components/Stats.astro';
-import People from '../components/People.astro';
-import ContactChannels from '../components/ContactChannels.astro';
-import WhyRoot from '../components/WhyRoot.astro';
-import Stages from '../components/Stages.astro';
-import { url } from '../site';
-import { concerns } from '../concerns';
-import InterviewWall from '../components/InterviewWall.astro';
-import Promises from '../components/Promises.astro';
-import Compare from '../components/Compare.astro';
-import Conditions from '../components/Conditions.astro';
-import ServiceFlow from '../components/ServiceFlow.astro';
-import { hero, results, leaders, people, campaignsCopy, services, voice } from '../content';
+import Container from '../components/Container.astro';
+import Button from '../components/Button.astro';
+import { Image } from 'astro:assets';
+import doctor from '../assets/doctor-kim.jpg';
+import { SITE, url, tel } from '../site';
+import { allQna, qna } from '../qna';
+
+const cards = [
+  { href: '/about/story/', title: '병원소개', quote: '처음엔 혼자, 다음엔 가족과 함께', subs: [['/about/story/', '김앤김 이야기'], ['/about/doctor/', '대표원장 소개']] },
+  { href: '/philosophy/', title: '진료철학', quote: '“내가 환자라면, 내 가족이라면”', subs: [['/philosophy/', '세 가지 질문과 진료실 4가지 원칙']] },
+  { href: '/silver/', title: '실버 치아 클리닉', quote: '“내 부모님이라면”', subs: [['/silver/', '보험 임플란트·틀니'], ['/silver/#safe', '만성질환 안전 진료']] },
+  { href: '/adult/implant/', title: '청장년 클리닉', quote: '“내가 이 비용을 낸다면”', subs: [['/adult/implant/', '임플란트'], ['/adult/natural/', '자연치아·심미보철'], ['/adult/wisdom/', '사랑니·구강외과']] },
+  { href: '/kids/', title: '어린이·청소년 클리닉', quote: '“내 아이라면”', subs: [['/kids/', '영유아 검진 · 충치 예방 · 청소년 관리']] },
+  { href: '/qna/', title: '궁금해요 Q&A', quote: '환자분들이 물어보신 질문에 답합니다', subs: [['/qna/', '전체 질문 보기']] },
+];
+
+// 최근 질문 3개: 가장 나중에 추가된 질문부터
+const recent = allQna.slice(-3).reverse();
+const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!.tab;
 ---
 
-<Layout title="병원 마케팅·병원 브랜딩 전문">
-  <Hero {...hero} />
-
-  <!-- 원장님들의 한마디: 인터뷰 소개 → 손글씨 느낌의 인용 → 핵심 한 줄 -->
-  <Section id="voice" class="relative isolate overflow-clip">
-    <div class="mx-auto max-w-[110rem] text-center">
-      <!-- 첫 줄은 보통 크기, 둘째 줄("모든 원장님이 바라는 1가지")은 크게 -->
-      <p class="t-mid leading-snug font-semibold text-foreground-muted">
-        {voice.intro.split('\n')[0]}
-        <span class="mt-3 block t-headline leading-snug font-extrabold text-foreground">{voice.intro.split('\n')[1]}</span>
-      </p>
-      <!-- 따옴표를 인용문 좌우에 같은 높이로 나란히 둔다. 인터뷰 배경 사진 띠가 인용문 뒤 세로 가운데에 깔린다 -->
-      <blockquote class="relative mx-auto mt-14 flex max-w-[96rem] items-center justify-center gap-3 md:mt-20 md:gap-8">
-        <InterviewWall />
-        <span aria-hidden="true" class="shrink-0 translate-y-[0.3em] self-center font-serif text-[6.4rem] leading-[0.6] text-primary/70 md:text-[9.6rem]">“</span>
-        <p class="font-serif t-headline font-bold leading-[1.8] whitespace-pre-line text-foreground">{voice.quote}</p>
-        <span aria-hidden="true" class="shrink-0 translate-y-[0.3em] self-center font-serif text-[6.4rem] leading-[0.6] text-primary/70 md:text-[9.6rem]">”</span>
-      </blockquote>
-      <div aria-hidden="true" class="mx-auto mt-8 h-8 w-px bg-primary/60 md:mt-12 md:h-12" />
-      <h2 class="mt-5 t-headline leading-snug font-extrabold md:mt-6">{voice.answer.split('가치를 ')[0]}가치를<br class="md:hidden" /> {voice.answer.split('가치를 ')[1]}</h2>
-      <!-- 원장님 고민 30가지: 정사각형 상자 하나. 누르면 /concerns 페이지로 간다 -->
-      <a id="concerns-tab" href={url('/concerns/')} class="group scroll-mt-[40vh] mx-auto mt-12 flex aspect-square w-[11.2rem] flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-primary bg-background/80 p-2 text-center shadow-lg transition-colors hover:bg-primary hover:text-primary-foreground md:mt-14 md:w-[12.4rem]">
-        <span class="t-body leading-tight font-bold text-foreground-muted group-hover:text-primary-foreground">스물한 분 원장님의</span>
-        <span class="t-mid leading-snug font-extrabold">고민과 해답</span>
-        <span class="t-mid font-extrabold text-primary-bright group-hover:text-primary-foreground">1위~30위</span>
-        <span aria-hidden="true" class="t-body font-bold transition-transform group-hover:translate-x-1">→</span>
-      </a>
-    </div>
-  </Section>
-
-  <Section id="conditions" tone="surface">
-    <Conditions />
-  </Section>
-
-  <Section id="brand">
-    <WhyRoot />
-  </Section>
-
-  <Section id="company" tone="surface">
-    <div class="mx-auto mb-16 max-w-prose text-center">
-      <p class="mb-4 inline-flex rounded-lg bg-primary px-3 py-1 t-body font-bold text-primary-foreground">{leaders.eyebrow}</p>
-      <h2 class="t-headline leading-snug font-extrabold whitespace-pre-line"><span class="text-lg-red">LG그룹</span>{leaders.title.replace('LG그룹', '').split('프리미엄 브랜드')[0]}<strong class="font-extrabold text-white">프리미엄 브랜드</strong>{leaders.title.split('프리미엄 브랜드')[1]}</h2>
-    </div>
-    <People items={people} />
-  </Section>
-
-  <!-- 주요 캠페인 소개: 캠페인 사진 모음을 섹션 전체 배경으로 반복해 깔고 흰색으로 흐리게 누른다. 그 위에 제목·480+·로고 상자 -->
-  <section id="campaigns" class="relative isolate overflow-clip bg-white py-section text-black">
-    <!-- 흰 여백을 지운 사진 모음을 네 겹으로 어긋나게 겹쳐 빈틈 없이 채운다. 맨 아래 색은 사진들의 평균 색 -->
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 -z-10 bg-[rgb(171_181_201)] bg-repeat"
-      style={`background-image: ${Array(4).fill(`url(${collageBg.src})`).join(', ')}; background-size: 72rem auto; background-position: 0 0, 36rem 26.5rem, 18rem 13rem, 54rem 40rem;`}
-    />
-    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-white/55" />
-
-    <div class="mx-auto max-w-site px-gutter text-center">
-      <p class="mb-4 inline-flex rounded-lg bg-primary px-3 py-1 t-body font-bold text-primary-foreground">{campaignsCopy.eyebrow}</p>
-      <h2 class="t-headline leading-snug font-extrabold whitespace-pre-line">{campaignsCopy.title}</h2>
-
-      <div class="mx-auto mt-10 max-w-[104.7rem] md:mt-14">
-        <p class="text-[6.4rem] leading-none font-extrabold text-primary [text-shadow:0_0_6px_#fff,0_0_18px_#fff,0_0_32px_#fff] md:text-[12rem]" aria-label={`${campaignsCopy.count}${campaignsCopy.countSuffix}`}>
-          <span aria-hidden="true" class="count-up" style={`--to: ${campaignsCopy.count}`}></span><span aria-hidden="true" class="plus-pop ml-1">{campaignsCopy.countSuffix}</span>
+<Layout>
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-surface via-background to-surface-accent">
+    <Container class="grid items-center gap-8 pt-14 md:grid-cols-[1.1fr_0.9fr] md:pt-16">
+      <div class="pb-6 md:pb-20">
+        <p class="t-mid font-semibold text-primary">{SITE.slogan}</p>
+        <h1 class="mt-3 t-display font-bold">한 가족의 시간을<br />함께해 온 치과</h1>
+        <p class="mt-5 max-w-[48rem] t-mid text-foreground-muted">
+          아이의 첫 이부터 부모님의 틀니까지, {SITE.since}년부터 파주 운정 가족의 치아 건강을 돌봐왔습니다.
         </p>
-        <div class="mx-auto mt-8 rounded-3xl bg-white px-6 py-6 shadow-lg md:mx-[6%] md:mt-12 md:py-7">
-          <!-- 휴대폰에서는 상자 안 제목·로고·설명을 20% 작게(zoom 0.8) -->
-          <p class="mb-8 t-head font-extrabold text-primary max-md:[zoom:0.8]">{campaignsCopy.boxTitle}</p>
-          <!-- 로고 네 개와 각 로고 아래 프로젝트 이름. 로고를 칸 아래쪽에 붙여 설명과 가깝게 두고(그 로고의 설명으로 보이게), 항목끼리는 넓게 띄운다 -->
-          <ul class="mx-auto grid max-w-[88rem] grid-cols-2 gap-x-6 gap-y-12 max-md:[zoom:0.8] md:grid-cols-4">
-            {campaignLogos.map(({ src, alt, caption, h, project }) => (
-              <li class="flex flex-col items-center">
-                <!-- 연세대처럼 caption이 있으면 심볼 아래에 기관명을 작게 붙인다 -->
-                <div class="flex h-[7.3rem] w-full flex-col items-center justify-end">
-                  <Image src={src} alt={alt} quality={95} format="png" class={caption ? "h-[4.8rem] w-auto object-contain" : `h-auto w-auto object-contain ${h ?? "max-h-[4.8rem] max-w-[9.4rem]"}`} />
-                  {caption && <span class="mt-1.5 t-body font-bold tracking-tight text-black/70">{caption}</span>}
-                </div>
-                <p class="mt-3.5 t-body leading-snug font-bold whitespace-pre-line text-black/55">{project}</p>
-              </li>
-            ))}
-          </ul>
-          <!-- 아래 줄: 뷰티·브랜드 런칭 프로젝트. 로고 파일이 없는 곳(logo 없음)은 이름을 글자 로고처럼 보여 준다 -->
-          <ul class="mx-auto mt-10 grid max-w-[88rem] grid-cols-2 gap-x-6 gap-y-12 max-md:[zoom:0.8] border-t border-black/10 pt-10 md:grid-cols-4">
-            {beautyLogos.map(({ src, alt, h, project }) => (
-              <li class="flex flex-col items-center">
-                <div class="flex h-[7.3rem] w-full items-end justify-center">
-                  {src ? <Image src={src} alt={alt} quality={95} format="png" class={`h-auto max-h-[4.8rem] w-auto object-contain ${h ?? "max-w-[9.4rem]"}`} /> : <span class="t-head font-extrabold tracking-tight">{alt}</span>}
-                </div>
-                <p class="mt-3.5 t-body leading-snug font-bold whitespace-pre-line text-black/55">{project}</p>
-              </li>
-            ))}
-          </ul>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <Button href={SITE.contact.booking} variant="naver" size="lg">네이버 예약</Button>
+          <Button href={tel} variant="secondary" size="lg">전화 상담 {SITE.contact.phone}</Button>
         </div>
       </div>
-    </div>
+      <div class="relative mx-auto w-full max-w-[44rem] self-end">
+        <Image src={doctor} alt="김앤김치과 대표원장 김정민" widths={[400, 700]} sizes="(min-width: 768px) 44rem, 90vw" class="relative aspect-[4/5] w-full rounded-t-[16rem] object-cover object-top" loading="eager" />
+      </div>
+    </Container>
   </section>
 
-  <Section id="results">
-    <div class="mx-auto mb-14 max-w-[96rem] text-center md:mb-20">
-      <p class="mb-4 inline-flex rounded-lg bg-primary px-3 py-1 t-body font-bold text-primary-foreground">브랜딩 성과</p>
-      <h2 class="t-headline leading-snug font-extrabold">저희의 정성스러운 브랜딩과<br />원장님의 <span class="text-primary">TRUST &amp; PREMIUM</span>한 노력으로<br />만든 귀한 성과입니다</h2>
-    </div>
-    <Stats items={results} />
+  <!-- 병원 요약: 검색·AI가 인용하기 좋은 사실 정보 -->
+  <div class="border-y border-border bg-background">
+    <Container class="py-6">
+      <p class="t-body text-foreground-muted">
+        김앤김치과는 {SITE.since}년부터 파주 운정신도시 야당동에서 진료해 온 치과입니다. 대표원장 김정민이 임플란트, 틀니, 자연치아 보존, 어린이 진료까지 직접 진료합니다.
+      </p>
+    </Container>
+  </div>
+
+  <Section eyebrow="진료 안내" title="우리 가족 누구나, 필요한 진료를 한곳에서">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        cards.map((c) => (
+          <li class="group relative flex flex-col rounded-3xl border border-border bg-background p-7 transition-shadow hover:shadow-lg md:p-8">
+            <h3 class="t-head font-bold">
+              <a href={url(c.href)} class="after:absolute after:inset-0 after:content-['']">{c.title}</a>
+            </h3>
+            <p class="mt-3 t-mid text-primary">{c.quote}</p>
+            <p class="relative z-10 mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-6">
+              {c.subs.map(([h, l]) => (
+                <a href={url(h)} class="t-body text-foreground-muted underline-offset-4 hover:text-primary hover:underline">{l}</a>
+              ))}
+            </p>
+            <span aria-hidden="true" class="absolute top-7 right-7 t-head text-foreground-subtle transition-transform group-hover:translate-x-1 group-hover:text-primary md:top-8 md:right-8">→</span>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
-  <Section id="compare" tone="surface">
-    <Compare />
-  </Section>
-
-  <Section id="stages">
-    <Stages />
-  </Section>
-
-  <Section id="services" tone="surface">
-    <div class="mx-auto mb-16 max-w-[96rem] text-center">
-      <p class="mb-4 inline-flex rounded-lg bg-primary px-3 py-1 t-body font-bold text-primary-foreground">{services.eyebrow}</p>
-      <h2 class="t-headline leading-snug font-extrabold whitespace-pre-line">{services.title}</h2>
-    </div>
-    <ServiceFlow items={services.items} />
-  </Section>
-
-  <Section id="promise">
-    <Promises />
-  </Section>
-
-  <!-- 원장님 고민 30 안내: 제목·설명과 /concerns로 가는 둥근 탭 하나 -->
-  <Section id="concerns" tone="surface" align="center" class="overflow-clip" eyebrow="원장님 인터뷰" title={'스물한 분 원장님 인터뷰 중\n가장 많이 나온 고민 1위~30위'} lead={'가장 많이 나온 순서대로 1위부터 30위까지 정리했습니다.\n궁금한 고민과 해결 방법을 확인하세요.'}>
-    <!-- 고민 30개 둥근 탭이 화면 끝에서 끝까지 한 줄로 천천히 흐른다(같은 목록을 두 번 이어 붙여 끊김 없이 반복). 마우스를 올리면 멈춘다 -->
-    <div class="concern-marquee max-md:hidden relative left-1/2 w-screen -translate-x-1/2 overflow-hidden py-2 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-      <ul class="concern-marquee-track flex w-max gap-3">
-        {[...concerns, ...concerns].map((c, i) => (
-          <li aria-hidden={i >= concerns.length ? 'true' : undefined}>
-            <a href={url(`/concerns/#q${c.rank}`)} tabindex={i >= concerns.length ? -1 : undefined} class="inline-flex min-h-11 items-center gap-2 rounded-full border border-border-accent bg-background/70 px-5 py-2 t-body font-semibold whitespace-nowrap text-foreground-muted transition-colors hover:border-primary hover:text-primary-bright">
-              <span class="text-primary-bright">{c.rank}</span>{c.title}
+  <Section tone="surface" eyebrow="궁금해요 Q&A" title="최근 질문">
+    <ul class="grid gap-4 lg:grid-cols-3">
+      {
+        recent.map((it) => (
+          <li>
+            <a href={url(`/qna/#${it.id}`)} class="flex h-full flex-col rounded-3xl bg-background p-7 shadow-sm transition-shadow hover:shadow-lg">
+              <span class="self-start rounded-full bg-primary-surface px-3 py-1 t-body font-semibold text-primary">{tabOf(it.id)}</span>
+              <p class="mt-4 t-mid font-bold">Q. {it.q}</p>
+              <p class="mt-3 line-clamp-3 t-body text-foreground-muted">{it.a}</p>
             </a>
           </li>
-        ))}
-      </ul>
+        ))
+      }
+    </ul>
+    <div class="mt-8 text-center">
+      <Button href={url('/qna/')} variant="secondary">전체 질문 보기</Button>
     </div>
-
-    <div class="mt-10 text-center">
-      <a href={url('/concerns/')} class="inline-flex min-h-12 items-center gap-2 rounded-full border border-primary bg-background/70 px-7 py-3 t-mid font-bold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
-        고민과 해답 1위~30위 보러 가기
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  </Section>
-
-  <Section id="contact" align="center" eyebrow="문의" title={'원장님의 병원은\n진료의 가치만큼 평가받고 있습니까?'} lead="아래 중 편한 방법으로 신청하시면 대표가 직접 연락드립니다.">
-    <ContactChannels />
   </Section>
 </Layout>

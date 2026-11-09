@@ -1,0 +1,26 @@
+---
+// 사진 자리. 사진이 준비되면 src: import한 사진을 넘긴다. 없으면 하늘색 자리에 어떤 사진이 들어갈지 적어 둔다.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props {
+  src?: ImageMetadata;
+  alt: string; // 사진 설명(없을 땐 자리 안내 문구로도 쓴다)
+  ratio?: string; // 예: 'aspect-[4/3]'
+  class?: string;
+  caption?: string;
+}
+const { src, alt, ratio = 'aspect-[4/3]', class: className = '', caption } = Astro.props;
+---
+
+<figure class={className}>
+  {
+    src ? (
+      <Image src={src} alt={alt} class:list={['w-full rounded-3xl object-cover', ratio]} />
+    ) : (
+      <div role="img" aria-label={alt} class:list={['flex w-full items-center justify-center rounded-3xl bg-gradient-to-br from-primary-surface to-surface-accent p-6 text-center', ratio]}>
+        <span class="t-body text-foreground-subtle">사진 준비 중 · {alt}</span>
+      </div>
+    )
+  }
+  {caption && <figcaption class="mt-2 t-body text-foreground-muted">{caption}</figcaption>}
+</figure>

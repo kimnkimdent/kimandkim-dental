@@ -1,0 +1,16 @@
+---
+// 역지사지 진료 노트: 대표원장 1인칭 인용.
+import { Image } from 'astro:assets';
+import doctor from '../assets/doctor-kim.jpg';
+interface Props { quote: string }
+const { quote } = Astro.props;
+---
+
+<figure class="mx-auto flex max-w-[88rem] flex-col items-center gap-6 rounded-3xl border border-border bg-background p-8 text-center shadow-sm md:flex-row md:gap-10 md:p-12 md:text-left">
+  <Image src={doctor} alt="대표원장 김정민" width={240} height={240} class="size-24 shrink-0 rounded-full bg-primary-surface object-cover object-top md:size-32" />
+  <div>
+    <p class="t-body font-semibold text-primary">역지사지 진료 노트</p>
+    <blockquote class="mt-3 font-serif text-[1.9rem] leading-relaxed font-bold md:text-[2.4rem]">“{quote}”</blockquote>
+    <figcaption class="mt-4 t-body text-foreground-muted">— 대표원장 김정민</figcaption>
+  </div>
+</figure>

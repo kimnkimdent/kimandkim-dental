@@ -1,0 +1,28 @@
+---
+// 하위 페이지 맨 위 큰 제목 영역(h1). 경로 표시 · 작은 라벨 · 제목 · 설명.
+// watermark: 배경에 크게 깔리는 장식 글자(예: 易地思之).
+import Container from './Container.astro';
+interface Props {
+  crumbs?: string[]; // 예: ['병원소개', '김앤김 이야기']
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  watermark?: string;
+}
+const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
+  {watermark && (
+    <p aria-hidden="true" class="pointer-events-none absolute top-1/2 right-[-2rem] -translate-y-1/2 font-serif text-[10rem] font-bold whitespace-nowrap text-primary opacity-[0.07] select-none md:text-[20rem]">
+      {watermark}
+    </p>
+  )}
+  <Container class="relative">
+    {crumbs.length > 0 && <p class="t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
+    {eyebrow && <p class="mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}
+    <h1 class:list={['t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
+    {lead && <p class="mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{lead}</p>}
+    <slot />
+  </Container>
+</section>

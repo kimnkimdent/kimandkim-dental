@@ -1,0 +1,15 @@
+---
+// 글자 로고(임시). 병원 로고 파일을 받으면 src/assets/logo.png로 넣고 <Image>로 바꾼다.
+import { SITE } from '../site';
+interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2', className]}>
+  <svg aria-hidden="true" viewBox="0 0 32 32" class="size-8 lg:size-9 text-primary" fill="none">
+    <path d="M16 6.5c-2.2-2-5.6-2.6-8.2-.9C4.6 7.7 4.5 12 5.6 15.6c.9 3 1.6 6.4 2.4 9.5.4 1.6 2.6 1.7 3.1.1l1.8-5.6c.5-1.6 2.7-1.6 3.2 0l1.8 5.6c.5 1.6 2.7 1.5 3.1-.1.8-3.1 1.5-6.5 2.4-9.5 1.1-3.6 1-7.9-2.2-10-2.6-1.7-6-1.1-8.2.9z" fill="currentColor" opacity=".14"/>
+    <path d="M16 6.5c-2.2-2-5.6-2.6-8.2-.9C4.6 7.7 4.5 12 5.6 15.6c.9 3 1.6 6.4 2.4 9.5.4 1.6 2.6 1.7 3.1.1l1.8-5.6c.5-1.6 2.7-1.6 3.2 0l1.8 5.6c.5 1.6 2.7 1.5 3.1-.1.8-3.1 1.5-6.5 2.4-9.5 1.1-3.6 1-7.9-2.2-10-2.6-1.7-6-1.1-8.2.9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M12 12.5c1.2 1 2.6 1.5 4 1.5s2.8-.5 4-1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <span class="text-[2rem] font-extrabold tracking-tight text-foreground lg:text-[2.2rem]">{SITE.name}</span>
+</span>

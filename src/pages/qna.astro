@@ -1,0 +1,70 @@
+---
+// 궁금해요 Q&A: 분류 탭(앵커) + 전체 질문과 답(펼쳐 보이게. 검색·AI가 그대로 읽는다). 질문 추가는 src/qna.ts.
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Container from '../components/Container.astro';
+import Button from '../components/Button.astro';
+import { SITE, tel } from '../site';
+import { qna, allQna, qnaUpdated, qnaAuthor } from '../qna';
+import { faqSchema } from '../seo';
+---
+
+<Layout
+  title="궁금해요 Q&A"
+  description="파주 운정 김앤김치과 진료실에서 가장 많이 받은 질문과 답. 보험 임플란트·틀니, 임플란트, 신경 치료, 사랑니, 어린이 치아까지."
+  crumbs={[{ name: '궁금해요 Q&A', path: '/qna/' }]}
+  schema={[faqSchema(allQna)]}
+>
+  <PageHero
+    crumbs={['궁금해요 Q&A']}
+    eyebrow="궁금해요 Q&A"
+    title="환자분들이 물어보신 질문에 답합니다"
+    lead="파주 운정 김앤김치과 진료실에서 가장 많이 받은 질문을 모았습니다. 내가 환자라면 궁금했을 질문부터 정직하게 답하겠습니다."
+  >
+    <nav aria-label="질문 분류" class="mt-8 flex flex-wrap gap-2">
+      <a href="#all" class="inline-flex min-h-11 items-center rounded-full border border-primary bg-primary px-5 t-body font-semibold text-primary-foreground">전체 {allQna.length}</a>
+      {qna.map((g) => (
+        <a href={`#${g.id}`} class="inline-flex min-h-11 items-center rounded-full border border-border-accent bg-background px-5 t-body font-semibold text-foreground-muted hover:border-primary hover:text-primary">{g.tab}</a>
+      ))}
+    </nav>
+  </PageHero>
+
+  <div id="all" class="bg-background pb-section">
+    <Container narrow>
+      {
+        qna.map((g) => (
+          <section id={g.id} class="scroll-mt-28 pt-14">
+            <p class="t-body font-semibold text-primary">{g.tab}</p>
+            <h2 class="mt-1 t-headline font-bold">“{g.title}”</h2>
+            <ul class="mt-6 space-y-3">
+              {g.items.map((it) => (
+                <li id={it.id} class="qna-item scroll-mt-28 rounded-3xl border border-border bg-background p-6 md:p-8">
+                  <h3 class="t-head font-bold"><span class="text-primary">Q.</span> {it.q}</h3>
+                  <p class="mt-3 t-mid leading-relaxed text-foreground-muted"><span class="font-bold text-foreground">A.</span> {it.a}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+      <p class="mt-10 t-body text-foreground-subtle">작성 · 검수: {qnaAuthor} · 최종 검수일 {qnaUpdated}</p>
+
+      <div class="mt-12 rounded-3xl bg-primary-surface p-8 text-center md:p-12">
+        <h2 class="t-head font-bold">찾으시는 답이 없나요?</h2>
+        <p class="mt-3 t-mid text-foreground-muted">파주 운정 김앤김치과에 전화 {SITE.contact.phone} 또는 네이버 예약으로 편하게 물어보세요.</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <Button href={SITE.contact.booking} variant="naver">네이버 예약</Button>
+          <Button href={tel} variant="secondary">전화 상담</Button>
+        </div>
+      </div>
+    </Container>
+  </div>
+</Layout>
+
+<style>
+  /* 진료 페이지에서 질문을 눌러 들어오면 그 질문을 강조한다 */
+  .qna-item:target {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-surface);
+  }
+</style>

@@ -4,23 +4,25 @@ import { SITE, url } from '../site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import QuickMenu from '../components/QuickMenu.astro';
-
-import { baseSchema } from '../seo';
+import VisitInfo from '../components/VisitInfo.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import { baseSchema, breadcrumb } from '../seo';
 
 interface Props {
-  title?: string;
+  title?: string; // 페이지 제목. 없으면 홈 제목
   description?: string;
   image?: string;
   noindex?: boolean;
-  // 이 페이지에만 붙일 구조화데이터(FAQ, 사례 글, 페이지 위치 등). 회사 정보는 모든 페이지에 자동으로 붙는다.
-  schema?: object[];
+  crumbs?: { name: string; path: string }[]; // 검색엔진용 페이지 위치
+  schema?: object[]; // 이 페이지에만 붙일 구조화데이터(FAQ 등). 병원 정보는 모든 페이지에 자동으로 붙는다.
+  treatment?: boolean; // 진료 페이지면 하단에 부작용 안내 문구를 붙인다
 }
 
-const { title, description = SITE.description, image = SITE.ogImage, noindex = false, schema = [] } = Astro.props;
-const fullTitle = title ? `${title} | ${SITE.name}` : SITE.name;
+const { title, description = SITE.description, image = SITE.ogImage, noindex = false, crumbs = [], schema = [], treatment = false } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | 파주 운정 야당동 치과 · 임플란트 · 틀니 · 어린이 치과 진료`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url(image), Astro.site);
-const jsonLd = [...baseSchema(Astro.site!), ...schema];
+const jsonLd = [...baseSchema(Astro.site!), ...(crumbs.length ? [breadcrumb(Astro.site!, crumbs)] : []), ...schema];
 ---
 
 <!doctype html>
@@ -33,19 +35,19 @@ const jsonLd = [...baseSchema(Astro.site!), ...schema];
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
-    <link rel="icon" href={url('/favicon.ico')} />
     <link rel="sitemap" href={url('/sitemap-index.xml')} />
     <link rel="alternate" type="text/markdown" title="llms.txt" href={url('/llms.txt')} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta name="theme-color" content="#ffffff" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:site_name" content={SITE.fullName} />
     <meta property="og:locale" content={SITE.locale} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     {SITE.verification.google && <meta name="google-site-verification" content={SITE.verification.google} />}
     {SITE.verification.naver && <meta name="naver-site-verification" content={SITE.verification.naver} />}
@@ -57,6 +59,8 @@ const jsonLd = [...baseSchema(Astro.site!), ...schema];
     <main class="flex-1">
       <slot />
     </main>
+    {treatment && <Disclaimer />}
+    <VisitInfo />
     <Footer />
     <QuickMenu />
   </body>

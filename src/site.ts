@@ -1,44 +1,71 @@
-// 회사 정보. 상호·설명·메뉴·연락처는 여기서만 바꾸면 전 페이지(상단 메뉴, 문의 섹션, 플로팅 버튼, 바닥글)에 반영된다.
-// 각 섹션에 들어가는 글은 src/content.ts에 있다.
+// 병원 정보. 이름·연락처·진료시간·주소·메뉴는 여기서만 바꾸면 전 페이지(상단 메뉴, 하단 방문 안내, 고정 버튼, 바닥글, 검색용 정보)에 반영된다.
 export const SITE = {
-  name: 'ROOT Branding × Marketing',
-  description: '병원 전문 브랜딩·마케팅 회사 루트(ROOT BxM). 치과·피부과·성형외과 등 병원의 전문성(TRUST)과 프리미엄(PREMIUM)을 브랜딩하고, 네이버 검색·AI 추천(GEO)·오프라인 광고·의료법 검수까지 함께합니다.',
+  name: '김앤김치과',
+  fullName: '김앤김치과의원',
+  slogan: '우리 가족 치아 건강엔, 김앤김치과',
+  concept: '한 가족의 시간을 함께해 온 치과',
+  description:
+    '2012년부터 파주 운정신도시 야당동에서 진료해 온 김앤김치과. 대표원장이 임플란트, 보험 임플란트·틀니, 자연치아 보존, 어린이 진료까지 직접 진료합니다.',
   locale: 'ko_KR',
   ogImage: '/og.jpg', // 1200x630 공유 이미지(카톡·SNS 링크 미리보기). public/og.jpg
-  // 검색엔진 소유 확인 코드. 각 콘솔의 "HTML 태그" 방식에서 content="..." 값만 넣는다.
+  since: 2012,
+  // 검색엔진 소유 확인 코드. 검색 등록 단계에서 채운다.
   verification: {
-    google: 'ILMSA86LU_89iTWsY1R3Daj4VAyyfy5THyrGgLwkAeY',
-    naver: 'a3d6db4af9e0f0b95608597cc82f470372bd7b91',
-    // 다음 웹마스터도구 PIN 코드. robots.txt 맨 아래에 그대로 붙는다.
-    daum: '#DaumWebMasterTool:72023541a0c755282e767d47303be80fe800b35a99e5c30fa831e2a3bebf12dd:WoYFtMaR84eZ7MaX1Xjw9A==',
+    google: '',
+    naver: '',
+    daum: '',
   },
-  // 상단 메뉴. 원페이지라 섹션 id로 이동한다. index.astro의 Section id와 맞춘다.
+  // 상단 메뉴. children이 있으면 마우스를 올리면(휴대폰은 펼치면) 하위 메뉴가 나온다.
   nav: [
-    { href: '/#conditions', label: '브랜드 철학' },
-    { href: '/#company', label: '대표 소개' },
-    { href: '/#campaigns', label: '주요 경력' },
-    { href: '/#results', label: '성공 사례' },
-    { href: '/#services', label: '서비스' },
-    { href: '/#promise', label: '약속' },
-    { href: '/#contact', label: '문의' },
-  ],
+    {
+      href: '/about/story/',
+      label: '병원소개',
+      children: [
+        { href: '/about/story/', label: '김앤김 이야기' },
+        { href: '/about/doctor/', label: '대표원장 소개' },
+      ],
+    },
+    { href: '/philosophy/', label: '진료철학' },
+    { href: '/silver/', label: '실버 치아 클리닉' },
+    {
+      href: '/adult/implant/',
+      label: '청장년 클리닉',
+      children: [
+        { href: '/adult/implant/', label: '임플란트' },
+        { href: '/adult/natural/', label: '자연치아·심미보철' },
+        { href: '/adult/wisdom/', label: '사랑니·구강외과' },
+      ],
+    },
+    { href: '/kids/', label: '어린이·청소년 클리닉' },
+    { href: '/qna/', label: '궁금해요 Q&A' },
+  ] as { href: string; label: string; children?: { href: string; label: string }[] }[],
   contact: {
-    phone: '010-9966-4156',
-    kakao: 'https://open.kakao.com/o/srJjr8Fi', // 카카오톡 채널 주소. "문의하기" 버튼이 여기로 연결된다.
-    form: 'https://tally.so/r/OQQvN7', // "우리 병원 브랜딩 제안 받기" 문의폼(Tally). 문의가 오면 rackrock48@gmail.com 으로 메일 알림
-    email: 'brius525@naver.com',
-    address: '', // 비워 두면 바닥글에서 주소 줄이 빠진다.
-    hours: '평일 10:00 – 18:00 (주말·공휴일 휴무)',
+    phone: '031-8071-2500',
+    // TODO(확인 필요): 네이버 예약 주소를 받으면 바꾼다. 지금은 네이버 지도 검색(플레이스에서 예약 가능)으로 연결.
+    booking: 'https://map.naver.com/p/search/%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
+    map: 'https://map.naver.com/p/search/%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
+    kakaoMap: 'https://map.kakao.com/?q=%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
+    address: '경기도 파주시 와석순환로 82, 대홍프라자 5층 (야당동)',
+    region: '경기도',
+    city: '파주시',
+    street: '와석순환로 82, 대홍프라자 5층',
+    parking: ['대홍프라자 지하 주차장', '건물 뒤편 1층 주차장', '건물 뒤 일방통행로 주차칸'],
   },
-  // 바닥글 표기 사항
+  // 진료시간 (원고: 확인 필요). days는 검색엔진용 요일 코드.
+  hours: [
+    { label: '월 · 목 · 금', time: '10:00 ~ 18:30', days: ['Monday', 'Thursday', 'Friday'], open: '10:00', close: '18:30' },
+    { label: '화 (야간진료)', time: '10:00 ~ 20:30', days: ['Tuesday'], open: '10:00', close: '20:30', highlight: true },
+    { label: '토', time: '10:00 ~ 14:00 (점심시간 없음)', days: ['Saturday'], open: '10:00', close: '14:00' },
+  ],
+  lunch: '평일 13:00 ~ 14:00',
+  closed: '수 · 일 휴진 / 공휴일은 전화 문의',
   legal: {
-    brand: '루트 브랜딩 마케팅', // 상호명
-    company: '봄삼(주)', // 법인명
-    representative: '노규락, 주현아',
-    businessNumber: '429-87-01803',
+    representative: '김정민',
+    businessNumber: '', // TODO(확인 필요). 비워 두면 바닥글에서 빠진다.
   },
 };
 
 // GitHub Pages는 https://아이디.github.io/저장소명/ 아래에서 서비스되므로 내부 링크는 반드시 url()로 감쌀 것.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const url = (path: string) => base + path;
+export const tel = `tel:${SITE.contact.phone.replace(/-/g, '')}`;

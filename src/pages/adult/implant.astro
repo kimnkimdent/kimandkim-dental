@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Note from '../../components/Note.astro';
+import Process from '../../components/Process.astro';
+import FaqLinks from '../../components/FaqLinks.astro';
+import Photo from '../../components/Photo.astro';
+import SubTabs from '../../components/SubTabs.astro';
+import { SITE, url } from '../../site';
+
+const tabs = SITE.nav[3].children!;
+const parts = [
+  { t: '픽스처', d: '인공 치근' },
+  { t: '지대주', d: '연결 기둥' },
+  { t: '크라운', d: '인공 치아' },
+];
+// TODO(원장님 확인): 임플란트 종류 · 치료 과정
+const kinds = [
+  { t: '일반 임플란트', d: '잇몸뼈 상태에 맞춰 식립합니다.' },
+  { t: '보험 임플란트', d: '만 65세 이상 평생 2개, 자세한 기준은 실버 치아 클리닉에서 안내합니다.', link: '/silver/' },
+  { t: '뼈이식 임플란트', d: '잇몸뼈가 얇거나 손상된 경우 뼈를 보강한 뒤 식립합니다.' },
+  { t: '상악동 거상술 임플란트', d: '위쪽 어금니 뼈 높이가 부족할 때 뼈를 채운 뒤 식립합니다.' },
+];
+---
+
+<Layout
+  title="임플란트 · 청장년 클리닉"
+  description="파주 운정 김앤김치과 임플란트. 자연치아를 먼저 살펴보고 임플란트가 꼭 필요한 경우에만 권해드립니다. CT 정밀 검사, 뼈이식·상악동 거상술 임플란트."
+  crumbs={[{ name: '청장년 클리닉', path: '/adult/implant/' }, { name: '임플란트', path: '/adult/implant/' }]}
+  treatment
+>
+  <PageHero
+    crumbs={['청장년 클리닉', '임플란트']}
+    eyebrow="“내가 이 비용을 낸다면”"
+    title="우리 부부엔 믿음을"
+    lead="일하고, 아이 키우고, 부모님 챙기느라 늘 뒷전이던 내 치아. 꼭 필요한 치료부터 정직하게 시작합니다."
+  >
+    <SubTabs items={tabs} current="/adult/implant/" />
+  </PageHero>
+
+  <Section eyebrow="임플란트" title="꼭 필요할 때, 꼭 필요한 만큼" lead="자연치아를 먼저 살펴보고, 임플란트가 꼭 필요한 경우에만 권해드립니다.">
+    <Note quote="제가 환자라면 ‘정말 이 치아를 빼야 하나’부터 묻고 싶을 겁니다. 그래서 살릴 방법을 먼저 말씀드립니다." />
+  </Section>
+
+  <Section tone="surface" eyebrow="임플란트의 구조" title="옆 치아를 깎지 않고, 자연치아에 가까운 씹는 힘을 되찾습니다">
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <Photo alt="픽스처 · 지대주 · 크라운 분리 일러스트" ratio="aspect-square" />
+      <ol class="space-y-3">
+        {
+          parts.map((p, i) => (
+            <li class="flex items-center gap-5 rounded-2xl bg-background p-6 shadow-sm">
+              <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary t-mid font-bold text-primary-foreground">{i + 1}</span>
+              <p><strong class="t-head">{p.t}</strong> <span class="ml-2 t-mid text-foreground-muted">{p.d}</span></p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Section>
+
+  <Section eyebrow="임플란트 종류" title="잇몸뼈 상태에 맞는 방법을 찾습니다">
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {
+        kinds.map((k) => (
+          <li class="rounded-3xl border border-border p-7">
+            <h3 class="t-head font-bold">{k.t}</h3>
+            <p class="mt-3 t-body text-foreground-muted">{k.d}</p>
+            {k.link && <a href={url(k.link)} class="mt-4 inline-block t-body font-semibold text-primary hover:underline">실버 치아 클리닉 보기 →</a>}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section tone="surface" eyebrow="치료 과정" title="검사부터 정기 검진까지">
+    <Process
+      items={[
+        { title: '정밀 검사', text: 'CT로 뼈의 양과 신경 위치 확인' },
+        { title: '상담', text: '치료 계획, 기간, 총비용 설명' },
+        { title: '식립', text: '마취 후 식립' },
+        { title: '골유착', text: '아래턱 약 2~3개월, 위턱 약 3~6개월' },
+        { title: '보철', text: '맞춤 크라운 장착' },
+        { title: '정기 검진', text: '6개월~1년마다 점검' },
+      ]}
+    />
+  </Section>
+
+  <Section eyebrow="자주 묻는 질문" title="임플란트, 이것이 궁금해요">
+    <FaqLinks group="implant" />
+  </Section>
+</Layout>
