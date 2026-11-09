@@ -11,7 +11,7 @@ import FamilyTeeth from '../../components/FamilyTeeth.astro';
 import { SITE } from '../../site';
 import { Image } from 'astro:assets';
 import Section from '../../components/Section.astro';
-import doctor from '../../assets/doctor-kim.jpg'; // 대표원장 프로필 전체(상반신) 사진
+import doctor from '../../assets/photos/doctor-bluegray.jpg'; // 대표원장 프로필 전체(상반신), 배경을 진한 청회색 한 톤으로 정리한 사진
 import { DOCTOR } from '../../seo'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다
 import kidCheckup from '../../assets/photos/kid-checkup.jpg';
 import chairTalk from '../../assets/photos/chair-talk.jpg';
@@ -174,7 +174,7 @@ const chapters = [
   <!-- 대표원장 소개(같은 페이지 아래). 메뉴의 '대표원장 소개'가 여기(#doctor)로 온다 -->
   <Section id="doctor" class="!bg-[hsl(220_12%_93%)]" eyebrow="대표원장 소개" title="상담부터 치료 후 점검까지, 직접 봅니다">
     <div class="grid items-start gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
-      <div class="overflow-hidden rounded-3xl bg-[rgb(208_210_218)] shadow-sm">
+      <div class="overflow-hidden rounded-3xl bg-[#3e4c5e] shadow-sm">
         <Image src={doctor} alt="김앤김치과 대표원장 김정민" widths={[500, 900]} sizes="(min-width: 768px) 40vw, 100vw" class="h-auto w-full object-contain" />
       </div>
       <div>
