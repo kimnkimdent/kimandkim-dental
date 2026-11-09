@@ -1,6 +1,7 @@
 ---
 // 하위 페이지 맨 위 큰 제목 영역(h1). 경로 표시 · 작은 라벨 · 제목 · 설명.
 // watermark: 배경에 크게 깔리는 장식 글자(예: 易地思之).
+// slot="aside": 넓은 화면에서 제목 오른쪽(휴대폰은 아래)에 놓이는 내용. 예: <Note variant="aside" slot="aside" />
 import Container from './Container.astro';
 import Mark from './Mark.astro';
 interface Props {
@@ -11,10 +12,11 @@ interface Props {
   watermark?: string;
 }
 const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
+const hasAside = Astro.slots.has('aside');
 ---
 
 <section class="relative overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
-  {!watermark && <Mark tone="faint" class="pointer-events-none absolute top-1/2 right-[-4rem] h-[26rem] w-auto -translate-y-1/2 md:right-[4%] md:h-[38rem]" />}
+  {!watermark && !hasAside && <Mark tone="faint" class="pointer-events-none absolute top-1/2 right-[-4rem] h-[26rem] w-auto -translate-y-1/2 md:right-[4%] md:h-[38rem]" />}
   <Container class="relative">
     {/* 장식 글자: 왼쪽 글 바로 뒤에 크게 깔린다 */}
     {watermark && (
@@ -23,9 +25,14 @@ const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
       </p>
     )}
     {crumbs.length > 0 && <p class="relative t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
+    <div class:list={[hasAside && 'grid items-end gap-10 lg:grid-cols-[1fr_minmax(0,46rem)] lg:gap-16']}>
+    <div>
     {eyebrow && <p class="relative mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}
     <h1 class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
     {lead && <p data-speakable class="relative mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{lead}</p>}
     <slot />
+    </div>
+    {hasAside && <div class="relative"><slot name="aside" /></div>}
+    </div>
   </Container>
 </section>
