@@ -1,4 +1,6 @@
 ---
+import PhotoBand from '../../components/PhotoBand.astro';
+import bandRoom from '../../assets/photos/surgery-room.jpg';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
@@ -34,6 +36,8 @@ const tabs = SITE.nav[3].children!;
   </Section>
 
   <!-- TODO(원장님 확인): 매복 유형 설명 -->
+  <PhotoBand src={bandRoom} alt="김앤김치과 수술실" eyebrow="사랑니·구강외과" text={'얼마나 걸리고 얼마나 부을지\n먼저 말씀드립니다.'} />
+
   <Section eyebrow="매복 사랑니 발치" title="위치와 신경부터 확인합니다">
     <div class="grid items-center gap-10 md:grid-cols-2">
       <Photo src={ctScan} alt="CT 촬영으로 사랑니 위치와 신경을 확인하는 모습" />

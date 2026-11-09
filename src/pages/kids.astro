@@ -1,4 +1,6 @@
 ---
+import PhotoBand from '../components/PhotoBand.astro';
+import bandKid from '../assets/photos/band-kid.jpg';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
@@ -47,6 +49,8 @@ const checkups = [
   </Section>
 
   <!-- TODO(원장님 확인): 예방 치료 문구 -->
+  <PhotoBand src={bandKid} alt="치아 모형으로 아이에게 설명하는 대표원장" eyebrow="어린이·청소년 클리닉" text={'첫 이가 나던 날부터\n교복을 입는 날까지 함께 지켜봅니다.'} position="40% 40%" />
+
   <Section eyebrow="영유아 구강검진 · 충치 예방" title="국가 영유아 구강검진 (무료)">
     <ol class="grid gap-3 md:grid-cols-3">
       {

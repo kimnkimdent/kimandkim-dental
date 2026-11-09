@@ -1,4 +1,6 @@
 ---
+import PhotoBand from '../../components/PhotoBand.astro';
+import bandTreat from '../../assets/photos/band-treat.jpg';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
@@ -36,6 +38,8 @@ const esthetic = [
   <Section>
     <Note quote="제 치아라면 한 번이라도 덜 깎고 싶을 겁니다." />
   </Section>
+
+  <PhotoBand src={bandTreat} alt="직원과 함께 진료하는 대표원장" eyebrow="자연치아·심미보철" text={'덜 깎고,\n나답게 되살립니다.'} position="50% 35%" />
 
   <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 치료">
     <ol class="grid gap-3 md:grid-cols-3">
