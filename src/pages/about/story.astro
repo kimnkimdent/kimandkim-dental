@@ -14,9 +14,8 @@ import Section from '../../components/Section.astro';
 import doctor from '../../assets/photos/doctor-white.jpg'; // 대표원장 프로필(상반신), 배경을 흰색으로 정리한 사진
 import { DOCTOR } from '../../seo'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다
 import kidCheckup from '../../assets/photos/kid-checkup.jpg';
-import chairTalk from '../../assets/photos/chair-talk.jpg';
+import deskConsult from '../../assets/photos/desk-consult.jpg';
 import deskSmile from '../../assets/photos/sofa-laugh.jpg';
-import kidFriendly from "../../assets/photos/kid-friendly.jpg";
 import modelExplain from '../../assets/photos/model-explain.jpg';
 import exterior from '../../assets/photos/exterior.jpg';
 
@@ -38,24 +37,21 @@ const chapters = [
     teeth: 1 as const, // 표지 안 치아 수 = 가족 수(혼자 → 가족 → 세 세대)
     title: '처음엔\n혼자 오셨습니다',
     text: '치과 문을 열기까지 망설이셨던 분이 상담을 받고, 치료를 마치고, 다음 검진 날짜를 잡고 가셨습니다.',
-    photos: [{ src: chairTalk, alt: '진료 의자에 앉은 여성 환자와 이야기하는 대표원장' }],
+    photos: [{ src: deskConsult, alt: '상담실에서 엑스레이를 보며 여성 환자와 상담하는 대표원장' }],
   },
   {
     mark: '가족과 함께',
     teeth: 2 as const,
     title: '다음엔\n가족과 함께',
     text: '처음 혼자 오셨던 분이 어느새 배우자분과, 자녀분과, 부모님까지 모시고 오십니다.',
-    photos: [
-      { src: modelExplain, alt: '치아 모형으로 여성 환자에게 설명하는 대표원장' },
-      { src: kidFriendly, alt: '아이와 눈을 맞추며 설명하는 대표원장' },
-    ],
+    photos: [{ src: kidCheckup, alt: '아이와 눈을 맞추며 진료하는 대표원장' }],
   },
   {
     mark: '세 세대',
     teeth: 3 as const,
     title: '할머니의 틀니,\n손주의 첫 불소',
     text: '할머니가 틀니를 맞추시던 날, 손주는 첫 불소를 바르고 갑니다. 그 믿음이 쌓여 지금의 김앤김치과가 되었습니다.',
-    photos: [{ src: kidCheckup, alt: '아이 첫 검진을 하는 대표원장' }],
+    photos: [{ src: modelExplain, alt: '틀니 모형을 들고 설명하는 대표원장' }],
   },
   {
     mark: String(NOW),
