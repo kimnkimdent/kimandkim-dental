@@ -1,5 +1,5 @@
 ---
-// 가족 치아 픽토그램(면으로 채운 치아가 겹친 모양). count: 1(혼자) · 2(가족) · 3(세 세대).
+// 가족 치아 픽토그램(면으로 채운 치아가 겹친 모양). count: 1(혼자: 하늘색) · 2(가족: 하늘색+연회색) · 3(세 세대: 남색+하늘색+연회색).
 // 뒤 남색 큰 치아 → 앞 하늘색 중간 치아 → 맨 앞 연회색 작은 치아. 색은 로고 남색·하늘색. 장식용.
 interface Props { count: 1 | 2 | 3; class?: string }
 const { count, class: className = 'size-16' } = Astro.props;
@@ -12,7 +12,9 @@ const all = [
   { x: 26, y: 18, s: 1.0, fill: '#49d7ef' }, // 하늘색(중간, 앞 오른쪽)
   { x: 8, y: 30, s: 0.75, fill: '#e8eef3' }, // 연회색(작은, 맨 앞 왼쪽)
 ];
-const teeth = all.slice(0, count);
+// 1개: 하늘색 / 2개: 하늘색 + 작은 연회색 / 3개: 남색 + 하늘색 + 연회색
+const pick = { 1: [1], 2: [1, 2], 3: [0, 1, 2] }[count];
+const teeth = pick.map((i) => all[i]);
 // 보이는 치아들을 감싸는 상자에 맞춰 viewBox를 잡아 원 가운데에 오게 한다
 const minX = Math.min(...teeth.map((t) => t.x));
 const minY = Math.min(...teeth.map((t) => t.y));
