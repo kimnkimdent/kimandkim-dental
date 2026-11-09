@@ -11,9 +11,9 @@ const isActive = (item: (typeof SITE.nav)[number]) =>
 ---
 
 <header class="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-  <div class="mx-auto flex min-h-16 max-w-site items-center justify-between gap-4 px-gutter lg:min-h-[8rem]">
+  <div class="mx-auto flex min-h-[7.6rem] max-w-site items-center justify-between gap-4 px-gutter lg:min-h-[10.4rem]">
     <a href={url('/')} class="flex min-h-11 items-center" aria-label={`${SITE.name} 홈`}>
-      <Logo />
+      <Logo class="h-[5.2rem] w-auto sm:h-[6rem] lg:h-[7.2rem]" />
     </a>
 
     <nav aria-label="주요 메뉴" class="hidden lg:block">
@@ -24,7 +24,7 @@ const isActive = (item: (typeof SITE.nav)[number]) =>
               <a
                 href={url(item.href)}
                 class:list={[
-                  'flex min-h-[8rem] items-center px-3.5 text-[1.6rem] font-semibold transition-colors hover:text-primary',
+                  'flex min-h-[10.4rem] items-center px-3 text-[1.6rem] font-semibold transition-colors hover:text-primary',
                   isActive(item) ? 'text-primary' : 'text-foreground',
                 ]}
               >

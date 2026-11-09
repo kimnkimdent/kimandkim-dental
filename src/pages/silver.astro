@@ -6,6 +6,7 @@ import Note from '../components/Note.astro';
 import Process from '../components/Process.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
+import Mark from '../components/Mark.astro';
 import doctorWarm from '../assets/photos/doctor-warm.jpg';
 
 const worries = ['빠진 이가 많아 식사가 불편해요', '쓰던 틀니가 헐겁거나 잇몸이 아파요', '당뇨·고혈압 약을 먹고 있어 치료가 걱정돼요', '잇몸이 내려가고, 이가 시리고, 입이 자주 말라요'];
@@ -42,7 +43,7 @@ const dentures = [
       {
         worries.map((w) => (
           <li class="flex items-center gap-3 rounded-2xl bg-background px-6 py-5 t-mid font-semibold shadow-sm">
-            <svg aria-hidden="true" class="size-6 shrink-0 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7" /></svg>
+            <Mark class="h-9 w-auto" />
             {w}
           </li>
         ))

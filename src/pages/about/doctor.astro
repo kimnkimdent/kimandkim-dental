@@ -6,7 +6,8 @@ import SubTabs from '../../components/SubTabs.astro';
 import { Image } from 'astro:assets';
 import doctor from '../../assets/photos/doctor-profile.jpg';
 import { SITE } from '../../site';
-import { DOCTOR } from '../../seo'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다(검색용 정보와 함께 바뀜)
+import { DOCTOR } from '../../seo';
+import Mark from '../../components/Mark.astro'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다(검색용 정보와 함께 바뀜)
 
 const tabs = SITE.nav[0].children!;
 const { career, fields } = DOCTOR;
@@ -36,7 +37,7 @@ const { career, fields } = DOCTOR;
 
         <h3 class="mt-12 t-head font-bold">약력 · 학회</h3>
         <ul class="mt-4 space-y-2.5">
-          {career.map((c) => <li class="flex gap-3 t-mid"><span class="mt-[0.9rem] size-1.5 shrink-0 rounded-full bg-primary"></span>{c}</li>)}
+          {career.map((c) => <li class="flex items-center gap-3 t-mid"><Mark class="h-6 w-auto" />{c}</li>)}
         </ul>
 
         <h3 class="mt-12 t-head font-bold">주요 진료 분야</h3>

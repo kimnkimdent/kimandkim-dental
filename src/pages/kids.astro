@@ -5,6 +5,7 @@ import Section from '../components/Section.astro';
 import Note from '../components/Note.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
+import Mark from '../components/Mark.astro';
 import kidCheckup from '../assets/photos/kid-checkup.jpg';
 
 const checkups = [
@@ -51,6 +52,7 @@ const checkups = [
       {
         checkups.map((c) => (
           <li class="rounded-3xl border border-border p-7 text-center">
+            <Mark class="mx-auto mb-3 h-12 w-auto" />
             <p class="t-head font-bold text-primary">{c.t}</p>
             <p class="mt-2 t-mid">{c.d}</p>
           </li>

@@ -4,11 +4,13 @@
 import { SITE, tel } from '../site';
 import Container from './Container.astro';
 import Button from './Button.astro';
+import Mark from './Mark.astro';
 const c = SITE.contact;
 ---
 
 <section class="bg-primary py-16 text-center text-primary-foreground md:py-20">
   <Container>
+    <Mark tone="white" class="mx-auto mb-5 size-20 md:size-24" />
     <p class="t-headline font-bold">{SITE.slogan}</p>
     <p class="mt-3 t-mid opacity-90">{SITE.since}년부터 운정 한자리에서, 한 가족의 시간을 함께해 왔습니다.</p>
   </Container>

@@ -13,10 +13,10 @@
 /* ── 색 ───────────────────────────────────────────────────────────────── */
 :root {
   /* 브랜드 컬러: 병원 색은 이 한 줄만 바꾼다. 화이트·하늘색 톤(원고). 흰 글자 버튼이 읽히는 진한 하늘색. */
-  --primary: hsl(204, 72%, 40%);
+  --primary: hsl(203, 88%, 33%); /* 로고 남색 #0a659c */
   --primary-foreground: hsl(0, 0%, 100%);
-  --primary-bright: hsl(198, 80%, 58%);
-  --primary-surface: hsl(from var(--primary) h 75% 95%);
+  --primary-bright: hsl(191, 84%, 61%); /* 로고 하늘색 #49d7ef (장식·큰 글자용) */
+  --primary-surface: hsl(191, 80%, 95%);
   --ring: hsl(from var(--primary) h 80% 55%);
 
   --secondary: hsl(214, 45%, 20%);
@@ -172,7 +172,7 @@
   html {
     font-size: 62.5%;
     scroll-behavior: smooth;
-    scroll-padding-top: 8rem; /* 앵커로 이동할 때 상단 고정 메뉴에 가리지 않게 */
+    scroll-padding-top: 11rem; /* 앵커로 이동할 때 상단 고정 메뉴에 가리지 않게 */
     -webkit-text-size-adjust: 100%;
   }
   body {

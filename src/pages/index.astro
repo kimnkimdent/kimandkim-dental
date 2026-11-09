@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
+import Mark from '../components/Mark.astro';
 import { Image } from 'astro:assets';
 import doctor from '../assets/doctor-kim.jpg';
 import { SITE, url, tel } from '../site';
@@ -27,6 +28,7 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
   <section class="relative overflow-hidden bg-gradient-to-br from-primary-surface via-background to-surface-accent">
     <Container class="grid items-center gap-8 pt-14 md:grid-cols-[1.1fr_0.9fr] md:pt-16">
       <div class="pb-6 md:pb-20">
+        <Mark class="mb-5 h-[6.4rem] w-auto md:h-[8.4rem]" />
         <p class="t-mid font-semibold text-primary">{SITE.slogan}</p>
         <h1 class="mt-3 t-display font-bold">한 가족의 시간을<br />함께해 온 치과</h1>
         <p class="mt-5 max-w-[48rem] t-mid text-foreground-muted">
@@ -57,6 +59,7 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
       {
         cards.map((c) => (
           <li class="group relative flex flex-col rounded-3xl border border-border bg-background p-7 transition-shadow hover:shadow-lg md:p-8">
+            <Mark class="mb-5 h-14 w-auto transition-transform group-hover:-rotate-6" />
             <h3 class="t-head font-bold">
               <a href={url(c.href)} class="after:absolute after:inset-0 after:content-['']">{c.title}</a>
             </h3>

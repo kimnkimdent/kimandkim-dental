@@ -1,12 +1,13 @@
 ---
 // 바닥글. 내용은 src/site.ts에서 바꾼다. 아래 여백은 휴대폰 하단 고정 버튼에 가리지 않기 위한 것.
 import { SITE, tel } from '../site';
+import Logo from './Logo.astro';
 const { representative, businessNumber } = SITE.legal;
 ---
 
 <footer class="bg-secondary pb-[calc(6rem+env(safe-area-inset-bottom))] text-secondary-foreground lg:pb-0">
   <div class="mx-auto max-w-site px-gutter py-12">
-    <p class="t-mid font-extrabold">{SITE.fullName}</p>
+    <Logo variant="white" class="h-[5.6rem] w-auto md:h-[7rem]" />
     <p class="mt-4 t-body leading-relaxed opacity-75">
       {SITE.fullName} <span class="px-1.5 opacity-50">|</span> 대표자 {representative}
       {businessNumber && <><span class="px-1.5 opacity-50">|</span> 사업자등록번호 {businessNumber}</>}

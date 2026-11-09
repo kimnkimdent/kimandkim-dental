@@ -2,6 +2,7 @@
 // 하위 페이지 맨 위 큰 제목 영역(h1). 경로 표시 · 작은 라벨 · 제목 · 설명.
 // watermark: 배경에 크게 깔리는 장식 글자(예: 易地思之).
 import Container from './Container.astro';
+import Mark from './Mark.astro';
 interface Props {
   crumbs?: string[]; // 예: ['병원소개', '김앤김 이야기']
   eyebrow?: string;
@@ -18,6 +19,7 @@ const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
       {watermark}
     </p>
   )}
+  {!watermark && <Mark tone="faint" class="pointer-events-none absolute top-1/2 right-[-4rem] h-[26rem] w-auto -translate-y-1/2 md:right-[4%] md:h-[38rem]" />}
   <Container class="relative">
     {crumbs.length > 0 && <p class="t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
     {eyebrow && <p class="mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}

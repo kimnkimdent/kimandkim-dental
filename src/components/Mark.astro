@@ -1,0 +1,11 @@
+---
+// 로고 심볼(KIM+ 스마일 치아)을 픽토그램처럼 쓰는 부품. 장식용이라 화면읽기에서는 숨긴다.
+// tone: color(하늘색+남색) / white(어두운 바탕) / faint(배경 워터마크용, 흐리게)
+import mark from '../assets/logo/mark.svg';
+import markWhite from '../assets/logo/mark-white.svg';
+interface Props { tone?: 'color' | 'white' | 'faint'; class?: string }
+const { tone = 'color', class: className = 'size-10' } = Astro.props;
+const src = tone === 'white' ? markWhite : mark;
+---
+
+<img src={src.src} alt="" aria-hidden="true" width={src.width} height={src.height} class:list={['shrink-0 select-none', tone === 'faint' && 'opacity-[0.08]', className]} />
