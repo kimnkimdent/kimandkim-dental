@@ -84,7 +84,7 @@ export function baseSchema(site: URL) {
         addressCountry: 'KR',
       },
       hasMap: c.map,
-      // TODO: 좌표(geo), 네이버 플레이스·블로그·인스타그램 주소를 받으면 geo와 sameAs에 추가
+      sameAs: [c.blog], // 공식 채널. TODO: 네이버 플레이스·인스타그램 주소, 좌표(geo)를 받으면 추가
       // 평일은 점심시간(13:00~14:00)을 빼고 오전·오후로 나눠 알린다. 토요일은 점심시간 없음.
       openingHoursSpecification: SITE.hours.flatMap((h) =>
         h.days.includes('Saturday')

@@ -45,6 +45,8 @@ export const SITE = {
     booking: 'https://map.naver.com/p/search/%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
     map: 'https://map.naver.com/p/search/%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
     kakaoMap: 'https://map.kakao.com/?q=%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
+    blog: 'https://blog.naver.com/dent2500', // 네이버 블로그(공식)
+    blogPhilosophy: 'https://blog.naver.com/dent2500/224362690669', // 블로그 진료철학 글(진료철학 페이지 버튼)
     address: '경기도 파주시 와석순환로 82, 대홍프라자 5층 (야당동)',
     region: '경기도',
     city: '파주시',

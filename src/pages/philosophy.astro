@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import Photo from '../components/Photo.astro';
+import Button from '../components/Button.astro';
+import { SITE } from '../site';
 import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
 import kidFriendly from '../assets/photos/kid-friendly.jpg';
@@ -34,7 +36,16 @@ const rules = [
     eyebrow="易地思之"
     title="내가 환자라면"
     lead={'진료하는 모든 순간 습관처럼 생각합니다. “내가 환자라면…”\n그래야 환자분만을 위한 진료를 할 수 있기 때문입니다.'}
-  />
+  >
+    <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
+    <div class="relative mt-8">
+      <Button href={SITE.contact.blogPhilosophy} variant="secondary" size="lg" class="bg-background/80 backdrop-blur">
+        역지사지 진료철학
+        <span class="t-body font-medium text-foreground-muted">블로그에서 보기</span>
+        <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+      </Button>
+    </div>
+  </PageHero>
 
   <Section eyebrow="세 가지 질문" title="제가 매번 스스로에게 묻는 세 가지 질문">
     <ol class="grid gap-4 md:grid-cols-3">
