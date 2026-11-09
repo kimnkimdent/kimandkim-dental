@@ -8,4 +8,4 @@ const { tone = 'color', class: className = 'size-10' } = Astro.props;
 const src = tone === 'white' ? markWhite : mark;
 ---
 
-<img src={src.src} alt="" aria-hidden="true" width={src.width} height={src.height} class:list={['shrink-0 select-none', tone === 'faint' && 'opacity-[0.14]', className]} />
+<img src={src.src} alt="" aria-hidden="true" width={src.width} height={src.height} class:list={['shrink-0 select-none', tone === 'faint' && 'opacity-[0.12]', className]} />

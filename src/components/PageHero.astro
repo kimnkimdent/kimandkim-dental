@@ -1,6 +1,7 @@
 ---
 // 하위 페이지 맨 위 큰 제목 영역(h1). 경로 표시 · 작은 라벨 · 제목 · 설명.
-// 제목 묶음 뒤 왼쪽에 장식이 크게 깔린다: watermark(글자, 예: 易地思之)가 있으면 그 글자, 없으면 KIM+ 심볼.
+// 장식: watermark(글자, 예: 易地思之)가 있으면 제목 뒤 왼쪽에 크게. 없으면 KIM+ 심볼을 오른쪽에 아주 크게 깔아
+// 화면 가장자리에서 일부가 잘리고, 아래 카드(진료 노트 등)가 일부를 가리게 둔다.
 import Container from './Container.astro';
 import Mark from './Mark.astro';
 interface Props {
@@ -13,19 +14,18 @@ interface Props {
 const { crumbs = [], eyebrow, title, lead, watermark } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
+<section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
+  {!watermark && <Mark tone="faint" class="pointer-events-none absolute top-[-4rem] right-[-12rem] -z-10 h-[38rem] w-auto sm:right-[-10rem] sm:h-[48rem] md:top-[-8rem] md:right-[-6rem] md:h-[64rem] lg:right-[2%]" />}
   <Container class="relative">
     {crumbs.length > 0 && <p class="relative z-10 t-body text-foreground-muted">홈 &gt; {crumbs.join(' > ')}</p>}
 
-    <!-- 제목 묶음: 장식은 이 묶음 왼쪽 뒤에 붙는다 -->
+    <!-- 제목 묶음 -->
     <div class="relative">
       {
-        watermark ? (
+        watermark && (
           <p aria-hidden="true" class="pointer-events-none absolute top-1/2 left-[-0.06em] -translate-y-1/2 font-serif text-[11rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[16rem] md:text-[22rem]">
             {watermark}
           </p>
-        ) : (
-          <Mark tone="faint" class="pointer-events-none absolute top-1/2 left-[-1.6rem] h-[17rem] w-auto -translate-y-1/2 sm:h-[22rem] md:left-[-3rem] md:h-[30rem]" />
         )
       }
       {eyebrow && <p class="relative mt-6 t-mid font-semibold text-primary">{eyebrow}</p>}
