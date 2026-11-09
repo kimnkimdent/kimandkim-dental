@@ -1,0 +1,43 @@
+---
+// 버튼. href가 있으면 링크(<a>), 없으면 <button>으로 그려진다.
+// 내부 링크·앵커는 url('/#services')처럼 url()로 감싸서 넘긴다. 전화는 "tel:0200000000", 카카오톡은 채널 주소 그대로.
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'kakao' | 'gray';
+  size?: 'sm' | 'md' | 'lg';
+  type?: 'button' | 'submit';
+  full?: boolean; // 가로로 꽉 채우기
+  class?: string;
+  [key: string]: unknown;
+}
+const { href, variant = 'primary', size = 'md', type = 'button', full = false, class: className = '', ...rest } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-full font-bold whitespace-nowrap transition-colors duration-150';
+const sizes = {
+  sm: 'min-h-9 px-5 py-2 t-body',
+  md: 'min-h-11 px-5 py-2.5 t-body',
+  lg: 'min-h-13 px-7 py-3 t-mid',
+};
+const variants = {
+  primary: 'border border-primary bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground',
+  secondary: 'border border-border-accent bg-background text-foreground hover:border-primary hover:text-primary',
+  ghost: 'text-primary hover:bg-primary-surface',
+  gray: 'border border-transparent bg-[hsl(0_0%_88%)] font-bold text-primary hover:border-primary', // 밝은 회색 바탕 + 초록 글씨
+  kakao: 'bg-[#fee500] text-[#191919] hover:bg-[#f2da00]',
+};
+const classes = [base, sizes[size], variants[variant], full && 'w-full', className];
+const external = href?.startsWith('http');
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}
