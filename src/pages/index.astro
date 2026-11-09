@@ -23,7 +23,7 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
 ---
 
 <Layout keywords={["파주 치과", "운정 치과", "야당동 치과", "운정신도시 치과"]}>
-  <!-- 첫 화면: 진료 장면 영상 배경(소리 없음·자동 반복). 영상 파일: public/video/ (0.7배속 26초, PC 1920px 약 5MB, 휴대폰 세로 약 1.2MB)
+  <!-- 첫 화면: 진료 장면 영상 배경(소리 없음·자동 반복). 영상 파일: public/video/ (0.8배속+중간 프레임 보간 23초, PC 1920px 약 4.4MB, 휴대폰 세로 약 1MB)
        "동작 줄이기" 설정이면 영상 대신 첫 장면 사진만 보인다. -->
   <section style={`--poster: url(${url("/video/hero-poster.jpg")})`} class="hero-video relative isolate flex min-h-[calc(100svh-7.6rem)] items-center overflow-hidden bg-secondary lg:min-h-[calc(100svh-10.4rem)]">
     <video
