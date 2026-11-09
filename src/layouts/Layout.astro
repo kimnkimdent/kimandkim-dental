@@ -16,6 +16,7 @@ interface Props {
   noindex?: boolean;
   crumbs?: { name: string; path: string }[]; // 검색엔진용 페이지 위치
   schema?: object[]; // 이 페이지에만 붙일 구조화데이터(FAQ 등). 병원·원장 정보는 모든 페이지에 자동으로 붙는다.
+  clinic?: 'silver' | 'adult' | 'kids'; // 진료 과목 색(src/styles/global.css의 data-clinic)
   treatment?: boolean; // 진료 페이지: 하단 부작용 안내 문구 + 의료 페이지 구조화데이터(원장 검수)
   procedures?: string[]; // 진료 페이지가 다루는 진료 항목
   keywords?: string[]; // 이 페이지 핵심 검색어(병원 공통 검색어 앞에 붙는다)
@@ -30,6 +31,7 @@ const {
   schema = [],
   treatment = false,
   procedures = [],
+  clinic,
   keywords = [],
 } = Astro.props;
 const fullTitle = title ? `${title} | 파주 운정 ${SITE.name}` : `${SITE.name} | 파주 운정 야당동 치과 · 임플란트 · 틀니 · 어린이 치과 진료`;
@@ -86,7 +88,7 @@ const kw = [...new Set([...keywords, SITE.name, ...topics.slice(0, 8)])].join(',
   </head>
   <body id="top" class="flex min-h-screen flex-col">
     <Header />
-    <main class="flex-1">
+    <main class="flex-1" data-clinic={clinic}>
       <slot />
     </main>
     {treatment && <Disclaimer />}

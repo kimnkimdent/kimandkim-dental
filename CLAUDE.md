@@ -29,7 +29,7 @@
 - 사용자가 "도메인 연결", "내 주소로" 같은 말을 하면 `/domain` 스킬을 실행한다.
 
 ## 구조
-> **김앤김치과 실제 구조(이 아래 템플릿 설명보다 우선):** 여러 페이지 사이트다. `src/site.ts`(병원 정보·진료시간·메뉴 nav와 하위 children), `src/qna.ts`(궁금해요 Q&A 27문항, 진료 페이지 FAQ도 여기서), `src/pages/`(index, about/story(김앤김 이야기 + 아래 #doctor 대표원장 소개), philosophy, silver, adult/implant·natural·wisdom, kids, qna). 공통 부품: `PageHero`(하위 페이지 h1), `Note`(역지사지 진료 노트), `Process`(번호 과정), `FaqLinks`, `Photo`(사진 자리, src 없으면 "사진 준비 중"), `SubTabs`, `VisitInfo`(전 페이지 하단 공통 메시지·진료시간·오시는 길·예약), `Disclaimer`(Layout `treatment` 속성). 원고의 "(원장님 확인)" 항목은 코드에 `TODO(원장님 확인)`로 표시. 미리보기는 4322번.
+> **김앤김치과 실제 구조(이 아래 템플릿 설명보다 우선):** 여러 페이지 사이트다. `src/site.ts`(병원 정보·진료시간·메뉴 nav와 하위 children), `src/qna.ts`(궁금해요 Q&A 27문항, 진료 페이지 FAQ도 여기서), `src/pages/`(index, about/story(김앤김 이야기 + 아래 #doctor 대표원장 소개), philosophy, silver, adult/implant·natural·wisdom, kids, qna). 공통 부품: `PageHero`(하위 페이지 h1), `Note`(역지사지 진료 노트), `Process`(번호 과정), `FaqLinks`, `Photo`(사진 자리, src 없으면 "사진 준비 중"), `SubTabs`, `VisitInfo`(전 페이지 하단 공통 메시지·진료시간·오시는 길·예약), `Disclaimer`(Layout `treatment` 속성). 진료 과목 색: Layout·PageHero에 clinic="silver|adult|kids"(global.css data-clinic, 픽토그램 ClinicIcon: 하트/플러스/별). 원고의 "(원장님 확인)" 항목은 코드에 `TODO(원장님 확인)`로 표시. 미리보기는 4322번.
 
 원페이지 사이트다. 첫 페이지 하나에 섹션이 세로로 이어지고, 상단 메뉴는 섹션으로 이동하는 앵커다. 처음 상태의 글은 전부 "카드 제목 1", "섹션 설명이 들어갑니다" 같은 자리 표시 문구다.
 

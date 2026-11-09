@@ -248,3 +248,24 @@
     background: var(--poster) center / cover;
   }
 }
+
+/* 진료 과목별 색(모두 파란 계열). <main data-clinic="silver|adult|kids">에 걸면 그 페이지의 버튼·라벨·번호·배경 강조색이 바뀐다.
+   흰 글자 버튼이 잘 읽히는 진하기로 맞췄다. */
+[data-clinic='silver'] {
+  /* 실버: 깊은 남색 — 차분하고 든든하게 */
+  --primary: hsl(224, 52%, 34%);
+  --primary-bright: hsl(222, 68%, 64%);
+  --primary-surface: hsl(224, 55%, 96%);
+}
+[data-clinic='adult'] {
+  /* 청장년: 브랜드 청색(로고 남색) */
+  --primary: hsl(203, 88%, 33%);
+  --primary-bright: hsl(191, 84%, 61%);
+  --primary-surface: hsl(197, 75%, 95%);
+}
+[data-clinic='kids'] {
+  /* 어린이·청소년: 밝은 하늘색 — 경쾌하게 */
+  --primary: hsl(196, 88%, 35%);
+  --primary-bright: hsl(190, 88%, 58%);
+  --primary-surface: hsl(190, 85%, 95%);
+}
