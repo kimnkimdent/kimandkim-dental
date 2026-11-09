@@ -6,7 +6,6 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Container from '../../components/Container.astro';
 import Photo from '../../components/Photo.astro';
-import SubTabs from '../../components/SubTabs.astro';
 import Mark from '../../components/Mark.astro';
 import { SITE } from '../../site';
 import kidCheckup from '../../assets/photos/kid-checkup.jpg';
@@ -16,7 +15,6 @@ import kidFriendly from "../../assets/photos/kid-friendly.jpg";
 import modelExplain from '../../assets/photos/model-explain.jpg';
 import exterior from '../../assets/photos/exterior.jpg';
 
-const tabs = SITE.nav[0].children!;
 const NOW = 2026;
 const years = NOW - SITE.since; // 14
 
@@ -71,10 +69,7 @@ const chapters = [
     crumbs={['병원소개', '김앤김 이야기']}
     eyebrow="김앤김 이야기"
     title={'2012년, 운정 야당동의\n작은 약속에서 시작했습니다'}
-    lead="우리 동네 가족들이 믿고 다닐 수 있는 치과. 그 약속을 지키며 한자리에서 가족의 시간을 함께해 왔습니다."
-  >
-    <SubTabs items={tabs} current="/about/story/" />
-  </PageHero>
+    lead="우리 동네 가족들이 믿고 다닐 수 있는 치과. 그 약속을 지키며 한자리에서 가족의 시간을 함께해 왔습니다." />
 
   <!-- 숫자로 보는 14년 -->
   <section class="bg-background pt-6 pb-4 md:pt-10">
