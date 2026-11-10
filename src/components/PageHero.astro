@@ -5,16 +5,18 @@
 import Container from './Container.astro';
 import { br } from '../site';
 import Mark from './Mark.astro';
-import ClinicIcon from './ClinicIcon.astro';
+import ServiceIcon from './ServiceIcon.astro';
 interface Props {
   crumbs?: string[]; // 예: ['병원소개', '김앤김 이야기']
   eyebrow?: string;
   title: string;
   lead?: string;
   watermark?: string;
-  clinic?: 'silver' | 'adult' | 'kids'; // 진료 과목 픽토그램(라벨 옆)
+  clinic?: 'silver' | 'adult' | 'kids'; // 진료 과목 색
+  icon?: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | 'qna'; // 라벨 옆 픽토그램(홈 진료 안내와 같은 그림). 없으면 clinic 값을 쓴다
 }
-const { crumbs = [], eyebrow, title, lead, watermark, clinic } = Astro.props;
+const { crumbs = [], eyebrow, title, lead, watermark, clinic, icon } = Astro.props;
+const pictogram = icon ?? clinic;
 ---
 
 <section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-16 md:pt-20 md:pb-24">
@@ -31,7 +33,7 @@ const { crumbs = [], eyebrow, title, lead, watermark, clinic } = Astro.props;
           </p>
         )
       }
-      {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{clinic && <ClinicIcon clinic={clinic} class="h-9 md:h-10" />}{eyebrow}</p>}
+      {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{pictogram && <ServiceIcon name={pictogram} class="size-10 md:size-12" />}{eyebrow}</p>}
       <h1 class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{title}</h1>
       {lead && <p data-speakable class="relative mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{br(lead)}</p>}
     </div>

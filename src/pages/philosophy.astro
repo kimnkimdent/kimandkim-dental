@@ -4,6 +4,7 @@ import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Photo from '../components/Photo.astro';
 import Button from '../components/Button.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import { SITE, br } from '../site';
 import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
@@ -47,7 +48,7 @@ const rules = [
       <div class="mt-6 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
         <div class="relative md:sticky md:top-32 md:self-start">
           <p aria-hidden="true" class="pointer-events-none absolute top-[38%] left-[-0.06em] -z-10 -translate-y-1/2 font-serif text-[10rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[14rem] md:text-[18rem]">易地思之</p>
-          <p class="t-mid font-semibold text-primary">易地思之 · 원장 인터뷰</p>
+          <p class="flex items-center gap-2.5 t-mid font-semibold text-primary"><ServiceIcon name="philosophy" class="size-10 md:size-12" />易地思之 · 원장 인터뷰</p>
           <span aria-hidden="true" class="mt-6 block h-[3.6rem] font-serif text-[7rem] leading-[0.9] text-primary-bright">“</span>
           <h1 id="philosophy-title" class="mt-2 font-serif text-[2.8rem] leading-[1.5] font-bold md:text-[3.8rem]">
             내가 환자라면…<br />내 가족이라면…
