@@ -5,6 +5,7 @@ import Container from '../components/Container.astro';
 import Photo from '../components/Photo.astro';
 import Button from '../components/Button.astro';
 import ServiceIcon from '../components/ServiceIcon.astro';
+import FingerCount from '../components/FingerCount.astro';
 import { SITE, br } from '../site';
 import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
@@ -37,7 +38,7 @@ const rules = [
 
 <Layout
   title="진료철학"
-  description="易地思之, 내가 환자라면. 김앤김치과 대표원장 김정민이 진료할 때마다 스스로에게 묻는 세 가지 질문과 진료실에서 지키는 4가지 원칙."
+  description="易地思之, 내가 환자라면. 김앤김치과 대표원장 김정민이 진료할 때마다 스스로에게 묻는 3가지 질문과 진료실에서 지키는 4가지 원칙."
   crumbs={[{ name: '진료철학', path: '/philosophy/' }]}
   keywords={["진료철학", "역지사지", "양심 치과"]}
 >
@@ -71,12 +72,12 @@ const rules = [
     </Container>
   </section>
 
-  <Section tone="surface" eyebrow="세 가지 질문" title="제가 매번 스스로에게 묻는 세 가지 질문">
+  <Section tone="surface" eyebrow="3가지 질문" title="제가 매번 스스로에게 묻는 3가지 질문">
     <ol class="grid gap-4 md:grid-cols-3">
       {
         questions.map((x, i) => (
           <li class="rounded-3xl bg-surface p-8">
-            <span class="font-serif text-[4rem] leading-none font-bold text-primary/30">{String(i + 1).padStart(2, '0')}</span>
+            <span class="flex items-center gap-3"><FingerCount n={(i + 1) as 1 | 2 | 3} class="h-16 w-auto" /><span class="sr-only">{i + 1}번째 질문</span></span>
             <h3 class="mt-4 t-head font-bold whitespace-pre-line">{x.q}</h3>
             <p class="mt-4 t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
           </li>
@@ -85,7 +86,7 @@ const rules = [
     </ol>
   </Section>
 
-  <Section eyebrow="4가지 원칙" title="진료실에서 지키는 4가지 원칙" lead="세 가지 질문은 진료실에서 이렇게 지켜집니다.">
+  <Section eyebrow="4가지 원칙" title="진료실에서 지키는 4가지 원칙" lead="3가지 질문은 진료실에서 이렇게 지켜집니다.">
     <ul class="grid gap-6 sm:grid-cols-2">
       {
         rules.map((r, i) => (
