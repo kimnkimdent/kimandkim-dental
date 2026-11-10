@@ -13,7 +13,7 @@ import { Image } from 'astro:assets';
 import Section from '../../components/Section.astro';
 import doctor from '../../assets/photos/doctor-white.jpg'; // 대표원장 프로필(상반신), 배경을 흰색으로 정리한 사진
 import { DOCTOR } from '../../seo'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다
-import kidCheckup from '../../assets/photos/kid-checkup.jpg';
+import whiteTreat from '../../assets/photos/white-treat.jpg';
 import deskConsult from '../../assets/photos/desk-consult.jpg';
 import deskSmile from '../../assets/photos/sofa-laugh.jpg';
 import modelExplain from '../../assets/photos/model-explain.jpg';
@@ -44,10 +44,10 @@ const chapters = [
     teeth: 2 as const,
     title: '다음엔\n가족과 함께',
     text: '처음 혼자 오셨던 분이 어느새 배우자분과, 자녀분과, 부모님까지 모시고 오십니다.',
-    photos: [{ src: kidCheckup, alt: '아이와 눈을 맞추며 진료하는 대표원장' }],
+    photos: [{ src: whiteTreat, alt: '흰 가운을 입고 직원과 함께 진료하는 대표원장' }],
   },
   {
-    mark: '세 세대',
+    mark: '3가족의 시간',
     teeth: 3 as const,
     title: '할머니의 틀니,\n손주의 첫 불소',
     text: '할머니가 틀니를 맞추시던 날, 손주는 첫 불소를 바르고 갑니다. 그 믿음이 쌓여 지금의 김앤김치과가 되었습니다.',
