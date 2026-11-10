@@ -17,7 +17,7 @@ const { src, alt, eyebrow, text, sub, position = '50% 50%' } = Astro.props;
 
 <section class="relative isolate flex min-h-[32rem] items-center overflow-hidden bg-secondary py-20 text-white md:min-h-[44rem]">
   <Image src={src} alt={alt} widths={[800, 1600, 2000]} sizes="100vw" class="absolute inset-0 -z-20 h-full w-full object-cover" style={`object-position: ${position}`} />
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[hsl(214_45%_10%/0.6)]"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[hsl(216_62%_10%/0.6)]"></div>
   <div aria-hidden="true" class="absolute inset-0 -z-10 bg-primary opacity-35 mix-blend-multiply"></div>
   <Container class="text-center">
     {eyebrow && <p class="t-mid font-semibold text-primary-bright">{eyebrow}</p>}
