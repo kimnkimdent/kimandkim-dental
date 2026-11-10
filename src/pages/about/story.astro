@@ -137,10 +137,10 @@ const chapters = [
                 {/* 사진 */}
                 <div class:list={['story-in relative z-10 md:row-start-1', right ? 'md:col-start-3 md:pl-10' : 'md:col-start-1 md:pr-10', 'col-start-2 mt-0']}>
                   {c.photos.length === 1 ? (
-                    <Photo src={c.photos[0].src} alt={c.photos[0].alt} class="shadow-lg [&_img]:rounded-3xl" />
+                    <Photo src={c.photos[0].src} alt={c.photos[0].alt} class="story-tint shadow-lg [&_img]:rounded-3xl" />
                   ) : (
                     <div class="grid grid-cols-2 gap-3">
-                      {c.photos.map((p, k) => <Photo src={p.src} alt={p.alt} ratio="aspect-[3/4]" class:list={['shadow-lg [&_img]:object-[70%_50%]', k === 1 && 'mt-10']} />)}
+                      {c.photos.map((p, k) => <Photo src={p.src} alt={p.alt} ratio="aspect-[3/4]" class:list={['story-tint shadow-lg [&_img]:object-[70%_50%]', k === 1 && 'mt-10']} />)}
                     </div>
                   )}
                 </div>
@@ -213,6 +213,34 @@ const chapters = [
 </Layout>
 
 <style>
+
+  /* 연대기 사진: 진한 남색 → 하늘색 블루 필터로 톤 통일 */
+  :global(.story-tint) {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2.4rem;
+  }
+  :global(.story-tint img) {
+    filter: saturate(0.85) contrast(1.03) brightness(1.04);
+  }
+  :global(.story-tint)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(160deg, hsl(213 72% 27% / 0.55), hsl(196 82% 58% / 0.35));
+    mix-blend-mode: color;
+  }
+  :global(.story-tint)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: hsl(205 80% 50% / 0.08);
+  }
   /* 14년: 화면에 들어오면 0 → 14로 올라간다 */
   @property --n {
     syntax: '<integer>';
