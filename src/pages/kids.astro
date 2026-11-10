@@ -1,4 +1,5 @@
 ---
+import { br } from '../site';
 import PhotoBand from '../components/PhotoBand.astro';
 import bandKid from '../assets/photos/band-kid.jpg';
 import Layout from '../layouts/Layout.astro';
@@ -53,7 +54,7 @@ const checkups = [
           <li class="rounded-3xl border border-border p-7 text-center">
             <Mark class="mx-auto mb-3 h-12 w-auto" />
             <p class="t-head font-bold text-primary">{c.t}</p>
-            <p class="mt-2 t-mid">{c.d}</p>
+            <p class="mt-2 t-mid whitespace-pre-line">{br(c.d)}</p>
           </li>
         ))
       }

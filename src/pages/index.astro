@@ -6,7 +6,7 @@ import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
 import Mark from '../components/Mark.astro';
 import ClinicIcon from '../components/ClinicIcon.astro';
-import { SITE, url, tel } from '../site';
+import { SITE, url, tel, br } from '../site';
 import { allQna, qna } from '../qna';
 
 const cards = [
@@ -93,8 +93,8 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
           <li>
             <a href={url(`/qna/#${it.id}`)} class="flex h-full flex-col rounded-3xl bg-background p-7 shadow-sm transition-shadow hover:shadow-lg">
               <span class="self-start rounded-full bg-primary-surface px-3 py-1 t-body font-semibold text-primary">{tabOf(it.id)}</span>
-              <p class="mt-4 t-mid font-bold">Q. {it.q}</p>
-              <p class="mt-3 line-clamp-3 t-body text-foreground-muted">{it.a}</p>
+              <p class="mt-4 t-mid font-bold whitespace-pre-line">Q. {br(it.q)}</p>
+              <p class="mt-3 line-clamp-3 t-body text-foreground-muted whitespace-pre-line">{br(it.a)}</p>
             </a>
           </li>
         ))

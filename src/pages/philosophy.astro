@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import Photo from '../components/Photo.astro';
 import Button from '../components/Button.astro';
-import { SITE } from '../site';
+import { SITE, br } from '../site';
 import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
 import modelExplain from '../assets/photos/model-explain.jpg';
@@ -53,7 +53,7 @@ const rules = [
           <li class="rounded-3xl bg-surface p-8">
             <span class="font-serif text-[4rem] leading-none font-bold text-primary/30">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="mt-4 t-head font-bold whitespace-pre-line">{x.q}</h3>
-            <p class="mt-4 t-body leading-relaxed text-foreground-muted">{x.a}</p>
+            <p class="mt-4 t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
           </li>
         ))
       }
@@ -69,7 +69,7 @@ const rules = [
             <div class="p-7">
               <p class="t-body font-bold text-primary">{String(i + 1).padStart(2, '0')}</p>
               <h3 class="mt-1 t-head font-bold">{r.t}</h3>
-              <p class="mt-3 t-body leading-relaxed text-foreground-muted">{r.d}</p>
+              <p class="mt-3 t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(r.d)}</p>
             </div>
           </li>
         ))

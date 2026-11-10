@@ -3,6 +3,7 @@
 // align="left"면 페이지 제목 아래처럼 왼쪽 정렬된 곳에 맞춰 붙는다(기본은 가운데).
 import { Image } from 'astro:assets';
 import doctor from '../assets/doctor-kim.jpg';
+import { br } from '../site';
 interface Props { quote: string; align?: 'center' | 'left' }
 const { quote, align = 'center' } = Astro.props;
 ---
@@ -11,7 +12,7 @@ const { quote, align = 'center' } = Astro.props;
   <Image src={doctor} alt="대표원장 김정민" width={240} height={240} class="size-24 shrink-0 rounded-full bg-primary-surface object-cover object-top md:size-32" />
   <div>
     <p class="t-body font-semibold text-primary">역지사지 진료 노트</p>
-    <blockquote class="mt-3 font-serif text-[1.9rem] leading-relaxed font-bold md:text-[2.4rem]">“{quote}”</blockquote>
+    <blockquote class="mt-3 font-serif text-[1.9rem] leading-relaxed font-bold md:text-[2.4rem] whitespace-pre-line">“{br(quote)}”</blockquote>
     <figcaption class="mt-4 t-body text-foreground-muted">— 대표원장 김정민</figcaption>
   </div>
 </figure>

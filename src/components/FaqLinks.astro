@@ -1,6 +1,6 @@
 ---
 // 진료 페이지의 "자주 묻는 질문": 질문을 누르면 궁금해요 Q&A 페이지의 해당 답변으로 이동한다.
-import { url } from '../site';
+import { url, br } from '../site';
 import { groupOf } from '../qna';
 interface Props { group: string }
 const g = groupOf(Astro.props.group);
@@ -12,7 +12,7 @@ const g = groupOf(Astro.props.group);
       <li>
         <a href={url(`/qna/#${it.id}`)} class="group flex min-h-16 items-center gap-4 px-6 py-4 transition-colors hover:bg-surface md:px-8">
           <span class="t-body font-bold text-primary">{String(i + 1).padStart(2, '0')}</span>
-          <span class="flex-1 t-mid font-semibold">{it.q}</span>
+          <span class="flex-1 t-mid font-semibold whitespace-pre-line">{br(it.q)}</span>
           <span aria-hidden="true" class="t-mid text-foreground-subtle transition-transform group-hover:translate-x-1">→</span>
         </a>
       </li>

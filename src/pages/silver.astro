@@ -1,4 +1,5 @@
 ---
+import { br } from '../site';
 import PhotoBand from '../components/PhotoBand.astro';
 import bandRoom from '../assets/photos/treatment-room.jpg';
 import Layout from '../layouts/Layout.astro';
@@ -56,7 +57,7 @@ const dentures = [
         dentures.map((x) => (
           <li class="rounded-3xl border border-border p-7">
             <h3 class="t-head font-bold text-primary">{x.t}</h3>
-            <p class="mt-3 t-body text-foreground-muted">{x.d}</p>
+            <p class="mt-3 t-body text-foreground-muted whitespace-pre-line">{br(x.d)}</p>
           </li>
         ))
       }

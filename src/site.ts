@@ -74,3 +74,7 @@ export const SITE = {
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const url = (path: string) => base + path;
 export const tel = `tel:${SITE.contact.phone.replace(/-/g, '')}`;
+
+// 문장이 끝나는 곳(. ? ! 뒤)에서 줄을 바꾼다. 화면에 보이는 설명 글에만 쓴다(검색용 설명에는 쓰지 않음).
+// 받는 쪽 글자에는 whitespace-pre-line이 있어야 줄바꿈이 보인다.
+export const br = (s?: string) => (s ?? '').replace(/([.?!…][”’"']?)\s+(?=[^\s])/g, '$1\n');

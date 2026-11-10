@@ -10,7 +10,7 @@ import Process from '../../components/Process.astro';
 import FaqLinks from '../../components/FaqLinks.astro';
 import Photo from '../../components/Photo.astro';
 import SubTabs from '../../components/SubTabs.astro';
-import { SITE, url } from '../../site';
+import { SITE, url, br } from '../../site';
 
 const tabs = SITE.nav[3].children!;
 const parts = [
@@ -73,7 +73,7 @@ const kinds = [
         kinds.map((k) => (
           <li class="rounded-3xl border border-border p-7">
             <h3 class="t-head font-bold">{k.t}</h3>
-            <p class="mt-3 t-body text-foreground-muted">{k.d}</p>
+            <p class="mt-3 t-body text-foreground-muted whitespace-pre-line">{br(k.d)}</p>
             {k.link && <a href={url(k.link)} class="mt-4 inline-block t-body font-semibold text-primary hover:underline">실버 치아 클리닉 보기 →</a>}
           </li>
         ))

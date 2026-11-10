@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
-import { SITE, tel } from '../site';
+import { SITE, tel, br } from '../site';
 import { qna, allQna, qnaUpdated, qnaAuthor } from '../qna';
 import { faqSchema } from '../seo';
 ---
@@ -40,8 +40,8 @@ import { faqSchema } from '../seo';
             <ul class="mt-6 space-y-3">
               {g.items.map((it) => (
                 <li id={it.id} class="qna-item scroll-mt-28 rounded-3xl border border-border bg-background p-6 md:p-8">
-                  <h3 class="t-head font-bold"><span class="text-primary">Q.</span> {it.q}</h3>
-                  <p class="mt-3 t-mid leading-relaxed text-foreground-muted"><span class="font-bold text-foreground">A.</span> {it.a}</p>
+                  <h3 class="t-head font-bold whitespace-pre-line"><span class="text-primary">Q.</span> {br(it.q)}</h3>
+                  <p class="mt-3 t-mid leading-relaxed whitespace-pre-line text-foreground-muted"><span class="font-bold text-foreground">A.</span> {br(it.a)}</p>
                 </li>
               ))}
             </ul>
