@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
 import Photo from '../components/Photo.astro';
 import Button from '../components/Button.astro';
 import { SITE, br } from '../site';
@@ -9,6 +10,17 @@ import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
 import modelExplain from '../assets/photos/model-explain.jpg';
 import xrayWoman from '../assets/photos/xray-woman2.jpg';
+
+// 원장 인터뷰(원장님 말씀 그대로, 문단·줄바꿈도 그대로)
+const interview = [
+  "제가 진료할 때 가장 많이 되묻는\n질문이 하나 있어요.",
+  "'내가 환자라면,\n내가 이 돈을 낸다면\n어떤 치료를 선택할까'라는 거예요.\n역지사지 정신을\n순간의 판단이 아니라,\n습관처럼 매 진료마다\n적용하려고 해요.",
+  "그러다 보니\n무조건 비싼 치료를 권하기보다,\n환자분 상황에 맞는\n현실적인 치료를 함께 고민하고\n타고난 치아를 최대한 끝까지\n쓰실 수 있도록\n기본을 지키게 되더라고요.",
+  "치료 전에는 늘 충분히 설명드려서\n막연한 불안감이 확신으로\n바뀔 수 있게 하고요.",
+  "다만 이 역지사지가\n환자의 감정 공감에만\n쏠리는 건 아니에요.",
+  "설명은 편안하고 따뜻하게\n해드리지만,\n정작 어떤 치료가 필요한지는\n냉정하게 이성적인 판단을\n하려고 노력합니다.",
+  "환자 입장에서 생각하는 것과,\n환자에게 정말 필요한 걸\n객관적으로 진단하고 치료하는 것.\n이 두 가지를 같이 가져가는 게\n제 진료의 핵심이에요."
+];
 
 const questions = [
   { q: '내가 환자라면,\n무엇이 가장 두려울까', a: '치과 문을 열기까지의 망설임을 압니다. 치료보다 마음을 먼저 살핍니다.' },
@@ -34,7 +46,7 @@ const rules = [
     watermark="易地思之"
     eyebrow="易地思之"
     title="내가 환자라면"
-    lead={'진료하는 모든 순간, 습관처럼 스스로에게 묻습니다. “내가 환자라면…”\n치과 문을 열기까지의 망설임, 치료비에 대한 걱정, 내 가족에게도 권할 수 있는 치료인지에 대한 고민.\n그 마음을 먼저 헤아려야 환자분만을 위한 진료를 할 수 있다고 믿습니다.\n그래서 오늘도 환자분의 자리에서 먼저 생각하고, 충분히 설명하고, 꼭 필요한 만큼 진료합니다.'}
+    lead={'진료하는 모든 순간 습관처럼 생각합니다. “내가 환자라면…”\n그래야 환자분만을 위한 진료를 할 수 있기 때문입니다.'}
   >
     <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
     <div class="relative mt-8">
@@ -46,7 +58,28 @@ const rules = [
     </div>
   </PageHero>
 
-  <Section eyebrow="세 가지 질문" title="제가 매번 스스로에게 묻는 세 가지 질문">
+  <!-- 원장 인터뷰: 진료철학 설명(원장님 말씀 그대로, 줄바꿈도 그대로) -->
+  <section class="bg-background py-section" aria-labelledby="interview-title">
+    <Container>
+      <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <div class="md:sticky md:top-32 md:self-start">
+          <p class="t-body font-semibold tracking-wide text-primary">원장 인터뷰</p>
+          <span aria-hidden="true" class="mt-4 block font-serif text-[7rem] leading-[0.6] text-primary-bright">“</span>
+          <h2 id="interview-title" class="mt-2 font-serif text-[2.6rem] leading-[1.5] font-bold md:text-[3.4rem]">
+            내가 환자라면,<br />내가 이 돈을 낸다면<br />어떤 치료를 선택할까
+          </h2>
+          <span aria-hidden="true" class="mt-7 block h-[3px] w-12 rounded-full bg-primary"></span>
+        </div>
+
+        <div class="space-y-7 border-l-2 border-primary-surface pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
+          {interview.map((para) => <p class="whitespace-pre-line">{para}</p>)}
+          <p class="!mt-10 t-body font-semibold text-foreground">— 김정민 원장 인터뷰 중에서 —</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <Section tone="surface" eyebrow="세 가지 질문" title="제가 매번 스스로에게 묻는 세 가지 질문">
     <ol class="grid gap-4 md:grid-cols-3">
       {
         questions.map((x, i) => (
@@ -60,7 +93,7 @@ const rules = [
     </ol>
   </Section>
 
-  <Section tone="surface" eyebrow="4가지 원칙" title="진료실에서 지키는 4가지 원칙" lead="세 가지 질문은 진료실에서 이렇게 지켜집니다.">
+  <Section eyebrow="4가지 원칙" title="진료실에서 지키는 4가지 원칙" lead="세 가지 질문은 진료실에서 이렇게 지켜집니다.">
     <ul class="grid gap-6 sm:grid-cols-2">
       {
         rules.map((r, i) => (
