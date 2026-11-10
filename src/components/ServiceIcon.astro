@@ -1,12 +1,12 @@
 ---
 // 홈 진료 안내 카드 픽토그램(내용에 맞춘 그림). 진한색 = 감싼 곳의 primary(진료 과목 색), 연한색 = primary-surface.
-// about(한 가족) · philosophy(마음을 감싼 손) · silver(할머니·할아버지 얼굴) · adult(엄마·아빠 얼굴) · kids(아이 얼굴) · qna(물음 말풍선)
+// about(한 가족) · philosophy(겹친 두 하트) · silver(할머니·할아버지 얼굴) · adult(엄마·아빠 얼굴) · kids(아이 얼굴) · qna(물음 말풍선)
 interface Props { name: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | 'qna'; class?: string }
 const { name, class: className = 'size-12' } = Astro.props;
 const D = 'var(--primary)';
 const L = 'var(--primary-surface)';
 // 그림마다 실제 차지하는 영역에 맞춘 보기 영역(같은 크기로 보이게). 실버·청장년(두 얼굴)은 20% 크게
-const VB: Record<Props['name'], string> = {"about":"1.4 1.65 45.2 45.2","philosophy":"2.4 3.55 43.2 43.2","silver":"6.42 3.92 35.17 35.17","adult":"5.54 6.54 36.42 36.42","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
+const VB: Record<Props['name'], string> = {"about":"1.4 1.65 45.2 45.2","philosophy":"3.4 4.2 44.5 44.5","silver":"6.42 3.92 35.17 35.17","adult":"5.54 6.54 36.42 36.42","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
 ---
 
 <svg aria-hidden="true" viewBox={VB[name]} class={className} overflow="visible" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -24,9 +24,9 @@ const VB: Record<Props['name'], string> = {"about":"1.4 1.65 45.2 45.2","philoso
   )}
   {name === 'philosophy' && (
     <>
-      {/* 두 손이 감싼 마음 */}
-      <path d="M24 26.5c-.6 0-1.1-.2-1.5-.6l-6.3-6c-2.7-2.6-2.8-6.9-.2-9.4 2.2-2.2 5.8-2.2 8 0 2.2-2.2 5.8-2.2 8 0 2.6 2.5 2.5 6.8-.2 9.4l-6.3 6c-.4.4-.9.6-1.5.6z" fill={D} />
-      <path d="M4 30l8.5-3.4c1.7-.7 3.6-.6 5.2.3L24 30l6.3-3.1c1.6-.9 3.5-1 5.2-.3L44 30v8l-9 3c-1.3.4-2.6.4-3.9 0L24 38.6 16.9 41c-1.3.4-2.6.4-3.9 0L4 38z" fill={L} stroke={D} stroke-width="2.6" />
+      {/* 살짝 겹친 두 하트: 환자의 마음과 의사의 마음 */}
+      <path transform="translate(3 9) scale(1.3)" d="M12 21c-.4 0-.8-.1-1.1-.4L3.6 14C.9 11.4.8 7.1 3.4 4.5c2.3-2.3 6-2.3 8.6 0 2.6-2.3 6.3-2.3 8.6 0 2.6 2.6 2.5 6.9-.2 9.5l-7.3 6.6c-.3.3-.7.4-1.1.4z" fill={L} stroke={D} stroke-width="1.85" />
+      <path transform="translate(17 13) scale(1.3)" d="M12 21c-.4 0-.8-.1-1.1-.4L3.6 14C.9 11.4.8 7.1 3.4 4.5c2.3-2.3 6-2.3 8.6 0 2.6-2.3 6.3-2.3 8.6 0 2.6 2.6 2.5 6.9-.2 9.5l-7.3 6.6c-.3.3-.7.4-1.1.4z" fill={D} stroke={D} stroke-width="1.85" />
     </>
   )}
   {name === 'silver' && (
