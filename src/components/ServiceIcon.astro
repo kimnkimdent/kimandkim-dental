@@ -1,25 +1,21 @@
 ---
 // 홈 진료 안내 카드 픽토그램(내용에 맞춘 그림). 진한색 = 감싼 곳의 primary(진료 과목 색), 연한색 = primary-surface.
-// about(한 가족) · philosophy(겹친 두 하트) · silver(할머니·할아버지 얼굴) · adult(엄마·아빠 얼굴) · kids(아이 얼굴) · qna(물음 말풍선)
+// about(치아+의료 십자) · philosophy(겹친 두 하트) · silver(할머니·할아버지 얼굴) · adult(엄마·아빠 얼굴) · kids(아이 얼굴) · qna(물음 말풍선)
 interface Props { name: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | 'qna'; class?: string }
 const { name, class: className = 'size-12' } = Astro.props;
 const D = 'var(--primary)';
 const L = 'var(--primary-surface)';
 // 그림마다 실제 차지하는 영역에 맞춘 보기 영역(같은 크기로 보이게). 실버·청장년(두 얼굴)은 20% 크게
-const VB: Record<Props['name'], string> = {"about":"1.4 1.65 45.2 45.2","philosophy":"1.6 -0.95 46.8 46.8","silver":"6.42 3.92 35.17 35.17","adult":"5.54 6.54 36.42 36.42","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
+const VB: Record<Props['name'], string> = {"about":"3.7 2.3 44.5 44.5","philosophy":"1.6 -0.95 46.8 46.8","silver":"6.42 3.92 35.17 35.17","adult":"5.54 6.54 36.42 36.42","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
 ---
 
 <svg aria-hidden="true" viewBox={VB[name]} class={className} overflow="visible" fill="none" stroke-linecap="round" stroke-linejoin="round">
   {name === 'about' && (
     <>
-      {/* 한 가족: 어른 둘 + 아이 하나 */}
-      <circle cx="14" cy="13" r="5.5" fill={D} />
-      <circle cx="34" cy="13" r="5.5" fill={D} />
-      <circle cx="24" cy="25" r="4.2" fill={D} />
-      <path d="M4.5 41v-9c0-6 4.2-10.5 9.5-10.5 3.1 0 5.8 1.5 7.5 3.9" fill={L} stroke={D} stroke-width="2.6" />
-      <path d="M43.5 41v-9c0-6-4.2-10.5-9.5-10.5-3.1 0-5.8 1.5-7.5 3.9" fill={L} stroke={D} stroke-width="2.6" />
-      <path d="M16.5 41v-3.5c0-4.4 3.4-7.5 7.5-7.5s7.5 3.1 7.5 7.5V41z" fill={L} stroke={D} stroke-width="2.6" />
-      <path d="M3 41h42" stroke={D} stroke-width="2.6" />
+      {/* 치아 + 의료 십자: 우리 동네 치과 */}
+      <path transform="translate(1.5 2) scale(0.98)" d="M20 7.5C16.2 3.6 9.6 2.6 6.4 6.4 2.6 11 3.8 18.6 5.8 24.8c1.8 5.6 3 11.6 4.8 15 1.4 2.6 4.4 2.2 5.4-.4l2-5.6c.8-2.2 3.2-2.2 4 0l2 5.6c1 2.6 4 3 5.4.4 1.8-3.4 3-9.4 4.8-15 2-6.2 3.2-13.8-.6-18.4C30.4 2.6 23.8 3.6 20 7.5Z" fill={L} stroke={D} stroke-width="2.6" stroke-linejoin="round" />
+      <path d="M12.5 10.5c2-1.3 4.6-1.4 6.8-.2" stroke={D} stroke-width="2.4" />
+      <path d="M33 22h6a1.6 1.6 0 0 1 1.6 1.6V28h4.4a1.6 1.6 0 0 1 1.6 1.6v6a1.6 1.6 0 0 1-1.6 1.6h-4.4v4.4a1.6 1.6 0 0 1-1.6 1.6h-6a1.6 1.6 0 0 1-1.6-1.6v-4.4H27a1.6 1.6 0 0 1-1.6-1.6v-6A1.6 1.6 0 0 1 27 28h4.4v-4.4A1.6 1.6 0 0 1 33 22z" fill={D} stroke="#fff" stroke-width="2" />
     </>
   )}
   {name === 'philosophy' && (
