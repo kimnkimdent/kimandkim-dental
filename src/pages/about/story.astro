@@ -214,32 +214,14 @@ const chapters = [
 
 <style>
 
-  /* 연대기 사진: 진한 남색 → 하늘색 블루 필터로 톤 통일 */
+  /* 연대기 사진: 회색 톤(흑백) 필터로 통일 */
   :global(.story-tint) {
     position: relative;
     overflow: hidden;
     border-radius: 2.4rem;
   }
   :global(.story-tint img) {
-    filter: saturate(0.85) contrast(1.03) brightness(1.04);
-  }
-  :global(.story-tint)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background: linear-gradient(160deg, hsl(213 72% 27% / 0.55), hsl(196 82% 58% / 0.35));
-    mix-blend-mode: color;
-  }
-  :global(.story-tint)::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    border-radius: inherit;
-    background: hsl(205 80% 50% / 0.08);
+    filter: grayscale(1) contrast(1.06) brightness(1.04);
   }
   /* 14년: 화면에 들어오면 0 → 14로 올라간다 */
   @property --n {
