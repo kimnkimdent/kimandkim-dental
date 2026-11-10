@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Photo from '../components/Photo.astro';
@@ -41,37 +40,29 @@ const rules = [
   crumbs={[{ name: '진료철학', path: '/philosophy/' }]}
   keywords={["진료철학", "역지사지", "양심 치과"]}
 >
-  <PageHero
-    crumbs={['진료철학']}
-    watermark="易地思之"
-    eyebrow="易地思之"
-    title="내가 환자라면"
-    lead={'진료하는 모든 순간 습관처럼 생각합니다. “내가 환자라면…”\n그래야 환자분만을 위한 진료를 할 수 있기 때문입니다.'}
-  >
-    <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
-    <div class="relative mt-8">
-      <Button href={SITE.contact.blogPhilosophy} variant="primary" size="lg" class="shadow-md">
-        역지사지 진료철학
-        <span class="t-body font-medium opacity-80">자세히 보기</span>
-        <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
-      </Button>
-    </div>
-  </PageHero>
-
-  <!-- 원장 인터뷰: 진료철학 설명(원장님 말씀 그대로, 줄바꿈도 그대로) -->
-  <section class="bg-background py-section" aria-labelledby="interview-title">
-    <Container>
-      <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-        <div class="md:sticky md:top-32 md:self-start">
-          <p class="t-body font-semibold tracking-wide text-primary">원장 인터뷰</p>
-          <span aria-hidden="true" class="mt-4 block font-serif text-[7rem] leading-[0.6] text-primary-bright">“</span>
-          <h2 id="interview-title" class="mt-2 font-serif text-[2.6rem] leading-[1.5] font-bold md:text-[3.4rem]">
+  <!-- 첫 화면: 왼쪽 易地思之 · 핵심 질문(h1) · 블로그 자세히 보기 / 오른쪽 원장 인터뷰(원문·줄바꿈 그대로) -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-section md:pt-20" aria-labelledby="philosophy-title">
+    <Container class="relative">
+      <p class="relative z-10 t-body text-foreground-muted">홈 &gt; 진료철학</p>
+      <div class="mt-6 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <div class="relative md:sticky md:top-32 md:self-start">
+          <p aria-hidden="true" class="pointer-events-none absolute top-[38%] left-[-0.06em] -z-10 -translate-y-1/2 font-serif text-[10rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[14rem] md:text-[18rem]">易地思之</p>
+          <p class="t-mid font-semibold text-primary">易地思之 · 원장 인터뷰</p>
+          <span aria-hidden="true" class="mt-6 block h-[3.6rem] font-serif text-[7rem] leading-[0.9] text-primary-bright">“</span>
+          <h1 id="philosophy-title" class="mt-2 font-serif text-[2.8rem] leading-[1.5] font-bold md:text-[3.8rem]">
             내가 환자라면,<br />내가 이 돈을 낸다면<br />어떤 치료를 선택할까
-          </h2>
-          <span aria-hidden="true" class="mt-7 block h-[3px] w-12 rounded-full bg-primary"></span>
+          </h1>
+          <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
+          <div class="mt-8">
+            <Button href={SITE.contact.blogPhilosophy} variant="primary" size="lg" class="shadow-md">
+              역지사지 진료철학
+              <span class="t-body font-medium opacity-80">자세히 보기</span>
+              <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+            </Button>
+          </div>
         </div>
 
-        <div class="space-y-7 border-l-2 border-primary-surface pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
+        <div data-speakable class="space-y-7 border-l-2 border-primary/20 pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
           {interview.map((para) => <p class="whitespace-pre-line">{para}</p>)}
           <p class="!mt-10 t-body font-semibold text-foreground">— 김정민 원장 인터뷰 중에서 —</p>
         </div>
