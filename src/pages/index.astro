@@ -5,17 +5,17 @@ import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
 import Mark from '../components/Mark.astro';
-import ClinicIcon from '../components/ClinicIcon.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import { SITE, url, tel, br } from '../site';
 import { allQna, qna } from '../qna';
 
 const cards = [
-  { href: '/about/story/', title: '병원소개', quote: '처음엔 혼자, 다음엔 가족과 함께', subs: [['/about/story/', '김앤김 이야기'], ['/about/story/#doctor', '대표원장 소개']] },
-  { href: '/philosophy/', title: '진료철학', quote: '“내가 환자라면, 내 가족이라면”', subs: [['/philosophy/', '세 가지 질문과 진료실 4가지 원칙']] },
-  { href: '/silver/', clinic: 'silver' as const, title: '실버 치아 클리닉', quote: '“내 부모님이라면”', subs: [['/silver/', '보험 임플란트·틀니'], ['/silver/#safe', '만성질환 안전 진료']] },
-  { href: '/adult/implant/', clinic: 'adult' as const, title: '청장년 클리닉', quote: '“내가 이 비용을 낸다면”', subs: [['/adult/implant/', '임플란트'], ['/adult/natural/', '자연치아·심미보철'], ['/adult/wisdom/', '사랑니·구강외과']] },
-  { href: '/kids/', clinic: 'kids' as const, title: '어린이·청소년 클리닉', quote: '“내 아이라면”', subs: [['/kids/', '영유아 검진 · 충치 예방 · 청소년 관리']] },
-  { href: '/qna/', title: '궁금해요 Q&A', quote: '환자분들이 물어보신 질문에 답합니다', subs: [['/qna/', '전체 질문 보기']] },
+  { href: '/about/story/', icon: 'about' as const, title: '병원소개', quote: '처음엔 혼자, 다음엔 가족과 함께', subs: [['/about/story/', '김앤김 이야기'], ['/about/story/#doctor', '대표원장 소개']] },
+  { href: '/philosophy/', icon: 'philosophy' as const, title: '진료철학', quote: '“내가 환자라면, 내 가족이라면”', subs: [['/philosophy/', '세 가지 질문과 진료실 4가지 원칙']] },
+  { href: '/silver/', clinic: 'silver' as const, icon: 'silver' as const, title: '실버 치아 클리닉', quote: '“내 부모님이라면”', subs: [['/silver/', '보험 임플란트·틀니'], ['/silver/#safe', '만성질환 안전 진료']] },
+  { href: '/adult/implant/', clinic: 'adult' as const, icon: 'adult' as const, title: '청장년 클리닉', quote: '“내가 이 비용을 낸다면”', subs: [['/adult/implant/', '임플란트'], ['/adult/natural/', '자연치아·심미보철'], ['/adult/wisdom/', '사랑니·구강외과']] },
+  { href: '/kids/', clinic: 'kids' as const, icon: 'kids' as const, title: '어린이·청소년 클리닉', quote: '“내 아이라면”', subs: [['/kids/', '영유아 검진 · 충치 예방 · 청소년 관리']] },
+  { href: '/qna/', icon: 'qna' as const, title: '궁금해요 Q&A', quote: '환자분들이 물어보신 질문에 답합니다', subs: [['/qna/', '전체 질문 보기']] },
 ];
 
 // 최근 질문 3개: 가장 나중에 추가된 질문부터
@@ -69,7 +69,7 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
       {
         cards.map((c) => (
           <li data-clinic={c.clinic} class="group relative flex flex-col rounded-2xl border border-border bg-background p-4 transition-shadow hover:shadow-lg md:rounded-3xl md:p-6">
-            {c.clinic ? <ClinicIcon clinic={c.clinic} class="mb-3 h-9 transition-transform group-hover:-rotate-6 md:h-11" /> : <Mark class="mb-3 h-9 w-auto transition-transform group-hover:-rotate-6 md:h-11" />}
+            <ServiceIcon name={c.icon} class="mb-3 size-10 transition-transform group-hover:-rotate-6 md:size-12" />
             <h3 class="text-[1.6rem] leading-snug font-bold md:text-[2rem]">
               <a href={url(c.href)} class="after:absolute after:inset-0 after:content-['']">{c.title}</a>
             </h3>

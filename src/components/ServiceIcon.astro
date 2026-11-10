@@ -1,0 +1,65 @@
+---
+// 홈 진료 안내 카드 픽토그램(내용에 맞춘 그림). 진한색 = 감싼 곳의 primary(진료 과목 색), 연한색 = primary-surface.
+// about(병원 건물) · philosophy(마음을 감싼 손) · silver(틀니) · adult(임플란트) · kids(아이 얼굴) · qna(물음 말풍선)
+interface Props { name: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | 'qna'; class?: string }
+const { name, class: className = 'size-12' } = Astro.props;
+const D = 'var(--color-primary)';
+const L = 'var(--color-primary-surface)';
+---
+
+<svg aria-hidden="true" viewBox="0 0 48 48" class={className} fill="none" stroke-linecap="round" stroke-linejoin="round">
+  {name === 'about' && (
+    <>
+      {/* 병원 건물 + 치아 간판 */}
+      <path d="M8 42V18l16-9 16 9v24" fill={L} stroke={D} stroke-width="2.6" />
+      <path d="M4 42h40" stroke={D} stroke-width="2.6" />
+      <path d="M20 42v-8h8v8" fill="#fff" stroke={D} stroke-width="2.6" />
+      <path d="M24 17.5c-1.5-1.3-3.7-1.6-5-.5-1.6 1.4-1.3 4-.6 6 .5 1.6.9 3.3 1.3 4.9.2.9 1.4.9 1.7 0l.8-2.6c.3-.8 1.3-.8 1.6 0l.8 2.6c.3.9 1.5.9 1.7 0 .4-1.6.8-3.3 1.3-4.9.7-2 1-4.6-.6-6-1.3-1.1-3.5-.8-5 .5z" fill={D} />
+    </>
+  )}
+  {name === 'philosophy' && (
+    <>
+      {/* 두 손이 감싼 마음 */}
+      <path d="M24 26.5c-.6 0-1.1-.2-1.5-.6l-6.3-6c-2.7-2.6-2.8-6.9-.2-9.4 2.2-2.2 5.8-2.2 8 0 2.2-2.2 5.8-2.2 8 0 2.6 2.5 2.5 6.8-.2 9.4l-6.3 6c-.4.4-.9.6-1.5.6z" fill={D} />
+      <path d="M4 30l8.5-3.4c1.7-.7 3.6-.6 5.2.3L24 30l6.3-3.1c1.6-.9 3.5-1 5.2-.3L44 30v8l-9 3c-1.3.4-2.6.4-3.9 0L24 38.6 16.9 41c-1.3.4-2.6.4-3.9 0L4 38z" fill={L} stroke={D} stroke-width="2.6" />
+    </>
+  )}
+  {name === 'silver' && (
+    <>
+      {/* 틀니(위·아래 치아 + 잇몸) */}
+      <path d="M6 20c0-6 8-10 18-10s18 4 18 10v2H6z" fill={L} stroke={D} stroke-width="2.6" />
+      <path d="M11 22v3.5a2.5 2.5 0 0 0 5 0V22m0 0v4a2.5 2.5 0 0 0 5 0v-4m0 0v4a2.5 2.5 0 0 0 5 0v-4m0 0v4a2.5 2.5 0 0 0 5 0v-4m0 0v3.5a2.5 2.5 0 0 0 5 0V22" fill="#fff" stroke={D} stroke-width="2.2" />
+      <path d="M6 28h36v2c0 6-8 9-18 9S6 36 6 30z" fill={D} />
+      <path d="M12 30v-1.5M18 30.5v-2M24 31v-2.5M30 30.5v-2M36 30v-1.5" stroke="#fff" stroke-width="2.2" />
+    </>
+  )}
+  {name === 'adult' && (
+    <>
+      {/* 임플란트: 크라운 + 지대주 + 나사 */}
+      <path d="M24 8.5c-2.6-2.2-6.4-2.6-8.6-.8-2.6 2.2-2.3 6.4-1.2 9.7l.6 1.6h18.4l.6-1.6c1.1-3.3 1.4-7.5-1.2-9.7-2.2-1.8-6-1.4-8.6.8z" fill={D} />
+      <rect x="19" y="20" width="10" height="5" rx="1.5" fill={L} stroke={D} stroke-width="2.4" />
+      <path d="M19.5 25h9l-1 16.5c-.1 1.4-1.2 2.5-2.6 2.5h-1.8c-1.4 0-2.5-1.1-2.6-2.5z" fill={L} stroke={D} stroke-width="2.4" />
+      <path d="M19.4 29.5l9.2-1.5M19.6 33.5l8.8-1.5M19.8 37.5l8.4-1.5" stroke={D} stroke-width="2.2" />
+    </>
+  )}
+  {name === 'kids' && (
+    <>
+      {/* 웃는 아이 얼굴(양갈래 머리) */}
+      <circle cx="9" cy="13" r="5" fill={D} />
+      <circle cx="39" cy="13" r="5" fill={D} />
+      <circle cx="24" cy="26" r="16" fill={L} stroke={D} stroke-width="2.6" />
+      <path d="M11 20c3-6 8-9 13-9s10 3 13 9c-4-1.5-8-4-9.5-6.5C24.5 17 17 20 11 20z" fill={D} />
+      <circle cx="18.5" cy="26.5" r="1.9" fill={D} />
+      <circle cx="29.5" cy="26.5" r="1.9" fill={D} />
+      <path d="M18.5 32c3.2 3.2 7.8 3.2 11 0" stroke={D} stroke-width="2.6" />
+    </>
+  )}
+  {name === 'qna' && (
+    <>
+      {/* 물음표 말풍선 */}
+      <path d="M8 8h32a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H22l-9 7v-7H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill={L} stroke={D} stroke-width="2.6" />
+      <path d="M19.5 17.5a4.5 4.5 0 1 1 6.4 4.1c-1.2.6-1.9 1.4-1.9 2.6v1.3" stroke={D} stroke-width="3" />
+      <circle cx="24" cy="30" r="1.9" fill={D} />
+    </>
+  )}
+</svg>
