@@ -9,7 +9,7 @@ const L = 'var(--primary-surface)';
 const VB: Record<Props['name'], string> = {"about":"1.4 1.65 45.2 45.2","philosophy":"2.4 3.55 43.2 43.2","silver":"6.42 3.92 35.17 35.17","adult":"5.54 6.54 36.42 36.42","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
 ---
 
-<svg aria-hidden="true" viewBox={VB[name]} class={className} fill="none" stroke-linecap="round" stroke-linejoin="round">
+<svg aria-hidden="true" viewBox={VB[name]} class={className} overflow="visible" fill="none" stroke-linecap="round" stroke-linejoin="round">
   {name === 'about' && (
     <>
       {/* 한 가족: 어른 둘 + 아이 하나 */}
