@@ -25,6 +25,8 @@ export const GET: APIRoute = ({ site }) => {
     '',
     `> ${SITE.description}`,
     '',
+    SITE.summary,
+    '',
     '## 기본 정보',
     `- 병원명: ${SITE.fullName} (줄여서 ${SITE.name})`,
     `- 진료 과목: 치과 (임플란트, 틀니, 자연치아 보존·보철, 사랑니·구강외과, 어린이·청소년 진료)`,

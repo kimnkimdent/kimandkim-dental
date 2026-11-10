@@ -71,6 +71,8 @@ export function baseSchema(site: URL) {
       alternateName: [SITE.name, '김앤김 치과', '파주 김앤김치과', '운정 김앤김치과', 'Kim & Kim Dental Clinic'],
       slogan: SITE.slogan,
       description: SITE.description,
+      disambiguatingDescription: SITE.summary,
+      abstract: SITE.summary,
       url: abs('/', site),
       logo: abs('/logo.png', site),
       image: [abs(SITE.ogImage, site), abs('/logo.png', site)],
