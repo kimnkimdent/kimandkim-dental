@@ -10,7 +10,7 @@ import { SITE, url, tel, br } from '../site';
 import { allQna, qna } from '../qna';
 
 const cards = [
-  { href: '/about/story/', icon: 'about' as const, title: '병원소개', quote: '처음엔 혼자, 다음엔 가족과 함께', subs: [['/about/story/', '김앤김 이야기'], ['/about/story/#doctor', '대표원장 소개']] },
+  { href: '/about/story/', icon: 'about' as const, title: '병원소개', quote: '처음엔 혼자,\n다음엔 가족과 함께', subs: [['/about/story/', '김앤김 이야기'], ['/about/story/#doctor', '대표원장 소개']] },
   { href: '/philosophy/', icon: 'philosophy' as const, title: '진료철학', quote: '“내가 환자라면, 내 가족이라면”', subs: [['/philosophy/', '세 가지 질문과 진료실 4가지 원칙']] },
   { href: '/silver/', clinic: 'silver' as const, icon: 'silver' as const, title: '실버 치아 클리닉', quote: '“내 부모님이라면”', subs: [['/silver/', '보험 임플란트·틀니'], ['/silver/#safe', '만성질환 안전 진료']] },
   { href: '/adult/implant/', clinic: 'adult' as const, icon: 'adult' as const, title: '청장년 클리닉', quote: '“내가 이 비용을 낸다면”', subs: [['/adult/implant/', '임플란트'], ['/adult/natural/', '자연치아·심미보철'], ['/adult/wisdom/', '사랑니·구강외과']] },
@@ -68,12 +68,12 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
     <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 lg:gap-3">
       {
         cards.map((c) => (
-          <li data-clinic={c.clinic} class="group relative flex flex-col rounded-2xl border border-border bg-background p-4 transition-shadow hover:shadow-lg md:rounded-3xl md:p-6 lg:p-5">
-            <ServiceIcon name={c.icon} class="mb-3 size-10 transition-transform group-hover:-rotate-6 md:size-12" />
+          <li class="group relative flex flex-col rounded-2xl border border-border bg-background p-4 transition-shadow hover:shadow-lg md:rounded-3xl md:p-6 lg:p-5">
+            <span data-clinic={c.clinic} class="contents"><ServiceIcon name={c.icon} class="mb-3 size-10 transition-transform group-hover:-rotate-6 md:size-12" /></span>
             <h3 class="text-[1.6rem] leading-snug font-bold md:text-[2rem] lg:text-[1.7rem]">
               <a href={url(c.href)} class="after:absolute after:inset-0 after:content-['']">{c.title}</a>
             </h3>
-            <p class="mt-1.5 text-[1.3rem] leading-snug text-primary md:mt-2 md:text-[1.5rem] lg:text-[1.35rem]">{c.quote}</p>
+            <p class="mt-1.5 text-[1.3rem] leading-snug text-primary md:mt-2 md:text-[1.5rem] lg:text-[1.35rem] whitespace-pre-line">{c.quote}</p>
             <p class="relative z-10 mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-4 max-md:hidden lg:hidden">
               {c.subs.map(([h, l]) => (
                 <a href={url(h)} class="text-[1.3rem] text-foreground-muted underline-offset-4 hover:text-primary hover:underline">{l}</a>

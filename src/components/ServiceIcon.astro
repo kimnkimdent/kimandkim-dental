@@ -3,8 +3,8 @@
 // about(병원 건물) · philosophy(마음을 감싼 손) · silver(틀니) · adult(임플란트) · kids(아이 얼굴) · qna(물음 말풍선)
 interface Props { name: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | 'qna'; class?: string }
 const { name, class: className = 'size-12' } = Astro.props;
-const D = 'var(--color-primary)';
-const L = 'var(--color-primary-surface)';
+const D = 'var(--primary)';
+const L = 'var(--primary-surface)';
 ---
 
 <svg aria-hidden="true" viewBox="0 0 48 48" class={className} fill="none" stroke-linecap="round" stroke-linejoin="round">
