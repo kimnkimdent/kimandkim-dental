@@ -5,9 +5,11 @@ interface Props { name: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | '
 const { name, class: className = 'size-12' } = Astro.props;
 const D = 'var(--primary)';
 const L = 'var(--primary-surface)';
+// 그림마다 실제 차지하는 영역에 맞춘 보기 영역: 여섯 개가 같은 크기로 보이게 한다
+const VB: Record<Props['name'], string> = {"about":"1.4 1.65 45.2 45.2","philosophy":"2.4 3.55 43.2 43.2","silver":"2.9 0.4 42.2 42.2","adult":"1.9 2.9 43.7 43.7","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
 ---
 
-<svg aria-hidden="true" viewBox="0 0 48 48" class={className} fill="none" stroke-linecap="round" stroke-linejoin="round">
+<svg aria-hidden="true" viewBox={VB[name]} class={className} fill="none" stroke-linecap="round" stroke-linejoin="round">
   {name === 'about' && (
     <>
       {/* 한 가족: 어른 둘 + 아이 하나 */}
