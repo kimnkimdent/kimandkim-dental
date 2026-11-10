@@ -76,6 +76,7 @@ export function baseSchema(site: URL) {
       image: [abs(SITE.ogImage, site), abs('/logo.png', site)],
       telephone: '+82-31-8071-2500',
       foundingDate: String(SITE.since),
+      ...(SITE.legal.businessNumber ? { taxID: SITE.legal.businessNumber } : {}),
       address: {
         '@type': 'PostalAddress',
         streetAddress: c.street,

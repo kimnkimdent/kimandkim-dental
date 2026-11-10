@@ -53,7 +53,7 @@ export const SITE = {
     street: '와석순환로 82, 대홍프라자 5층',
     parking: ['대홍프라자 지하 주차장', '건물 뒤편 1층 주차장', '건물 뒤 일방통행로 주차칸'],
   },
-  // 진료시간 (원고: 확인 필요). days는 검색엔진용 요일 코드.
+  // 진료시간(원고 확정). days는 검색엔진용 요일 코드.
   hours: [
     { label: '월 · 목 · 금', time: '10:00 ~ 18:30', days: ['Monday', 'Thursday', 'Friday'], open: '10:00', close: '18:30' },
     { label: '화 (야간진료)', time: '10:00 ~ 20:30', days: ['Tuesday'], open: '10:00', close: '20:30', highlight: true },
@@ -63,7 +63,7 @@ export const SITE = {
   closed: '수 · 일 휴진 / 공휴일은 전화 문의',
   legal: {
     representative: '김정민',
-    businessNumber: '', // TODO(확인 필요). 비워 두면 바닥글에서 빠진다.
+    businessNumber: '546-03-03111', // 사업자등록증(파주세무서)
   },
 };
 
