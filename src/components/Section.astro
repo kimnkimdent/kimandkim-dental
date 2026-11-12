@@ -17,7 +17,7 @@ interface Props {
 const { id, eyebrow, title, lead, tone = 'white', align = 'left', narrow = false, class: className = '' } = Astro.props;
 ---
 
-<section id={id} class:list={['py-section', tone === 'surface' ? 'bg-surface' : 'bg-background', className]}>
+<section id={id} class:list={['scroll-mt-20 py-section', tone === 'surface' ? 'bg-surface' : 'bg-background', className]}>
   <Container narrow={narrow}>
     {
       (eyebrow || title || lead) && (
