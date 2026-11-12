@@ -29,7 +29,7 @@ export const SITE = {
       ],
     },
     { href: '/philosophy/', label: '진료철학' },
-    { href: '/silver/', label: '실버 치아 클리닉' },
+    { href: '/silver/', label: '실버클리닉' },
     {
       href: '/adult/implant/',
       label: '청장년 클리닉',
