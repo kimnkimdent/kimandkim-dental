@@ -1,6 +1,6 @@
 ---
 // 바닥글. 내용은 src/site.ts에서 바꾼다. 아래 여백은 휴대폰 하단 고정 버튼에 가리지 않기 위한 것.
-import { SITE, tel } from '../site';
+import { SITE, tel, url } from '../site';
 import Logo from './Logo.astro';
 const { representative, businessNumber } = SITE.legal;
 ---
@@ -14,7 +14,8 @@ const { representative, businessNumber } = SITE.legal;
       <br />
       {SITE.contact.address} <span class="px-1.5 opacity-50">|</span> 대표전화 <a href={tel} class="hover:underline">{SITE.contact.phone}</a>
     </p>
-    <!-- TODO(확인 필요): 이용약관 · 개인정보처리방침 · 비급여 진료비 안내 페이지 내용을 받으면 링크 연결 -->
+    <!-- TODO(확인 필요): 이용약관 · 개인정보처리방침 페이지 내용을 받으면 링크 추가 -->
+    <p class="mt-5 t-body"><a href={url('/fees/')} class="font-semibold underline-offset-4 hover:underline">비급여 진료비 안내</a></p>
     <p class="mt-6 t-body opacity-60">Copyright © {SITE.fullName}. All rights reserved.</p>
   </div>
 </footer>

@@ -1,0 +1,110 @@
+---
+// 비급여 진료비 안내(의료법상 게시 의무). 금액은 원장님 확인 자료(2026.11) 그대로. 바뀌면 아래 fees 목록만 고친다.
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Container from '../components/Container.astro';
+import { SITE, tel } from '../site';
+
+const updated = '2026년 11월';
+type Row = [string, string, string?]; // [항목, 금액, 비고]
+const fees: { title: string; rows: Row[] }[] = [
+  { title: '크라운', rows: [
+    ['메탈 크라운', '400,000원'],
+    ['포스트(기둥)', '100,000원 / 150,000원'],
+    ['PFM 크라운(도자기)', '400,000원'],
+    ['골드 크라운', '800,000원', 'A Type(금 함량 46%)'],
+    ['지르코니아 크라운(어금니)', '500,000원'],
+    ['지르코니아 크라운(앞니)', '550,000원'],
+  ] },
+  { title: '인레이 · 온레이', rows: [
+    ['세라믹 인레이(E-max)', '250,000원'],
+    ['골드 인레이(1면)', '350,000원'],
+    ['골드 인레이(2면)', '400,000원'],
+    ['골드 온레이', '450,000원'],
+  ] },
+  { title: '레진', rows: [
+    ['앞니 레진(깨진 경우)', '150,000원'],
+    ['앞니 레진(치아 사이)', '120,000원', '면당'],
+    ['치경부 마모 레진', '60,000원'],
+    ['벌어진 앞니 레진', '150,000원', '면당'],
+    ['어금니 레진(1면)', '100,000원'],
+  ] },
+  { title: '어린이', rows: [
+    ['유치 기성 크라운(SS 크라운)', '100,000원'],
+    ['공간 유지 장치', '120,000원'],
+    ['유치 레진', '50,000원'],
+    ['불소 도포', '30,000원'],
+  ] },
+  { title: '임플란트', rows: [
+    ['임플란트(네오, 국산)', '1,000,000원'],
+    ['임플란트(오스템, 국산)', '1,200,000원'],
+    ['상악동 거상술', '500,000원 / 1,000,000원', '치조정 접근 / 측방 접근'],
+    ['뼈이식', '300,000원'],
+    ['연속 보철(폰틱)', '500,000원'],
+    ['와이어 임시 고정', '100,000원 / 200,000원', '씹기 어려운 경우, 3치아'],
+    ['와이어(맞물리는 치아)', '100,000원'],
+    ['임시 틀니', '500,000원'],
+  ] },
+  { title: '틀니', rows: [
+    ['전체 틀니', '1,500,000원'],
+    ['부분 틀니', '1,300,000원'],
+    ['지대치 크라운', '400,000원'],
+    ['임시 틀니', '500,000원'],
+    ['임플란트 틀니(오버덴처)', '1,500,000원'],
+    ['로케이터(똑딱이)', '500,000원', '개당'],
+    ['틀니 수리', '150,000원 / 300,000원', '단순 수리 / 이장'],
+  ] },
+  { title: '치주 처치', rows: [
+    ['치석 제거(위·아래 전체)', '60,000원'],
+    ['치석 제거(위턱)', '30,000원'],
+    ['치석 제거(아래턱)', '30,000원'],
+  ] },
+  { title: '제증명 수수료', rows: [
+    ['진단서(일반)', '20,000원'],
+    ['치료 확인서', '10,000원'],
+    ['진료 확인서', '1,000원'],
+    ['진료기록부 사본(1~5매)', '1,000원'],
+    ['진료기록부 사본(6매 이상)', '100원', '매당'],
+  ] },
+];
+---
+
+<Layout
+  title="비급여 진료비 안내"
+  description={`파주 운정 김앤김치과 비급여 진료비 안내. 크라운·인레이·레진·임플란트·틀니·어린이 진료·제증명 수수료(${updated} 기준).`}
+  crumbs={[{ name: '비급여 진료비 안내', path: '/fees/' }]}
+  keywords={["임플란트 비용", "틀니 비용", "크라운 비용", "치과 비급여"]}
+>
+  <PageHero crumbs={['비급여 진료비 안내']} title="비급여 진료비 안내" lead={`${SITE.fullName}의 비급여 진료비입니다. (${updated} 기준)`} />
+
+  <div class="bg-background pb-section">
+    <Container narrow>
+      <div class="grid gap-10 pt-10">
+        {
+          fees.map((g) => (
+            <section>
+              <h2 class="t-head font-bold text-primary">{g.title}</h2>
+              <table class="mt-4 w-full border-t-2 border-primary t-body">
+                <thead class="sr-only"><tr><th scope="col">항목</th><th scope="col">금액</th></tr></thead>
+                <tbody>
+                  {g.rows.map(([name, price, note]) => (
+                    <tr class="border-b border-border">
+                      <th scope="row" class="py-3.5 pr-4 text-left font-medium">{name}{note && <span class="block t-13 font-normal text-foreground-muted md:inline md:pl-2">({note})</span>}</th>
+                      <td class="py-3.5 text-right font-semibold whitespace-nowrap">{price}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          ))
+        }
+      </div>
+
+      <ul class="mt-10 space-y-1.5 rounded-2xl bg-surface px-6 py-5 t-body text-foreground-muted">
+        <li>· 금액은 1개(1치아) 기준이며, 구강 상태와 치료 범위에 따라 달라질 수 있습니다.</li>
+        <li>· 만 65세 이상 보험 임플란트·보험 틀니 등 건강보험이 적용되는 진료는 위 금액과 다릅니다.</li>
+        <li>· 정확한 비용은 검사 후 치료 전에 미리 안내해 드립니다. 문의 <a href={tel} class="font-semibold text-primary">{SITE.contact.phone}</a></li>
+      </ul>
+    </Container>
+  </div>
+</Layout>
