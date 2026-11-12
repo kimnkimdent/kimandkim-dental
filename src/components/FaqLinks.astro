@@ -2,13 +2,15 @@
 // 진료 페이지의 "자주 묻는 질문": 질문을 누르면 궁금해요 Q&A 페이지의 해당 답변으로 이동한다.
 import { url, br } from '../site';
 import { groupOf } from '../qna';
-interface Props { group: string }
-const g = groupOf(Astro.props.group);
+// group 하나 또는 groups 여러 개(여러 개면 번갈아 섞어서 보여 준다)
+interface Props { group?: string; groups?: string[] }
+const lists = (Astro.props.groups ?? [Astro.props.group!]).map((id) => groupOf(id).items);
+const items = Array.from({ length: Math.max(...lists.map((l) => l.length)) }).flatMap((_, k) => lists.map((l) => l[k]).filter(Boolean));
 ---
 
 <ul class="divide-y divide-border overflow-hidden rounded-3xl border border-border bg-background">
   {
-    g.items.map((it, i) => (
+    items.map((it, i) => (
       <li>
         <a href={url(`/qna/#${it.id}`)} class="group flex min-h-16 items-center gap-4 px-6 py-4 transition-colors hover:bg-surface md:px-8">
           <span class="t-body font-bold text-primary">{String(i + 1).padStart(2, '0')}</span>
