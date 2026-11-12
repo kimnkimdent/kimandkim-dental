@@ -13,6 +13,10 @@ import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
 import modelExplain from '../assets/photos/model-explain.jpg';
 import xrayWoman from '../assets/photos/xray-woman2.jpg';
+import qPhoto1 from '../assets/photos/consult-woman.jpg';
+import qPhoto2 from '../assets/photos/desk-consult.jpg';
+import qPhoto3 from '../assets/photos/sofa-laugh.jpg';
+const qPhotos = [qPhoto1, qPhoto2, qPhoto3];
 
 // 원장 인터뷰(원장님 말씀 그대로, 문단·줄바꿈도 그대로)
 // 원장 인터뷰. \n = 줄바꿈(PC는 이 자리에서만 바꿈), | = 휴대폰에서만 줄바꿈.
@@ -80,13 +84,20 @@ const rules = [
   </section>
 
   <Section tone="surface" eyebrow="3가지 질문" title="제가 매번 스스로에게 묻는 3가지 질문">
-    <ol class="grid gap-4 md:grid-cols-3">
+    <!-- 원형 사진 안에 번호와 질문, 아래에 답 -->
+    <ol class="grid gap-12 md:grid-cols-3 md:gap-8">
       {
         questions.map((x, i) => (
-          <li class="rounded-3xl bg-surface p-8">
-            <span class="font-serif text-[4rem] leading-none font-bold text-primary/30">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="mt-4 t-head font-bold whitespace-pre-line">{x.q}</h3>
-            <p class="mt-4 t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
+          <li class="flex flex-col items-center text-center">
+            <div class="relative isolate flex aspect-square w-full max-w-[30rem] items-center justify-center overflow-hidden rounded-full shadow-lg ring-8 ring-background">
+              <Image src={qPhotos[i]} alt="" aria-hidden="true" widths={[400, 700]} sizes="30rem" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+              <div aria-hidden="true" class="absolute inset-0 -z-10 bg-secondary/70"></div>
+              <div class="px-8 text-white">
+                <span class="block text-[3.2rem] leading-none font-extrabold text-primary-bright tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="mt-4 font-serif text-[2rem] leading-snug font-bold whitespace-pre-line md:text-[2.2rem]">{x.q}</h3>
+              </div>
+            </div>
+            <p class="mt-6 max-w-[30rem] t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
           </li>
         ))
       }
