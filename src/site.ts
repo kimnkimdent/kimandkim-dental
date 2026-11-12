@@ -57,7 +57,17 @@ export const SITE = {
         { href: '/kids/#care', label: '충치 치료·청소년 관리' },
       ],
     },
-    { href: '/qna/', label: '궁금해요 Q&A' },
+    {
+      href: '/qna/',
+      label: '궁금해요 Q&A',
+      children: [
+        { href: '/qna/#silver', label: '실버' },
+        { href: '/qna/#implant', label: '임플란트' },
+        { href: '/qna/#natural', label: '자연치아·심미' },
+        { href: '/qna/#wisdom', label: '사랑니·구강외과' },
+        { href: '/qna/#kids', label: '어린이·청소년' },
+      ],
+    },
   ] as { href: string; label: string; children?: { href: string; label: string }[] }[],
   contact: {
     phone: '031-8071-2500',
