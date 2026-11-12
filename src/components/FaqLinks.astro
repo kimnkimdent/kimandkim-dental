@@ -10,7 +10,6 @@ const limit = Astro.props.limit ?? 5;
 const lists = ids.map((id) => [...groupOf(id).items].reverse());
 const all = Array.from({ length: Math.max(...lists.map((l) => l.length)) }).flatMap((_, k) => lists.map((l) => l[k]).filter(Boolean));
 const items = all.slice(0, limit);
-const total = all.length;
 ---
 
 <ul class="divide-y divide-border overflow-hidden rounded-3xl border border-border bg-background">
@@ -28,6 +27,6 @@ const total = all.length;
 </ul>
 <p class="mt-6 text-center">
   <a href={url(`/qna/#${ids[0]}`)} class="inline-flex min-h-11 items-center gap-2 rounded-full border border-border-accent px-6 t-body font-semibold text-primary hover:border-primary">
-    궁금해요 Q&amp;A에서 {total > items.length ? `${total - items.length}개 더 보기` : '전체 질문 보기'} →
+    궁금해요 Q&amp;A 더 보기 →
   </a>
 </p>
