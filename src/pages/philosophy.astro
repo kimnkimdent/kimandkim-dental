@@ -13,11 +13,11 @@ import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
 import modelExplain from '../assets/photos/model-explain.jpg';
 import xrayWoman from '../assets/photos/xray-woman2.jpg';
-import qPhoto1 from '../assets/photos/consult-woman.jpg';
+import qPhoto1 from '../assets/photos/q-mouth.jpg';
 import qPhoto2 from '../assets/photos/desk-consult.jpg';
 import qPhoto3 from '../assets/photos/q-kid.jpg';
 const qPhotos = [qPhoto1, qPhoto2, qPhoto3];
-const qPos = ['50% 50%', '50% 50%', '100% 40%']; // 사진에서 보일 위치(3번은 아이 얼굴이 가운데 오게)
+const qPos = ['50% 12%', '50% 50%', '100% 40%']; // 사진에서 보일 위치(1번은 입이 원 아래쪽, 3번은 아이 얼굴이 가운데)
 
 // 원장 인터뷰(원장님 말씀 그대로, 문단·줄바꿈도 그대로)
 // 원장 인터뷰. \n = 줄바꿈(PC는 이 자리에서만 바꿈), | = 휴대폰에서만 줄바꿈.
@@ -92,7 +92,7 @@ const rules = [
           <li class="flex flex-col items-center text-center">
             <div class="relative isolate flex aspect-square w-full max-w-[30rem] items-center justify-center overflow-hidden rounded-full shadow-lg ring-8 ring-background">
               <Image src={qPhotos[i]} alt="" aria-hidden="true" widths={[400, 700]} sizes="30rem" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${qPos[i]}`} />
-              <div aria-hidden="true" class:list={['absolute inset-0 -z-10', i === 2 ? 'bg-secondary/50' : 'bg-secondary/70']}></div>
+              <div aria-hidden="true" class:list={['absolute inset-0 -z-10', i === 0 ? 'bg-gradient-to-b from-secondary/60 via-secondary/30 to-transparent' : i === 2 ? 'bg-secondary/50' : 'bg-secondary/70']}></div>
               <div class="px-8 text-white">
                 <span class="block text-[3.2rem] leading-none font-extrabold text-primary-bright tabular-nums">{String(i + 1).padStart(2, '0')}</span>
                 <h3 class="mt-4 font-serif text-[2rem] leading-snug font-bold whitespace-pre-line md:text-[2.2rem]">{x.q}</h3>
