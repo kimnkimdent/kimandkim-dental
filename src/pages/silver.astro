@@ -6,6 +6,7 @@ import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import Note from '../components/Note.astro';
 import SubTabs from '../components/SubTabs.astro';
+import ChapterHead from '../components/ChapterHead.astro';
 import Process from '../components/Process.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import DentalArt from '../components/DentalArt.astro';
@@ -20,6 +21,7 @@ const dentures = [
   { art: 'partial', t: '부분 틀니', d: '남은 치아에 고리를 걸어 빈자리를 채우는 틀니' },
   { art: 'implant-denture', t: '임플란트 틀니', d: '아래턱에 임플란트를 보통 2개 심고 똑딱이로 연결해 덜 움직이는 틀니' },
 ] as const;
+const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
 ---
 
 <Layout
@@ -42,7 +44,9 @@ const dentures = [
   <WorryBand items={worries} />
 
 
-  <Section id="denture" eyebrow="틀니 클리닉" title="잇몸에 맞춰, 편안하게 씹으실 수 있도록">
+  <ChapterHead id="denture" index={1} title="틀니 클리닉" items={chapters} />
+
+  <Section title="잇몸에 맞춰, 편안하게 씹으실 수 있도록">
     <ul class="grid gap-4 md:grid-cols-3">
       {
         dentures.map((x) => (
@@ -60,7 +64,9 @@ const dentures = [
     <p class="mt-2 t-body text-foreground-muted">장착 후 조정: 보험 틀니는 3개월 안에 6회까지, 비급여 틀니는 편하게 쓰실 수 있을 때까지 맞춰 드립니다.</p>
   </Section>
 
-  <Section id="insurance" tone="surface" eyebrow="국가보험 임플란트·틀니 (2026년 기준)" title="만 65세 이상이시라면 건강보험이 적용됩니다">
+  <ChapterHead id="insurance" index={2} title="보험 임플란트·틀니" lead="만 65세 이상 국가 건강보험 적용 (2026년 기준)" items={chapters} />
+
+  <Section tone="surface" title="만 65세 이상이시라면 건강보험이 적용됩니다">
     <div class="grid gap-4 md:grid-cols-2">
       <div class="flex items-center gap-6 rounded-3xl bg-background p-8 shadow-sm">
         <div class="flex-1">
@@ -82,7 +88,9 @@ const dentures = [
     <p class="mt-4 t-body text-foreground-muted">대상 여부는 내원 시 확인해 드립니다.</p>
   </Section>
 
-  <Section id="safe" eyebrow="만성질환 안전 진료" title="드시는 약부터, 먼저 살핍니다">
+  <ChapterHead id="safe" index={3} title="만성질환 안전 진료" items={chapters} />
+
+  <Section title="드시는 약부터, 먼저 살핍니다">
     <Process
       items={[
         { title: '문진', text: '복용 약 확인' },
@@ -95,7 +103,9 @@ const dentures = [
     <p class="mt-6 rounded-2xl bg-primary-surface px-6 py-4 t-mid font-semibold text-primary">진료 오실 때 약 봉투나 처방전을 가져와 주세요.</p>
   </Section>
 
-  <Section id="care" tone="surface" eyebrow="잇몸 · 시린 이 · 구강건조 관리" title="노년기 구강 건강을 꾸준히 지킵니다">
+  <ChapterHead id="care" index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />
+
+  <Section tone="surface" title="노년기 구강 건강을 꾸준히 지킵니다">
     <Image src={tGum} alt="잇몸 경계를 관리하는 잇몸 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="mb-6 w-full rounded-3xl bg-white object-contain md:w-1/2" />
     <p class="max-w-prose t-mid leading-relaxed text-foreground-muted">보험 잇몸 치료와 시린 이 치료(GI 충전), 정기 불소 관리로 노년기 구강 건강을 지킵니다.</p>
   </Section>

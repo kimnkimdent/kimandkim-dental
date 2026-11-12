@@ -7,6 +7,7 @@ import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import Note from '../components/Note.astro';
 import SubTabs from '../components/SubTabs.astro';
+import ChapterHead from '../components/ChapterHead.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
 import Mark from '../components/Mark.astro';
@@ -21,6 +22,7 @@ const checkups = [
 ];
 import WorryBand from '../components/WorryBand.astro';
 const worries = ["아이가 치과를 너무 무서워해요","첫 치과는 언제 가야 하나요?","유치는 빠질 텐데 꼭 치료해야 하나요?","밤에 젖병을 물고 자요","이 사이가 까맣게 보여요","양치를 싫어해서 매번 전쟁이에요","영구치가 삐뚤게 나고 있어요","넘어져서 앞니를 다쳤어요"];
+const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 ---
 
 <Layout
@@ -42,7 +44,9 @@ const worries = ["아이가 치과를 너무 무서워해요","첫 치과는 언
 
   <WorryBand items={worries} />
 
-  <Section id="first" tone="surface" eyebrow="치과가 무서운 아이를 위해" title="말하고, 보여주고, 기다립니다">
+  <ChapterHead id="first" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
+
+  <Section tone="surface" title="말하고, 보여주고, 기다립니다">
     <ol class="grid gap-3 md:grid-cols-3">
       {['무엇을 할지 말하고', '기구를 보여준 다음 진료합니다', '아이가 준비될 때까지 기다립니다'].map((t, i) => (
         <li class="flex items-center gap-4 rounded-2xl bg-background p-6 shadow-sm">
@@ -55,7 +59,9 @@ const worries = ["아이가 치과를 너무 무서워해요","첫 치과는 언
 
   <PhotoBand src={bandKid} alt="치아 모형으로 아이에게 설명하는 대표원장" eyebrow="치과가 무서운 아이를 위해" text={'아이가 준비될 때까지\n기다립니다.'} position="40% 40%" />
 
-  <Section id="checkup" eyebrow="영유아 구강검진 · 충치 예방" title="국가 영유아 구강검진 (무료)">
+  <ChapterHead id="checkup" index={2} title="영유아 구강검진" lead="무료 국가 검진과 충치 예방" items={chapters} />
+
+  <Section title="국가 영유아 구강검진 (무료)">
     <ol class="grid gap-3 md:grid-cols-3">
       {
         checkups.map((c) => (
@@ -70,7 +76,9 @@ const worries = ["아이가 치과를 너무 무서워해요","첫 치과는 언
     <p class="mt-6 rounded-2xl bg-primary-surface px-6 py-4 t-mid text-foreground">불소 도포 · 실란트 · 충치가 생기기 전에 미리 막습니다.</p>
   </Section>
 
-  <Section id="care" tone="surface" eyebrow="충치 치료 · 청소년 관리" title="자라는 치아에 맞춰 관리합니다">
+  <ChapterHead id="care" index={3} title="충치 치료·청소년 관리" items={chapters} />
+
+  <Section tone="surface" title="자라는 치아에 맞춰 관리합니다">
     <Image src={tKids} alt="치과에서 아이 치아에 빛을 쬐어 치료하는 모습" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="mb-6 aspect-[16/9] w-full rounded-3xl object-cover md:w-1/2" />
     <div class="grid gap-4 md:grid-cols-2">
       <div class="rounded-3xl bg-background p-8 shadow-sm">
