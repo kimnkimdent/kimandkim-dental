@@ -90,6 +90,7 @@ export const SITE = {
     { label: '토', time: '10:00 ~ 14:00 (점심시간 없음)', days: ['Saturday'], open: '10:00', close: '14:00' },
   ],
   lunch: '평일 13:00 ~ 14:00',
+  closedDays: '수 · 일', // 정기 휴진 요일(진료시간 표에 '휴진' 줄로 나온다)
   closed: '수 · 일 휴진 / 공휴일은 전화 문의',
   legal: {
     representative: '김정민',
