@@ -10,7 +10,7 @@ interface Props {
   crumbs?: string[]; // 예: ['병원소개', '김앤김 이야기']
   eyebrow?: string;
   title: string;
-  accent?: string[]; // 제목 안에서 로고 하늘색으로 칠할 말(예: ['2012년', '작은 약속'])
+  accent?: string[]; // 제목 안에서 하늘색(primary-bright)으로 칠할 말(예: ['2012년', '작은 약속'])
   lead?: string;
   watermark?: string;
   clinic?: 'silver' | 'adult' | 'kids'; // 진료 과목 색
@@ -38,7 +38,7 @@ const pictogram = icon ?? clinic;
         )
       }
       {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{pictogram && <ServiceIcon name={pictogram} class="size-10 md:size-12" />}{eyebrow}</p>}
-      <h1 class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{parts.map((p) => (accent.includes(p) ? <span class="text-logo-sky">{p}</span> : p))}</h1>
+      <h1 class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{parts.map((p) => (accent.includes(p) ? <span class="text-primary-bright">{p}</span> : p))}</h1>
       {lead && <p data-speakable class="relative mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{br(lead)}</p>}
     </div>
 
