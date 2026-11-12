@@ -12,11 +12,8 @@ const isActive = (item: (typeof SITE.nav)[number]) =>
 
 <header class="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
   <div class="mx-auto flex min-h-[7.6rem] max-w-site items-center justify-between gap-4 px-gutter lg:min-h-[10.4rem]">
-    <a href={url('/')} class="relative flex min-h-11 items-center" aria-label={`우리 가족 치아 건강엔 ${SITE.name} 홈`}>
+    <a href={url('/')} class="flex min-h-11 items-center" aria-label={`${SITE.name} 홈`}>
       <Logo class="h-[5.2rem] w-auto sm:h-[6rem] lg:h-[7.2rem]" />
-      <!-- 로고 글자(김 앤 김 치 과) 바로 위 빈 자리에, 같은 폭으로 양끝 맞춰 넣은 한 줄 문구.
-           위치는 로고 그림 안 글자 자리 비율(가로 43.2%~97.6%)에 맞췄다. -->
-      <span aria-hidden="true" class="tagline absolute top-[6%] left-[43.2%] w-[54.4%] text-[1.05rem] leading-none font-medium text-foreground-muted sm:text-[1.2rem] lg:text-[1.45rem]">우리 가족 치아 건강엔</span>
     </a>
 
     <nav aria-label="주요 메뉴" class="hidden lg:block">
@@ -79,8 +76,3 @@ const isActive = (item: (typeof SITE.nav)[number]) =>
     </div>
   </div>
 </header>
-
-<style>
-  /* 아래 로고 글자처럼 글자 사이를 고르게 벌려 양끝을 맞춘다 */
-  .tagline { text-align: justify; text-align-last: justify; white-space: nowrap; }
-</style>
