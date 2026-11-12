@@ -126,15 +126,14 @@ const rules = [
 <style>
   /* 배경 사진: 가운데는 보이고 바깥으로 갈수록 사라지게 번짐 + 살짝 흐리게 */
   /* 헤드 카피 움직임(스크롤에 따라). '동작 줄이기' 설정이면 움직이지 않는다.
-     - 첫 화면 제목: 두 줄이 차례로 올라오고, 스크롤해 내려가면 두 줄이 양옆으로 살짝 벌어지며 흐려진다.
+     - 첫 화면 제목: 두 줄이 차례로 올라온다(스크롤해도 그대로 보인다).
      - 섹션 제목(h2)·질문 원 안 제목: 화면에 들어올 때 아래에서 올라오며 또렷해진다. */
   @media (prefers-reduced-motion: no-preference) {
-    .head-line { animation: head-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both, head-out linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0 60vh; }
-    .head-line-2 { animation-delay: 0.25s, 0s; --dir: 1; }
+    .head-line { animation: head-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .head-line-2 { animation-delay: 0.25s; }
     :global(main section h2), .head-move { animation: head-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
   }
   @keyframes head-in { from { opacity: 0; translate: 0 2.4rem; } }
-  @keyframes head-out { to { filter: opacity(0.25); transform: translateX(calc(var(--dir, -1) * 4rem)); } }
   @keyframes head-rise { from { opacity: 0; transform: translateY(3rem); letter-spacing: 0.08em; } }
 
   /* 4가지 원칙: 카드에 마우스를 올리면 사진이 천천히 확대된다 */
