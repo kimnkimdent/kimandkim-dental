@@ -1,38 +1,32 @@
 ---
-// 역지사지 진료 노트: 대표원장 1인칭 인용. 상자 없이 '편지' 같은 인용 디자인.
-// 왼쪽 세로 선 + 뒤에 큰 따옴표 + 명조 본문 + 아래 서명(사진·이름).
+// 역지사지 진료 노트: 대표원장 1인칭 인용. 상자 없이 가운데 정렬한 '헌사' 느낌.
+// 위: 원장님 원형 사진 + 라벨 / 뒤: 易地思之 큰 한자 워터마크 / 가운데: 명조 본문 / 아래: 양옆 가는 선 사이 서명.
 // 줄바꿈: \n = 항상(PC는 이 자리에서만 바꿈), | = 휴대폰에서만.
-// align="left"면 페이지 제목 아래처럼 왼쪽에 붙고, 기본(center)은 가운데에 놓인다.
+// align 값은 예전 호환용(지금은 항상 가운데).
 import { Image } from 'astro:assets';
 import doctor from '../assets/doctor-kim.jpg';
 interface Props { quote: string; align?: 'center' | 'left' }
-const { quote, align = 'center' } = Astro.props;
+const { quote } = Astro.props;
 const lines = quote.split('\n').map((l) => l.split('|'));
 ---
 
-<figure class:list={['note relative isolate max-w-[112rem] py-4 md:py-6', align === 'center' && 'mx-auto']}>
-  <!-- 장식: 큰 따옴표 -->
-  <span aria-hidden="true" class="pointer-events-none absolute -top-10 -left-2 -z-10 font-serif text-[16rem] leading-none text-primary opacity-[0.08] select-none md:-top-16 md:-left-6 md:text-[24rem]">“</span>
+<figure class="note relative isolate mx-auto max-w-[112rem] py-6 text-center md:py-10">
+  <!-- 장식: 易地思之 워터마크 -->
+  <span aria-hidden="true" class="pointer-events-none absolute top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 font-serif text-[9rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.05] select-none md:text-[18rem]">易地思之</span>
 
-  <!-- 라벨 + 가는 선 -->
-  <div class="flex items-center gap-4">
-    <p class="shrink-0 t-body font-semibold tracking-[0.12em] text-primary"><span class="font-serif">易地思之</span> · 역지사지 진료 노트</p>
-    <span aria-hidden="true" class="h-px flex-1 bg-gradient-to-r from-primary/40 to-transparent"></span>
-  </div>
+  <!-- 사진 + 라벨 -->
+  <Image src={doctor} alt="대표원장 김정민" width={200} height={200} class="mx-auto size-20 rounded-full bg-primary-surface object-cover object-top shadow-lg ring-4 ring-background md:size-24" />
+  <p class="mt-5 t-body font-semibold tracking-[0.3em] text-primary">역지사지 진료 노트</p>
 
   <!-- 본문 -->
-  <div class="mt-7 border-l-2 border-primary/60 pl-5 md:mt-9 md:pl-9">
-    <blockquote class="font-serif text-[1.8rem] leading-[1.85] font-semibold break-keep text-secondary md:text-[2.3rem] md:leading-[1.8] lg:whitespace-nowrap">
-      {lines.map((parts, i) => (<>{i > 0 && <br />}{parts.map((p, j) => (<>{j > 0 && <><br class="md:hidden" /><span class="hidden md:inline"> </span></>}{p}</>))}</>))}
-    </blockquote>
-  </div>
+  <blockquote class="mt-6 font-serif text-[1.8rem] leading-[1.9] font-semibold break-keep text-secondary md:mt-8 md:text-[2.4rem] md:leading-[1.85] lg:whitespace-nowrap">
+    <span aria-hidden="true" class="text-primary/50">“</span>{lines.map((parts, i) => (<>{i > 0 && <br />}{parts.map((p, j) => (<>{j > 0 && <><br class="md:hidden" /><span class="hidden md:inline"> </span></>}{p}</>))}</>))}<span aria-hidden="true" class="text-primary/50">”</span>
+  </blockquote>
 
   <!-- 서명 -->
-  <figcaption class="mt-8 flex items-center gap-4 pl-5 md:mt-10 md:pl-9">
-    <Image src={doctor} alt="대표원장 김정민" width={160} height={160} class="size-14 shrink-0 rounded-full bg-primary-surface object-cover object-top ring-2 ring-background shadow-md md:size-16" />
-    <span>
-      <span class="block t-body text-foreground-muted">대표원장</span>
-      <span class="block font-serif t-mid font-bold tracking-[0.2em] text-foreground">김정민</span>
-    </span>
+  <figcaption class="mt-8 flex items-center justify-center gap-4 md:mt-10">
+    <span aria-hidden="true" class="h-px w-10 bg-primary/40 md:w-16"></span>
+    <span class="t-body text-foreground-muted">대표원장 <span class="ml-1 font-serif t-mid font-bold tracking-[0.2em] text-foreground">김정민</span></span>
+    <span aria-hidden="true" class="h-px w-10 bg-primary/40 md:w-16"></span>
   </figcaption>
 </figure>
