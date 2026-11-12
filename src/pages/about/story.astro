@@ -167,9 +167,9 @@ const chapters = [
   <!-- 대표원장 소개 위: 'Family Dental Clinic'이 옆으로 천천히 흐르는 띠(장식) -->
   <div aria-hidden="true" class="family-flow overflow-hidden bg-background py-8 md:py-12">
     <div class="family-track flex w-max items-center">
-      {Array.from({ length: 6 }).map((_, k) => (
-        <span class:list={['flex shrink-0 items-center gap-6 pr-6 text-[5.6rem] leading-none font-extrabold tracking-tight whitespace-nowrap md:gap-10 md:pr-10 md:text-[11rem]', k % 2 ? 'family-outline' : 'text-primary/12']}>
-          Family Dental Clinic <span class="size-4 shrink-0 rounded-full bg-primary-bright md:size-6"></span>
+      {Array.from({ length: 6 }).map(() => (
+        <span class:list={['flex shrink-0 items-center gap-6 pr-6 text-[5.6rem] leading-none font-thin tracking-tight whitespace-nowrap text-foreground-subtle/25 md:gap-10 md:pr-10 md:text-[11rem]']}>
+          Family Dental Clinic <span class="size-3 shrink-0 rounded-full bg-primary-bright/30 md:size-4"></span>
         </span>
       ))}
     </div>
@@ -347,7 +347,6 @@ const chapters = [
   }
   /* Family Dental Clinic 띠: 같은 문구 8개 중 절반(-50%)만큼 흐르면 처음과 같아져 끊김 없이 반복 */
   .family-track { animation: family-flow 36s linear infinite; }
-  .family-outline { color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--color-primary) 30%, transparent); }
   @keyframes family-flow { to { transform: translateX(-50%); } }
 
   /* 대표원장 사진: 위가 접혀 있다가 스크롤에 따라 아래로 펼쳐진다 */
