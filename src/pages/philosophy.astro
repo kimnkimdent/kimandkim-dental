@@ -15,14 +15,15 @@ import modelExplain from '../assets/photos/model-explain.jpg';
 import xrayWoman from '../assets/photos/xray-woman2.jpg';
 
 // 원장 인터뷰(원장님 말씀 그대로, 문단·줄바꿈도 그대로)
+// 원장 인터뷰. \n = 줄바꿈(PC는 이 자리에서만 바꿈), | = 휴대폰에서만 줄바꿈.
 const interview = [
-  "제가 진료할 때 가장 많이 되묻는\n질문이 하나 있어요.",
-  "'내가 환자라면,\n내가 이 돈을 낸다면\n어떤 치료를 선택할까'라는 거예요.\n역지사지 정신을\n순간의 판단이 아니라,\n습관처럼 매 진료마다\n적용하려고 해요.",
-  "그러다 보니\n무조건 비싼 치료를 권하기보다,\n환자분 상황에 맞는\n현실적인 치료를 함께 고민하고\n타고난 치아를 최대한 끝까지\n쓰실 수 있도록\n기본을 지키게 되더라고요.",
-  "치료 전에는 늘 충분히 설명드려서\n막연한 불안감이 확신으로\n바뀔 수 있게 하고요.",
-  "다만 이 역지사지가\n환자의 감정 공감에만\n쏠리는 건 아니에요.",
-  "설명은 편안하고 따뜻하게\n해드리지만,\n정작 어떤 치료가 필요한지는\n냉정하게 이성적인 판단을\n하려고 노력합니다.",
-  "환자 입장에서 생각하는 것과,\n환자에게 정말 필요한 걸\n객관적으로 진단하고 치료하는 것.\n이 두 가지를 같이 가져가는 게\n제 진료의 핵심이에요."
+  "제가 진료할 때 가장 많이 되묻는|질문이 하나 있어요.",
+  "'내가 환자라면, 내가 이 돈을 낸다면|어떤 치료를 선택할까'라는 거예요.\n역지사지 정신을 순간의 판단이 아니라,\n습관처럼 매 진료마다 적용하려고 해요.",
+  "그러다 보니 무조건 비싼 치료를 권하기보다,\n환자분 상황에 맞는 현실적인 치료를 함께 고민하고\n타고난 치아를 최대한 끝까지 쓰실 수 있도록\n기본을 지키게 되더라고요.",
+  "치료 전에는 늘 충분히 설명드려서\n막연한 불안감이 확신으로 바뀔 수 있게 하고요.",
+  "다만 이 역지사지가|환자의 감정 공감에만 쏠리는 건 아니에요.",
+  "설명은 편안하고 따뜻하게 해드리지만,\n정작 어떤 치료가 필요한지는\n냉정하게 이성적인 판단을 하려고 노력합니다.",
+  "환자 입장에서 생각하는 것과,\n환자에게 정말 필요한 걸|객관적으로 진단하고 치료하는 것.\n이 두 가지를 같이 가져가는 게|제 진료의 핵심이에요."
 ];
 
 const questions = [
@@ -72,7 +73,7 @@ const rules = [
         </div>
 
         <div data-speakable class="space-y-7 border-l-2 border-primary/20 pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
-          {interview.map((para) => <p class="whitespace-pre-line">{para}</p>)}
+          {interview.map((para) => <p class="break-keep lg:whitespace-nowrap">{para.split('\n').map((line, i) => (<>{i > 0 && <br />}{line.split('|').map((part, j) => (<>{j > 0 && <><br class="md:hidden" /><span class="hidden md:inline"> </span></>}{part}</>))}</>))}</p>)}
           <p class="!mt-10 t-body font-semibold text-foreground">— 김정민 원장 인터뷰 중에서 —</p>
         </div>
       </div>
