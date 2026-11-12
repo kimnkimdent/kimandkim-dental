@@ -78,12 +78,12 @@ const H = home ? 'h2' : 'h1';
   </section>
 
   <Section tone="surface" eyebrow="3가지 질문" title="제가 매번 스스로에게 묻는 3가지 질문">
-    <!-- 원형 사진 안에 번호와 질문, 아래에 답 -->
+    <!-- 둥근 모서리 사진 박스 안에 번호와 질문, 아래에 답 -->
     <ol class="grid gap-12 md:grid-cols-3 md:gap-8">
       {
         questions.map((x, i) => (
           <li class="flex flex-col items-center text-center">
-            <div class="relative isolate flex aspect-square w-full max-w-[30rem] items-center justify-center overflow-hidden rounded-full shadow-lg ring-8 ring-background">
+            <div class="relative isolate flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-3xl shadow-lg">
               <Image src={qPhotos[i]} alt="" aria-hidden="true" widths={[400, 700]} sizes="30rem" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${qPos[i]}; transform: scale(${i === 0 ? 1.1 : 1})`} />
               <div aria-hidden="true" class:list={['absolute inset-0 -z-10', i === 0 ? 'bg-gradient-to-b from-secondary/60 via-secondary/30 to-transparent' : i === 2 || i === 1 ? 'bg-secondary/50' : 'bg-secondary/70']}></div>
               <div class="px-8 text-white">
@@ -91,7 +91,7 @@ const H = home ? 'h2' : 'h1';
                 <h3 class="head-move mt-4 font-serif text-[2rem] leading-snug font-bold whitespace-pre-line md:text-[2.2rem]">{x.q}</h3>
               </div>
             </div>
-            <p class="mt-6 max-w-[30rem] t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
+            <p class="mt-6 t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
           </li>
         ))
       }
