@@ -135,7 +135,7 @@ const chapters = [
                 </div>
 
                 {/* 사진 */}
-                <div class:list={['story-in relative z-10 md:row-start-1', right ? 'md:col-start-3 md:pl-10' : 'md:col-start-1 md:pr-10', 'col-start-2 mt-0']}>
+                <div class:list={['story-photo relative z-10 md:row-start-1', right ? 'from-right' : 'from-left', right ? 'md:col-start-3 md:pl-10' : 'md:col-start-1 md:pr-10', 'col-start-2 mt-0']}>
                   {c.photos.length === 1 ? (
                     <Photo src={c.photos[0].src} alt={c.photos[0].alt} class="story-tint shadow-lg [&_img]:rounded-3xl" />
                   ) : (
@@ -146,7 +146,7 @@ const chapters = [
                 </div>
 
                 {/* 글 */}
-                <div class:list={['story-in relative z-10 col-start-2 mt-6 md:row-start-1 md:mt-0 md:self-center', right ? 'md:col-start-1 md:pr-10 md:text-right' : 'md:col-start-3 md:pl-10']}>
+                <div class:list={['story-text relative z-10 col-start-2 mt-6', right ? 'from-left' : 'from-right', ' md:row-start-1 md:mt-0 md:self-center', right ? 'md:col-start-1 md:pr-10 md:text-right' : 'md:col-start-3 md:pl-10']}>
                   {c.now ? (
                     <p class="font-serif text-[4.8rem] leading-none font-bold tracking-[0.08em] text-primary md:text-[7.6rem]">NOW</p>
                   ) : c.year ? (
@@ -214,6 +214,10 @@ const chapters = [
 
 <style>
 
+  /* 사진·글이 옆에서 들어올 때 화면이 좌우로 넓어지지 않게 */
+  section:has(.story-photo) {
+    overflow-x: clip;
+  }
   /* 연대기 사진: 원래 컬러 그대로(모서리만 둥글게) */
   :global(.story-tint) {
     position: relative;
@@ -267,6 +271,17 @@ const chapters = [
     @keyframes rise {
       from { opacity: 0; transform: translateY(4rem); }
     }
+    @keyframes photo-in {
+      from { opacity: 0; transform: translateX(var(--dx)); clip-path: inset(0 0 100% 0 round 2.4rem); }
+      to { opacity: 1; transform: none; clip-path: inset(0 0 0 0 round 2.4rem); }
+    }
+    @keyframes photo-zoom {
+      from { transform: scale(1.18) translateY(-3%); }
+      to { transform: scale(1.02) translateY(3%); }
+    }
+    @keyframes text-in {
+      from { opacity: 0; transform: translateX(var(--dx)) translateY(2rem); }
+    }
     @keyframes pop {
       from { transform: scale(0.4); }
     }
@@ -305,10 +320,28 @@ const chapters = [
         animation-timeline: view();
         animation-range: entry 10% entry 70%;
       }
-      .story-in {
-        animation: rise ease-out both;
+      /* 사진: 옆에서 밀려 들어오며 가려진 막이 걷히듯 열리고, 안의 사진은 살짝 확대됐다가 제자리로 */
+      .story-photo {
+        animation: photo-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
         animation-timeline: view();
-        animation-range: entry 0% entry 55%;
+        animation-range: entry 5% cover 40%;
+      }
+      .story-photo :global(img) {
+        animation: photo-zoom linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+      /* 글: 사진보다 조금 늦게, 반대쪽에서 따라 들어온다 */
+      .story-text {
+        animation: text-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
+        animation-timeline: view();
+        animation-range: entry 25% cover 45%;
+      }
+      .from-left { --dx: -6rem; }
+      .from-right { --dx: 6rem; }
+      /* 휴대폰: 옆으로 밀리면 화면이 좌우로 흔들리므로 아래에서만 올라온다 */
+      @media (max-width: 767px) {
+        .from-left, .from-right { --dx: 0rem; }
       }
     }
   }
