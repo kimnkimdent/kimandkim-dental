@@ -26,6 +26,7 @@
   --background: hsl(0, 0%, 100%);
   --surface: hsl(200, 60%, 97.5%);
   --surface-accent: hsl(200, 65%, 92%);
+  --surface-gray: hsl(220, 10%, 93%); /* 연회색(말풍선 등) */
 
   --foreground: hsl(216, 40%, 14%);
   --foreground-muted: hsl(215, 16%, 38%);
@@ -58,6 +59,7 @@
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-accent: var(--surface-accent);
+  --color-surface-gray: var(--surface-gray);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-foreground-subtle: var(--foreground-subtle);
