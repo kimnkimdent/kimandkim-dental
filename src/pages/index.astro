@@ -50,14 +50,6 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
         <p class="mt-5 t-mid opacity-90 lg:whitespace-nowrap">
           아이의 첫 이부터 부모님의 틀니까지, {SITE.since}년부터 파주 운정 가족의 치아 건강을 돌봐왔습니다.
         </p>
-        <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <!-- 휴대폰: 버튼을 약 30% 작게, 전화번호는 '전화 상담' 아래 작게 -->
-          <Button href={SITE.contact.booking} variant="naver" size="lg" class="max-md:min-h-11 max-md:min-w-[13rem] max-md:px-6 max-md:py-2 max-md:text-[1.4rem]">네이버 예약</Button>
-          <Button href={tel} variant="white" size="lg" class="max-md:min-h-11 max-md:min-w-[13rem] max-md:flex-col max-md:gap-0 max-md:px-6 max-md:py-1.5 max-md:text-[1.4rem] max-md:leading-tight">
-            전화 상담
-            <span class="font-semibold max-md:text-[1.15rem] max-md:opacity-75">{SITE.contact.phone}</span>
-          </Button>
-        </div>
       </div>
     </Container>
   </section>
