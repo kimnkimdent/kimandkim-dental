@@ -32,8 +32,8 @@ const isHome = Astro.url.pathname === import.meta.env.BASE_URL || Astro.url.path
           {
             SITE.hours.map((h) => (
               <div class="flex flex-wrap justify-between gap-x-4 gap-y-1 py-3">
-                <dt class:list={['t-body font-semibold', h.highlight && 'text-primary']}>{h.label}</dt>
-                <dd class="t-body text-foreground-muted">{h.time}</dd>
+                <dt class:list={['t-body', h.highlight ? 'font-bold text-primary' : 'font-semibold']}>{h.label}</dt>
+                <dd class:list={['t-body text-foreground-muted', h.highlight && 'font-bold']}>{h.time}</dd>
               </div>
             ))
           }
