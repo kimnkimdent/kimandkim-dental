@@ -178,7 +178,7 @@ const { home = false } = Astro.props;
     <Container>
       <p class="t-body font-semibold tracking-wide text-primary">대표원장 소개</p>
 
-      <div class="mt-8 grid items-end gap-10 md:grid-cols-[1.02fr_0.98fr] md:gap-16">
+      <div class="mt-8 grid items-center gap-10 md:grid-cols-[1.02fr_0.98fr] md:gap-16">
         <div class="doctor-fold overflow-hidden rounded-[2.4rem] bg-[hsl(220_14%_95%)]">
           <Image src={doctor} alt="김앤김치과 대표원장 김정민" widths={[500, 900]} sizes="(min-width: 768px) 50vw, 100vw" class="h-auto w-full" />
         </div>
@@ -196,17 +196,18 @@ const { home = false } = Astro.props;
             <span class="t-body text-foreground-muted">김앤김치과 대표원장</span>
             <span class="font-serif text-[2.4rem] font-bold tracking-[0.2em]">김정민</span>
           </p>
+
+          <!-- 약력 · 학회: 서명 바로 아래, 한 목록으로 줄 사이 밑줄 없이 -->
+          <div class="mt-10 border-t border-foreground/80 pt-8">
+            <h3 class="t-body font-bold tracking-wide text-primary">약력 · 학회</h3>
+            <ul class="mt-4 space-y-2.5">
+              {career.map((c) => <li class="t-mid">{c}</li>)}
+              {memberOf.map((m) => <li class="t-mid">{m.alt} 정회원 <span class="t-body font-semibold text-foreground-muted">{m.name.split('(')[1]?.replace(')', '')}</span></li>)}
+            </ul>
+          </div>
         </div>
       </div>
 
-      <!-- 약력 · 학회: 한 목록으로, 줄 사이 밑줄 없이 -->
-      <div class="mt-16 border-t border-foreground/80 pt-10 md:mt-20">
-        <h3 class="t-body font-bold tracking-wide text-primary">약력 · 학회</h3>
-        <ul class="mt-4 space-y-2.5 md:columns-2 md:gap-16">
-          {career.map((c) => <li class="t-mid break-inside-avoid">{c}</li>)}
-          {memberOf.map((m) => <li class="t-mid break-inside-avoid">{m.alt} 정회원 <span class="t-body font-semibold text-foreground-muted">{m.name.split('(')[1]?.replace(')', '')}</span></li>)}
-        </ul>
-      </div>
     </Container>
   </section>
 
