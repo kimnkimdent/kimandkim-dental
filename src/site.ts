@@ -29,7 +29,16 @@ export const SITE = {
       ],
     },
     { href: '/philosophy/', label: '진료철학' },
-    { href: '/silver/', label: '실버 클리닉' },
+    {
+      href: '/silver/',
+      label: '실버 클리닉',
+      children: [
+        { href: '/silver/#denture', label: '틀니 클리닉' },
+        { href: '/silver/#insurance', label: '보험 임플란트·틀니' },
+        { href: '/silver/#safe', label: '만성질환 안전 진료' },
+        { href: '/silver/#care', label: '잇몸·시린 이 관리' },
+      ],
+    },
     {
       href: '/adult/implant/',
       label: '청장년 클리닉',
@@ -39,7 +48,15 @@ export const SITE = {
         { href: '/adult/wisdom/', label: '사랑니·구강외과' },
       ],
     },
-    { href: '/kids/', label: '어린이·청소년 클리닉' },
+    {
+      href: '/kids/',
+      label: '어린이·청소년 클리닉',
+      children: [
+        { href: '/kids/#first', label: '처음 오는 아이' },
+        { href: '/kids/#checkup', label: '영유아 구강검진' },
+        { href: '/kids/#care', label: '충치 치료·청소년 관리' },
+      ],
+    },
     { href: '/qna/', label: '궁금해요 Q&A' },
   ] as { href: string; label: string; children?: { href: string; label: string }[] }[],
   contact: {

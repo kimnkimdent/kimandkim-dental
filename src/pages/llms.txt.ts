@@ -20,7 +20,7 @@ const pageSummary: Record<string, string> = {
 
 export const GET: APIRoute = ({ site }) => {
   const abs = (p: string) => new URL(url(p), site).href;
-  const pages = SITE.nav.flatMap((n) => n.children ?? [n]);
+  const pages = SITE.nav.flatMap((n) => [n, ...(n.children ?? [])]).filter((p, i, a) => p.href in pageSummary && a.findIndex((q) => q.href === p.href) === i);
   const lines = [
     `# ${SITE.fullName} (${SITE.name})`,
     '',

@@ -1,5 +1,5 @@
 ---
-import { br } from '../site';
+import { SITE, br } from '../site';
 import { Image } from 'astro:assets';
 import bandRoom from '../assets/photos/treatment-room.jpg';
 import Layout from '../layouts/Layout.astro';
@@ -31,7 +31,7 @@ const dentures = [
   procedures={["전체 틀니", "부분 틀니", "임플란트 틀니", "보험 임플란트", "보험 틀니", "잇몸 치료", "시린 이 치료(GI 충전)"]}
 >
   <PageHero clinic="silver" crumbs={['실버 클리닉']} eyebrow="“내 부모님이라면”" title="부모님엔 편안함을">
-    <SubTabs items={[{href:"/silver/#denture",label:"틀니 클리닉"},{href:"/silver/#insurance",label:"보험 임플란트·틀니"},{href:"/silver/#safe",label:"만성질환 안전 진료"},{href:"/silver/#care",label:"잇몸·시린 이 관리"}]} current="" />
+    <SubTabs items={SITE.nav.find((n) => n.href === '/silver/')!.children!} current="" />
     <!-- 역지사지 진료 노트: 제목 바로 아래 -->
     <div class="relative mt-10 md:mt-12">
       <Note align="left" quote={'제 부모님이라면 무엇보다|안전하고 덜 힘드셨으면 합니다.\n그래서 드시는 약과 혈압·혈당부터 확인하고,|틀니 하나를 맞춰도|식사 때 불편한 곳이 없는지|몇 번이고 다시 봐 드립니다.\n편안한 한 끼가 부모님의 하루를|바꾼다는 걸 알기 때문입니다.'} />
