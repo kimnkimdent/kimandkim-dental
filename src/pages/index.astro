@@ -24,11 +24,11 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
 ---
 
 <Layout keywords={["파주 치과", "운정 치과", "야당동 치과", "운정신도시 치과"]}>
-  <!-- 첫 화면: 진료 장면 영상 배경(소리 없음·자동 반복). 영상 파일: public/video/ (0.7배속+중간 프레임 보간 25초, PC는 화면 높이 안에 영상 전체가 보이게(남는 양옆은 남색), 끝과 처음을 겹쳐 끊김 없이 반복, PC 약 5MB, 휴대폰 약 1.5MB)
+  <!-- 첫 화면: 진료 장면 영상 배경(소리 없음·자동 반복). 영상 파일: public/video/ (0.7배속+중간 프레임 보간 25초, PC는 화면 높이에 맞춰 꽉 채움(위아래 조금 잘릴 수 있음), 끝과 처음을 겹쳐 끊김 없이 반복, PC 약 5MB, 휴대폰 약 1.5MB)
        "동작 줄이기" 설정이면 영상 대신 첫 장면 사진만 보인다. -->
-  <section style={`--poster: url(${url("/video/hero-poster.jpg")})`} class="hero-video relative isolate flex min-h-[calc(100svh-7.6rem)] items-center overflow-hidden bg-secondary lg:h-[min(calc(100svh-10.4rem),56.25vw)] lg:min-h-0">
+  <section style={`--poster: url(${url("/video/hero-poster.jpg")})`} class="hero-video relative isolate flex min-h-[calc(100svh-7.6rem)] items-center overflow-hidden bg-secondary lg:h-[calc(100svh-10.4rem)] lg:min-h-0">
     <video
-      class="absolute inset-0 -z-20 h-full w-full object-cover lg:object-contain"
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
       autoplay
       muted
       loop
