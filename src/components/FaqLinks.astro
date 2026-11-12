@@ -1,12 +1,16 @@
 ---
-// 진료 페이지의 "자주 묻는 질문": 질문을 누르면 궁금해요 Q&A 페이지의 해당 답변으로 이동한다.
+// 진료 페이지 하단 "자주 묻는 질문": 최근에 올린 질문부터 5개(limit)만 보이고, 아래 버튼으로 궁금해요 Q&A 전체로 이어진다.
+// 질문을 누르면 궁금해요 Q&A 페이지의 해당 답변으로 이동한다.
+// group 하나 또는 groups 여러 개(여러 개면 각 분류의 최근 질문을 번갈아 섞는다). '최근' = src/data/qna.json에서 분류 안 뒤쪽에 있는 질문.
 import { url, br } from '../site';
 import { groupOf } from '../qna';
-// group 하나 또는 groups 여러 개(여러 개면 번갈아 섞어서 보여 준다)
-// limit: 묶음마다 앞에서부터 몇 개만 보여 줄지(나머지는 궁금해요 Q&A에서)
 interface Props { group?: string; groups?: string[]; limit?: number }
-const lists = (Astro.props.groups ?? [Astro.props.group!]).map((id) => groupOf(id).items.slice(0, Astro.props.limit));
-const items = Array.from({ length: Math.max(...lists.map((l) => l.length)) }).flatMap((_, k) => lists.map((l) => l[k]).filter(Boolean));
+const ids = Astro.props.groups ?? [Astro.props.group!];
+const limit = Astro.props.limit ?? 5;
+const lists = ids.map((id) => [...groupOf(id).items].reverse());
+const all = Array.from({ length: Math.max(...lists.map((l) => l.length)) }).flatMap((_, k) => lists.map((l) => l[k]).filter(Boolean));
+const items = all.slice(0, limit);
+const total = all.length;
 ---
 
 <ul class="divide-y divide-border overflow-hidden rounded-3xl border border-border bg-background">
@@ -22,3 +26,8 @@ const items = Array.from({ length: Math.max(...lists.map((l) => l.length)) }).fl
     ))
   }
 </ul>
+<p class="mt-6 text-center">
+  <a href={url(`/qna/#${ids[0]}`)} class="inline-flex min-h-11 items-center gap-2 rounded-full border border-border-accent px-6 t-body font-semibold text-primary hover:border-primary">
+    궁금해요 Q&amp;A에서 {total > items.length ? `${total - items.length}개 더 보기` : '전체 질문 보기'} →
+  </a>
+</p>
