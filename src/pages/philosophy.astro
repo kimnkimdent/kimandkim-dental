@@ -64,7 +64,7 @@ const rules = [
           <p aria-hidden="true" class="pointer-events-none absolute top-[38%] left-[-0.06em] -z-10 -translate-y-1/2 font-serif text-[10rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[14rem] md:text-[18rem]">易地思之</p>
           <p class="flex items-center gap-2.5 t-mid font-semibold text-primary"><ServiceIcon name="philosophy" class="size-10 md:size-12" />김정민 원장의 역지사지</p>
           <h1 id="philosophy-title" class="mt-6 font-serif text-[3.6rem] leading-[1.4] font-bold text-secondary md:text-[5.2rem]">
-            내가 환자라면…<br />내 가족이라면…
+            <span class="head-line block">내가 환자라면…</span><span class="head-line head-line-2 block">내 가족이라면…</span>
           </h1>
           <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
           <div class="mt-8">
@@ -95,7 +95,7 @@ const rules = [
               <div aria-hidden="true" class:list={['absolute inset-0 -z-10', i === 0 ? 'bg-gradient-to-b from-secondary/60 via-secondary/30 to-transparent' : i === 2 || i === 1 ? 'bg-secondary/50' : 'bg-secondary/70']}></div>
               <div class="px-8 text-white">
                 <span class="block text-[3.2rem] leading-none font-extrabold text-primary-bright tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="mt-4 font-serif text-[2rem] leading-snug font-bold whitespace-pre-line md:text-[2.2rem]">{x.q}</h3>
+                <h3 class="head-move mt-4 font-serif text-[2rem] leading-snug font-bold whitespace-pre-line md:text-[2.2rem]">{x.q}</h3>
               </div>
             </div>
             <p class="mt-6 max-w-[30rem] t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
@@ -109,8 +109,8 @@ const rules = [
     <ul class="grid gap-6 sm:grid-cols-2">
       {
         rules.map((r, i) => (
-          <li class="overflow-hidden rounded-3xl bg-background shadow-sm">
-            <Photo src={r.src} alt={r.photo} ratio="aspect-[16/9]" class="[&>*]:rounded-none" />
+          <li class="rule-card overflow-hidden rounded-3xl bg-background shadow-sm">
+            <Photo src={r.src} alt={r.photo} ratio="aspect-[16/9]" class="overflow-hidden [&>*]:rounded-none" />
             <div class="p-7">
               <p class="t-body font-bold text-primary">{String(i + 1).padStart(2, '0')}</p>
               <h3 class="mt-1 t-head font-bold">{r.t}</h3>
@@ -125,6 +125,22 @@ const rules = [
 
 <style>
   /* 배경 사진: 가운데는 보이고 바깥으로 갈수록 사라지게 번짐 + 살짝 흐리게 */
+  /* 헤드 카피 움직임(스크롤에 따라). '동작 줄이기' 설정이면 움직이지 않는다.
+     - 첫 화면 제목: 두 줄이 차례로 올라오고, 스크롤해 내려가면 두 줄이 양옆으로 살짝 벌어지며 흐려진다.
+     - 섹션 제목(h2)·질문 원 안 제목: 화면에 들어올 때 아래에서 올라오며 또렷해진다. */
+  @media (prefers-reduced-motion: no-preference) {
+    .head-line { animation: head-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both, head-out linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0 60vh; }
+    .head-line-2 { animation-delay: 0.25s, 0s; --dir: 1; }
+    :global(main section h2), .head-move { animation: head-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+  }
+  @keyframes head-in { from { opacity: 0; translate: 0 2.4rem; } }
+  @keyframes head-out { to { filter: opacity(0.25); transform: translateX(calc(var(--dir, -1) * 4rem)); } }
+  @keyframes head-rise { from { opacity: 0; transform: translateY(3rem); letter-spacing: 0.08em; } }
+
+  /* 4가지 원칙: 카드에 마우스를 올리면 사진이 천천히 확대된다 */
+  .rule-card :global(img) { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .rule-card:hover :global(img) { transform: scale(1.08); }
+
   :global(.soft-photo) {
     mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
     -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
