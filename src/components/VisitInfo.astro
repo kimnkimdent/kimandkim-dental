@@ -6,8 +6,11 @@ import Container from './Container.astro';
 import Button from './Button.astro';
 import Mark from './Mark.astro';
 const c = SITE.contact;
+// 첫 페이지는 영상 첫 화면에 같은 문구가 있어서 파란 공통 메시지 띠를 뺀다
+const isHome = Astro.url.pathname === import.meta.env.BASE_URL || Astro.url.pathname === import.meta.env.BASE_URL + '/' || Astro.url.pathname === '/';
 ---
 
+{!isHome && (
 <section class="bg-primary py-16 text-center text-primary-foreground md:py-20">
   <Container>
     <Mark tone="white" class="mx-auto mb-5 size-20 md:size-24" />
@@ -15,6 +18,7 @@ const c = SITE.contact;
     <p class="mt-3 t-mid opacity-90">{SITE.since}년부터 운정 한자리에서, 한 가족의 시간을 함께해 왔습니다.</p>
   </Container>
 </section>
+)}
 
 <section id="visit" class="scroll-mt-20 bg-surface py-section" aria-labelledby="visit-title">
   <Container>
