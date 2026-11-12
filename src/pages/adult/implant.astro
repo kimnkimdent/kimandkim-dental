@@ -20,7 +20,7 @@ const parts = [
 ];
 const kinds = [
   { t: '일반 임플란트', d: '잇몸뼈 상태에 맞춰 식립합니다.' },
-  { t: '보험 임플란트', d: '만 65세 이상 평생 2개, 자세한 기준은 실버 치아 클리닉에서 안내합니다.', link: '/silver/' },
+  { t: '보험 임플란트', d: '만 65세 이상 평생 2개, 자세한 기준은 실버 클리닉에서 안내합니다.', link: '/silver/' },
   { t: '뼈이식 임플란트', d: '잇몸뼈가 얇거나 손상된 경우 뼈를 보강한 뒤 식립합니다.' },
   { t: '상악동 거상술 임플란트', d: '위쪽 어금니 뼈 높이가 부족할 때 뼈를 채운 뒤 식립합니다.' },
 ];
@@ -74,7 +74,7 @@ const kinds = [
           <li class="rounded-3xl border border-border p-7">
             <h3 class="t-head font-bold">{k.t}</h3>
             <p class="mt-3 t-body text-foreground-muted whitespace-pre-line">{br(k.d)}</p>
-            {k.link && <a href={url(k.link)} class="mt-4 inline-block t-body font-semibold text-primary hover:underline">실버 치아 클리닉 보기 →</a>}
+            {k.link && <a href={url(k.link)} class="mt-4 inline-block t-body font-semibold text-primary hover:underline">실버 클리닉 보기 →</a>}
           </li>
         ))
       }
