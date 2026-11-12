@@ -3,8 +3,9 @@
 import { url, br } from '../site';
 import { groupOf } from '../qna';
 // group 하나 또는 groups 여러 개(여러 개면 번갈아 섞어서 보여 준다)
-interface Props { group?: string; groups?: string[] }
-const lists = (Astro.props.groups ?? [Astro.props.group!]).map((id) => groupOf(id).items);
+// limit: 묶음마다 앞에서부터 몇 개만 보여 줄지(나머지는 궁금해요 Q&A에서)
+interface Props { group?: string; groups?: string[]; limit?: number }
+const lists = (Astro.props.groups ?? [Astro.props.group!]).map((id) => groupOf(id).items.slice(0, Astro.props.limit));
 const items = Array.from({ length: Math.max(...lists.map((l) => l.length)) }).flatMap((_, k) => lists.map((l) => l[k]).filter(Boolean));
 ---
 
