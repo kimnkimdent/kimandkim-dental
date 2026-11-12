@@ -76,6 +76,7 @@ const chapters = [
   <PageHero icon="about"
     crumbs={['병원소개', '김앤김 이야기']}
     eyebrow="김앤김 이야기"
+    accent={['2012년', '작은 약속']}
     title={'2012년, 운정 야당동의\n작은 약속에서 시작했습니다'}
     lead={'우리 동네 가족들이 믿고 다닐 수 있는 치과.\n그 약속을 지키며 한자리에서 가족의 시간을 함께해 왔습니다.'} />
 
@@ -144,13 +145,13 @@ const chapters = [
                   {c.now ? (
                     <p class="font-serif text-[4.8rem] leading-none font-bold tracking-[0.08em] text-primary md:text-[7.6rem]">NOW</p>
                   ) : c.year ? (
-                    <p class:list={['font-serif text-[4rem] leading-none font-bold md:text-[6.4rem]', c.now ? 'text-primary' : i === 0 ? 'text-logo-sky' : 'text-primary-bright']}>
+                    <p class:list={['font-serif text-[4rem] leading-none font-bold md:text-[6.4rem]', c.now ? 'text-primary' : 'text-primary-bright']}>
                       {c.year}
                     </p>
                   ) : (
                     <p class="t-body font-bold tracking-widest text-primary">{c.mark}</p>
                   )}
-                  <h2 class="mt-3 t-headline font-bold whitespace-pre-line">{i === 0 ? c.title.split('작은 약속').map((t, k) => (<>{k > 0 && <span class="text-logo-sky">작은 약속</span>}{t}</>)) : c.title}</h2>
+                  <h2 class="mt-3 t-headline font-bold whitespace-pre-line">{c.title}</h2>
                   <p class="mt-4 max-w-[44rem] t-mid leading-relaxed text-foreground-muted whitespace-pre-line">{br(c.text)}</p>
                 </div>
               </li>
