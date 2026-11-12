@@ -19,6 +19,8 @@ const checkups = [
   { t: '2차', d: '생후 42~53개월' },
   { t: '3차', d: '생후 54~65개월' },
 ];
+import WorryBand from '../components/WorryBand.astro';
+const worries = ["아이가 치과를 너무 무서워해요","첫 치과는 언제 가야 하나요?","유치는 빠질 텐데 꼭 치료해야 하나요?","밤에 젖병을 물고 자요","이 사이가 까맣게 보여요","양치를 싫어해서 매번 전쟁이에요","영구치가 삐뚤게 나고 있어요","넘어져서 앞니를 다쳤어요"];
 ---
 
 <Layout
@@ -37,6 +39,8 @@ const checkups = [
       <Note align="left" quote={'제 아이라면, 오늘 치료를|다 끝내는 것보다\n다음에 또 와도 괜찮다고|느끼게 하는 게 먼저일 겁니다.\n그래서 무엇을 할지 먼저 말하고,|기구를 보여 주고,|아이가 준비될 때까지 기다립니다.\n처음 만난 치과의 기억이|평생의 치아 습관이 되니까요.'} />
     </div>
   </PageHero>
+
+  <WorryBand items={worries} />
 
   <Section id="first" tone="surface" eyebrow="치과가 무서운 아이를 위해" title="말하고, 보여주고, 기다립니다">
     <ol class="grid gap-3 md:grid-cols-3">
