@@ -1,16 +1,21 @@
 ---
 // 한 페이지 안의 큰 묶음(예: 청장년 클리닉의 임플란트 / 자연치아·심미보철 / 사랑니·구강외과)이 시작되는 자리 표지.
 // 진한 남색 띠 위에 큰 번호 · 묶음 이름 · 한 줄 소개, 오른쪽엔 전체 묶음 목록(지금 묶음 강조)을 둬서 어디까지 왔는지 보이게 한다.
+// photo: 배경 사진(진한 남색을 덮어 글이 잘 읽히게). position: 사진에서 보일 위치.
 // id를 여기에 걸어 상단 메뉴·탭(#implant 등)이 이 표지로 이동한다.
 import Container from './Container.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { url } from '../site';
-interface Props { id: string; index: number; title: string; lead?: string; items: { href: string; label: string }[] }
-const { id, index, title, lead, items } = Astro.props;
+interface Props { id: string; index: number; title: string; lead?: string; items: { href: string; label: string }[]; photo?: ImageMetadata; position?: string }
+const { id, index, title, lead, items, photo, position = '50% 40%' } = Astro.props;
 const no = (n: number) => String(n).padStart(2, '0');
 ---
 
-<section id={id} class="scroll-mt-20 bg-secondary text-white" aria-labelledby={`${id}-title`}>
-  <Container class="grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-end md:py-16">
+<section id={id} class="relative isolate scroll-mt-20 overflow-hidden bg-secondary text-white" aria-labelledby={`${id}-title`}>
+  {photo && <Image src={photo} alt="" aria-hidden="true" widths={[800, 1600]} sizes="100vw" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${position}`} />}
+  {photo && <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-secondary/90 via-secondary/75 to-secondary/45"></div>}
+  <Container class="grid gap-8 py-16 md:grid-cols-[1fr_auto] md:items-end md:py-24">
     <div class="flex items-end gap-5 md:gap-8">
       <span aria-hidden="true" class="text-[6.4rem] leading-[0.8] font-extrabold tracking-tight text-primary-bright tabular-nums md:text-[10rem]">{no(index)}</span>
       <div>

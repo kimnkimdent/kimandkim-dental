@@ -1,6 +1,5 @@
 ---
 import { SITE, br } from '../site';
-import PhotoBand from '../components/PhotoBand.astro';
 import bandKid from '../assets/photos/band-kid.jpg';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -13,6 +12,7 @@ import Photo from '../components/Photo.astro';
 import Mark from '../components/Mark.astro';
 import { Image } from 'astro:assets';
 import tKids from '../assets/treat/treat-06.jpg';
+import kidFriendly from '../assets/photos/kid-friendly.jpg';
 import kidCheckup from '../assets/photos/kid-checkup.jpg';
 
 const checkups = [
@@ -44,7 +44,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 
   <WorryBand items={worries} />
 
-  <ChapterHead id="first" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
+  <ChapterHead id="first" photo={bandKid} position="40% 40%" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
 
   <Section tone="surface" title="말하고, 보여주고, 기다립니다">
     <ol class="grid gap-3 md:grid-cols-3">
@@ -57,9 +57,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
     </ol>
   </Section>
 
-  <PhotoBand src={bandKid} alt="치아 모형으로 아이에게 설명하는 대표원장" eyebrow="치과가 무서운 아이를 위해" text={'아이가 준비될 때까지\n기다립니다.'} position="40% 40%" />
-
-  <ChapterHead id="checkup" index={2} title="영유아 구강검진" lead="무료 국가 검진과 충치 예방" items={chapters} />
+  <ChapterHead id="checkup" photo={kidCheckup} index={2} title="영유아 구강검진" lead="무료 국가 검진과 충치 예방" items={chapters} />
 
   <Section title="국가 영유아 구강검진 (무료)">
     <ol class="grid gap-3 md:grid-cols-3">
@@ -76,7 +74,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
     <p class="mt-6 rounded-2xl bg-primary-surface px-6 py-4 t-mid text-foreground">불소 도포 · 실란트 · 충치가 생기기 전에 미리 막습니다.</p>
   </Section>
 
-  <ChapterHead id="care" index={3} title="충치 치료·청소년 관리" items={chapters} />
+  <ChapterHead id="care" photo={kidFriendly} index={3} title="충치 치료·청소년 관리" items={chapters} />
 
   <Section tone="surface" title="자라는 치아에 맞춰 관리합니다">
     <Image src={tKids} alt="치과에서 아이 치아에 빛을 쬐어 치료하는 모습" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="mb-6 aspect-[16/9] w-full rounded-3xl object-cover md:w-1/2" />

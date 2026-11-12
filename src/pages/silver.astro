@@ -13,6 +13,9 @@ import DentalArt from '../components/DentalArt.astro';
 import Photo from '../components/Photo.astro';
 import WorryBand from '../components/WorryBand.astro';
 import tGum from '../assets/treat/treat-08.jpg';
+import chRoom from '../assets/photos/treatment-room.jpg';
+import chConsult from '../assets/photos/consult-room.jpg';
+import chDesk from '../assets/photos/desk-consult.jpg';
 import doctorWarm from '../assets/photos/doctor-warm.jpg';
 
 const worries = ['빠진 이가 많아 식사가 불편해요', '쓰던 틀니가 헐겁거나 잇몸이 아파요', '당뇨·고혈압 약을 먹고 있어 치료가 걱정돼요', '잇몸이 내려가고, 이가 시리고, 입이 자주 말라요', '딱딱한 음식은 아예 못 씹겠어요', '틀니를 끼면 말할 때 발음이 새요', '잇몸에서 피가 나고 입 냄새가 나요', '혈액순환제(아스피린)를 먹는데 이를 뽑아도 될까요?'];
@@ -44,7 +47,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
   <WorryBand items={worries} />
 
 
-  <ChapterHead id="denture" index={1} title="틀니 클리닉" items={chapters} />
+  <ChapterHead id="denture" photo={doctorWarm} index={1} title="틀니 클리닉" items={chapters} />
 
   <Section title="잇몸에 맞춰, 편안하게 씹으실 수 있도록">
     <ul class="grid gap-4 md:grid-cols-3">
@@ -64,7 +67,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
     <p class="mt-2 t-body text-foreground-muted">장착 후 조정: 보험 틀니는 3개월 안에 6회까지, 비급여 틀니는 편하게 쓰실 수 있을 때까지 맞춰 드립니다.</p>
   </Section>
 
-  <ChapterHead id="insurance" index={2} title="보험 임플란트·틀니" lead="만 65세 이상 국가 건강보험 적용 (2026년 기준)" items={chapters} />
+  <ChapterHead id="insurance" photo={chConsult} index={2} title="보험 임플란트·틀니" lead="만 65세 이상 국가 건강보험 적용 (2026년 기준)" items={chapters} />
 
   <Section tone="surface" title="만 65세 이상이시라면 건강보험이 적용됩니다">
     <div class="grid gap-4 md:grid-cols-2">
@@ -88,7 +91,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
     <p class="mt-4 t-body text-foreground-muted">대상 여부는 내원 시 확인해 드립니다.</p>
   </Section>
 
-  <ChapterHead id="safe" index={3} title="만성질환 안전 진료" items={chapters} />
+  <ChapterHead id="safe" photo={chDesk} index={3} title="만성질환 안전 진료" items={chapters} />
 
   <Section title="드시는 약부터, 먼저 살핍니다">
     <Process
@@ -103,7 +106,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
     <p class="mt-6 rounded-2xl bg-primary-surface px-6 py-4 t-mid font-semibold text-primary">진료 오실 때 약 봉투나 처방전을 가져와 주세요.</p>
   </Section>
 
-  <ChapterHead id="care" index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />
+  <ChapterHead id="care" photo={chRoom} index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />
 
   <Section tone="surface" title="노년기 구강 건강을 꾸준히 지킵니다">
     <Image src={tGum} alt="잇몸 경계를 관리하는 잇몸 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="mb-6 w-full rounded-3xl bg-white object-contain md:w-1/2" />
