@@ -214,14 +214,11 @@ const chapters = [
 
 <style>
 
-  /* 연대기 사진: 회색 톤(흑백) 필터로 통일 */
+  /* 연대기 사진: 원래 컬러 그대로(모서리만 둥글게) */
   :global(.story-tint) {
     position: relative;
     overflow: hidden;
     border-radius: 2.4rem;
-  }
-  :global(.story-tint img) {
-    filter: grayscale(1) contrast(1.06) brightness(1.04);
   }
   /* 14년: 화면에 들어오면 0 → 14로 올라간다 */
   @property --n {
