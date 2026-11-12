@@ -1,0 +1,32 @@
+---
+// 한 페이지 안의 큰 묶음(예: 청장년 클리닉의 임플란트 / 자연치아·심미보철 / 사랑니·구강외과)이 시작되는 자리 표지.
+// 진한 남색 띠 위에 큰 번호 · 묶음 이름 · 한 줄 소개, 오른쪽엔 전체 묶음 목록(지금 묶음 강조)을 둬서 어디까지 왔는지 보이게 한다.
+// id를 여기에 걸어 상단 메뉴·탭(#implant 등)이 이 표지로 이동한다.
+import Container from './Container.astro';
+import { url } from '../site';
+interface Props { id: string; index: number; title: string; lead?: string; items: { href: string; label: string }[] }
+const { id, index, title, lead, items } = Astro.props;
+const no = (n: number) => String(n).padStart(2, '0');
+---
+
+<section id={id} class="scroll-mt-20 bg-secondary text-white" aria-labelledby={`${id}-title`}>
+  <Container class="grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-end md:py-16">
+    <div class="flex items-end gap-5 md:gap-8">
+      <span aria-hidden="true" class="text-[6.4rem] leading-[0.8] font-extrabold tracking-tight text-primary-bright tabular-nums md:text-[10rem]">{no(index)}</span>
+      <div>
+        <p class="t-body font-semibold tracking-[0.2em] text-white/60">{no(index)} / {no(items.length)}</p>
+        <h2 id={`${id}-title`} class="mt-1 text-[2.8rem] leading-tight font-bold md:text-[4rem]">{title}</h2>
+        {lead && <p class="mt-2 t-mid text-white/80">{lead}</p>}
+      </div>
+    </div>
+    <ol class="flex flex-wrap gap-2 md:flex-col md:items-end md:gap-1.5">
+      {items.map((x, i) => (
+        <li>
+          <a href={url(x.href)} aria-current={i + 1 === index ? 'true' : undefined} class:list={['inline-flex min-h-11 items-center gap-2 rounded-full px-4 t-body font-semibold transition-colors md:min-h-9', i + 1 === index ? 'bg-primary-bright text-secondary' : 'text-white/60 hover:text-white']}>
+            <span class="tabular-nums">{no(i + 1)}</span>{x.label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </Container>
+</section>
