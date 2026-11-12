@@ -66,6 +66,11 @@ const rules = [
           <h1 id="philosophy-title" class="mt-6 font-serif text-[3.6rem] leading-[1.4] font-bold text-secondary md:text-[5.2rem]">
             <span class="head-line block">내가 환자라면…</span><span class="head-line head-line-2 block">내 가족이라면…</span>
           </h1>
+        </div>
+
+        <div data-speakable class="space-y-7 border-l-2 border-primary/20 pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
+          {interview.map((para) => <p class="break-keep lg:whitespace-nowrap">{para.split('\n').map((line, i) => (<>{i > 0 && <br />}{line.split('|').map((part, j) => (<>{j > 0 && <><br class="md:hidden" /><span class="hidden md:inline"> </span></>}{part}</>))}</>))}</p>)}
+          <p class="!mt-10 t-body font-semibold text-foreground">— 김정민 원장 인터뷰 중에서 —</p>
           <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
           <div class="mt-8">
             <Button href={SITE.contact.blogPhilosophy} variant="primary" size="lg" class="shadow-md max-md:min-h-11 max-md:gap-1.5 max-md:px-5 max-md:py-2 max-md:text-[1.4rem]">
@@ -74,11 +79,6 @@ const rules = [
               <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
             </Button>
           </div>
-        </div>
-
-        <div data-speakable class="space-y-7 border-l-2 border-primary/20 pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
-          {interview.map((para) => <p class="break-keep lg:whitespace-nowrap">{para.split('\n').map((line, i) => (<>{i > 0 && <br />}{line.split('|').map((part, j) => (<>{j > 0 && <><br class="md:hidden" /><span class="hidden md:inline"> </span></>}{part}</>))}</>))}</p>)}
-          <p class="!mt-10 t-body font-semibold text-foreground">— 김정민 원장 인터뷰 중에서 —</p>
         </div>
       </div>
     </Container>
