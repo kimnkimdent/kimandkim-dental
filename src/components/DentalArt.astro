@@ -1,0 +1,65 @@
+---
+// 실버 클리닉용 직접 그린 설명 그림(장식). 틀니·임플란트 구조를 단순한 선과 면으로 보여준다.
+// 색은 진료 과목 색(var(--primary))을 따른다.
+interface Props { name: 'full' | 'partial' | 'implant-denture' | 'implant'; class?: string }
+const { name, class: className = 'h-auto w-full' } = Astro.props;
+const D = 'var(--primary)';
+const L = 'var(--primary-surface)';
+const W = '#fff';
+// 아래 앞니 줄(x 시작 위치)
+const xs = [34, 56, 78, 100, 122, 144];
+const tooth = (x: number, y = 52, h = 46) => `M${x + 2} ${y}h18c1.5 0 2 1 2 2v${h - 14}c0 7-5 12-11 12s-11-5-11-12v${-(h - 14)}c0-1 .5-2 2-2z`;
+---
+
+<svg aria-hidden="true" viewBox="0 0 200 150" class={className} fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="4" y="4" width="192" height="142" rx="22" fill={L} />
+  {
+    name === 'full' && (
+      <g>
+        <rect x="26" y="30" width="148" height="30" rx="15" fill={D} opacity=".9" />
+        {xs.map((x) => <path d={tooth(x)} fill={W} stroke={D} stroke-width="2.5" />)}
+      </g>
+    )
+  }
+  {
+    name === 'partial' && (
+      <g>
+        {/* 남은 자연치아(양 끝)와 빈자리를 채운 틀니 치아, 고리로 연결 */}
+        <path d={tooth(34, 40, 62)} fill={W} stroke={D} stroke-width="2.5" />
+        <path d={tooth(144, 40, 62)} fill={W} stroke={D} stroke-width="2.5" />
+        <rect x="54" y="38" width="92" height="22" rx="11" fill={D} opacity=".9" />
+        {xs.slice(1, 5).map((x) => <path d={tooth(x)} fill={W} stroke={D} stroke-width="2.5" />)}
+        <path d="M54 50c-6 0-10 4-12 10M146 50c6 0 10 4 12 10" stroke={D} stroke-width="3.5" />
+      </g>
+    )
+  }
+  {
+    name === 'implant-denture' && (
+      <g>
+        <rect x="26" y="22" width="148" height="26" rx="13" fill={D} opacity=".9" />
+        {xs.map((x) => <path d={tooth(x, 40, 40)} fill={W} stroke={D} stroke-width="2.5" />)}
+        {/* 잇몸 속 임플란트 2개 + 똑딱이 */}
+        <rect x="20" y="96" width="160" height="40" rx="12" fill={W} opacity=".7" />
+        {[62, 138].map((x) => (
+          <g>
+            <circle cx={x} cy="92" r="6" fill={W} stroke={D} stroke-width="2.5" />
+            <path d={`M${x - 6} 100h12l-2 30h-8z`} fill={W} stroke={D} stroke-width="2.5" />
+            <path d={`M${x - 6} 108h12M${x - 5.5} 116h11M${x - 5} 124h10`} stroke={D} stroke-width="2" />
+          </g>
+        ))}
+      </g>
+    )
+  }
+  {
+    name === 'implant' && (
+      <g>
+        {/* 잇몸뼈 · 나사 · 기둥 · 크라운 */}
+        <rect x="20" y="86" width="160" height="50" rx="12" fill={W} opacity=".7" />
+        <path d="M76 22h48c6 0 9 4 9 10v18c0 12-10 22-22 22h-22c-12 0-22-10-22-22V32c0-6 3-10 9-10z" fill={W} stroke={D} stroke-width="3" />
+        <path d="M90 72h20v14H90z" fill={L} stroke={D} stroke-width="3" />
+        <path d="M88 86h24l-4 46H92z" fill={W} stroke={D} stroke-width="3" />
+        <path d="M88 96h24M88.6 106h22.8M89.3 116h21.4M90 126h20" stroke={D} stroke-width="2.4" />
+      </g>
+    )
+  }
+</svg>
