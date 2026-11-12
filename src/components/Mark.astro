@@ -1,11 +1,40 @@
 ---
 // 로고 심볼(KIM+ 스마일 치아)을 픽토그램처럼 쓰는 부품. 장식용이라 화면읽기에서는 숨긴다.
 // tone: color(하늘색+남색) / white(어두운 바탕) / faint(배경 워터마크용, 흐리게)
+// trace: 로고 테두리를 따라 빛나는 선이 천천히 도는 움직임(첫 화면용). '동작 줄이기' 설정이면 멈춘다.
 import mark from '../assets/logo/mark.svg';
 import markWhite from '../assets/logo/mark-white.svg';
-interface Props { tone?: 'color' | 'white' | 'faint'; class?: string }
-const { tone = 'color', class: className = 'size-10' } = Astro.props;
+import whiteRaw from '../assets/logo/mark-white.svg?raw';
+interface Props { tone?: 'color' | 'white' | 'faint'; class?: string; trace?: boolean }
+const { tone = 'color', class: className = 'size-10', trace = false } = Astro.props;
 const src = tone === 'white' ? markWhite : mark;
+// trace용: 흰 로고 SVG의 viewBox와 모양(path)을 그대로 꺼내 쓴다
+const viewBox = whiteRaw.match(/viewBox="([^"]+)"/)?.[1];
+const shapes = whiteRaw.replace(/^[\s\S]*?<svg[^>]*>|<\/svg>\s*$/g, '');
+const outline = shapes.replace(/fill="[^"]*"/g, '');
 ---
 
-<img src={src.src} alt="" aria-hidden="true" width={src.width} height={src.height} class:list={['shrink-0 select-none', tone === 'faint' && 'opacity-[0.12]', className]} />
+{
+  trace ? (
+    <svg viewBox={viewBox} aria-hidden="true" class:list={['mark-trace shrink-0 overflow-visible select-none', className]}>
+      <g fill="#ffffff" set:html={shapes} />
+      <g class="mark-line" pathLength="100" fill="none" stroke="var(--color-primary-bright)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" set:html={outline.replace(/<path /g, '<path pathLength="100" ')} />
+    </svg>
+  ) : (
+    <img src={src.src} alt="" aria-hidden="true" width={src.width} height={src.height} class:list={['shrink-0 select-none', tone === 'faint' && 'opacity-[0.12]', className]} />
+  )
+}
+
+<style>
+  .mark-line {
+    stroke-dasharray: 22 78;
+    filter: drop-shadow(0 0 4px var(--color-primary-bright));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .mark-line { animation: mark-trace 4.5s linear infinite; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mark-line { display: none; }
+  }
+  @keyframes mark-trace { to { stroke-dashoffset: -100; } }
+</style>
