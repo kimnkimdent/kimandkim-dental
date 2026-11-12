@@ -1,0 +1,144 @@
+---
+// PhilosophyBody: src/pages/philosophy.astro의 본문(첫 페이지에서도 그대로 이어서 보여 준다). home=true면 맨 위 제목을 h2로 낮추고 경로 표시를 숨긴다.
+import Section from '../../components/Section.astro';
+import Container from '../../components/Container.astro';
+import Photo from '../../components/Photo.astro';
+import Button from '../../components/Button.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import { Image } from 'astro:assets';
+import bgRoom from '../../assets/photos/treatment-room.jpg';
+import bgDoctor from '../../assets/photos/white-treat.jpg';
+import { SITE, br } from '../../site';
+import doctorDeskSmile from '../../assets/photos/doctor-desk-smile.jpg';
+import xrayExplain from '../../assets/photos/xray-explain.jpg';
+import modelExplain from '../../assets/photos/model-explain.jpg';
+import xrayWoman from '../../assets/photos/xray-woman2.jpg';
+import qPhoto1 from '../../assets/photos/q-mouth.jpg';
+import qPhoto2 from '../../assets/photos/q-implant.jpg';
+import qPhoto3 from '../../assets/photos/kid-checkup.jpg';
+const qPhotos = [qPhoto1, qPhoto2, qPhoto3];
+const qPos = ['50% 36%', '42% 45%', '100% 55%']; // 사진에서 보일 위치(1번은 입이 원 아래쪽, 3번은 아이가 잘 보이게 오른쪽)
+
+// 원장 인터뷰(원장님 말씀 그대로, 문단·줄바꿈도 그대로)
+// 원장 인터뷰. \n = 줄바꿈(PC는 이 자리에서만 바꿈), | = 휴대폰에서만 줄바꿈.
+const interview = [
+  "제가 진료할 때 가장 많이 되묻는|질문이 하나 있어요.",
+  "'내가 환자라면, 내가 이 돈을 낸다면|어떤 치료를 선택할까'라는 거예요.\n역지사지 정신을 순간의 판단이 아니라,\n습관처럼 매 진료마다 적용하려고 해요.",
+  "그러다 보니 무조건 비싼 치료를 권하기보다,\n환자분 상황에 맞는 현실적인 치료를 함께 고민하고\n타고난 치아를 최대한 끝까지 쓰실 수 있도록\n기본을 지키게 되더라고요.",
+  "치료 전에는 늘 충분히 설명드려서\n막연한 불안감이 확신으로 바뀔 수 있게 하고요.",
+  "다만 이 역지사지가|환자의 감정 공감에만 쏠리는 건 아니에요.",
+  "설명은 편안하고 따뜻하게 해드리지만,\n정작 어떤 치료가 필요한지는\n냉정하게 이성적인 판단을 하려고 노력합니다.",
+  "환자 입장에서 생각하는 것과,\n환자에게 정말 필요한 걸|객관적으로 진단하고 치료하는 것.\n이 두 가지를 같이 가져가는 게|제 진료의 핵심이에요."
+];
+
+const questions = [
+  { q: '내가 환자라면,\n무엇이 가장 두려울까', a: '치과 문을 열기까지의 망설임을 압니다. 치료보다 마음을 먼저 살핍니다.' },
+  { q: '내가 이 비용을 낸다면,\n어떤 치료를 선택할까', a: '비싼 치료가 늘 좋은 치료는 아닙니다. 사정에 맞는 현실적인 치료를 함께 고민합니다.' },
+  { q: '내 가족이라면,\n이 치료를 권할까', a: '내 부모님, 내 아이에게 하지 않을 치료는 권하지 않습니다.' },
+];
+const rules = [
+  { t: '밝은 진료 분위기', d: '첫인사부터 귀가까지 웃는 얼굴로 맞이하고, 진료 중에도 지금 무엇을 하는지 말씀드립니다.', photo: '진료실에서 웃으며 맞이하는 대표원장', src: doctorDeskSmile },
+  { t: '충분한 설명', d: '엑스레이를 함께 보며 통증·기간·비용을 치료 전에 안내합니다. 아이는 부모님께, 어르신은 자녀분께도 설명드립니다.', photo: '엑스레이 화면 앞에서 여성 환자에게 손짓하며 설명하는 대표원장', src: xrayWoman },
+  { t: '두려움까지 배려', d: '눈높이를 맞추고, 무엇을 할지 먼저 보여 드리며 설명합니다. 표면 마취 후 천천히 마취하고, 손을 드시면 바로 멈춥니다.', photo: '치아 모형을 들고 설명하는 대표원장', src: modelExplain },
+  { t: '꼭 필요한 치료', d: '자연치아를 지킬 방법부터 검토하고, 여러 방법의 장단점과 비용을 비교해 드린 뒤 선택을 기다립니다.', photo: '엑스레이 화면을 보며 설명하는 대표원장', src: xrayExplain },
+];
+interface Props { home?: boolean }
+const { home = false } = Astro.props;
+const H = home ? 'h2' : 'h1';
+---
+  <!-- 첫 화면: 왼쪽 易地思之 · 핵심 질문(h1) · 블로그 자세히 보기 / 오른쪽 원장 인터뷰(원문·줄바꿈 그대로) -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-section md:pt-20" aria-labelledby="philosophy-title">
+    <!-- 배경: 원장님 · 진료실 사진을 희미하게, 가장자리는 부드럽게 번지도록(장식용) -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+      <Image src={bgRoom} alt="" widths={[800, 1400]} sizes="60vw" class="soft-photo absolute bottom-0 left-[-10%] h-[70%] w-[75%] object-cover opacity-[0.16] md:left-[-4%] md:w-[55%]" />
+      <Image src={bgDoctor} alt="" widths={[600, 1000]} sizes="45vw" class="soft-photo absolute top-[6%] right-[-12%] h-[42%] w-[115%] md:top-[4%] md:h-[75%] object-cover object-[60%_30%] opacity-[0.14] md:right-[-6%] md:w-[42%]" />
+    </div>
+    <Container class="relative">
+      {!home && <p class="relative z-10 t-body text-foreground-muted">홈 &gt; 진료철학</p>}
+      <div class="mt-6 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <div class="relative md:sticky md:top-32 md:self-start">
+          <p aria-hidden="true" class="pointer-events-none absolute top-[38%] left-[-0.06em] -z-10 -translate-y-1/2 font-serif text-[10rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[14rem] md:text-[18rem]">易地思之</p>
+          <p class="flex items-center gap-2.5 t-mid font-semibold text-primary"><ServiceIcon name="philosophy" class="size-10 md:size-12" />김정민 원장의 역지사지</p>
+          <H id="philosophy-title" class="mt-6 font-serif text-[3.6rem] leading-[1.4] font-bold text-secondary md:text-[5.2rem]">
+            <span class="head-line block">내가 환자라면…</span><span class="head-line head-line-2 block">내 가족이라면…</span>
+          </H>
+        </div>
+
+        <div data-speakable class="space-y-7 border-l-2 border-primary/20 pl-6 t-mid leading-[1.85] text-foreground-muted md:pl-10">
+          {interview.map((para) => <p class="break-keep lg:whitespace-nowrap">{para.split('\n').map((line, i) => (<>{i > 0 && <br />}{line.split('|').map((part, j) => (<>{j > 0 && <><br class="md:hidden" /><span class="hidden md:inline"> </span></>}{part}</>))}</>))}</p>)}
+          <p class="!mt-10 t-body font-semibold text-foreground">— 김정민 원장 인터뷰 중에서 —</p>
+          <!-- 네이버 블로그 진료철학 글로 연결(주소는 src/site.ts의 blogPhilosophy) -->
+          <div class="mt-8">
+            <Button href={SITE.contact.blogPhilosophy} variant="primary" size="lg" class="shadow-md max-md:min-h-11 max-md:gap-1.5 max-md:px-5 max-md:py-2 max-md:text-[1.4rem]">
+              역지사지 진료철학
+              <span class="t-body font-medium opacity-80 max-md:text-[1.2rem]">더 자세히 보기</span>
+              <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <Section tone="surface" eyebrow="3가지 질문" title="제가 매번 스스로에게 묻는 3가지 질문">
+    <!-- 원형 사진 안에 번호와 질문, 아래에 답 -->
+    <ol class="grid gap-12 md:grid-cols-3 md:gap-8">
+      {
+        questions.map((x, i) => (
+          <li class="flex flex-col items-center text-center">
+            <div class="relative isolate flex aspect-square w-full max-w-[30rem] items-center justify-center overflow-hidden rounded-full shadow-lg ring-8 ring-background">
+              <Image src={qPhotos[i]} alt="" aria-hidden="true" widths={[400, 700]} sizes="30rem" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${qPos[i]}; transform: scale(${i === 0 ? 1.1 : 1})`} />
+              <div aria-hidden="true" class:list={['absolute inset-0 -z-10', i === 0 ? 'bg-gradient-to-b from-secondary/60 via-secondary/30 to-transparent' : i === 2 || i === 1 ? 'bg-secondary/50' : 'bg-secondary/70']}></div>
+              <div class="px-8 text-white">
+                <span class="block text-[3.2rem] leading-none font-extrabold text-primary-bright tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="head-move mt-4 font-serif text-[2rem] leading-snug font-bold whitespace-pre-line md:text-[2.2rem]">{x.q}</h3>
+              </div>
+            </div>
+            <p class="mt-6 max-w-[30rem] t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(x.a)}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section eyebrow="4가지 원칙" title="진료실에서 지키는 4가지 원칙" lead="3가지 질문은 진료실에서 이렇게 지켜집니다.">
+    <ul class="grid gap-6 sm:grid-cols-2">
+      {
+        rules.map((r, i) => (
+          <li class="rule-card overflow-hidden rounded-3xl bg-background shadow-sm">
+            <Photo src={r.src} alt={r.photo} ratio="aspect-[16/9]" class="overflow-hidden [&>*]:rounded-none" />
+            <div class="p-7">
+              <p class="t-body font-bold text-primary">{String(i + 1).padStart(2, '0')}</p>
+              <h3 class="mt-1 t-head font-bold">{r.t}</h3>
+              <p class="mt-3 t-body leading-relaxed text-foreground-muted whitespace-pre-line">{br(r.d)}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+
+<style>
+  /* 배경 사진: 가운데는 보이고 바깥으로 갈수록 사라지게 번짐 + 살짝 흐리게 */
+  /* 헤드 카피 움직임(스크롤에 따라). '동작 줄이기' 설정이면 움직이지 않는다.
+     - 첫 화면 제목: 두 줄이 차례로 올라온다(스크롤해도 그대로 보인다).
+     - 섹션 제목(h2)·질문 원 안 제목: 화면에 들어올 때 아래에서 올라오며 또렷해진다. */
+  @media (prefers-reduced-motion: no-preference) {
+    .head-line { animation: head-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .head-line-2 { animation-delay: 0.25s; }
+    :global(main section h2), .head-move { animation: head-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+  }
+  @keyframes head-in { from { opacity: 0; translate: 0 2.4rem; } }
+  @keyframes head-rise { from { opacity: 0; transform: translateY(3rem); letter-spacing: 0.08em; } }
+
+  /* 4가지 원칙: 카드에 마우스를 올리면 사진이 천천히 확대된다 */
+  .rule-card :global(img) { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .rule-card:hover :global(img) { transform: scale(1.08); }
+
+  :global(.soft-photo) {
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
+    filter: grayscale(0.4) blur(1px);
+  }
+</style>

@@ -1,0 +1,360 @@
+---
+// StoryBody: src/pages/about/story.astro의 본문(첫 페이지에서도 그대로 이어서 보여 준다). home=true면 맨 위 제목을 h2로 낮추고 경로 표시를 숨긴다.
+// 김앤김 이야기: 2012 → 2026, 한 줄기 곡선을 따라 내려가며 사진·글이 이어지는 연대기.
+// 스크롤하면 곡선이 아래로 그려지고 각 장면이 떠오른다(자바스크립트 없이 CSS만. 지원 안 하는 브라우저·"동작 줄이기"에서는 처음부터 다 보임).
+// 장면을 추가하려면 chapters 배열에 { mark, year, title, text, photos, side }를 넣는다. 원고에 없는 연도·사실은 넣지 않는다.
+import PageHero from '../../components/PageHero.astro';
+import Container from '../../components/Container.astro';
+import Photo from '../../components/Photo.astro';
+import Mark from '../../components/Mark.astro';
+import FamilyTeeth from '../../components/FamilyTeeth.astro';
+import { SITE, br } from '../../site';
+import { Image } from 'astro:assets';
+import Section from '../../components/Section.astro';
+import doctor from '../../assets/photos/doctor-white.jpg'; // 대표원장 프로필(상반신), 배경을 흰색으로 정리한 사진
+import { DOCTOR } from '../../seo'; // 약력·진료 분야는 src/seo.ts의 DOCTOR에서 고친다
+import whiteTreat from '../../assets/photos/white-treat.jpg';
+import deskConsult from '../../assets/photos/desk-consult.jpg';
+import deskSmile from '../../assets/photos/sofa-laugh.jpg';
+import kidFriendly from '../../assets/photos/kid-friendly.jpg';
+import exterior from '../../assets/photos/exterior.jpg';
+
+// 지금 연도: 사이트를 올릴(반영할) 때의 연도로 자동으로 바뀐다(2027년에 다시 올리면 2027).
+// 약력 = 학력·경력·수료(학회 회원 줄은 빼고), 학회 = memberOf(한글 이름 + 영문 약칭)
+const { memberOf } = DOCTOR;
+const career = DOCTOR.career.filter((c) => !c.includes('학회'));
+const NOW = Math.max(2026, new Date().getFullYear());
+const years = NOW - SITE.since; // 14
+
+const chapters = [
+  {
+    mark: String(SITE.since),
+    year: SITE.since,
+    title: '운정 야당동의\n작은 약속',
+    text: '우리 동네 가족들이 믿고 다닐 수 있는 치과. 2012년, 파주 운정 야당동에서 그 약속으로 문을 열었습니다.',
+    photos: [{ src: exterior, alt: '김앤김치과가 있는 대흥프라자 건물 외관' }], // 사진 파일 위쪽 하늘을 잘라 건물이 더 보이게 맞춤
+  },
+  {
+    mark: '처음엔 혼자',
+    teeth: 1 as const, // 표지 안 치아 수 = 가족 수(혼자 → 가족 → 세 세대)
+    title: '처음엔\n혼자 오셨습니다',
+    text: '치과 문을 열기까지 망설이셨던 분이 상담을 받고, 치료를 마치고, 다음 검진 날짜를 잡고 가셨습니다.',
+    photos: [{ src: deskConsult, alt: '상담실에서 엑스레이를 보며 여성 환자와 상담하는 대표원장' }],
+  },
+  {
+    mark: '가족과 함께',
+    teeth: 2 as const,
+    title: '다음엔\n가족과 함께',
+    text: '처음 혼자 오셨던 분이 어느새 배우자분과, 자녀분과, 부모님까지 모시고 오십니다.',
+    photos: [{ src: whiteTreat, alt: '흰 가운을 입고 직원과 함께 진료하는 대표원장' }],
+  },
+  {
+    mark: '3대 가족의 시간',
+    teeth: 3 as const,
+    title: '할머니의 틀니,\n손주의 첫 불소',
+    text: '할머니가 틀니를 맞추시던 날, 손주는 첫 불소를 바르고 갑니다. 그 믿음이 쌓여 지금의 김앤김치과가 되었습니다.',
+    photos: [{ src: kidFriendly, alt: '아이 눈높이에 맞춰 설명하는 대표원장' }],
+  },
+  {
+    mark: String(NOW),
+    year: NOW,
+    title: '지금도,\n같은 자리에서',
+    text: '공감은 따뜻하게, 진단은 정확하게. 모두가 환하게 웃으며 인사하는 동네 치과로 함께하겠습니다.',
+    photos: [{ src: deskSmile, alt: '대기실 소파에서 환자와 태블릿을 보며 함께 웃는 대표원장 김정민' }],
+    now: true,
+  },
+];
+
+interface Props { home?: boolean }
+const { home = false } = Astro.props;
+---
+  <PageHero icon="about"
+    as={home ? 'h2' : 'h1'}
+    crumbs={home ? [] : ['병원소개', '김앤김 이야기']}
+    eyebrow="김앤김 이야기"
+    accent={['2012년', '작은 약속']}
+    title={'2012년, 운정 야당동의\n작은 약속에서 시작했습니다'}
+    lead={'우리 동네 가족들이 믿고 다닐 수 있는 치과.\n그 약속을 지키며 한자리에서 가족의 시간을 함께해 왔습니다.'} />
+
+  <!-- 숫자로 보는 14년 -->
+  <section class="bg-background pt-6 pb-4 md:pt-10">
+    <Container>
+      <!-- 2012에서 지금(올해)까지 숫자가 돌아 올라가고, 그 뒤로 다음 해들이 흐릿하게 이어지며 '계속'을 보여 준다 -->
+      <div class="grid items-center gap-y-3 text-center md:grid-cols-[1fr_auto_1fr] md:gap-x-8">
+        <p class="t-mid font-semibold text-foreground-muted md:text-right">
+          <span class="text-[2.4rem] font-extrabold tabular-nums tracking-tight text-primary-bright md:text-[3.2rem]">{SITE.since}</span>년부터
+        </p>
+        <p class="relative">
+          <span class="sr-only">{NOW}</span>
+          <span aria-hidden="true" class="year-roll text-[8.8rem] leading-none font-extrabold tabular-nums tracking-tight text-primary md:text-[15rem]" style={`--from: ${SITE.since}; --to: ${NOW}`}></span>
+        </p>
+        <div aria-hidden="true" class="future relative h-[4.8rem] overflow-hidden md:h-[6rem]">
+          <div class="future-track flex h-full w-max items-center gap-6 text-[3.2rem] font-extrabold tabular-nums tracking-tight text-primary md:gap-8 md:text-[4rem]">
+            {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((k) => <span style={`opacity: ${Math.max(0.12, 0.5 - ((k - 1) % 6) * 0.08)}`}>{NOW + k}</span>)}
+          </div>
+        </div>
+      </div>
+      <p class="mt-6 text-center t-mid">
+        같은 자리에서 <strong class="story-count text-[3.2rem] leading-none font-extrabold text-primary md:text-[4.4rem]" style={`--to: ${years}`}><span class="sr-only">{years}</span></strong><strong class="text-primary">년</strong>,
+        <strong class="inline-flex items-center gap-2 text-primary">그리고 계속됩니다 <span aria-hidden="true" class="pulse-dot inline-block size-3 rounded-full bg-primary-bright"></span></strong>
+      </p>
+    </Container>
+  </section>
+
+  <!-- 왼쪽 세로 줄을 따라 내려가는 연대기: 표지 · 사진 · 글이 한 줄에 나란히 -->
+  <section class="story bg-background pt-10 pb-section" aria-label={`${SITE.since}년부터 ${NOW}년까지`}>
+    <Container>
+      <ol class="relative">
+        {
+          chapters.map((c, i) => {
+            const last = i === chapters.length - 1;
+            return (
+              <li class="story-row relative grid grid-cols-[3.6rem_1fr] gap-x-5 pb-16 md:grid-cols-[9.6rem_1fr_1fr] md:gap-x-10 md:pb-24">
+                {/* 왼쪽 세로 줄(휴대폰·PC 같은 모양, 회색 단색) */}
+                {!last && <span aria-hidden="true" class="absolute top-0 bottom-0 left-[1.7rem] w-1 rounded-full bg-foreground-subtle/30 md:left-[4.6rem]"></span>}
+
+                {/* 표지(곡선 위 동그라미) */}
+                <div class="relative z-10 row-span-2 md:col-start-1 md:row-span-1 md:row-start-1 md:flex md:justify-center">
+                  <span class:list={[
+                    'story-dot flex items-center justify-center rounded-full border-4 border-background font-bold shadow-md',
+                    c.year ? 'size-14 bg-primary text-[1.3rem] text-primary-foreground md:size-24 md:text-[2rem]' : 'size-14 bg-primary-surface text-[1.1rem] text-primary md:size-24 md:text-[1.4rem]',
+                  ]}>
+                    {c.now ? <Mark tone="white" class="h-8 w-auto md:h-12" /> : c.teeth ? (
+                      <span role="img" aria-label={c.mark} class="flex items-center justify-center"><FamilyTeeth count={c.teeth} class="size-[3.4rem] md:size-[6rem]" /></span>
+                    ) : <span class="px-1 text-center leading-tight">{c.mark}</span>}
+                  </span>
+                </div>
+
+                {/* 사진 */}
+                <div class:list={['story-photo relative z-10 md:row-start-1', 'from-left col-start-2 mt-0 md:col-start-2']}>
+                  {c.photos.length === 1 ? (
+                    <Photo src={c.photos[0].src} alt={c.photos[0].alt} class="story-tint shadow-lg [&_img]:rounded-3xl" />
+                  ) : (
+                    <div class="grid grid-cols-2 gap-3">
+                      {c.photos.map((p, k) => <Photo src={p.src} alt={p.alt} ratio="aspect-[3/4]" class:list={['story-tint shadow-lg [&_img]:object-[70%_50%]', k === 1 && 'mt-10']} />)}
+                    </div>
+                  )}
+                </div>
+
+                {/* 글 */}
+                <div class:list={['story-text relative z-10 col-start-2 mt-6', 'from-right md:col-start-3 md:row-start-1 md:mt-0 md:self-center']}>
+                  {c.now ? (
+                    <p class="text-[4.8rem] leading-none font-extrabold tabular-nums tracking-tight text-primary md:text-[7.6rem]">NOW</p>
+                  ) : c.year ? (
+                    <p class:list={['text-[4rem] leading-none font-extrabold tabular-nums tracking-tight md:text-[6.4rem]', c.now ? 'text-primary' : 'text-primary-bright']}>
+                      {c.year}
+                    </p>
+                  ) : (
+                    <p class="t-body font-bold tracking-widest text-primary">{c.mark}</p>
+                  )}
+                  <h2 class="mt-3 t-headline font-bold whitespace-pre-line">{c.title}</h2>
+                  <p class="mt-4 max-w-[44rem] t-mid leading-relaxed text-foreground-muted whitespace-pre-line">{br(c.text)}</p>
+                </div>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </Container>
+  </section>
+
+  <!-- 대표원장 소개(같은 페이지 아래). 메뉴의 '대표원장 소개'가 여기(#doctor)로 온다 -->
+  <!-- 대표원장 소개: 사진(왼쪽) · 명조체 인사말과 서명(오른쪽) · 아래 약력/학회 두 칸 -->
+  <!-- 대표원장 소개 위: 'Family Dental Clinic'이 옆으로 천천히 흐르는 띠(장식) -->
+  <div aria-hidden="true" class="family-flow overflow-hidden bg-background py-8 md:py-12">
+    <div class="family-track flex w-max items-center">
+      {Array.from({ length: 6 }).map(() => (
+        <span class:list={['flex shrink-0 items-center gap-6 pr-6 text-[5.6rem] leading-none font-extrabold tracking-tight whitespace-nowrap text-foreground-subtle/25 md:gap-10 md:pr-10 md:text-[11rem]']}>
+          Family Dental Clinic <span class="size-3 shrink-0 rounded-full bg-foreground-subtle/30 md:size-5"></span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <section id="doctor" class="scroll-mt-28 bg-background py-section">
+    <Container>
+      <p class="t-body font-semibold tracking-wide text-primary">대표원장 소개</p>
+
+      <div class="mt-8 grid items-end gap-10 md:grid-cols-[1.02fr_0.98fr] md:gap-16">
+        <div class="doctor-fold overflow-hidden rounded-[2.4rem] bg-[hsl(220_14%_95%)]">
+          <Image src={doctor} alt="김앤김치과 대표원장 김정민" widths={[500, 900]} sizes="(min-width: 768px) 50vw, 100vw" class="h-auto w-full" />
+        </div>
+
+        <div class="md:pb-4">
+          <h2 class="font-serif text-[2.8rem] leading-[1.45] font-bold md:text-[4rem]">
+            안녕하세요,<br />김앤김치과 대표원장<br />김정민입니다.
+          </h2>
+          <span aria-hidden="true" class="mt-7 block h-[3px] w-12 rounded-full bg-primary"></span>
+          <div class="mt-7 space-y-2 t-mid leading-relaxed text-foreground-muted">
+            <p>첫 상담과 진단, 수술, 치료 후 경과 확인까지<br class="max-md:hidden" /> 제가 직접 진료합니다.</p>
+            <p>오래 믿고 다니실 수 있는 치과가 되도록,<br class="max-md:hidden" /> 한 분 한 분 끝까지 책임지겠습니다.</p>
+          </div>
+          <p class="mt-8 flex items-baseline gap-3">
+            <span class="t-body text-foreground-muted">김앤김치과 대표원장</span>
+            <span class="font-serif text-[2.4rem] font-bold tracking-[0.2em]">김정민</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- 약력 · 학회: 한 목록으로, 줄 사이 밑줄 없이 -->
+      <div class="mt-16 border-t border-foreground/80 pt-10 md:mt-20">
+        <h3 class="t-body font-bold tracking-wide text-primary">약력 · 학회</h3>
+        <ul class="mt-4 space-y-2.5 md:columns-2 md:gap-16">
+          {career.map((c) => <li class="t-mid break-inside-avoid">{c}</li>)}
+          {memberOf.map((m) => <li class="t-mid break-inside-avoid">{m.alt} 정회원 <span class="t-body font-semibold text-foreground-muted">{m.name.split('(')[1]?.replace(')', '')}</span></li>)}
+        </ul>
+      </div>
+    </Container>
+  </section>
+
+
+<style>
+
+  /* 사진·글이 옆에서 들어올 때 화면이 좌우로 넓어지지 않게 */
+  section:has(.story-photo) {
+    overflow-x: clip;
+  }
+  /* 연대기 사진: 원래 컬러 그대로(모서리만 둥글게) */
+  :global(.story-tint) {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2.4rem;
+  }
+  /* 14년: 화면에 들어오면 0 → 14로 올라간다 */
+  @property --n {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+  }
+  .story-count {
+    --n: var(--to);
+    counter-reset: n var(--n);
+    font-variant-numeric: tabular-nums;
+  }
+  .story-count::before {
+    content: counter(n);
+  }
+  /* 연도 숫자: 2012 → 올해까지 돌아 올라간다 */
+  @property --y {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 2012;
+  }
+  .year-roll {
+    --y: var(--to);
+    counter-reset: y var(--y);
+    font-variant-numeric: tabular-nums;
+  }
+  .year-roll::before {
+    content: counter(y);
+  }
+  /* 다음 해들: 오른쪽으로 갈수록 흐려지게 */
+  .future {
+    mask-image: linear-gradient(to right, black 0%, black 35%, transparent 100%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes count {
+      from { --n: 0; }
+    }
+    @keyframes draw {
+      from { stroke-dashoffset: 1; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes grow {
+      from { transform: scaleY(0); }
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(4rem); }
+    }
+    @keyframes photo-in {
+      from { opacity: 0; transform: translateX(var(--dx)); clip-path: inset(0 0 100% 0 round 2.4rem); }
+      to { opacity: 1; transform: none; clip-path: inset(0 0 0 0 round 2.4rem); }
+    }
+    @keyframes photo-zoom {
+      from { transform: scale(1.18) translateY(-3%); }
+      to { transform: scale(1.02) translateY(3%); }
+    }
+    @keyframes text-in {
+      from { opacity: 0; transform: translateX(var(--dx)) translateY(2rem); }
+    }
+    @keyframes pop {
+      from { transform: scale(0.4); }
+    }
+    .story-count {
+      animation: count 2.6s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+    @keyframes roll {
+      from { --y: var(--from); }
+    }
+    @keyframes drift {
+      to { transform: translateX(-50%); }
+    }
+    @keyframes future-in {
+      from { opacity: 0; transform: translateX(-3rem); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.8); opacity: 0.35; }
+    }
+    /* 페이지가 열리면 2.6초 동안 2012 → 올해. 이어서 다음 해들이 나타나 천천히 흘러가고(끝없이), 점이 깜빡인다 */
+    .year-roll {
+      animation: roll 2.6s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+    .future {
+      animation: future-in 0.8s 2.7s ease-out both;
+    }
+    .future-track {
+      animation: drift 24s 2.9s linear infinite;
+    }
+    .pulse-dot {
+      animation: pulse 1.8s 2.9s ease-in-out infinite;
+    }
+    @supports (animation-timeline: view()) {
+      .story-dot {
+        animation: pop ease-out both;
+        animation-timeline: view();
+        animation-range: entry 10% entry 70%;
+      }
+      /* 사진: 옆에서 밀려 들어오며 가려진 막이 걷히듯 열리고, 안의 사진은 살짝 확대됐다가 제자리로 */
+      .story-photo {
+        animation: photo-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 40%;
+      }
+      .story-photo :global(img) {
+        animation: photo-zoom linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+      /* 글: 사진보다 조금 늦게, 반대쪽에서 따라 들어온다 */
+      .story-text {
+        animation: text-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
+        animation-timeline: view();
+        animation-range: entry 25% cover 45%;
+      }
+      .from-left { --dx: -6rem; }
+      .from-right { --dx: 6rem; }
+      /* 휴대폰: 옆으로 밀리면 화면이 좌우로 흔들리므로 아래에서만 올라온다 */
+      @media (max-width: 767px) {
+        .from-left, .from-right { --dx: 0rem; }
+      }
+    }
+  }
+  /* Family Dental Clinic 띠: 같은 문구 8개 중 절반(-50%)만큼 흐르면 처음과 같아져 끊김 없이 반복 */
+  .family-track { animation: family-flow 70s linear infinite; }
+  @keyframes family-flow { to { transform: translateX(-50%); } }
+
+  /* 대표원장 사진: 세로축을 기준으로 뒤집혀 있다가 화면에 들어오면 빠르게 펴진다(왼쪽으로 넘기듯) */
+  .doctor-fold { transform-origin: center; backface-visibility: hidden; }
+  @media (prefers-reduced-motion: no-preference) {
+    .doctor-fold { animation: doctor-flip linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+  }
+  @keyframes doctor-flip {
+    from { transform: perspective(250rem) rotateY(-100deg); }
+    to { transform: perspective(250rem) rotateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .family-track { animation: none; }
+  }
+</style>
