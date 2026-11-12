@@ -13,6 +13,10 @@ import Note from '../../components/Note.astro';
 import Process from '../../components/Process.astro';
 import FaqLinks from '../../components/FaqLinks.astro';
 import Photo from '../../components/Photo.astro';
+import { Image } from 'astro:assets';
+import tImplant from '../../assets/treat/treat-04.jpg';
+import tCavity from '../../assets/treat/treat-01.jpg';
+import tCrown from '../../assets/treat/treat-07.jpg';
 import SubTabs from '../../components/SubTabs.astro';
 import { SITE, url, br } from '../../site';
 
@@ -67,7 +71,7 @@ const esthetic = [
 
   <Section tone="surface" eyebrow="임플란트의 구조" title="옆 치아를 깎지 않고, 자연치아에 가까운 씹는 힘을 되찾습니다">
     <div class="grid items-center gap-10 md:grid-cols-2">
-      <Photo alt="픽스처 · 지대주 · 크라운 분리 일러스트" ratio="aspect-square" />
+      <Image src={tImplant} alt="3D CT로 임플란트 위치를 계획하는 화면과 임플란트 구조 모형" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain " />
       <ol class="space-y-3">
         {
           parts.map((p, i) => (
@@ -119,6 +123,7 @@ const esthetic = [
   </Section>
 
   <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 치료">
+    <Image src={tCavity} alt="충치를 다듬고 그 자리를 채우는 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain mb-6 max-h-[36rem] md:w-1/2" />
     <ol class="grid gap-3 md:grid-cols-3">
       {
         cavity.map((c) => (
@@ -142,6 +147,7 @@ const esthetic = [
   </Section>
 
   <Section eyebrow="심미·보철 치료" title="자연스러운 색과 모양으로">
+    <Image src={tCrown} alt="다듬은 치아 위에 크라운을 씌우는 보철 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain mb-6 max-h-[36rem] md:w-1/2" />
     <ul class="grid gap-4 md:grid-cols-3">
       {
         esthetic.map((x) => (

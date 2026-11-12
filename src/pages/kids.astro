@@ -10,6 +10,8 @@ import SubTabs from '../components/SubTabs.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
 import Mark from '../components/Mark.astro';
+import { Image } from 'astro:assets';
+import tKids from '../assets/treat/treat-06.jpg';
 import kidCheckup from '../assets/photos/kid-checkup.jpg';
 
 const checkups = [
@@ -65,6 +67,7 @@ const checkups = [
   </Section>
 
   <Section id="care" tone="surface" eyebrow="충치 치료 · 청소년 관리" title="자라는 치아에 맞춰 관리합니다">
+    <Image src={tKids} alt="치과에서 아이 치아에 빛을 쬐어 치료하는 모습" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="mb-6 aspect-[16/9] w-full rounded-3xl object-cover md:w-1/2" />
     <div class="grid gap-4 md:grid-cols-2">
       <div class="rounded-3xl bg-background p-8 shadow-sm">
         <h3 class="t-head font-bold">어린이 충치 치료</h3>
