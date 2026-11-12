@@ -20,7 +20,9 @@ import kidFriendly from '../../assets/photos/kid-friendly.jpg';
 import exterior from '../../assets/photos/exterior.jpg';
 
 // 지금 연도: 사이트를 올릴(반영할) 때의 연도로 자동으로 바뀐다(2027년에 다시 올리면 2027).
-const { career, fields } = DOCTOR;
+// 약력 = 학력·경력·수료(학회 회원 줄은 빼고), 학회 = memberOf(한글 이름 + 영문 약칭)
+const { memberOf } = DOCTOR;
+const career = DOCTOR.career.filter((c) => !c.includes('학회'));
 const NOW = Math.max(2026, new Date().getFullYear());
 const years = NOW - SITE.since; // 14
 
@@ -168,7 +170,7 @@ const chapters = [
   </section>
 
   <!-- 대표원장 소개(같은 페이지 아래). 메뉴의 '대표원장 소개'가 여기(#doctor)로 온다 -->
-  <!-- 대표원장 소개: 사진(왼쪽) · 명조체 인사말과 서명(오른쪽) · 아래 약력/진료 분야 두 칸 -->
+  <!-- 대표원장 소개: 사진(왼쪽) · 명조체 인사말과 서명(오른쪽) · 아래 약력/학회 두 칸 -->
   <section id="doctor" class="scroll-mt-28 bg-background py-section">
     <Container>
       <p class="t-body font-semibold tracking-wide text-primary">대표원장 소개</p>
@@ -194,17 +196,22 @@ const chapters = [
         </div>
       </div>
 
-      <div class="mt-16 grid gap-10 border-t border-foreground/80 pt-10 md:mt-20 md:grid-cols-[1.3fr_0.7fr] md:gap-16">
+      <div class="mt-16 grid gap-10 border-t border-foreground/80 pt-10 md:mt-20 md:grid-cols-2 md:gap-16">
         <div>
-          <h3 class="t-body font-bold tracking-wide text-primary">약력 · 학회</h3>
+          <h3 class="t-body font-bold tracking-wide text-primary">약력</h3>
           <ul class="mt-4 divide-y divide-border">
             {career.map((c) => <li class="py-3 t-mid">{c}</li>)}
           </ul>
         </div>
         <div>
-          <h3 class="t-body font-bold tracking-wide text-primary">주요 진료 분야</h3>
+          <h3 class="t-body font-bold tracking-wide text-primary">학회</h3>
           <ul class="mt-4 divide-y divide-border">
-            {fields.map((f) => <li class="py-3 t-mid font-semibold">{f}</li>)}
+            {memberOf.map((m) => (
+              <li class="flex items-baseline justify-between gap-4 py-3 t-mid">
+                <span>{m.alt} 정회원</span>
+                <span class="shrink-0 t-body font-semibold tracking-wide text-foreground-muted">{m.name.split('(')[1]?.replace(')', '')}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
