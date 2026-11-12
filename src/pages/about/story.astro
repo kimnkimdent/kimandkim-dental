@@ -349,15 +349,14 @@ const chapters = [
   .family-track { animation: family-flow 36s linear infinite; }
   @keyframes family-flow { to { transform: translateX(-50%); } }
 
-  /* 대표원장 사진: 위가 접혀 있다가 스크롤에 따라 아래로 펼쳐진다 */
-  .doctor-fold { transform-origin: top center; }
+  /* 대표원장 사진: 세로축을 기준으로 뒤집혀 있다가 화면에 들어오면 빠르게 펴진다(왼쪽으로 넘기듯) */
+  .doctor-fold { transform-origin: center; backface-visibility: hidden; }
   @media (prefers-reduced-motion: no-preference) {
-    .doctor-fold { animation: doctor-unfold linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+    .doctor-fold { animation: doctor-flip linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
   }
-  @keyframes doctor-unfold {
-    from { transform: perspective(120rem) rotateX(-75deg); opacity: 0.2; }
-    60% { opacity: 1; }
-    to { transform: perspective(120rem) rotateX(0); opacity: 1; }
+  @keyframes doctor-flip {
+    from { transform: perspective(250rem) rotateY(-100deg); }
+    to { transform: perspective(250rem) rotateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
     .family-track { animation: none; }
