@@ -5,6 +5,9 @@ import Container from '../components/Container.astro';
 import Photo from '../components/Photo.astro';
 import Button from '../components/Button.astro';
 import ServiceIcon from '../components/ServiceIcon.astro';
+import { Image } from 'astro:assets';
+import bgRoom from '../assets/photos/treatment-room.jpg';
+import bgDoctor from '../assets/doctor-kim.jpg';
 import { SITE, br } from '../site';
 import doctorDeskSmile from '../assets/photos/doctor-desk-smile.jpg';
 import xrayExplain from '../assets/photos/xray-explain.jpg';
@@ -43,6 +46,11 @@ const rules = [
 >
   <!-- 첫 화면: 왼쪽 易地思之 · 핵심 질문(h1) · 블로그 자세히 보기 / 오른쪽 원장 인터뷰(원문·줄바꿈 그대로) -->
   <section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-section md:pt-20" aria-labelledby="philosophy-title">
+    <!-- 배경: 원장님 · 진료실 사진을 희미하게, 가장자리는 부드럽게 번지도록(장식용) -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+      <Image src={bgRoom} alt="" widths={[800, 1400]} sizes="60vw" class="soft-photo absolute bottom-0 left-[-10%] h-[70%] w-[75%] object-cover opacity-[0.16] md:left-[-4%] md:w-[55%]" />
+      <Image src={bgDoctor} alt="" widths={[600, 1000]} sizes="45vw" class="soft-photo absolute top-[4%] right-[-18%] h-[75%] w-[80%] object-cover object-top opacity-[0.14] md:right-[-6%] md:w-[42%]" />
+    </div>
     <Container class="relative">
       <p class="relative z-10 t-body text-foreground-muted">홈 &gt; 진료철학</p>
       <div class="mt-6 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
@@ -102,3 +110,12 @@ const rules = [
     </ul>
   </Section>
 </Layout>
+
+<style>
+  /* 배경 사진: 가운데는 보이고 바깥으로 갈수록 사라지게 번짐 + 살짝 흐리게 */
+  :global(.soft-photo) {
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
+    filter: grayscale(0.4) blur(1px);
+  }
+</style>
