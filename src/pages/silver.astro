@@ -14,8 +14,8 @@ import Photo from '../components/Photo.astro';
 import WorryBand from '../components/WorryBand.astro';
 import tGum from '../assets/treat/treat-08.jpg';
 import chRoom from '../assets/photos/treatment-room.jpg';
-import chConsult from '../assets/photos/consult-man.jpg';
-import chModel from '../assets/photos/model-explain.jpg';
+import chConsult from '../assets/photos/xray-room.jpg';
+import chModel from '../assets/photos/desk-wide.jpg';
 import chDesk from '../assets/photos/desk-consult.jpg';
 import doctorWarm from '../assets/photos/doctor-warm.jpg';
 
@@ -48,7 +48,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
   <WorryBand items={worries} />
 
 
-  <ChapterHead id="denture" photo={chModel} position="50% 50%" index={1} title="틀니 클리닉" items={chapters} />
+  <ChapterHead id="denture" photo={chModel} position="50% 45%" index={1} title="틀니 클리닉" items={chapters} />
 
   <Section title="잇몸에 맞춰, 편안하게 씹으실 수 있도록">
     <ul class="grid gap-4 md:grid-cols-3">
@@ -68,7 +68,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
     <p class="mt-2 t-body text-foreground-muted">장착 후 조정: 보험 틀니는 3개월 안에 6회까지, 비급여 틀니는 편하게 쓰실 수 있을 때까지 맞춰 드립니다.</p>
   </Section>
 
-  <ChapterHead id="insurance" photo={chConsult} position="50% 45%" index={2} title="보험 임플란트·틀니" lead="만 65세 이상 국가 건강보험 적용 (2026년 기준)" items={chapters} />
+  <ChapterHead id="insurance" photo={chConsult} position="50% 35%" index={2} title="보험 임플란트·틀니" lead="만 65세 이상 국가 건강보험 적용 (2026년 기준)" items={chapters} />
 
   <Section tone="surface" title="만 65세 이상이시라면 건강보험이 적용됩니다">
     <div class="grid gap-4 md:grid-cols-2">
