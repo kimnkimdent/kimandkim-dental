@@ -16,6 +16,7 @@
   --primary: hsl(213, 72%, 27%); /* 진한 남색 #133e76 */
   --primary-foreground: hsl(0, 0%, 100%);
   --primary-bright: hsl(196, 82%, 58%); /* 하늘색 #3db8e8 (라벨 강조·따옴표·선·장식) */
+  --logo-sky: #49d7ef; /* 로고 웃는 입의 하늘색(큰 글자 장식에만) */
   --primary-surface: hsl(199, 82%, 95%); /* 아주 연한 하늘색 바탕 */
   --ring: hsl(from var(--primary) h 80% 55%);
 
@@ -50,6 +51,7 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-bright: var(--primary-bright);
+  --color-logo-sky: var(--logo-sky);
   --color-primary-surface: var(--primary-surface);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
