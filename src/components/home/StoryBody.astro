@@ -115,6 +115,8 @@ const { home = false } = Astro.props;
 
                 {/* 표지(곡선 위 동그라미) */}
                 <div class="relative z-10 row-span-2 md:col-start-1 md:row-span-1 md:row-start-1 md:flex md:justify-center">
+                  {/* 치아 그림 장면(처음엔 혼자·가족과 함께·3대)은 동그라미 없이 줄만 이어진다 */}
+                  {!c.teeth && (
                   <span class:list={[
                     'story-dot flex items-center justify-center rounded-full border-4 border-background font-bold shadow-md',
                     c.year ? 'size-14 bg-primary text-[1.3rem] text-primary-foreground md:size-24 md:text-[2rem]' : 'size-14 bg-primary-surface text-[1.1rem] text-primary md:size-24 md:text-[1.4rem]',
@@ -123,6 +125,7 @@ const { home = false } = Astro.props;
                       <span role="img" aria-label={c.mark} class="flex items-center justify-center"><FamilyTeeth count={c.teeth} class="size-[3.4rem] md:size-[6rem]" /></span>
                     ) : <span class="px-1 text-center leading-tight">{c.mark}</span>}
                   </span>
+                  )}
                 </div>
 
                 {/* 사진 */}
