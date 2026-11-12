@@ -189,24 +189,13 @@ const chapters = [
         </div>
       </div>
 
-      <div class="mt-16 grid gap-10 border-t border-foreground/80 pt-10 md:mt-20 md:grid-cols-2 md:gap-16">
-        <div>
-          <h3 class="t-body font-bold tracking-wide text-primary">약력</h3>
-          <ul class="mt-4 divide-y divide-border">
-            {career.map((c) => <li class="py-3 t-mid">{c}</li>)}
-          </ul>
-        </div>
-        <div>
-          <h3 class="t-body font-bold tracking-wide text-primary">학회</h3>
-          <ul class="mt-4 divide-y divide-border">
-            {memberOf.map((m) => (
-              <li class="flex items-baseline justify-between gap-4 py-3 t-mid">
-                <span>{m.alt} 정회원</span>
-                <span class="shrink-0 t-body font-semibold tracking-wide text-foreground-muted">{m.name.split('(')[1]?.replace(')', '')}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <!-- 약력 · 학회: 한 목록으로, 줄 사이 밑줄 없이 -->
+      <div class="mt-16 border-t border-foreground/80 pt-10 md:mt-20">
+        <h3 class="t-body font-bold tracking-wide text-primary">약력 · 학회</h3>
+        <ul class="mt-4 space-y-2.5 md:columns-2 md:gap-16">
+          {career.map((c) => <li class="t-mid break-inside-avoid">{c}</li>)}
+          {memberOf.map((m) => <li class="t-mid break-inside-avoid">{m.alt} 정회원 <span class="t-body font-semibold text-foreground-muted">{m.name.split('(')[1]?.replace(')', '')}</span></li>)}
+        </ul>
       </div>
     </Container>
   </section>
