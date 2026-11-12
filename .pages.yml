@@ -46,12 +46,12 @@ content:
             fields:
               - name: q
                 label: 질문
-                description: 환자분이 실제로 묻는 말투로. 지역 이름(파주·운정·야당동)은 질문이나 답 중 한 곳에만.
+                description: 환자분이 실제로 묻는 말투로. 지역 이름(파주·운정·야당동)은 질문에 넣지 마세요.
                 type: text
                 required: true
               - name: a
                 label: 답
-                description: 결론부터 짧게. '최고·유일·100%·무통·완치 보장' 같은 표현, 치료 후기·전후 사진은 의료법상 쓸 수 없어요.
+                description: 결론부터 짧게. 지역 이름은 답 안에 한 번만(예: '운정 김앤김치과에서는…'). '최고·유일·100%·무통·완치 보장' 같은 표현, 치료 후기·전후 사진은 의료법상 쓸 수 없어요.
                 type: text
                 required: true
               - name: id
