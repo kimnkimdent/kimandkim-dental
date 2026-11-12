@@ -111,7 +111,7 @@ const chapters = [
         {
           chapters.map((c, i) => {
             const right = i % 2 === 1; // 사진이 오른쪽에 오는 장면
-            const bend = right ? 30 : 70; // 곡선이 휘는 방향(글 쪽으로)
+            const bend = 50; // 곧은 세로선(PC·휴대폰 모두)
             const last = i === chapters.length - 1;
             return (
               <li class="story-row relative grid grid-cols-[3.6rem_1fr] gap-x-5 pb-16 md:grid-cols-[1fr_12rem_1fr] md:gap-x-0 md:pb-28">
