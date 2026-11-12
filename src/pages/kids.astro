@@ -12,7 +12,8 @@ import Mark from '../components/Mark.astro';
 import { Image } from 'astro:assets';
 import tKids from '../assets/treat/treat-06.jpg';
 import kidFriendly from '../assets/photos/logo-wall.jpg';
-import chTreat from '../assets/photos/white-treat.jpg';
+import chTreat from '../assets/photos/band-kid.jpg';
+import chKid2 from '../assets/photos/kid-friendly.jpg';
 import kidCheckup from '../assets/photos/kid-checkup.jpg';
 
 const checkups = [
@@ -45,7 +46,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
     <Note align="left" quote={'제 아이라면, 오늘 치료를|다 끝내는 것보다\n다음에 또 와도 괜찮다고|느끼게 하는 게 먼저일 겁니다.\n그래서 무엇을 할지 먼저 말하고,|기구를 보여 주고,|아이가 준비될 때까지 기다립니다.\n처음 만난 치과의 기억이|평생의 치아 습관이 되니까요.'} />
   </Section>
 
-  <ChapterHead id="first" photo={chTreat} position="50% 25%" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
+  <ChapterHead id="first" photo={chTreat} position="50% 30%" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
 
   <Section tone="surface" title="말하고, 보여주고, 기다립니다">
     <ol class="grid gap-3 md:grid-cols-3">
@@ -58,7 +59,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
     </ol>
   </Section>
 
-  <ChapterHead id="checkup" photo={kidCheckup} index={2} title="영유아 구강검진" lead="무료 국가 검진과 충치 예방" items={chapters} />
+  <ChapterHead id="checkup" photo={chKid2} position="50% 25%" index={2} title="영유아 구강검진" lead="무료 국가 검진과 충치 예방" items={chapters} />
 
   <Section title="국가 영유아 구강검진 (무료)">
     <ol class="grid gap-3 md:grid-cols-3">
