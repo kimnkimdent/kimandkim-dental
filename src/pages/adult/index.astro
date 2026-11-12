@@ -3,7 +3,6 @@
 // 각 묶음은 역지사지 진료 노트로 시작한다. 제목 아래 탭과 상단 메뉴는 src/site.ts의 청장년 클리닉 children을 쓴다.
 import PhotoBand from '../../components/PhotoBand.astro';
 import bandSurgery from '../../assets/photos/band-surgery.jpg';
-import bandScanner from '../../assets/photos/band-scanner.jpg';
 import bandTreat from '../../assets/photos/band-treat.jpg';
 import bandRoom from '../../assets/photos/surgery-room.jpg';
 import ctScan from '../../assets/photos/ct-scan.jpg';
@@ -61,6 +60,7 @@ const esthetic = [
   </PageHero>
 
   <!-- ───────── 임플란트 ───────── -->
+
   <Section id="implant" eyebrow="임플란트" title="꼭 필요할 때, 꼭 필요한 만큼" lead="자연치아를 먼저 살펴보고, 임플란트가 꼭 필요한 경우에만 권해드립니다.">
     <Note quote={'일하고, 아이 키우고,|부모님 챙기느라\n내 치아는 늘 뒷전이셨을 겁니다.\n제가 환자라면|‘정말 이 치아를 빼야 하나’부터\n묻고 싶을 것 같아,|살릴 방법을 먼저 말씀드립니다.\n임플란트가 꼭 필요하다면|기간과 총비용까지\n미리 설명드리고 시작합니다.'} />
   </Section>
@@ -81,8 +81,6 @@ const esthetic = [
     </div>
   </Section>
 
-  <PhotoBand src={bandSurgery} alt="직원과 함께 진료하는 대표원장" eyebrow="임플란트" text={'꼭 필요할 때,\n꼭 필요한 만큼'} position="50% 35%" />
-
   <Section eyebrow="임플란트 종류" title="잇몸뼈 상태에 맞는 방법을 찾습니다">
     <ul class="grid gap-4 sm:grid-cols-2">
       {
@@ -96,8 +94,6 @@ const esthetic = [
       }
     </ul>
   </Section>
-
-  <PhotoBand src={bandScanner} alt="구강 스캐너로 진료하는 대표원장" eyebrow="정밀 검사 · 상담" text={'치료 계획, 기간, 총비용을\n치료 전에 설명드립니다.'} position="50% 40%" />
 
   <Section tone="surface" eyebrow="임플란트 치료 과정" title="검사부터 정기 검진까지">
     <Process
@@ -114,12 +110,13 @@ const esthetic = [
     <FaqLinks group="implant" />
   </Section>
 
+  <PhotoBand src={bandSurgery} alt="직원과 함께 진료하는 대표원장" eyebrow="임플란트" text={'꼭 필요할 때,\n꼭 필요한 만큼'} position="50% 35%" />
+
   <!-- ───────── 자연치아·심미보철 ───────── -->
+
   <Section id="natural" eyebrow="자연치아·심미보철" title="내 치아를 오래, 자연스럽게" lead="덜 깎고, 나답게 되살립니다.">
     <Note quote={'제 치아라면 한 번이라도|덜 깎고 싶을 겁니다.\n그래서 충치는 범위를 확인해|꼭 필요한 만큼만 다듬고,|신경 치료가 필요해도|뽑기 전에 살릴 방법부터 찾습니다.\n오래 쓰셔야 할 내 치아이니까요.'} />
   </Section>
-
-  <PhotoBand src={bandTreat} alt="직원과 함께 진료하는 대표원장" eyebrow="자연치아·심미보철" text={'덜 깎고,\n나답게 되살립니다.'} position="50% 35%" />
 
   <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 치료">
     <ol class="grid gap-3 md:grid-cols-3">
@@ -159,16 +156,17 @@ const esthetic = [
     <FaqLinks group="natural" />
   </Section>
 
+  <PhotoBand src={bandTreat} alt="직원과 함께 진료하는 대표원장" eyebrow="자연치아·심미보철" text={'덜 깎고,\n나답게 되살립니다.'} position="50% 35%" />
+
   <!-- ───────── 사랑니·구강외과 ───────── -->
-  <Section id="wisdom" tone="surface" eyebrow="사랑니·구강외과" title="정확히 확인하고, 부담은 줄인 사랑니 발치" lead="미루지 말고, 편안하게.">
+
+  <Section id="wisdom" eyebrow="사랑니·구강외과" title="정확히 확인하고, 부담은 줄인 사랑니 발치" lead="미루지 말고, 편안하게.">
     <Note quote={'몇 년씩 미루는 마음, 충분히 압니다.\n얼마나 걸리고 얼마나 부을지,|신경과는 얼마나 가까운지|CT를 함께 보며 먼저 말씀드립니다.\n무엇이 기다리는지 알고 나면|막연한 걱정이 조금은 덜어지니까요.'} />
   </Section>
 
-  <Section eyebrow="사랑니, 왜 빼야 할까요?" title="닦기 어려운 자리라 문제가 생기기 쉽습니다">
+  <Section tone="surface" eyebrow="사랑니, 왜 빼야 할까요?" title="닦기 어려운 자리라 문제가 생기기 쉽습니다">
     <p class="max-w-prose t-mid leading-relaxed text-foreground-muted">칫솔이 닿기 어려워 충치와 잇몸 염증이 잘 생기고, 앞 어금니까지 상하게 할 수 있습니다.<br /> 나이가 들수록 회복도 더뎌집니다.</p>
   </Section>
-
-  <PhotoBand src={bandRoom} alt="김앤김치과 수술실" eyebrow="사랑니·구강외과" text={'얼마나 걸리고 얼마나 부을지\n먼저 말씀드립니다.'} />
 
   <Section eyebrow="매복 사랑니 발치" title="위치와 신경부터 확인합니다">
     <div class="grid items-center gap-10 md:grid-cols-2">
@@ -193,4 +191,6 @@ const esthetic = [
     <h3 class="mt-14 mb-5 t-head font-bold">사랑니, 이것이 궁금해요</h3>
     <FaqLinks group="wisdom" />
   </Section>
+
+  <PhotoBand src={bandRoom} alt="김앤김치과 수술실" eyebrow="사랑니·구강외과" text={'얼마나 걸리고 얼마나 부을지\n먼저 말씀드립니다.'} />
 </Layout>
