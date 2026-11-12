@@ -8,18 +8,6 @@ import Mark from '../components/Mark.astro';
 import ServiceIcon from '../components/ServiceIcon.astro';
 import { SITE, url, tel, br } from '../site';
 import { allQna, qna } from '../qna';
-import { Image } from 'astro:assets';
-import phSilver from '../assets/photos/doctor-warm.jpg';
-import phAdult from '../assets/photos/band-surgery.jpg';
-import phKids from '../assets/photos/kid-checkup.jpg';
-
-// 진료 안내: 클리닉 3개를 번호 붙은 큰 블록으로(위: 색 띠 제목 / 아래: 글 + 사진 카드). 서브 타이틀은 src/site.ts 메뉴에서 가져온다.
-const sub = (h: string) => SITE.nav.find((n) => n.href === h)!.children!;
-const clinics = [
-  { href: '/silver/', clinic: 'silver', en: 'Silver Clinic', title: '실버 클리닉', quote: '“내 부모님이라면”', lead: '드시는 약부터 먼저 살피고, 틀니 하나도 편안해지실 때까지 맞춰 드립니다.', head: '부모님의 식사 시간을 편안하게', photo: phSilver, alt: '어르신 환자를 따뜻하게 맞이하는 대표원장', pos: '50% 30%' },
-  { href: '/adult/', clinic: 'adult', en: 'Adult Clinic', title: '청장년 클리닉', quote: '“내가 이 비용을 낸다면”', lead: '살릴 방법부터 먼저 말씀드리고, 꼭 필요한 치료만 기간과 비용까지 미리 안내합니다.', head: '꼭 필요한 치료부터 정직하게', photo: phAdult, alt: '직원과 함께 진료하는 대표원장', pos: '50% 35%' },
-  { href: '/kids/', clinic: 'kids', en: 'Kids Clinic', title: '어린이·청소년 클리닉', quote: '“내 아이라면”', lead: '무엇을 할지 먼저 말하고, 보여 주고, 아이가 준비될 때까지 기다립니다.', head: '다음에 또 와도 괜찮은 치과', photo: phKids, alt: '아이의 치아를 검진하는 모습', pos: '50% 40%' },
-] as const;
 
 const cards = [
   { href: '/about/story/', icon: 'about' as const, title: '병원소개', quote: '처음엔 혼자,\n다음엔 가족과 함께', desc: '김앤김 이야기\n대표원장 소개' },
@@ -29,8 +17,6 @@ const cards = [
   { href: '/kids/', clinic: 'kids' as const, icon: 'kids' as const, title: '어린이·청소년 클리닉', quote: '“내 아이라면”', desc: '영유아 검진 · 충치 예방\n청소년 관리' },
   { href: '/qna/', icon: 'qna' as const, title: '궁금해요 Q&A', quote: '환자분들이 물어보신 질문에 답합니다', desc: '진료 과목별\n자주 묻는 질문과 답' },
 ];
-
-const etc = cards.filter((c) => !('clinic' in c));
 
 // 최근 질문 3개: 가장 나중에 추가된 질문부터
 const recent = allQna.slice(-3).reverse();
@@ -79,48 +65,18 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
   <!-- 병원 요약 문장은 화면에 보이지 않고 검색·AI용 정보(src/site.ts의 summary → 구조화데이터·llms.txt)에만 들어간다 -->
 
   <Section eyebrow="진료 안내" title="우리 가족 누구나, 필요한 진료를 한곳에서">
-    <div class="space-y-12 md:space-y-16">
+    <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-6 lg:gap-3">
       {
-        clinics.map((c, i) => (
-          <article data-clinic={c.clinic} class="overflow-hidden rounded-3xl shadow-sm">
-            <!-- 색 띠: 번호 · 클리닉 이름 · 한 줄 소개 -->
-            <header class="bg-primary px-6 py-8 text-white md:px-12 md:py-10">
-              <p class="t-body font-semibold tracking-[0.2em] text-primary-bright">KIM&amp;KIM CLINIC {String(i + 1).padStart(2, '0')}</p>
-              <h3 class="mt-2 text-[2.6rem] font-bold md:text-[3.6rem]"><a href={url(c.href)} class="hover:underline">{c.title}</a> <span class="ml-1 font-serif text-[1.8rem] font-semibold opacity-80 md:text-[2.2rem]">{c.quote}</span></h3>
-              <p class="mt-3 t-mid leading-relaxed opacity-85">{c.lead}</p>
-            </header>
-            <!-- 카드: 왼쪽 글(서브 타이틀 체크 목록) · 오른쪽 사진 -->
-            <div class:list={['grid bg-background md:grid-cols-2', i % 2 && 'md:[&>figure]:order-first']}>
-              <div class="flex flex-col justify-center p-6 md:p-12">
-                <p class="t-body font-semibold text-primary italic">{c.en}</p>
-                <p class="mt-1 t-headline font-bold">{c.head}</p>
-                <ul class="mt-6 space-y-1">
-                  {sub(c.href).map((x) => (
-                    <li><a href={url(x.href)} class="group flex min-h-11 items-center gap-3 border-b border-border py-2 t-mid hover:text-primary"><span aria-hidden="true" class="font-bold text-primary">✓</span>{x.label}<span aria-hidden="true" class="ml-auto text-foreground-subtle transition-transform group-hover:translate-x-1 group-hover:text-primary">→</span></a></li>
-                  ))}
-                </ul>
-                <a href={url(c.href)} class="mt-8 inline-flex min-h-11 items-center self-start rounded-full bg-primary px-6 t-body font-semibold text-primary-foreground hover:opacity-90">{c.title} 자세히 보기 →</a>
-              </div>
-              <figure class="relative min-h-[24rem] md:min-h-[42rem]">
-                <Image src={c.photo} alt={c.alt} widths={[640, 1000]} sizes="(min-width: 768px) 50vw, 100vw" class="absolute inset-0 h-full w-full object-cover" style={`object-position:${c.pos}`} />
-              </figure>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-
-    <!-- 그 밖의 안내: 병원소개 · 진료철학 · 궁금해요 Q&A -->
-    <ul class="mt-12 grid gap-3 md:mt-16 md:grid-cols-3 md:gap-4">
-      {
-        etc.map((c) => (
-          <li class="group relative flex items-center gap-4 rounded-2xl border border-border bg-background p-5 transition-shadow hover:shadow-lg md:p-6">
-            <ServiceIcon name={c.icon} class="size-12 shrink-0" />
-            <div>
-              <h3 class="t-head font-bold"><a href={url(c.href)} class="after:absolute after:inset-0 after:content-['']">{c.title}</a></h3>
-              <p class="mt-1 t-body text-foreground-muted">{c.desc.split(/\s*\n\s*/).join(' · ')}</p>
-            </div>
-            <span aria-hidden="true" class="ml-auto text-[2rem] text-foreground-subtle transition-transform group-hover:translate-x-1 group-hover:text-primary">→</span>
+        cards.map((c) => (
+          <li class="group relative flex flex-col rounded-2xl border border-border bg-background p-4 transition-shadow hover:shadow-lg md:rounded-3xl md:p-6 lg:p-5">
+            <ServiceIcon name={c.icon} class="mb-3 size-10 transition-transform group-hover:-rotate-6 md:size-12" />
+            <h3 class="text-[1.6rem] leading-snug font-bold md:text-[2rem] lg:text-[1.7rem]">
+              <a href={url(c.href)} class="after:absolute after:inset-0 after:content-['']">{c.title}</a>
+            </h3>
+            <p class:list={['mt-1.5 text-[1.3rem] leading-snug whitespace-pre-line text-primary md:mt-2 md:text-[1.5rem] lg:text-[1.35rem] mb-3', c.quote.startsWith('“') && '-indent-[0.45em] pl-[0.45em]']}>{c.quote}</p>
+            <!-- 각 페이지 내용 안내(원고의 카드 하단 줄) -->
+            <p class="mt-auto border-t border-border pt-3 text-[1.2rem] leading-snug whitespace-pre-line text-foreground-muted md:pt-4 md:text-[1.35rem] lg:text-[1.25rem]">{c.desc}</p>
+            <span aria-hidden="true" class="absolute top-4 right-4 text-[1.6rem] text-foreground-subtle transition-transform group-hover:translate-x-1 group-hover:text-primary md:top-6 md:right-6 md:text-[2rem] lg:top-5 lg:right-5 lg:text-[1.6rem]">→</span>
           </li>
         ))
       }
