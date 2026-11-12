@@ -40,12 +40,12 @@ export const SITE = {
       ],
     },
     {
-      href: '/adult/implant/',
+      href: '/adult/',
       label: '청장년 클리닉',
       children: [
-        { href: '/adult/implant/', label: '임플란트' },
-        { href: '/adult/natural/', label: '자연치아·심미보철' },
-        { href: '/adult/wisdom/', label: '사랑니·구강외과' },
+        { href: '/adult/#implant', label: '임플란트' },
+        { href: '/adult/#natural', label: '자연치아·심미보철' },
+        { href: '/adult/#wisdom', label: '사랑니·구강외과' },
       ],
     },
     {
