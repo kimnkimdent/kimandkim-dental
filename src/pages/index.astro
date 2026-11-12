@@ -28,7 +28,7 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
 <Layout keywords={["파주 치과", "운정 치과", "야당동 치과", "운정신도시 치과"]}>
   <!-- 첫 화면: 진료 장면 영상 배경(소리 없음·자동 반복). 영상 파일: public/video/ (0.7배속+중간 프레임 보간 25초, PC는 화면 높이에 맞춰 꽉 채움(위아래 조금 잘릴 수 있음), 끝과 처음을 겹쳐 끊김 없이 반복, PC 약 5MB, 휴대폰 약 1.5MB)
        "동작 줄이기" 설정이면 영상 대신 첫 장면 사진만 보인다. -->
-  <section style={`--poster: url(${url("/video/hero-poster.jpg")})`} class="hero-video relative isolate flex min-h-[calc(100svh-7.6rem)] items-center overflow-hidden bg-secondary lg:h-[calc(100svh-10.4rem)] lg:min-h-0">
+  <section style={`--poster: url(${url("/video/hero-poster.jpg")})`} class="hero-video relative isolate flex min-h-[calc(100svh-7.6rem)] items-center overflow-hidden bg-secondary lg:min-h-[calc(100svh-10.4rem)]">
     <video
       class="absolute inset-0 -z-20 h-full w-full object-cover"
       autoplay
@@ -44,7 +44,7 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
     </video>
     <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,hsl(216_62%_11%/0.65)_0%,hsl(216_62%_11%/0.45)_60%,hsl(216_62%_11%/0.6)_100%)]"></div>
 
-    <Container class="pt-16 pb-[28rem] text-white md:pb-[30rem] lg:pb-[14rem]">
+    <Container class="py-16 text-white">
       <div class="mx-auto flex flex-col items-center text-center">
         <Mark tone="white" blink class="mb-6 h-[7.2rem] w-auto md:h-[10rem]" />
         <p class="t-mid font-semibold text-primary-bright">{SITE.slogan}</p>
@@ -54,22 +54,6 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
         </p>
       </div>
     </Container>
-    <!-- 진료 안내: 영상 맨 아래에 투명하게 겹쳐, 픽토그램(흰색) + 이름만 -->
-    <nav aria-labelledby="guide-title" style="--primary:#fff" class="absolute inset-x-0 bottom-0 border-t border-white/20 bg-white/5 text-white backdrop-blur-[2px]">
-      <h2 id="guide-title" class="sr-only">진료 안내</h2>
-      <ul class="mx-auto grid max-w-site grid-cols-3 px-gutter pt-2 pb-[calc(7.2rem+env(safe-area-inset-bottom))] md:pt-4 lg:grid-cols-6 lg:py-4">
-        {
-          cards.map((c) => (
-            <li>
-              <a href={url(c.href)} class="group flex flex-col items-center gap-1.5 rounded-2xl px-1 py-2.5 text-center transition-colors hover:bg-white/10 md:gap-2.5 md:py-3">
-                <ServiceIcon outline name={c.icon} class="size-9 drop-shadow transition-transform group-hover:-translate-y-1 md:size-12" />
-                <span class="text-[1.25rem] leading-snug font-semibold break-keep drop-shadow md:text-[1.6rem]">{c.title}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
   </section>
 
   <!-- 병원 요약 문장은 화면에 보이지 않고 검색·AI용 정보(src/site.ts의 summary → 구조화데이터·llms.txt)에만 들어간다 -->
