@@ -9,7 +9,6 @@ import Note from '../components/Note.astro';
 import Process from '../components/Process.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
-import Mark from '../components/Mark.astro';
 import doctorWarm from '../assets/photos/doctor-warm.jpg';
 
 const worries = ['빠진 이가 많아 식사가 불편해요', '쓰던 틀니가 헐겁거나 잇몸이 아파요', '당뇨·고혈압 약을 먹고 있어 치료가 걱정돼요', '잇몸이 내려가고, 이가 시리고, 입이 자주 말라요'];
@@ -37,12 +36,12 @@ const dentures = [
   </PageHero>
 
   <Section tone="surface" title="이런 고민 있으신가요?" align="center">
-    <ul class="mx-auto grid max-w-[88rem] gap-3 sm:grid-cols-2">
+    <!-- 부모님이 직접 하시는 말처럼, 말풍선이 좌우로 번갈아 놓인다 -->
+    <ul class="mx-auto flex max-w-[72rem] flex-col gap-4 md:gap-5">
       {
-        worries.map((w) => (
-          <li class="flex items-center gap-3 rounded-2xl bg-background px-6 py-5 t-mid font-semibold shadow-sm">
-            <Mark class="h-9 w-auto" />
-            {w}
+        worries.map((w, i) => (
+          <li class:list={['worry relative max-w-[90%] rounded-[2.4rem] px-7 py-5 font-serif t-mid font-bold md:max-w-[70%] md:px-9 md:py-6 md:text-[2rem]', i % 2 ? 'self-end rounded-br-md bg-primary text-primary-foreground' : 'self-start rounded-bl-md bg-background text-foreground shadow-sm']}>
+            “{w}”
           </li>
         ))
       }
