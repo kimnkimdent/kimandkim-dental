@@ -86,14 +86,14 @@ const chapters = [
       <!-- 2012에서 지금(올해)까지 숫자가 돌아 올라가고, 그 뒤로 다음 해들이 흐릿하게 이어지며 '계속'을 보여 준다 -->
       <div class="grid items-center gap-y-3 text-center md:grid-cols-[1fr_auto_1fr] md:gap-x-8">
         <p class="t-mid font-semibold text-foreground-muted md:text-right">
-          <span class="font-serif text-[2.4rem] font-bold text-primary-bright md:text-[3.2rem]">{SITE.since}</span>년부터
+          <span class="text-[2.4rem] font-extrabold tabular-nums tracking-tight text-primary-bright md:text-[3.2rem]">{SITE.since}</span>년부터
         </p>
         <p class="relative">
           <span class="sr-only">{NOW}</span>
-          <span aria-hidden="true" class="year-roll font-serif text-[8.8rem] leading-none font-bold text-primary md:text-[15rem]" style={`--from: ${SITE.since}; --to: ${NOW}`}></span>
+          <span aria-hidden="true" class="year-roll text-[8.8rem] leading-none font-extrabold tabular-nums tracking-tight text-primary md:text-[15rem]" style={`--from: ${SITE.since}; --to: ${NOW}`}></span>
         </p>
         <div aria-hidden="true" class="future relative h-[4.8rem] overflow-hidden md:h-[6rem]">
-          <div class="future-track flex h-full w-max items-center gap-6 font-serif text-[3.2rem] font-bold text-primary md:gap-8 md:text-[4rem]">
+          <div class="future-track flex h-full w-max items-center gap-6 text-[3.2rem] font-extrabold tabular-nums tracking-tight text-primary md:gap-8 md:text-[4rem]">
             {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((k) => <span style={`opacity: ${Math.max(0.12, 0.5 - ((k - 1) % 6) * 0.08)}`}>{NOW + k}</span>)}
           </div>
         </div>
@@ -143,9 +143,9 @@ const chapters = [
                 {/* 글 */}
                 <div class:list={['story-text relative z-10 col-start-2 mt-6', 'from-right md:col-start-3 md:row-start-1 md:mt-0 md:self-center']}>
                   {c.now ? (
-                    <p class="font-serif text-[4.8rem] leading-none font-bold tracking-[0.08em] text-primary md:text-[7.6rem]">NOW</p>
+                    <p class="text-[4.8rem] leading-none font-extrabold tabular-nums tracking-tight text-primary md:text-[7.6rem]">NOW</p>
                   ) : c.year ? (
-                    <p class:list={['font-serif text-[4rem] leading-none font-bold md:text-[6.4rem]', c.now ? 'text-primary' : 'text-primary-bright']}>
+                    <p class:list={['text-[4rem] leading-none font-extrabold tabular-nums tracking-tight md:text-[6.4rem]', c.now ? 'text-primary' : 'text-primary-bright']}>
                       {c.year}
                     </p>
                   ) : (
