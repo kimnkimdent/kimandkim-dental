@@ -1,6 +1,6 @@
 ---
 import { br } from '../site';
-import PhotoBand from '../components/PhotoBand.astro';
+import { Image } from 'astro:assets';
 import bandRoom from '../assets/photos/treatment-room.jpg';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -36,7 +36,11 @@ const dentures = [
     </div>
   </PageHero>
 
-  <Section tone="surface" title="이런 고민 있으신가요?" align="center">
+  <!-- 배경: 진료실 사진을 어둡게 눌러 깔고, 그 위로 말풍선이 흐른다 -->
+  <div class="relative isolate overflow-hidden">
+    <Image src={bandRoom} alt="" aria-hidden="true" widths={[800, 1600]} sizes="100vw" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-secondary/75"></div>
+  <Section class="!bg-transparent text-white" title="이런 고민 있으신가요?" align="center">
     <!-- 부모님이 직접 하시는 말처럼: 말풍선이 높낮이를 달리해 두 줄로 천천히 흘러간다(같은 목록을 두 번 이어 붙여 끊김 없이 반복) -->
     <ul class="sr-only">{worries.map((w) => <li>{w}</li>)}</ul>
     <div aria-hidden="true" class="worry-flow -mx-4 space-y-4 overflow-hidden md:-mx-8">
@@ -44,7 +48,7 @@ const dentures = [
         [worries.slice(0, 4), worries.slice(4)].map((row, r) => (
           <div class:list={['worry-track flex w-max py-3', r ? 'worry-rev' : '']}>
             {[...row, ...row].map((w, i) => (
-              <p class:list={['worry mr-5 shrink-0 rounded-[2.4rem] px-7 py-5 font-serif t-mid font-bold whitespace-nowrap md:px-9 md:py-6 md:text-[2rem]', (i + r) % 2 ? 'rounded-br-md bg-primary text-primary-foreground' : 'rounded-bl-md bg-background text-foreground shadow-sm']} style={`margin-top:${[0, 2.4, 0.8, 3.2][(i + r * 2) % 4]}rem`}>
+              <p class:list={['worry mr-5 shrink-0 rounded-[2.4rem] px-7 py-5 font-serif t-mid font-bold whitespace-nowrap md:px-9 md:py-6 md:text-[2rem]', (i + r) % 2 ? 'rounded-br-md bg-primary-bright text-secondary' : 'rounded-bl-md bg-background text-foreground shadow-sm']} style={`margin-top:${[0, 2.4, 0.8, 3.2][(i + r * 2) % 4]}rem`}>
                 “{w}”
               </p>
             ))}
@@ -53,8 +57,8 @@ const dentures = [
       }
     </div>
   </Section>
+  </div>
 
-  <PhotoBand src={bandRoom} alt="김앤김치과 진료실" eyebrow="만성질환 안전 진료" text={'드시는 약부터,\n먼저 살핍니다.'} />
 
   <Section eyebrow="틀니 클리닉" title="잇몸에 맞춰, 편안하게 씹으실 수 있도록">
     <ul class="grid gap-4 md:grid-cols-3">
