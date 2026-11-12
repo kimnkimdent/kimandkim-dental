@@ -7,6 +7,17 @@ import Button from '../components/Button.astro';
 import { SITE, tel, br } from '../site';
 import { qna, allQna, qnaUpdated, qnaAuthor } from '../qna';
 import { faqSchema } from '../seo';
+
+// 진료 안내 서브 타이틀 → 그 주제를 다루는 질문(qna.ts의 id)
+const target: Record<string, string> = {
+  '/silver/#denture': 'silver-5', '/silver/#insurance': 'silver-1', '/silver/#safe': 'silver-3', '/silver/#care': 'natural-4',
+  '/adult/#implant': 'implant', '/adult/#natural': 'natural', '/adult/#wisdom': 'wisdom',
+  '/kids/#first': 'kids-1', '/kids/#checkup': 'kids-2', '/kids/#care': 'kids-3',
+};
+const rows = [['/silver/', '#silver'], ['/adult/', '#implant'], ['/kids/', '#kids']].map(([page, href]) => {
+  const n = SITE.nav.find((x) => x.href === page)!;
+  return { label: n.label, href, items: n.children!.map((c) => ({ label: c.label, href: '#' + target[c.href] })) };
+});
 ---
 
 <Layout
@@ -22,10 +33,16 @@ import { faqSchema } from '../seo';
     title="환자분들이 물어보신 질문에 답합니다"
     lead="파주 운정 김앤김치과 진료실에서 가장 많이 받은 질문을 모았습니다. 내가 환자라면 궁금했을 질문부터 정직하게 답하겠습니다."
   >
-    <nav aria-label="질문 분류" class="mt-8 flex flex-wrap gap-2">
+    <!-- 분류 탭: 전체 + 진료 안내 3개 클리닉별 서브 타이틀(src/site.ts 메뉴와 같은 이름). 누르면 그 주제의 첫 질문으로 이동 -->
+    <nav aria-label="질문 분류" class="mt-8 space-y-4">
       <a href="#all" class="inline-flex min-h-11 items-center rounded-full border border-primary bg-primary px-5 t-body font-semibold text-primary-foreground">전체 {allQna.length}</a>
-      {qna.map((g) => (
-        <a href={`#${g.id}`} class="inline-flex min-h-11 items-center rounded-full border border-border-accent bg-background px-5 t-body font-semibold text-foreground-muted hover:border-primary hover:text-primary">{g.tab}</a>
+      {rows.map((r) => (
+        <div class="flex flex-wrap items-center gap-2">
+          <a href={r.href} class="mr-2 inline-flex min-h-11 w-full items-center t-body font-bold text-secondary hover:text-primary sm:w-40">{r.label}</a>
+          {r.items.map((c) => (
+            <a href={c.href} class="inline-flex min-h-11 items-center rounded-full border border-border-accent bg-background px-5 t-body font-semibold text-foreground-muted hover:border-primary hover:text-primary">{c.label}</a>
+          ))}
+        </div>
       ))}
     </nav>
   </PageHero>
