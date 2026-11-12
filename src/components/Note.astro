@@ -9,7 +9,7 @@ const { quote, align = 'center' } = Astro.props;
 const lines = quote.split('\n').map((l) => l.split('|'));
 ---
 
-<figure class:list={['flex max-w-[100rem] flex-col items-center gap-6 rounded-3xl border border-border bg-background p-8 text-center shadow-sm md:flex-row md:gap-10 md:p-12 md:text-left', align === 'center' && 'mx-auto']}>
+<figure class:list={['flex max-w-[112rem] flex-col items-center gap-6 rounded-3xl border border-border bg-background p-8 text-center shadow-sm md:flex-row md:gap-10 md:p-12 md:text-left', align === 'center' && 'mx-auto']}>
   <Image src={doctor} alt="대표원장 김정민" width={240} height={240} class="size-24 shrink-0 rounded-full bg-primary-surface object-cover object-top md:size-32" />
   <div>
     <p class="t-body font-semibold text-primary">역지사지 진료 노트</p>
