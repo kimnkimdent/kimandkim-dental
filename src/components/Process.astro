@@ -1,17 +1,21 @@
 ---
-// 번호가 붙은 진료 과정(가로 흐름, 휴대폰은 2열). items: { title, text? }
-interface Props { items: { title: string; text?: string }[] }
+// 번호가 붙은 진료 과정(가로 흐름, 휴대폰은 2열). items: { title, text?, img? } — img가 있으면 카드 위에 그림이 들어간다.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { items: { title: string; text?: string; img?: ImageMetadata }[] }
 const { items } = Astro.props;
 const cols = { 4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5', 6: 'lg:grid-cols-6' }[items.length] ?? 'lg:grid-cols-4';
+const withImg = items.some((it) => it.img);
 ---
 
-<ol class:list={['grid grid-cols-2 gap-3 md:gap-4', cols]}>
+<ol class:list={['grid gap-3 md:gap-4', withImg ? 'sm:grid-cols-2' : 'grid-cols-2', cols]}>
   {
     items.map((it, i) => (
       <li class="rounded-2xl border border-border bg-background p-5 md:p-6">
+        {it.img && <Image src={it.img} alt={`${it.title} 과정 그림`} widths={[360, 480]} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw" class="mb-5 aspect-[8/9] h-auto w-full rounded-xl bg-white object-contain" />}
         <span class="flex size-9 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span>
         <p class="mt-4 t-mid font-bold">{it.title}</p>
-        {it.text && <p class="mt-1.5 t-body text-foreground-muted">{it.text}</p>}
+        {it.text && <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{it.text}</p>}
       </li>
     ))
   }

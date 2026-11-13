@@ -14,6 +14,10 @@ import Photo from '../components/Photo.astro';
 import dFull from '../assets/denture/full.jpg';
 import dPartial from '../assets/denture/partial.jpg';
 import dImplant from '../assets/denture/implant.jpg';
+import step1 from '../assets/denture/step1.jpg';
+import step2 from '../assets/denture/step2.jpg';
+import step3 from '../assets/denture/step3.jpg';
+import step4 from '../assets/denture/step4.jpg';
 import WorryBand from '../components/WorryBand.astro';
 import tGum from '../assets/treat/treat-08.jpg';
 import chRoom from '../assets/photos/treatment-room.jpg';
@@ -67,9 +71,15 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
       }
     </ul>
     <h3 class="mt-12 mb-5 t-head font-bold">틀니 진료 과정</h3>
-    <Process items={[{ title: '검진·본뜨기' }, { title: '맞춤 제작' }, { title: '장착' }, { title: '적응·조정' }]} />
-    <p class="mt-4 t-body text-foreground-muted">검진·본뜨기 → 맞춤 제작 → 장착 → 적응·조정까지 함께합니다.</p>
-    <p class="mt-2 t-body text-foreground-muted">장착 후 조정: 보험 틀니는 3개월 안에 6회까지, 비급여 틀니는 편하게 쓰실 수 있을 때까지 맞춰 드립니다.</p>
+    <Process
+      items={[
+        { img: step1, title: '검진·본뜨기', text: '남은 치아와 잇몸 상태를 먼저 살피고, 말랑한 재료로 입안 모양을 그대로 본뜹니다. 몇 분이면 끝나는 과정이라 편하게 계시면 됩니다.' },
+        { img: step2, title: '맞춤 제작', text: '본뜬 모형에 맞춰 잇몸 모양과 씹는 높이를 하나하나 맞춥니다. 중간에 미리 끼워 보며 불편한 곳이 없는지 함께 확인합니다.' },
+        { img: step3, title: '장착', text: '완성된 틀니를 끼우고, 끼우고 빼는 방법과 닦는 법을 천천히 알려 드립니다. 처음 며칠은 어색할 수 있어 무엇을 드시면 좋은지도 안내합니다.' },
+        { img: step4, title: '적응·조정', text: '쓰시다가 눌리거나 아픈 곳이 있으면 언제든 말씀해 주세요. 맞물림과 잇몸 닿는 부분을 다시 다듬어 편안해지실 때까지 맞춰 드립니다.' },
+      ]}
+    />
+        <p class="mt-2 t-body text-foreground-muted">장착 후 조정: 보험 틀니는 3개월 안에 6회까지, 비급여 틀니는 편하게 쓰실 수 있을 때까지 맞춰 드립니다.</p>
   </Section>
 
   <ChapterHead id="insurance" photo={chConsult} position="50% 35%" index={2} title="보험 임플란트·틀니" lead="만 65세 이상 국가 건강보험 적용 (2026년 기준)" items={chapters} />
