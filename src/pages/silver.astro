@@ -11,6 +11,9 @@ import Process from '../components/Process.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import DentalArt from '../components/DentalArt.astro';
 import Photo from '../components/Photo.astro';
+import dFull from '../assets/denture/full.jpg';
+import dPartial from '../assets/denture/partial.jpg';
+import dImplant from '../assets/denture/implant.jpg';
 import WorryBand from '../components/WorryBand.astro';
 import tGum from '../assets/treat/treat-08.jpg';
 import chRoom from '../assets/photos/treatment-room.jpg';
@@ -21,9 +24,9 @@ import doctorWarm from '../assets/photos/doctor-warm.jpg';
 
 const worries = ['빠진 이가 많아 식사가 불편해요', '쓰던 틀니가 헐겁거나 잇몸이 아파요', '당뇨·고혈압 약을 먹고 있어 치료가 걱정돼요', '잇몸이 내려가고, 이가 시리고, 입이 자주 말라요', '딱딱한 음식은 아예 못 씹겠어요', '틀니를 끼면 말할 때 발음이 새요', '잇몸에서 피가 나고 입 냄새가 나요', '혈액순환제(아스피린)를 먹는데 이를 뽑아도 될까요?'];
 const dentures = [
-  { art: 'full', t: '전체 틀니', d: '치아가 모두 없을 때 잇몸 전체를 덮는 틀니' },
-  { art: 'partial', t: '부분 틀니', d: '남은 치아에 고리를 걸어 빈자리를 채우는 틀니' },
-  { art: 'implant-denture', t: '임플란트 틀니', d: '아래턱에 임플란트를 보통 2개 심고 똑딱이로 연결해 덜 움직이는 틀니' },
+  { art: 'full', img: dFull, t: '전체 틀니', d: '치아가 모두 없을 때 잇몸 전체를 덮는 틀니' },
+  { art: 'partial', img: dPartial, t: '부분 틀니', d: '남은 치아에 고리를 걸어 빈자리를 채우는 틀니' },
+  { art: 'implant-denture', img: dImplant, t: '임플란트 틀니', d: '아래턱에 임플란트를 보통 2개 심고 똑딱이로 연결해 덜 움직이는 틀니' },
 ] as const;
 const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
 ---
@@ -56,7 +59,7 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
       {
         dentures.map((x) => (
           <li class="rounded-3xl border border-border p-5 md:p-6">
-            <DentalArt name={x.art} class="h-auto w-full" />
+            <Image src={x.img} alt={`${x.t} 모형 그림`} widths={[400, 660]} sizes="(min-width: 768px) 30vw, 100vw" class="aspect-[11/10] h-auto w-full rounded-2xl bg-white object-contain" />
             <h3 class="mt-5 px-2 t-head font-bold text-primary">{x.t}</h3>
             <p class="mt-3 px-2 t-body text-foreground-muted whitespace-pre-line">{br(x.d)}</p>
           </li>
