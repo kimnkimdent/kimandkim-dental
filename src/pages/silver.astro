@@ -20,6 +20,11 @@ import step3 from '../assets/denture/step3.jpg';
 import step4 from '../assets/denture/step4.jpg';
 import insImplant from '../assets/denture/ins-implant.jpg';
 import insDenture from '../assets/denture/ins-denture.jpg';
+import safe1 from '../assets/safe/s1.jpg';
+import safe2 from '../assets/safe/s2.jpg';
+import safe3 from '../assets/safe/s3.jpg';
+import safe4 from '../assets/safe/s4.jpg';
+import safe5 from '../assets/safe/s5.jpg';
 import WorryBand from '../components/WorryBand.astro';
 import tGum from '../assets/treat/treat-08.jpg';
 import chRoom from '../assets/photos/treatment-room.jpg';
@@ -35,6 +40,14 @@ const dentures = [
   { art: 'implant-denture', img: dImplant, t: '임플란트 틀니', d: '틀니가 자꾸 들뜨거나 잇몸이 아파 식사가 불편할 때 쓰는 방법이에요. 잇몸뼈에 임플란트를 2~4개 심고 그 위에 틀니를 똑딱이처럼 끼워 고정해, 일반 틀니보다 덜 움직이고 식사 때 들뜨는 불편을 줄여 줍니다.' },
 ] as const;
 const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
+// 만성질환 안전 진료 5단계
+const safeSteps = [
+  { img: safe1, t: '문진', d: '드시는 약과 앓고 계신 질환을 먼저 여쭙고, 처방전으로 함께 확인합니다.' },
+  { img: safe2, t: '혈압·혈당 체크', d: '진료 당일 혈압과 혈당을 재고, 괜찮은 상태인지 확인한 뒤 시작합니다.' },
+  { img: safe3, t: '내과 협진', d: '필요하면 다니시는 내과와 상의해, 약을 조절할지 함께 정합니다.' },
+  { img: safe4, t: '신중한 시술', d: '무리하지 않도록 나눠서 진행하고, 피가 멎었는지 꼼꼼히 확인합니다.' },
+  { img: safe5, t: '경과 확인', d: '다음 날 다시 살피고, 불편하신 점이 없는지 확인해 드립니다.' },
+];
 ---
 
 <Layout
@@ -112,17 +125,25 @@ const chapters = SITE.nav.find((n) => n.href === '/silver/')!.children!;
 
   <ChapterHead id="safe" photo={chDesk} index={3} title="만성질환 안전 진료" items={chapters} />
 
+  <!-- 만성질환 안전 진료: 제목 아래 준비물 안내 → 5단계 흐름(PC 가로 화살표 / 휴대폰 세로) -->
   <Section title="드시는 약부터, 먼저 살핍니다">
-    <Process
-      items={[
-        { title: '문진', text: '복용 약 확인' },
-        { title: '혈압·혈당 체크' },
-        { title: '내과 협진', text: '필요 시' },
-        { title: '신중한 시술', text: '꼼꼼한 지혈' },
-        { title: '경과 확인', text: '다음 날' },
-      ]}
-    />
-    <p class="mt-6 rounded-2xl bg-primary-surface px-6 py-4 t-mid font-semibold text-primary">진료 오실 때 약 봉투나 처방전을 가져와 주세요.</p>
+    <p class="-mt-6 mb-10 inline-flex items-center gap-2 rounded-full bg-primary-surface px-5 py-2.5 t-mid font-semibold text-primary md:mb-12">
+      진료 오실 때 약 봉투나 처방전을 가져와 주세요.
+    </p>
+    <ol class="grid gap-3 lg:grid-cols-5 lg:gap-0">
+      {
+        safeSteps.map((x, i) => (
+          <li class="relative flex items-center gap-4 rounded-2xl bg-surface p-4 lg:flex-col lg:items-center lg:bg-transparent lg:p-0 lg:px-3 lg:text-center">
+            <Image src={x.img} alt="" aria-hidden="true" widths={[200, 380]} sizes="10rem" class="size-20 shrink-0 rounded-2xl bg-white object-contain md:size-24 lg:size-32" />
+            <div class="lg:mt-4">
+              <p class="flex items-center gap-2 lg:justify-center"><span class="flex size-7 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span><span class="t-mid font-bold">{x.t}</span></p>
+              <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{x.d}</p>
+            </div>
+            {i < safeSteps.length - 1 && <span aria-hidden="true" class="absolute top-16 -right-3 hidden text-[2.4rem] text-primary/40 lg:block">→</span>}
+          </li>
+        ))
+      }
+    </ol>
   </Section>
 
   <ChapterHead id="care" photo={chRoom} index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />
