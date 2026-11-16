@@ -33,6 +33,9 @@ import nat3 from '../../assets/natural/n3.jpg';
 import nat4 from '../../assets/natural/n4.jpg';
 import imgCrown from '../../assets/natural/crown.jpg';
 import imgBridge from '../../assets/natural/bridge.jpg';
+import imgWhite from '../../assets/natural/whitening.jpg';
+import imgLam from '../../assets/natural/laminate.jpg';
+import imgResin from '../../assets/natural/resin.jpg';
 import ImageCard from '../../components/ImageCard.astro';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
@@ -62,9 +65,9 @@ const prosth = [
   { img: imgBridge, t: '브릿지', d: '빠진 치아 양옆을 지지대로 삼아 다리처럼 이어 빈자리를 메웁니다. 임플란트가 어려운 경우의 방법입니다.' },
 ];
 const esthetic = [
-  { t: '미백', d: '치아 표면을 깎지 않고, 누렇게 변한 색을 밝게 되돌립니다.' },
-  { t: '라미네이트', d: '앞니 겉면을 얇게 다듬고 맞춤 판을 붙여, 깨지거나 벌어진 모양을 정리합니다.' },
-  { t: '앞니 레진', d: '작게 깨지거나 틈이 있는 앞니를 치아 색 재료로 메워 자연스럽게 다듬습니다.' },
+  { img: imgWhite, t: '미백', d: '치아 표면을 깎지 않고, 누렇게 변한 색을 밝게 되돌립니다.' },
+  { img: imgLam, t: '라미네이트', d: '앞니 겉면을 얇게 다듬고 맞춤 판을 붙여, 깨지거나 벌어진 모양을 정리합니다.' },
+  { img: imgResin, t: '앞니 레진', d: '작게 깨지거나 틈이 있는 앞니를 치아 색 재료로 메워 자연스럽게 다듬습니다.' },
 ];
 import WorryBand from '../../components/WorryBand.astro';
 const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까요?","임플란트 비용과 기간이 얼마나 될지 걱정돼요","퇴근하고 나면 치과 문이 다 닫혀 있어요","찬물만 마시면 이가 시려요","씌운 이가 오래돼 색이 변했어요","사랑니가 욱신거리는데 뽑기가 무서워요","양치할 때마다 잇몸에서 피가 나요","과잉 진료는 아닐까 걱정돼요"];
@@ -158,15 +161,8 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
 
   <!-- 3. 심미: 색과 모양을 다듬는 치료 -->
   <Section tone="surface" eyebrow="심미 치료" title="색과 모양은 자연스럽게 다듬습니다">
-    <ul class="grid gap-4 md:grid-cols-3">
-      {
-        esthetic.map((x) => (
-          <li class="rounded-3xl bg-background p-7 shadow-sm">
-            <h3 class="t-head font-bold">{x.t}</h3>
-            <p class="mt-3 t-body leading-relaxed text-foreground-muted">{x.d}</p>
-          </li>
-        ))
-      }
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {esthetic.map((x) => <ImageCard img={x.img} alt={`${x.t} 치료 그림`} title={x.t} text={x.d} />)}
     </ul>
   </Section>
 
