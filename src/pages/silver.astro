@@ -48,6 +48,18 @@ const safeSteps = [
   { img: safe4, t: '신중한 시술', d: '무리하지 않도록 나눠서 진행하고, 피가 멎었는지 꼼꼼히 확인합니다.' },
   { img: safe5, t: '경과 확인', d: '다음 날 다시 살피고, 불편하신 점이 없는지 확인해 드립니다.' },
 ];
+// 잇몸·시린 이·입마름 관리
+const careItems = [
+  { t: '잇몸 치료 · 스케일링', signs: ['양치할 때 피가 납니다', '잇몸이 붓고 입 냄새가 납니다', '이가 흔들리는 느낌이 듭니다'], care: '치석을 제거하고 잇몸 속 염증을 단계별로 치료합니다. 스케일링은 1년에 1회, 잇몸 치료도 대부분 건강보험이 적용됩니다.' },
+  { t: '시린 이 치료', signs: ['찬물이나 바람에 이가 시립니다', '이와 잇몸 사이가 패어 보입니다', '양치할 때 찌릿합니다'], care: '패인 치아 뿌리 부분을 치아 색 재료(GI)로 메워 시린 증상을 줄입니다. 치아를 거의 깎지 않고 짧은 시간에 끝나며 보험이 적용됩니다.' },
+  { t: '입마름 · 불소 관리', signs: ['입안이 자주 마르고 끈적합니다', '틀니가 잘 붙지 않습니다', '충치가 자주 생깁니다'], care: '드시는 약 때문에 침이 줄었는지 함께 살피고, 정기적으로 불소를 발라 약해진 치아 뿌리를 보호합니다.' },
+];
+const homeTips = [
+  '부드러운 칫솔로 잇몸과 치아 경계를 살살 닦아 주세요.',
+  '치아 사이는 치간칫솔로, 틀니는 빼서 따로 닦아 주세요.',
+  '입이 마르면 물을 자주 조금씩 드시면 도움이 됩니다.',
+  '아프지 않아도 3~6개월마다 정기 검진을 받아 주세요.',
+];
 ---
 
 <Layout
@@ -148,9 +160,38 @@ const safeSteps = [
 
   <ChapterHead id="care" photo={chRoom} index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />
 
+  <!-- 잇몸·시린 이·입마름: 소개(그림+글) → 3가지 카드(이런 증상 / 이렇게 관리합니다) → 집에서 하는 관리 -->
   <Section tone="surface" title="노년기 구강 건강을 꾸준히 지킵니다">
-    <Image src={tGum} alt="잇몸 경계를 관리하는 잇몸 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="mb-6 w-full rounded-3xl bg-white object-contain md:w-1/2" />
-    <p class="max-w-prose t-mid leading-relaxed text-foreground-muted">보험 잇몸 치료와 시린 이 치료(GI 충전), 정기 불소 관리로 노년기 구강 건강을 지킵니다.</p>
+    <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+      <Image src={tGum} alt="잇몸 경계를 관리하는 잇몸 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 50vw, 100vw" class="w-full rounded-3xl bg-white object-contain" />
+      <div class="t-mid leading-relaxed text-foreground-muted">
+        <p>나이가 들면 잇몸이 조금씩 내려가고, 침이 줄어 입안이 쉽게 마릅니다. 그러면 치아 뿌리가 드러나 시리고, 충치와 잇몸병도 생기기 쉬워집니다.</p>
+        <p class="mt-4">남은 치아를 오래 쓰시려면 아프기 전에 꾸준히 살피는 것이 가장 중요합니다. 김앤김치과는 잇몸, 시린 이, 입마름을 함께 보며 부모님 치아를 관리해 드립니다.</p>
+      </div>
+    </div>
+
+    <ul class="mt-10 grid gap-4 md:grid-cols-3">
+      {
+        careItems.map((x) => (
+          <li class="flex flex-col rounded-3xl bg-background p-7 shadow-sm">
+            <h3 class="t-head font-bold">{x.t}</h3>
+            <p class="mt-4 t-body font-semibold text-primary">이런 증상이 있으시면</p>
+            <ul class="mt-2 space-y-1.5">
+              {x.signs.map((g) => <li class="flex gap-2 t-body text-foreground-muted"><span aria-hidden="true" class="text-primary">·</span>{g}</li>)}
+            </ul>
+            <p class="mt-5 t-body font-semibold text-primary">이렇게 관리합니다</p>
+            <p class="mt-2 t-body leading-relaxed text-foreground-muted">{x.care}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-6 rounded-3xl bg-primary-surface p-7 md:p-8">
+      <h3 class="t-head font-bold text-primary">집에서는 이렇게 챙겨 주세요</h3>
+      <ul class="mt-4 grid gap-2.5 md:grid-cols-2">
+        {homeTips.map((t) => <li class="flex gap-2.5 t-body leading-relaxed text-foreground"><span aria-hidden="true" class="font-bold text-primary">✓</span>{t}</li>)}
+      </ul>
+    </div>
   </Section>
 
   <Section eyebrow="자주 묻는 질문" title="부모님 치아, 이것이 궁금해요">
