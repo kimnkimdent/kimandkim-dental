@@ -1,23 +1,27 @@
 ---
 // 그림이 있는 단계 흐름도. PC: 가로 한 줄 + 단계 사이 화살표 / 휴대폰: 왼쪽 그림·오른쪽 설명 카드가 세로로.
-// items: { img, t(단계 이름), d(설명) }. 실버 만성질환 안전 진료 · 청장년 임플란트 치료 과정에서 쓴다.
+// items: { img, t(단계 이름), d(설명) }. boxed: PC에서도 단계마다 흰 상자 안에 그림·설명을 함께 넣는다(연회색 배경 섹션용).
+// 실버 만성질환 안전 진료(boxed 아님) · 청장년 임플란트 치료 과정(boxed)에서 쓴다.
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-interface Props { items: { img: ImageMetadata; t: string; d: string }[] }
-const { items } = Astro.props;
+interface Props { items: { img: ImageMetadata; t: string; d: string }[]; boxed?: boolean }
+const { items, boxed = false } = Astro.props;
 const cols = { 4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5', 6: 'lg:grid-cols-6' }[items.length] ?? 'lg:grid-cols-5';
 ---
 
-<ol class:list={['grid gap-3 lg:gap-0', cols]}>
+<ol class:list={['grid gap-3', boxed ? 'lg:gap-5' : 'lg:gap-0', cols]}>
   {
     items.map((x, i) => (
-      <li class="relative flex items-center gap-4 rounded-2xl bg-surface p-4 lg:flex-col lg:items-center lg:bg-transparent lg:p-0 lg:px-3 lg:text-center">
+      <li class:list={[
+        'relative flex items-center gap-4 rounded-2xl p-4 lg:flex-col lg:items-center lg:text-center',
+        boxed ? 'bg-background shadow-sm lg:justify-start lg:px-4 lg:py-6' : 'bg-surface lg:bg-transparent lg:p-0 lg:px-3',
+      ]}>
         <Image src={x.img} alt="" aria-hidden="true" widths={[200, 440]} sizes="10rem" class="size-20 shrink-0 rounded-2xl bg-white object-contain md:size-24 lg:size-32" />
         <div class="lg:mt-4">
           <p class="flex items-center gap-2 lg:justify-center"><span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span><span class="t-mid font-bold">{x.t}</span></p>
           <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{x.d}</p>
         </div>
-        {i < items.length - 1 && <span aria-hidden="true" class="absolute top-16 -right-3 hidden text-[2.4rem] text-primary/40 lg:block">→</span>}
+        {i < items.length - 1 && <span aria-hidden="true" class:list={['absolute top-16 hidden text-primary/40 lg:block', boxed ? '-right-4 z-10 text-[2rem]' : '-right-3 text-[2.4rem]']}>→</span>}
       </li>
     ))
   }
