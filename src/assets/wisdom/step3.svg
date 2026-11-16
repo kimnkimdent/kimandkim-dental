@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" width="160" height="180">
+  <!-- 3. 발치·봉합: 빠진 자리 위로 들려 나온 사랑니, 잇몸 봉합 -->
+  <rect width="160" height="180" fill="#fff"/>
+  <rect x="14" y="112" width="132" height="54" rx="10" fill="#f6ead2"/>
+  <path d="M14 112 Q40 100 80 104 Q120 100 146 112 L146 126 L14 126 Z" fill="#f2a9ad"/>
+  <path d="M60 108 Q80 120 100 108 Q96 140 80 146 Q64 140 60 108 Z" fill="#c9545c" opacity="0.55"/>
+  <g stroke="#133e76" stroke-width="2.5" stroke-linecap="round">
+    <path d="M64 104 L72 116 M72 104 L64 116"/>
+    <path d="M76 106 L84 118 M84 106 L76 118"/>
+    <path d="M88 104 L96 116 M96 104 L88 116"/>
+  </g>
+  <path d="M60 46 Q60 30 71 30 Q80 35 89 30 Q100 30 100 46 L98 66 Q96 74 92 86 Q88 96 85 86 L82 72 Q80 68 78 72 L75 86 Q72 96 68 86 Q64 74 62 66 Z" fill="#fffaf0" stroke="#c9b48c" stroke-width="2"/>
+  <path d="M122 92 V44 M122 44 l-9 11 M122 44 l9 11" stroke="#3db8e8" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

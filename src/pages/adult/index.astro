@@ -1,4 +1,8 @@
 ---
+import ws1 from '../../assets/wisdom/step1.svg';
+import ws2 from '../../assets/wisdom/step2.svg';
+import ws3 from '../../assets/wisdom/step3.svg';
+import ws4 from '../../assets/wisdom/step4.svg';
 // 청장년 클리닉(한 페이지): 임플란트(#implant) · 자연치아·심미보철(#natural) · 사랑니·구강외과(#wisdom).
 // 각 묶음은 역지사지 진료 노트로 시작한다. 제목 아래 탭과 상단 메뉴는 src/site.ts의 청장년 클리닉 children을 쓴다.
 import bandSurgery from '../../assets/photos/band-surgery.jpg';
@@ -191,7 +195,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
       <p class="t-mid leading-relaxed text-foreground-muted">사랑니는 반듯하게 난 경우부터 비스듬히 눕거나 뼈 속에 묻힌 경우(매복)까지 다양합니다. 신경과 가깝다면 CT로 거리를 먼저 확인하고 계획합니다.</p>
     </div>
     <h3 class="mt-10 mb-4 t-head font-bold">발치 과정</h3>
-    <Process items={[{ title: '위치·신경 확인', text: 'CT로 사랑니 방향과 신경까지의 거리를 확인합니다.' }, { title: '마취', text: '충분히 마취가 된 것을 확인한 뒤 시작합니다.' }, { title: '발치·봉합', text: '필요하면 나눠서 빼고, 잇몸을 꿰매 마무리합니다.' }, { title: '실밥 제거', text: '7~10일 뒤 실밥을 풀고 아문 상태를 확인합니다.' }]} />
+    <Process items={[{ img: ws1, title: '위치·신경 확인', text: 'CT로 사랑니 방향과 신경까지의 거리를 확인합니다.' }, { img: ws2, title: '마취', text: '충분히 마취가 된 것을 확인한 뒤 시작합니다.' }, { img: ws3, title: '발치·봉합', text: '필요하면 나눠서 빼고, 잇몸을 꿰매 마무리합니다.' }, { img: ws4, title: '실밥 제거', text: '7~10일 뒤 실밥을 풀고 아문 상태를 확인합니다.' }]} />
     <h3 class="mt-10 mb-4 t-head font-bold">뽑은 뒤에는 이렇게 해 주세요</h3>
     <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {['거즈는 1~2시간 꼭 물고 계셔 주세요.', '첫날은 얼음찜질로 부기를 줄여 주세요.', '2~3일은 빨대·흡연·음주를 피해 주세요.', '피가 계속 나거나 부기가 심해지면 바로 연락해 주세요.'].map((t) => <li class="flex gap-3 rounded-2xl bg-surface px-5 py-4 t-body"><span aria-hidden="true" class="font-bold text-primary">✓</span>{t}</li>)}
