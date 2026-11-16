@@ -1,0 +1,51 @@
+---
+// 첫 페이지 4가지 원칙 아래: 실버 · 청장년 · 어린이 클리닉 탭. 자바스크립트 없이 라디오 버튼으로 탭을 바꾼다.
+// 탭 안 메뉴는 src/site.ts의 nav children을 그대로 쓴다.
+import Section from '../Section.astro';
+import Button from '../Button.astro';
+import ServiceIcon from '../ServiceIcon.astro';
+import { SITE, url } from '../../site';
+
+const tabs = [
+  { id: 'silver', label: '실버 클리닉', quote: '“내 부모님이라면”', desc: '틀니와 보험 임플란트, 만성질환이 있으신 분도 안심하실 수 있도록 건강 상태를 먼저 살피고 진료합니다.' },
+  { id: 'adult', label: '청장년 클리닉', quote: '“내가 이 비용을 낸다면”', desc: '꼭 필요한 치료만 권하고, 자연치아를 최대한 지키는 방향으로 임플란트와 보존·보철 치료를 계획합니다.' },
+  { id: 'kids', label: '어린이·청소년 클리닉', quote: '“내 아이라면”', desc: '아이가 치과를 무서워하지 않도록 천천히 설명하고, 검진과 예방으로 평생 치아 습관을 함께 만듭니다.' },
+] as const;
+const sub = (id: string) => SITE.nav.find((n) => n.href === `/${id}/`)!;
+---
+
+<Section id="clinics" tone="surface" eyebrow="진료 안내" title="연령에 맞춘 3가지 클리닉">
+  <div class="clinic-tabs">
+    {tabs.map((t, i) => <input type="radio" name="clinic-tab" id={`ct-${t.id}`} class="sr-only" checked={i === 0} />)}
+    <div class="flex flex-wrap gap-2" data-tablist>
+      {tabs.map((t) => (
+        <label for={`ct-${t.id}`} data-tab={t.id} class="inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-full border border-border-accent bg-background px-5 t-body font-semibold text-foreground-muted transition-colors hover:border-primary hover:text-primary">
+          <ServiceIcon name={t.id} class="size-7" />{t.label}
+        </label>
+      ))}
+    </div>
+    {tabs.map((t) => (
+      <div data-panel={t.id} class="mt-6 hidden rounded-3xl bg-background p-7 shadow-sm md:p-10">
+        <p class="t-mid font-semibold text-primary">{t.quote}</p>
+        <h3 class="mt-2 t-head font-bold">{t.label}</h3>
+        <p class="mt-3 max-w-prose t-body text-foreground-muted">{t.desc}</p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {sub(t.id).children!.map((c) => (
+            <li><a href={url(c.href)} class="flex min-h-14 items-center justify-between rounded-2xl border border-border px-5 t-body font-semibold hover:border-primary hover:text-primary">{c.label}<span aria-hidden="true">→</span></a></li>
+          ))}
+        </ul>
+        <div class="mt-7"><Button href={url(`/${t.id}/`)}>{t.label} 자세히 보기</Button></div>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .clinic-tabs:has(#ct-silver:checked) [data-panel='silver'],
+  .clinic-tabs:has(#ct-adult:checked) [data-panel='adult'],
+  .clinic-tabs:has(#ct-kids:checked) [data-panel='kids'] { display: block; }
+  .clinic-tabs:has(#ct-silver:checked) [data-tab='silver'],
+  .clinic-tabs:has(#ct-adult:checked) [data-tab='adult'],
+  .clinic-tabs:has(#ct-kids:checked) [data-tab='kids'] { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-primary-foreground); }
+  .clinic-tabs:has(input:focus-visible) [data-tablist] { outline: 2px solid var(--color-ring); outline-offset: 4px; border-radius: 9999px; }
+</style>

@@ -10,6 +10,7 @@ import { SITE, url, tel, br } from '../site';
 import { allQna, qna } from '../qna';
 import StoryBody from '../components/home/StoryBody.astro';
 import PhilosophyBody from '../components/home/PhilosophyBody.astro';
+import ClinicTabs from "../components/home/ClinicTabs.astro";
 
 const cards = [
   { href: '/about/story/', icon: 'about' as const, title: '병원소개', quote: '처음엔 혼자,\n다음엔 가족과 함께', desc: '김앤김 이야기\n대표원장 소개' },
@@ -61,4 +62,5 @@ const tabOf = (id: string) => qna.find((g) => g.items.some((i) => i.id === id))!
   <!-- 영상 아래로 스크롤하면: 병원소개(김앤김 이야기·대표원장 소개) → 진료철학. 각 페이지와 같은 내용(src/components/home/) -->
   <StoryBody home />
   <PhilosophyBody home />
+  <ClinicTabs />
 </Layout>
