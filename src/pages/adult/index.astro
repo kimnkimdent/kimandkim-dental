@@ -13,7 +13,6 @@ import Process from '../../components/Process.astro';
 import FaqLinks from '../../components/FaqLinks.astro';
 import Photo from '../../components/Photo.astro';
 import { Image } from 'astro:assets';
-import tCavity from '../../assets/treat/treat-01.jpg';
 import tCrown from '../../assets/treat/treat-07.jpg';
 import part1 from '../../assets/implant/p1.jpg';
 import part2 from '../../assets/implant/p2.jpg';
@@ -29,6 +28,10 @@ import ip4 from '../../assets/implant/i4.jpg';
 import ip5 from '../../assets/implant/i5.jpg';
 import ip6 from '../../assets/implant/i6.jpg';
 import StepFlow from '../../components/StepFlow.astro';
+import nat1 from '../../assets/natural/n1.jpg';
+import nat2 from '../../assets/natural/n2.jpg';
+import nat3 from '../../assets/natural/n3.jpg';
+import nat4 from '../../assets/natural/n4.jpg';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
 import { SITE, url, br } from '../../site';
@@ -47,9 +50,10 @@ const kinds = [
 ];
 // 자연치아·심미보철: 살리는 치료(보존) → 되살리는 치료(보철) → 다듬는 치료(심미). 서로 겹치지 않게 나눈다.
 const cavity = [
-  { s: '초기', t: '레진 충전', d: '작은 충치를 깎아 내고 치아 색 재료로 메웁니다. 대부분 당일에 끝납니다.' },
-  { s: '중기', t: '인레이 · 온레이', d: '충치 범위가 넓으면 본을 떠 맞춤 조각을 만들어, 상한 부분만 채웁니다.' },
-  { s: '진행', t: '신경 치료', d: '염증이 신경까지 갔다면 신경을 정리해 뽑지 않고 살립니다. 오래 시리거나 가만히 있어도 욱신거리면 검진을 받아 보세요.' },
+  { img: nat1, s: '초기 충치', t: '레진 충전', d: '작은 충치를 깎아 내고 치아 색 재료로 메웁니다. 티가 잘 나지 않고 대부분 당일에 끝납니다.' },
+  { img: nat2, s: '넓은 충치', t: '인레이 · 온레이', d: '충치 범위가 넓으면 본을 떠 맞춤 조각을 만들어, 상한 부분만 정확히 채웁니다.' },
+  { img: nat3, s: '신경까지 간 충치', t: '신경 치료', d: '염증이 신경까지 갔다면 신경을 깨끗이 정리해 뽑지 않고 살립니다. 오래 시리거나 욱신거리면 검진을 받아 보세요.' },
+  { img: nat4, s: '잇몸 염증', t: '잇몸 치료 · 스케일링', d: '치석을 없애고 잇몸 상태에 맞춰 단계별로 치료합니다. 대부분 건강보험이 적용됩니다.' },
 ];
 const prosth = [
   { t: '크라운', d: '신경 치료한 치아나 크게 깨진 치아를 통째로 감싸, 더 깨지지 않고 오래 쓸 수 있게 보호합니다.' },
@@ -147,26 +151,19 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
 
   <!-- 1. 보존: 충치 단계별로 꼭 필요한 만큼 + 잇몸 치료 -->
   <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 범위에 따라, 꼭 필요한 만큼만 치료합니다">
-    <div class="grid items-center gap-8 md:grid-cols-[2fr_3fr]">
-      <Image src={tCavity} alt="충치를 다듬고 그 자리를 채우는 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain" />
-      <ol class="space-y-3">
-        {
-          cavity.map((c) => (
-            <li class="flex gap-4 rounded-2xl bg-background p-5 shadow-sm md:p-6">
-              <span class="h-fit shrink-0 rounded-full bg-primary-surface px-3 py-1 t-body font-bold text-primary">{c.s}</span>
-              <div>
-                <p class="t-head font-bold">{c.t}</p>
-                <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{c.d}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-    <div class="mt-6 rounded-3xl bg-background p-7 shadow-sm md:flex md:items-center md:gap-8">
-      <h3 class="shrink-0 t-head font-bold">잇몸 치료 · 스케일링</h3>
-      <p class="mt-2 t-body leading-relaxed text-foreground-muted md:mt-0">잇몸이 건강해야 치아도 오래 갑니다. 치석을 없애고 잇몸 상태에 맞춰 단계별로 치료하며, 대부분 건강보험이 적용됩니다.</p>
-    </div>
+    <!-- 4가지 보존 치료: 흰 상자마다 그림 · 상태 · 치료 이름 · 설명 (충치가 깊어지는 순서 → 잇몸) -->
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        cavity.map((c) => (
+          <li class="flex flex-col rounded-3xl bg-background p-6 shadow-sm">
+            <Image src={c.img} alt={`${c.t} 그림`} widths={[300, 600]} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw" class="mx-auto aspect-square h-auto w-full max-w-[22rem] object-contain" />
+            <span class="mt-4 self-start rounded-full bg-primary-surface px-3 py-1 t-body font-bold text-primary">{c.s}</span>
+            <h3 class="mt-3 t-head font-bold">{c.t}</h3>
+            <p class="mt-2 t-body leading-relaxed text-foreground-muted">{c.d}</p>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <!-- 2. 보철: 잃은 부분을 되살리는 치료 -->
