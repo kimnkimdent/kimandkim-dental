@@ -1,4 +1,5 @@
 ---
+import Container from '../components/Container.astro';
 import imgMedicine from '../assets/safe/medicine.jpg';
 import { SITE, br } from '../site';
 import { Image } from 'astro:assets';
@@ -141,17 +142,18 @@ const homeTips = [
   <ChapterHead id="safe" photo={chDesk} index={3} title="만성질환 안전 진료" items={chapters} />
 
   <!-- 만성질환 안전 진료: 제목 아래 준비물 안내 → 5단계 흐름(PC 가로 화살표 / 휴대폰 세로) -->
-  <Section title="드시는 약부터, 먼저 살핍니다">
-    <p class="-mt-6 mb-10 inline-flex items-center gap-2 rounded-full bg-primary-surface px-5 py-2.5 t-mid font-semibold text-primary md:mb-12">
-      진료 오실 때 약 봉투나 처방전을 가져와 주세요.
-    </p>
-    <!-- 진료 순서: 약 사진을 어둡게 깔고 그 위에 흰 상자 단계 -->
-    <div class="relative isolate overflow-hidden rounded-3xl px-5 py-10 md:px-10 md:py-14">
-      <Image src={imgMedicine} alt="" widths={[640, 1280, 1920]} sizes="100vw" class="absolute inset-0 -z-20 h-full w-full object-cover" />
-      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-secondary/75"></div>
+  <!-- 섹션 전체(제목 포함)에 약 사진을 어둡게 깔고, 그 위에 반투명 단계 상자 -->
+  <section class="relative isolate overflow-hidden py-section">
+    <Image src={imgMedicine} alt="" widths={[640, 1280, 1920]} sizes="100vw" class="absolute inset-0 -z-20 h-full w-full object-cover" />
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-secondary/80"></div>
+    <Container>
+      <h2 class="t-headline font-bold text-white">드시는 약부터, 먼저 살핍니다</h2>
+      <p class="mt-6 mb-10 inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-2.5 t-mid font-semibold text-white backdrop-blur-sm md:mb-12">
+        진료 오실 때 약 봉투나 처방전을 가져와 주세요.
+      </p>
       <StepFlow boxed glass items={safeSteps} />
-    </div>
-  </Section>
+    </Container>
+  </section>
 
   <ChapterHead id="care" photo={chRoom} index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />
 
