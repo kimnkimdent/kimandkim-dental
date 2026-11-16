@@ -13,18 +13,20 @@ import Process from '../../components/Process.astro';
 import FaqLinks from '../../components/FaqLinks.astro';
 import Photo from '../../components/Photo.astro';
 import { Image } from 'astro:assets';
-import tImplant from '../../assets/treat/treat-04.jpg';
 import tCavity from '../../assets/treat/treat-01.jpg';
 import tCrown from '../../assets/treat/treat-07.jpg';
+import part1 from '../../assets/implant/p1.jpg';
+import part2 from '../../assets/implant/p2.jpg';
+import part3 from '../../assets/implant/p3.jpg';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
 import { SITE, url, br } from '../../site';
 
 const tabs = SITE.nav.find((n) => n.href === '/adult/')!.children!;
 const parts = [
-  { t: '픽스처', d: '잇몸뼈 속에 심는 인공 치아 뿌리입니다. 뼈와 단단히 붙어 치아를 받쳐 줍니다.' },
-  { t: '지대주', d: '뿌리와 치아 머리를 이어 주는 연결 기둥입니다.' },
-  { t: '크라운', d: '눈에 보이는 치아 부분으로, 옆 치아의 색과 모양에 맞춰 만듭니다.' },
+  { img: part1, t: '픽스처', d: '잇몸뼈 속에 심는 인공 치아 뿌리입니다. 뼈와 단단히 붙어 치아를 받쳐 줍니다.' },
+  { img: part2, t: '지대주', d: '뿌리와 치아 머리를 이어 주는 연결 기둥입니다.' },
+  { img: part3, t: '크라운', d: '눈에 보이는 치아 부분으로, 옆 치아의 색과 모양에 맞춰 만듭니다.' },
 ];
 const kinds = [
   { t: '일반 임플란트', d: '잇몸뼈가 충분할 때 쓰는 가장 기본적인 방법입니다. CT로 뼈 상태를 확인하고 심을 위치를 정합니다.' },
@@ -78,19 +80,19 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   <ChapterHead id="implant" photo={bandSurgery} position="50% 35%" index={1} title="임플란트" lead="자연치아를 먼저 살펴보고, 꼭 필요할 때만 권해 드립니다." items={tabs} />
 
   <Section tone="surface" eyebrow="임플란트의 구조" title="옆 치아를 깎지 않고, 자연치아에 가까운 씹는 힘을 되찾습니다">
-    <div class="grid items-center gap-10 md:grid-cols-2">
-      <Image src={tImplant} alt="3D CT로 임플란트 위치를 계획하는 화면과 임플란트 구조 모형" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain " />
-      <ol class="space-y-3">
-        {
-          parts.map((p, i) => (
-            <li class="flex items-center gap-5 rounded-2xl bg-background p-6 shadow-sm">
-              <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary t-mid font-bold text-primary-foreground">{i + 1}</span>
-              <p><strong class="block t-head">{p.t}</strong><span class="mt-1 block t-body leading-relaxed text-foreground-muted">{p.d}</span></p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
+    <!-- 심는 순서대로 세 부분: 그림(픽스처 → 지대주 → 크라운) + 번호 · 이름 · 설명 -->
+    <ol class="grid gap-4 sm:grid-cols-3">
+      {
+        parts.map((p, i) => (
+          <li class="relative flex flex-col rounded-3xl bg-background p-6 shadow-sm">
+            <Image src={p.img} alt={`임플란트 ${p.t} 그림`} widths={[300, 540]} sizes="(min-width: 640px) 30vw, 100vw" class="mx-auto aspect-[54/74] h-auto w-full max-w-[22rem] object-contain" />
+            <p class="mt-5 flex items-center gap-2.5"><span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span><strong class="t-head">{p.t}</strong></p>
+            <p class="mt-2 t-body leading-relaxed text-foreground-muted">{p.d}</p>
+            {i < parts.length - 1 && <span aria-hidden="true" class="absolute top-1/3 -right-3.5 z-10 hidden size-7 items-center justify-center rounded-full bg-primary-surface text-primary sm:flex">→</span>}
+          </li>
+        ))
+      }
+    </ol>
   </Section>
 
   <Section eyebrow="임플란트 종류" title="잇몸뼈 상태에 맞는 방법을 찾습니다">
