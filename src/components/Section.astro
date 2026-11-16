@@ -7,7 +7,7 @@ import { br } from '../site';
 interface Props {
   id?: string;
   eyebrow?: string; // 제목 위 작은 라벨. 예: "서비스"
-  title?: string; // 섹션 제목(h2)
+  title?: string; // 섹션 제목(h2). '|' 자리에서 PC에서만 줄을 바꾼다(휴대폰은 자연스럽게 줄바꿈)
   lead?: string; // 제목 아래 한두 문장
   tone?: 'white' | 'surface'; // 배경색. surface=연회색
   align?: 'left' | 'center';
@@ -21,9 +21,9 @@ const { id, eyebrow, title, lead, tone = 'white', align = 'left', narrow = false
   <Container narrow={narrow}>
     {
       (eyebrow || title || lead) && (
-        <div class:list={['mb-12 max-w-prose', align === 'center' && 'mx-auto text-center']}>
+        <div class:list={['mb-12 max-w-prose lg:max-w-none', align === 'center' && 'mx-auto text-center']}>
           {eyebrow && <p class="mb-3 t-body font-semibold text-primary">{eyebrow}</p>}
-          {title && <h2 class="t-headline font-bold whitespace-pre-line">{title}</h2>}
+          {title && <h2 class="t-headline font-bold whitespace-pre-line">{title.split('|').map((t, i) => <>{i > 0 && <br class="max-lg:hidden" />}{i > 0 && <span class="lg:hidden"> </span>}{t}</>)}</h2>}
           {lead && <p class="mt-4 t-mid whitespace-pre-line text-foreground-muted">{br(lead)}</p>}
         </div>
       )

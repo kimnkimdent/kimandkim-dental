@@ -106,20 +106,20 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
 
   <ChapterHead id="implant" photo={bandSurgery} position="50% 35%" index={1} title="임플란트" lead="자연치아를 먼저 살펴보고, 꼭 필요할 때만 권해 드립니다." items={tabs} />
 
-  <Section tone="surface" eyebrow="임플란트의 구조" title="임플란트는 빠진 치아의 뿌리부터 다시 세우는 치료로, 3개의 구조로 되어 있습니다">
+  <Section tone="surface" eyebrow="임플란트의 구조" title="임플란트는 빠진 치아의 뿌리부터 다시 세우는 치료로,|3개의 구조로 되어 있습니다">
     <!-- 심는 순서대로 세 부분: 픽스처 → 지대주 → 크라운 -->
     <ol class="grid gap-4 sm:grid-cols-3">
       {parts.map((p, i) => <ImageCard img={p.img} alt={`임플란트 ${p.t} 그림`} no={i + 1} title={p.t} text={p.d} />)}
     </ol>
   </Section>
 
-  <Section eyebrow="임플란트 종류" title="잇몸뼈의 양과 위치를 먼저 확인하고, 내 상태에 꼭 맞는 임플란트 방법을 찾습니다">
+  <Section eyebrow="임플란트 종류" title="잇몸뼈의 양과 위치를 먼저 확인하고,|내 상태에 꼭 맞는 임플란트 방법을 찾습니다">
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {kinds.map((k) => <ImageCard img={k.img} alt={`${k.t} 모형 그림`} title={k.t} text={k.d} link={k.link ? { href: k.link, label: '실버 클리닉 보기 →' } : undefined} />)}
     </ul>
   </Section>
 
-  <Section tone="surface" eyebrow="임플란트 치료 과정" title="CT 정밀 검사부터 심은 뒤 정기 검진까지, 모든 과정을 미리 설명드리고 진행합니다">
+  <Section tone="surface" eyebrow="임플란트 치료 과정" title="CT 정밀 검사부터 심은 뒤 정기 검진까지,|모든 과정을 미리 설명드리고 진행합니다">
     <StepFlow boxed
       items={[
         { img: ip1, t: '정밀 검사', d: '바텍(Vatech) CT로 뼈의 양과 신경 위치를 입체적으로 확인합니다.' },
@@ -143,7 +143,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   <ChapterHead id="natural" photo={bandRoom} index={2} title="자연치아·심미보철" lead="덜 깎고, 나답게 되살립니다." items={tabs} />
 
   <!-- 1. 보존: 충치 단계별로 꼭 필요한 만큼 + 잇몸 치료 -->
-  <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치가 어디까지 진행됐는지 확인하고, 내 치아를 최대한 남기도록 꼭 필요한 만큼만 치료합니다">
+  <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치가 어디까지 진행됐는지 확인하고,|내 치아를 최대한 남기도록 꼭 필요한 만큼만 치료합니다">
     <!-- 4가지 보존 치료: 흰 상자마다 그림 · 상태 · 치료 이름 · 설명 (충치가 깊어지는 순서 → 잇몸) -->
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
@@ -160,7 +160,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   </Section>
 
   <!-- 2. 보철: 잃은 부분을 되살리는 치료 -->
-  <Section eyebrow="보철 치료" title="약해지거나 빠진 치아는, 다시 튼튼하게 되살립니다">
+  <Section eyebrow="보철 치료" title="약해지거나 빠진 치아는,|다시 튼튼하게 되살립니다">
     <!-- 크라운 / 브릿지 -->
     <ul class="grid gap-4 sm:grid-cols-2 lg:mx-auto lg:max-w-[80rem]">
       {prosth.map((x) => <ImageCard img={x.img} alt={`${x.t} 치료 그림`} title={x.t} text={x.d} />)}
@@ -168,7 +168,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   </Section>
 
   <!-- 3. 심미: 색과 모양을 다듬는 치료 -->
-  <Section tone="surface" eyebrow="심미 치료" title="누런 색, 깨지거나 벌어진 앞니도 자연스럽게 다듬습니다">
+  <Section tone="surface" eyebrow="심미 치료" title="누런 색, 깨지거나 벌어진 앞니도|자연스럽게 다듬습니다">
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {esthetic.map((x) => <ImageCard img={x.img} alt={`${x.t} 치료 그림`} title={x.t} text={x.d} />)}
     </ul>
@@ -178,14 +178,14 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
 
   <ChapterHead id="wisdom" photo={bandTreat} position="50% 35%" index={3} title="사랑니·구강외과" lead="미루지 말고, 편안하게." items={tabs} />
 
-  <Section class="!py-14 md:!py-20" tone="surface" eyebrow="사랑니, 왜 빼야 할까요?" title="사랑니는 칫솔이 닿기 어려운 맨 안쪽에 있어, 충치와 잇몸 염증이 생기기 쉽습니다">
+  <Section class="!py-14 md:!py-20" tone="surface" eyebrow="사랑니, 왜 빼야 할까요?" title="사랑니는 칫솔이 닿기 어려운 맨 안쪽에 있어,|충치와 잇몸 염증이 생기기 쉽습니다">
     <div class="grid items-center gap-6 md:grid-cols-[1fr_2fr] md:gap-10">
       <Photo class="mx-auto w-full max-w-[36rem]" ratio="aspect-[16/10]" src={imgWhyMolar} alt="아래턱 맨 안쪽 사랑니 주변에 기구가 닿기 어려운 모습을 보여 주는 그림" />
       <p class="t-mid leading-relaxed text-foreground-muted">칫솔이 닿기 어려워 충치와 잇몸 염증이 잘 생기고, 앞 어금니까지 상하게 할 수 있습니다.<br /> 나이가 들수록 회복도 더뎌집니다.</p>
     </div>
   </Section>
 
-  <Section class="!py-14 md:!py-20" eyebrow="매복 사랑니 발치" title="누워 있거나 뼈 속에 묻힌 사랑니도, 위치와 신경까지의 거리를 먼저 확인하고 안전하게 뽑습니다">
+  <Section class="!py-14 md:!py-20" eyebrow="매복 사랑니 발치" title="누워 있거나 뼈 속에 묻힌 사랑니도,|위치와 신경까지의 거리를 먼저 확인하고 안전하게 뽑습니다">
     <div class="grid items-center gap-6 md:grid-cols-[1fr_2fr] md:gap-10">
       <Photo class="mx-auto w-full max-w-[36rem]" ratio="aspect-[16/10]" src={imgWhy} alt="3D 엑스레이에서 맨 안쪽에 비스듬히 난 위아래 사랑니를 화살표로 표시한 그림" />
       <p class="t-mid leading-relaxed text-foreground-muted">사랑니는 반듯하게 난 경우부터 비스듬히 눕거나 뼈 속에 묻힌 경우(매복)까지 다양합니다. 신경과 가깝다면 CT로 거리를 먼저 확인하고 계획합니다.</p>
@@ -198,7 +198,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
     </ul>
   </Section>
 
-  <Section class="!py-14 md:!py-20" tone="surface" eyebrow="뽑기 전에, 살릴 방법부터" title="뽑아야 할 것 같은 치아도, 살릴 수 있는 방법이 있다면 먼저 찾아 말씀드립니다">
+  <Section class="!py-14 md:!py-20" tone="surface" eyebrow="뽑기 전에, 살릴 방법부터" title="뽑아야 할 것 같은 치아도,|살릴 수 있는 방법이 있다면 먼저 찾아 말씀드립니다">
     <ul class="grid gap-4 md:grid-cols-2">
       <li class="rounded-3xl bg-background p-6 shadow-sm md:p-7">
         <h3 class="t-head font-bold">치근단 절제술</h3>
