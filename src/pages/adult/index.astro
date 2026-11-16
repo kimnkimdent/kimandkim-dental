@@ -63,11 +63,11 @@ const cavity = [
 ];
 const prosth = [
   { img: imgCrown, t: '크라운', d: '신경 치료한 치아나 크게 깨진 치아를 통째로 감싸, 더 깨지지 않고 오래 쓸 수 있게 보호합니다.' },
-  { img: imgBridge, t: '브릿지', d: '빠진 치아 양옆을 지지대로 삼아 다리처럼 이어 빈자리를 메웁니다. 임플란트가 어려운 경우의 방법입니다.' },
+  { img: imgBridge, t: '브릿지', d: '빠진 치아 양옆을 지지대로 삼아 다리처럼 이어 빈자리를 메웁니다. 임플란트가 어려울 때 쓰며, 양옆 치아를 깎아야 하는 점도 함께 고려합니다.' },
 ];
 const esthetic = [
-  { img: imgWhite, t: '미백', d: '치아 표면을 깎지 않고, 누렇게 변한 색을 밝게 되돌립니다.' },
-  { img: imgLam, t: '라미네이트', d: '앞니 겉면을 얇게 다듬고 맞춤 판을 붙여, 깨지거나 벌어진 모양을 정리합니다.' },
+  { img: imgWhite, t: '미백', d: '치아 표면을 깎지 않고, 누렇게 변한 색을 밝게 되돌립니다. 며칠간 시릴 수 있고, 씌운 치아나 레진은 색이 바뀌지 않습니다.' },
+  { img: imgLam, t: '라미네이트', d: '앞니 겉면을 얇게 다듬고 맞춤 판을 붙여, 깨지거나 벌어진 모양을 정리합니다. 겉면을 깎아 원래대로 되돌릴 수 없으므로, 충분히 상담한 뒤 결정합니다.' },
   { img: imgResin, t: '앞니 레진', d: '작게 깨지거나 틈이 있는 앞니를 치아 색 재료로 메워 자연스럽게 다듬습니다.' },
 ];
 import WorryBand from '../../components/WorryBand.astro';
@@ -99,6 +99,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   <!-- 역지사지 진료 노트: 고민 띠 바로 아래 -->
   <Section class="!pt-0">
     <Note quote={'일하고, 아이 키우고, 부모님 챙기느라|내 치아는 늘 뒷전이셨을 겁니다.\n제가 환자라면|‘정말 이 치아를 빼야 하나’부터|묻고 싶을 것 같아,\n살릴 방법을 먼저 말씀드립니다.\n꼭 치료가 필요하다면|기간과 총비용까지|미리 설명드리고 시작합니다.'} />
+    <p class="mt-6 text-center t-mid text-foreground-muted">퇴근 후에도 오실 수 있도록 <strong class="text-primary">화요일은 저녁 8시 30분까지</strong> 진료합니다.</p>
   </Section>
 
   <!-- ───────── 임플란트 ───────── -->
@@ -129,6 +130,17 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
         { img: ip6, t: '정기 검진', d: '6개월~1년마다 잇몸과 맞물림을 점검합니다.' },
       ]}
     />
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl bg-background p-7 shadow-sm">
+        <h3 class="t-head font-bold">심은 뒤에는 이렇게 관리합니다</h3>
+        <p class="mt-2 t-body leading-relaxed text-foreground-muted">담배는 뼈와 붙는 것을 방해하니 치료 기간에는 피해 주세요. 당뇨가 있으시면 혈당을 꾸준히 관리하는 것이 중요합니다.</p>
+      </div>
+      <div class="flex flex-col rounded-3xl bg-background p-7 shadow-sm">
+        <h3 class="t-head font-bold">비용은 미리 확인하실 수 있습니다</h3>
+        <p class="mt-2 t-body leading-relaxed text-foreground-muted">임플란트·뼈이식·보철 비용을 진료비 안내에 공개하고 있습니다.</p>
+        <a href={url('/fees/')} class="mt-auto inline-block pt-4 t-body font-semibold text-primary hover:underline">비급여 진료비 보기 →</a>
+      </div>
+    </div>
   </Section>
 
   <!-- ───────── 자연치아·심미보철 ───────── -->
@@ -136,7 +148,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   <ChapterHead id="natural" photo={bandRoom} index={2} title="자연치아·심미보철" lead="덜 깎고, 나답게 되살립니다." items={tabs} />
 
   <!-- 1. 보존: 충치 단계별로 꼭 필요한 만큼 + 잇몸 치료 -->
-  <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 범위에 따라, 꼭 필요한 만큼만 치료합니다">
+  <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 범위에 따라, 꼭 필요한 만큼만 치료합니다" lead="찬물에 이가 시릴 때도 원인부터 찾습니다. 잇몸 쪽이 패였다면 그 부분만 메워 시린 증상을 줄입니다.">
     <!-- 4가지 보존 치료: 흰 상자마다 그림 · 상태 · 치료 이름 · 설명 (충치가 깊어지는 순서 → 잇몸) -->
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
@@ -158,6 +170,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
     <ul class="grid gap-4 sm:grid-cols-2 lg:mx-auto lg:max-w-[80rem]">
       {prosth.map((x) => <ImageCard img={x.img} alt={`${x.t} 치료 그림`} title={x.t} text={x.d} />)}
     </ul>
+    <p class="mt-6 text-center"><a href={url('/fees/')} class="t-body font-semibold text-primary hover:underline">크라운·인레이·레진 비용 보기 →</a></p>
   </Section>
 
   <!-- 3. 심미: 색과 모양을 다듬는 치료 -->
@@ -181,10 +194,14 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   <Section eyebrow="매복 사랑니 발치" title="위치와 신경부터 확인합니다">
     <div class="grid items-center gap-10 md:grid-cols-2">
       <Photo src={imgWhy} alt="3D 엑스레이에서 맨 안쪽에 비스듬히 난 위아래 사랑니를 화살표로 표시한 그림" />
-      <p class="t-mid leading-relaxed text-foreground-muted">정상 · 부분 매복 · 수평·완전 매복으로 나뉘며, 신경과 가까운 경우 CT로 거리를 확인한 뒤 계획합니다.</p>
+      <p class="t-mid leading-relaxed text-foreground-muted">사랑니는 반듯하게 난 경우부터 비스듬히 눕거나 뼈 속에 묻힌 경우(매복)까지 다양합니다. 신경과 가깝다면 CT로 거리를 먼저 확인하고 계획합니다.</p>
     </div>
     <h3 class="mt-12 mb-5 t-head font-bold">발치 과정</h3>
     <Process items={[{ title: '위치·신경 확인', text: 'CT로 사랑니 방향과 신경까지의 거리를 확인합니다.' }, { title: '마취', text: '충분히 마취가 된 것을 확인한 뒤 시작합니다.' }, { title: '발치·봉합', text: '필요하면 나눠서 빼고, 잇몸을 꿰매 마무리합니다.' }, { title: '실밥 제거', text: '7~10일 뒤 실밥을 풀고 아문 상태를 확인합니다.' }]} />
+    <h3 class="mt-12 mb-5 t-head font-bold">뽑은 뒤에는 이렇게 해 주세요</h3>
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {['거즈는 1~2시간 꼭 물고 계셔 주세요.', '첫날은 얼음찜질로 부기를 줄여 주세요.', '2~3일은 빨대·흡연·음주를 피해 주세요.', '피가 계속 나거나 부기가 심해지면 바로 연락해 주세요.'].map((t) => <li class="flex gap-3 rounded-2xl bg-surface px-5 py-4 t-body"><span aria-hidden="true" class="font-bold text-primary">✓</span>{t}</li>)}
+    </ul>
   </Section>
 
   <Section tone="surface" eyebrow="뽑기 전에, 살릴 방법부터" title="치아를 살리는 외과 치료">
