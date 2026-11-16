@@ -1,4 +1,5 @@
 ---
+import imgMedicine from '../assets/safe/medicine.jpg';
 import { SITE, br } from '../site';
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
@@ -144,6 +145,7 @@ const homeTips = [
     <p class="-mt-6 mb-10 inline-flex items-center gap-2 rounded-full bg-primary-surface px-5 py-2.5 t-mid font-semibold text-primary md:mb-12">
       진료 오실 때 약 봉투나 처방전을 가져와 주세요.
     </p>
+    <Image src={imgMedicine} alt="약병에서 손바닥에 알약을 덜어 내는 모습" widths={[640, 1280]} sizes="(min-width: 1280px) 120rem, 100vw" class="mb-10 aspect-[16/7] h-auto w-full rounded-3xl object-cover md:mb-12" />
     <StepFlow items={safeSteps} />
   </Section>
 
