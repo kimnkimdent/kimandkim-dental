@@ -1,0 +1,21 @@
+---
+// 그림 + 이름 + 설명 카드(청장년 임플란트 구조 · 임플란트 종류 · 보철 치료가 같은 모양을 쓴다).
+// 그림은 위(4:3 칸, 흰 바탕에 맞춤), 아래에 번호(선택) · 이름 · 설명 · 링크(선택).
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { url } from '../site';
+interface Props { img: ImageMetadata; alt: string; title: string; text: string; no?: number; link?: { href: string; label: string } }
+const { img, alt, title, text, no, link } = Astro.props;
+---
+
+<li class="flex flex-col overflow-hidden rounded-3xl border border-border bg-background">
+  <Image src={img} alt={alt} widths={[400, 800]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" class="aspect-[4/3] h-auto w-full bg-white object-contain p-4" />
+  <div class="flex flex-1 flex-col border-t border-border p-6">
+    <h3 class="flex items-center gap-2.5 t-head font-bold">
+      {no && <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{no}</span>}
+      {title}
+    </h3>
+    <p class="mt-2 t-body leading-relaxed text-foreground-muted">{text}</p>
+    {link && <a href={url(link.href)} class="mt-auto inline-block pt-4 t-body font-semibold text-primary hover:underline">{link.label}</a>}
+  </div>
+</li>
