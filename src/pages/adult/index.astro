@@ -13,7 +13,6 @@ import Process from '../../components/Process.astro';
 import FaqLinks from '../../components/FaqLinks.astro';
 import Photo from '../../components/Photo.astro';
 import { Image } from 'astro:assets';
-import tCrown from '../../assets/treat/treat-07.jpg';
 import part1 from '../../assets/implant/p1.jpg';
 import part2 from '../../assets/implant/p2.jpg';
 import part3 from '../../assets/implant/p3.jpg';
@@ -32,6 +31,8 @@ import nat1 from '../../assets/natural/n1.jpg';
 import nat2 from '../../assets/natural/n2.jpg';
 import nat3 from '../../assets/natural/n3.jpg';
 import nat4 from '../../assets/natural/n4.jpg';
+import imgCrown from '../../assets/natural/crown.jpg';
+import imgBridge from '../../assets/natural/bridge.jpg';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
 import { SITE, url, br } from '../../site';
@@ -56,8 +57,8 @@ const cavity = [
   { img: nat4, s: '잇몸 염증', t: '잇몸 치료 · 스케일링', d: '치석을 없애고 잇몸 상태에 맞춰 단계별로 치료합니다. 대부분 건강보험이 적용됩니다.' },
 ];
 const prosth = [
-  { t: '크라운', d: '신경 치료한 치아나 크게 깨진 치아를 통째로 감싸, 더 깨지지 않고 오래 쓸 수 있게 보호합니다.' },
-  { t: '브릿지', d: '빠진 치아 양옆을 지지대로 삼아 다리처럼 이어 빈자리를 메웁니다. 임플란트가 어려운 경우의 방법입니다.' },
+  { img: imgCrown, t: '크라운', d: '신경 치료한 치아나 크게 깨진 치아를 통째로 감싸, 더 깨지지 않고 오래 쓸 수 있게 보호합니다.' },
+  { img: imgBridge, t: '브릿지', d: '빠진 치아 양옆을 지지대로 삼아 다리처럼 이어 빈자리를 메웁니다. 임플란트가 어려운 경우의 방법입니다.' },
 ];
 const esthetic = [
   { t: '미백', d: '치아 표면을 깎지 않고, 누렇게 변한 색을 밝게 되돌립니다.' },
@@ -168,19 +169,20 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
 
   <!-- 2. 보철: 잃은 부분을 되살리는 치료 -->
   <Section eyebrow="보철 치료" title="잃은 부분은 튼튼하게 되살립니다">
-    <div class="grid items-center gap-8 md:grid-cols-[2fr_3fr]">
-      <Image src={tCrown} alt="다듬은 치아 위에 크라운을 씌우는 보철 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain" />
-      <ul class="space-y-3">
-        {
-          prosth.map((x) => (
-            <li class="rounded-2xl border border-border p-5 md:p-6">
+    <!-- 크라운 / 브릿지: 각각 그림과 설명 -->
+    <ul class="grid gap-4 md:grid-cols-2">
+      {
+        prosth.map((x) => (
+          <li class="overflow-hidden rounded-3xl border border-border">
+            <Image src={x.img} alt={`${x.t} 치료 그림`} widths={[480, 880]} sizes="(min-width: 768px) 45vw, 100vw" class="aspect-[11/9] h-auto w-full bg-white object-contain" />
+            <div class="border-t border-border p-6 md:p-7">
               <h3 class="t-head font-bold">{x.t}</h3>
-              <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{x.d}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+              <p class="mt-2 t-body leading-relaxed text-foreground-muted">{x.d}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <!-- 3. 심미: 색과 모양을 다듬는 치료 -->
