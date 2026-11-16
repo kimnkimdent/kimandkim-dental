@@ -18,6 +18,10 @@ import tCrown from '../../assets/treat/treat-07.jpg';
 import part1 from '../../assets/implant/p1.jpg';
 import part2 from '../../assets/implant/p2.jpg';
 import part3 from '../../assets/implant/p3.jpg';
+import kBasic from '../../assets/implant/k-basic.jpg';
+import kInsurance from '../../assets/implant/k-insurance.jpg';
+import kGraft from '../../assets/implant/k-graft.jpg';
+import kSinus from '../../assets/implant/k-sinus.jpg';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
 import { SITE, url, br } from '../../site';
@@ -29,10 +33,10 @@ const parts = [
   { img: part3, t: '크라운', d: '눈에 보이는 치아 부분으로, 옆 치아의 색과 모양에 맞춰 만듭니다.' },
 ];
 const kinds = [
-  { t: '일반 임플란트', d: '잇몸뼈가 충분할 때 쓰는 가장 기본적인 방법입니다. CT로 뼈 상태를 확인하고 심을 위치를 정합니다.' },
-  { t: '보험 임플란트', d: '만 65세 이상 평생 2개, 자세한 기준은 실버 클리닉에서 안내합니다.', link: '/silver/#insurance' },
-  { t: '뼈이식 임플란트', d: '이를 뺀 지 오래되어 잇몸뼈가 얇아졌다면, 뼈를 먼저 채운 뒤 심습니다. 기간은 조금 더 걸리지만 임플란트를 튼튼하게 받칠 수 있습니다.' },
-  { t: '상악동 거상술 임플란트', d: '위쪽 어금니 위에는 빈 공간(상악동)이 있어 뼈가 얕은 경우가 많습니다. 이 공간의 바닥을 살짝 올려 뼈를 채운 뒤 심습니다.' },
+  { img: kBasic, t: '일반 임플란트', d: '잇몸뼈가 충분할 때 쓰는 가장 기본적인 방법입니다. CT로 뼈 상태를 확인하고 심을 위치를 정합니다.' },
+  { img: kInsurance, t: '보험 임플란트', d: '만 65세 이상 평생 2개, 자세한 기준은 실버 클리닉에서 안내합니다.', link: '/silver/#insurance' },
+  { img: kGraft, t: '뼈이식 임플란트', d: '이를 뺀 지 오래되어 잇몸뼈가 얇아졌다면, 뼈를 먼저 채운 뒤 심습니다. 기간은 조금 더 걸리지만 임플란트를 튼튼하게 받칠 수 있습니다.' },
+  { img: kSinus, t: '상악동 거상술 임플란트', d: '위쪽 어금니 위에는 빈 공간(상악동)이 있어 뼈가 얕은 경우가 많습니다. 이 공간의 바닥을 살짝 올려 뼈를 채운 뒤 심습니다.' },
 ];
 const cavity = [
   { s: '초기', t: '레진 충전', d: '작은 충치를 깎아 내고 치아 색 재료로 메웁니다. 대부분 당일에 끝납니다.' },
@@ -99,10 +103,13 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
     <ul class="grid gap-4 sm:grid-cols-2">
       {
         kinds.map((k) => (
-          <li class="rounded-3xl border border-border p-7">
+          <li class="flex flex-col gap-5 rounded-3xl border border-border p-6 sm:flex-row sm:items-center md:p-7">
+            <Image src={k.img} alt={`${k.t} 모형 그림`} widths={[300, 500]} sizes="(min-width: 640px) 14rem, 100vw" class="mx-auto aspect-[4/3] h-auto w-full max-w-[24rem] shrink-0 rounded-2xl bg-white object-contain sm:mx-0 sm:w-44" />
+            <div class="flex-1">
             <h3 class="t-head font-bold">{k.t}</h3>
             <p class="mt-3 t-body text-foreground-muted whitespace-pre-line">{br(k.d)}</p>
             {k.link && <a href={url(k.link)} class="mt-4 inline-block t-body font-semibold text-primary hover:underline">실버 클리닉 보기 →</a>}
+            </div>
           </li>
         ))
       }
