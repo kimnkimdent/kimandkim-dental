@@ -1,5 +1,6 @@
 ---
 // PhilosophyBody: src/pages/philosophy.astro의 본문(첫 페이지에서도 그대로 이어서 보여 준다). home=true면 맨 위 제목을 h2로 낮추고 경로 표시를 숨긴다.
+import ClinicTabs from "./ClinicTabs.astro";
 import Section from '../../components/Section.astro';
 import Container from '../../components/Container.astro';
 import Photo from '../../components/Photo.astro';
@@ -113,6 +114,7 @@ const H = home ? 'h2' : 'h1';
         ))
       }
     </ul>
+    {home && <ClinicTabs />}
   </Section>
 
 
