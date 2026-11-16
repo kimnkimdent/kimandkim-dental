@@ -45,15 +45,20 @@ const kinds = [
   { img: kGraft, t: '뼈이식 임플란트', d: '이를 뺀 지 오래되어 잇몸뼈가 얇아졌다면, 뼈를 먼저 채운 뒤 심습니다. 기간은 조금 더 걸리지만 임플란트를 튼튼하게 받칠 수 있습니다.' },
   { img: kSinus, t: '상악동 거상술 임플란트', d: '위쪽 어금니 위에는 빈 공간(상악동)이 있어 뼈가 얕은 경우가 많습니다. 이 공간의 바닥을 살짝 올려 뼈를 채운 뒤 심습니다.' },
 ];
+// 자연치아·심미보철: 살리는 치료(보존) → 되살리는 치료(보철) → 다듬는 치료(심미). 서로 겹치지 않게 나눈다.
 const cavity = [
   { s: '초기', t: '레진 충전', d: '작은 충치를 깎아 내고 치아 색 재료로 메웁니다. 대부분 당일에 끝납니다.' },
-  { s: '중기', t: '인레이·온레이', d: '충치 범위가 넓으면 본을 떠 맞춤 조각을 만들어 채웁니다.' },
-  { s: '진행', t: '신경 치료 후 크라운', d: '신경까지 상했다면 신경 치료로 치아를 살린 뒤 크라운으로 감싸 보호합니다.' },
+  { s: '중기', t: '인레이 · 온레이', d: '충치 범위가 넓으면 본을 떠 맞춤 조각을 만들어, 상한 부분만 채웁니다.' },
+  { s: '진행', t: '신경 치료', d: '염증이 신경까지 갔다면 신경을 정리해 뽑지 않고 살립니다. 오래 시리거나 가만히 있어도 욱신거리면 검진을 받아 보세요.' },
+];
+const prosth = [
+  { t: '크라운', d: '신경 치료한 치아나 크게 깨진 치아를 통째로 감싸, 더 깨지지 않고 오래 쓸 수 있게 보호합니다.' },
+  { t: '브릿지', d: '빠진 치아 양옆을 지지대로 삼아 다리처럼 이어 빈자리를 메웁니다. 임플란트가 어려운 경우의 방법입니다.' },
 ];
 const esthetic = [
-  { t: '크라운', d: '많이 깨졌거나 신경 치료한 치아를 통째로 감싸, 더 깨지지 않게 보호합니다.' },
-  { t: '인레이·온레이 · 브릿지', d: '충치 부위만 맞춤 조각으로 채우거나, 빠진 자리를 양옆 치아에 걸어 메웁니다.' },
-  { t: '미백 · 라미네이트 · 레진', d: '누렇게 변한 색은 미백으로, 깨지거나 벌어진 앞니는 라미네이트나 레진으로 자연스럽게 다듬습니다.' },
+  { t: '미백', d: '치아 표면을 깎지 않고, 누렇게 변한 색을 밝게 되돌립니다.' },
+  { t: '라미네이트', d: '앞니 겉면을 얇게 다듬고 맞춤 판을 붙여, 깨지거나 벌어진 모양을 정리합니다.' },
+  { t: '앞니 레진', d: '작게 깨지거나 틈이 있는 앞니를 치아 색 재료로 메워 자연스럽게 다듬습니다.' },
 ];
 import WorryBand from '../../components/WorryBand.astro';
 const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까요?","임플란트 비용과 기간이 얼마나 될지 걱정돼요","퇴근하고 나면 치과 문이 다 닫혀 있어요","찬물만 마시면 이가 시려요","씌운 이가 오래돼 색이 변했어요","사랑니가 욱신거리는데 뽑기가 무서워요","양치할 때마다 잇몸에서 피가 나요","과잉 진료는 아닐까 걱정돼요"];
@@ -140,39 +145,55 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
 
   <ChapterHead id="natural" photo={bandRoom} index={2} title="자연치아·심미보철" lead="덜 깎고, 나답게 되살립니다." items={tabs} />
 
-  <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 치료">
-    <Image src={tCavity} alt="충치를 다듬고 그 자리를 채우는 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain mb-6 max-h-[36rem] md:w-1/2" />
-    <ol class="grid gap-3 md:grid-cols-3">
-      {
-        cavity.map((c) => (
-          <li class="rounded-3xl bg-background p-7 shadow-sm">
-            <span class="rounded-full bg-primary-surface px-3 py-1 t-body font-bold text-primary">{c.s}</span>
-            <p class="mt-4 t-head font-bold">{c.t}</p>
-            <p class="mt-2 t-body leading-relaxed text-foreground-muted">{c.d}</p>
-          </li>
-        ))
-      }
-    </ol>
-    <div class="mt-6 grid gap-4 md:grid-cols-2">
-      <div class="rounded-3xl bg-background p-8 shadow-sm">
-        <h3 class="t-head font-bold">신경 치료</h3>
-        <p class="mt-3 t-body leading-relaxed text-foreground-muted">염증이 신경까지 간 치아를 뽑지 않고 살리는 치료입니다.<br /> 오래 시리거나, 가만히 있어도 욱신거리거나, 잇몸이 붓는다면 검진을 받아보세요.</p>
-      </div>
-      <div class="rounded-3xl bg-background p-8 shadow-sm">
-        <h3 class="t-head font-bold">잇몸 치료 · 스케일링</h3>
-        <p class="mt-3 t-body leading-relaxed text-foreground-muted">잇몸 상태에 맞춰 단계별로 치료하며, 대부분 보험이 적용됩니다.</p>
-      </div>
+  <!-- 1. 보존: 충치 단계별로 꼭 필요한 만큼 + 잇몸 치료 -->
+  <Section tone="surface" eyebrow="자연치아 보존 치료" title="충치 범위에 따라, 꼭 필요한 만큼만 치료합니다">
+    <div class="grid items-center gap-8 md:grid-cols-[2fr_3fr]">
+      <Image src={tCavity} alt="충치를 다듬고 그 자리를 채우는 치료 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain" />
+      <ol class="space-y-3">
+        {
+          cavity.map((c) => (
+            <li class="flex gap-4 rounded-2xl bg-background p-5 shadow-sm md:p-6">
+              <span class="h-fit shrink-0 rounded-full bg-primary-surface px-3 py-1 t-body font-bold text-primary">{c.s}</span>
+              <div>
+                <p class="t-head font-bold">{c.t}</p>
+                <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{c.d}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div class="mt-6 rounded-3xl bg-background p-7 shadow-sm md:flex md:items-center md:gap-8">
+      <h3 class="shrink-0 t-head font-bold">잇몸 치료 · 스케일링</h3>
+      <p class="mt-2 t-body leading-relaxed text-foreground-muted md:mt-0">잇몸이 건강해야 치아도 오래 갑니다. 치석을 없애고 잇몸 상태에 맞춰 단계별로 치료하며, 대부분 건강보험이 적용됩니다.</p>
     </div>
   </Section>
 
-  <Section eyebrow="심미·보철 치료" title="자연스러운 색과 모양으로">
-    <Image src={tCrown} alt="다듬은 치아 위에 크라운을 씌우는 보철 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain mb-6 max-h-[36rem] md:w-1/2" />
+  <!-- 2. 보철: 잃은 부분을 되살리는 치료 -->
+  <Section eyebrow="보철 치료" title="잃은 부분은 튼튼하게 되살립니다">
+    <div class="grid items-center gap-8 md:grid-cols-[2fr_3fr]">
+      <Image src={tCrown} alt="다듬은 치아 위에 크라운을 씌우는 보철 그림" widths={[480, 640]} sizes="(min-width: 768px) 40vw, 100vw" class="w-full rounded-3xl bg-white object-contain" />
+      <ul class="space-y-3">
+        {
+          prosth.map((x) => (
+            <li class="rounded-2xl border border-border p-5 md:p-6">
+              <h3 class="t-head font-bold">{x.t}</h3>
+              <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{x.d}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 3. 심미: 색과 모양을 다듬는 치료 -->
+  <Section tone="surface" eyebrow="심미 치료" title="색과 모양은 자연스럽게 다듬습니다">
     <ul class="grid gap-4 md:grid-cols-3">
       {
         esthetic.map((x) => (
-          <li class="rounded-3xl border border-border p-7">
+          <li class="rounded-3xl bg-background p-7 shadow-sm">
             <h3 class="t-head font-bold">{x.t}</h3>
-            <p class="mt-3 t-body text-foreground-muted whitespace-pre-line">{br(x.d)}</p>
+            <p class="mt-3 t-body leading-relaxed text-foreground-muted">{x.d}</p>
           </li>
         ))
       }
