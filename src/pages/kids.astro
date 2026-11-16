@@ -1,4 +1,8 @@
 ---
+import ImageCard from '../components/ImageCard.astro';
+import first1 from '../assets/kids/first1.jpg';
+import first2 from '../assets/kids/first2.jpg';
+import first3 from '../assets/kids/first3.jpg';
 import { SITE, br } from '../site';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -48,17 +52,12 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
   <ChapterHead id="first" photo={kidCheckup} position="60% 40%" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
 
   <Section tone="surface" title="치과가 무서운 아이도 편안해지도록,|먼저 말하고 보여 주고 준비될 때까지 기다립니다">
-    <ol class="grid gap-3 md:grid-cols-3">
-      {[
-        ['무엇을 할지 말합니다', '오늘 무엇을 할지 아이 눈높이에 맞는 말로 먼저 이야기합니다.'],
-        ['기구를 보여 줍니다', '쓰는 기구를 직접 보고 만져 보게 해, 낯선 두려움을 줄입니다.'],
-        ['준비될 때까지 기다립니다', '아이가 괜찮다고 할 때 시작하고, 첫날은 치과와 친해지는 데서 끝나기도 합니다.'],
-      ].map(([t, d], i) => (
-        <li class="flex gap-4 rounded-2xl bg-background p-6 shadow-sm">
-          <span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span>
-          <span><span class="block t-mid font-semibold">{t}</span><span class="mt-1.5 block t-body leading-relaxed text-foreground-muted">{d}</span></span>
-        </li>
-      ))}
+    <ol class="grid gap-4 md:grid-cols-3">
+      {([
+        [first1, '무엇을 할지 말합니다', '오늘 무엇을 할지 아이 눈높이에 맞는 말로 먼저 이야기합니다.'],
+        [first2, '기구를 보여 줍니다', '쓰는 기구를 직접 보고 만져 보게 해, 낯선 두려움을 줄입니다.'],
+        [first3, '준비될 때까지 기다립니다', '아이가 괜찮다고 할 때 시작하고, 첫날은 치과와 친해지는 데서 끝나기도 합니다.'],
+      ] as const).map(([img, t, d], i) => <ImageCard img={img} alt={t + ' 그림'} no={i + 1} title={t} text={d} />)}
     </ol>
   </Section>
 
