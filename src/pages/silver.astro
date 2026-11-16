@@ -26,6 +26,7 @@ import safe3 from '../assets/safe/s3.jpg';
 import safe4 from '../assets/safe/s4.jpg';
 import safe5 from '../assets/safe/s5.jpg';
 import careImg from '../assets/denture/care.jpg';
+import StepFlow from '../components/StepFlow.astro';
 import WorryBand from '../components/WorryBand.astro';
 import tGum from '../assets/treat/treat-08.jpg';
 import chRoom from '../assets/photos/treatment-room.jpg';
@@ -143,20 +144,7 @@ const homeTips = [
     <p class="-mt-6 mb-10 inline-flex items-center gap-2 rounded-full bg-primary-surface px-5 py-2.5 t-mid font-semibold text-primary md:mb-12">
       진료 오실 때 약 봉투나 처방전을 가져와 주세요.
     </p>
-    <ol class="grid gap-3 lg:grid-cols-5 lg:gap-0">
-      {
-        safeSteps.map((x, i) => (
-          <li class="relative flex items-center gap-4 rounded-2xl bg-surface p-4 lg:flex-col lg:items-center lg:bg-transparent lg:p-0 lg:px-3 lg:text-center">
-            <Image src={x.img} alt="" aria-hidden="true" widths={[200, 380]} sizes="10rem" class="size-20 shrink-0 rounded-2xl bg-white object-contain md:size-24 lg:size-32" />
-            <div class="lg:mt-4">
-              <p class="flex items-center gap-2 lg:justify-center"><span class="flex size-7 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{i + 1}</span><span class="t-mid font-bold">{x.t}</span></p>
-              <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{x.d}</p>
-            </div>
-            {i < safeSteps.length - 1 && <span aria-hidden="true" class="absolute top-16 -right-3 hidden text-[2.4rem] text-primary/40 lg:block">→</span>}
-          </li>
-        ))
-      }
-    </ol>
+    <StepFlow items={safeSteps} />
   </Section>
 
   <ChapterHead id="care" photo={chRoom} index={4} title="잇몸·시린 이 관리" lead="잇몸 · 시린 이 · 구강건조까지 꾸준히" items={chapters} />

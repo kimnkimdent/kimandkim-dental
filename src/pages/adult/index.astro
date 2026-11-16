@@ -22,6 +22,13 @@ import kBasic from '../../assets/implant/k-basic-v3.jpg';
 import kInsurance from '../../assets/implant/k-insurance-v3.jpg';
 import kGraft from '../../assets/implant/k-graft-v3.jpg';
 import kSinus from '../../assets/implant/k-sinus-v3.jpg';
+import ip1 from '../../assets/implant/i1.jpg';
+import ip2 from '../../assets/implant/i2.jpg';
+import ip3 from '../../assets/implant/i3.jpg';
+import ip4 from '../../assets/implant/i4.jpg';
+import ip5 from '../../assets/implant/i5.jpg';
+import ip6 from '../../assets/implant/i6.jpg';
+import StepFlow from '../../components/StepFlow.astro';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
 import { SITE, url, br } from '../../site';
@@ -117,14 +124,14 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   </Section>
 
   <Section tone="surface" eyebrow="임플란트 치료 과정" title="검사부터 정기 검진까지">
-    <Process
+    <StepFlow
       items={[
-        { title: '정밀 검사', text: '바텍(Vatech) CT로 뼈의 양과 신경 위치를 입체적으로 확인합니다.' },
-        { title: '상담', text: '치료 계획과 기간, 총비용을 시작 전에 모두 설명드립니다.' },
-        { title: '식립', text: '충분히 마취한 뒤 잇몸뼈에 인공 뿌리를 심습니다.' },
-        { title: '골유착', text: '뼈와 단단히 붙을 때까지 기다립니다. 아래턱 약 2~3개월, 위턱 약 3~6개월입니다.' },
-        { title: '보철', text: '본을 떠 만든 맞춤 크라운을 연결합니다.' },
-        { title: '정기 검진', text: '6개월~1년마다 잇몸과 맞물림을 점검합니다.' },
+        { img: ip1, t: '정밀 검사', d: '바텍(Vatech) CT로 뼈의 양과 신경 위치를 입체적으로 확인합니다.' },
+        { img: ip2, t: '상담', d: '치료 계획과 기간, 총비용을 시작 전에 모두 설명드립니다.' },
+        { img: ip3, t: '식립', d: '충분히 마취한 뒤 잇몸뼈에 인공 뿌리를 심습니다.' },
+        { img: ip4, t: '골유착', d: '뼈와 단단히 붙을 때까지 기다립니다. 아래턱 약 2~3개월, 위턱 약 3~6개월입니다.' },
+        { img: ip5, t: '보철', d: '본을 떠 만든 맞춤 크라운을 연결합니다.' },
+        { img: ip6, t: '정기 검진', d: '6개월~1년마다 잇몸과 맞물림을 점검합니다.' },
       ]}
     />
   </Section>
