@@ -36,6 +36,7 @@ import imgBridge from '../../assets/natural/bridge.jpg';
 import imgWhite from '../../assets/natural/whitening-v2.jpg';
 import imgLam from '../../assets/natural/laminate-v5.jpg';
 import imgResin from '../../assets/natural/resin-v2.jpg';
+import imgWhy from '../../assets/wisdom/why.jpg';
 import ImageCard from '../../components/ImageCard.astro';
 import SubTabs from '../../components/SubTabs.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
@@ -171,6 +172,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
   <ChapterHead id="wisdom" photo={bandTreat} position="50% 35%" index={3} title="사랑니·구강외과" lead="미루지 말고, 편안하게." items={tabs} />
 
   <Section tone="surface" eyebrow="사랑니, 왜 빼야 할까요?" title="닦기 어려운 자리라 문제가 생기기 쉽습니다">
+    <Image src={imgWhy} alt="입안 3D 사진에서 맨 안쪽에 비스듬히 난 위아래 사랑니를 화살표로 표시한 그림" widths={[600, 1200]} sizes="(min-width: 1024px) 80rem, 100vw" class="mb-8 h-auto w-full max-w-[80rem] rounded-3xl" />
     <p class="max-w-prose t-mid leading-relaxed text-foreground-muted">칫솔이 닿기 어려워 충치와 잇몸 염증이 잘 생기고, 앞 어금니까지 상하게 할 수 있습니다.<br /> 나이가 들수록 회복도 더뎌집니다.</p>
   </Section>
 
