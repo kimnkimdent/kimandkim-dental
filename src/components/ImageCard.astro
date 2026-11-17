@@ -4,12 +4,12 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { url } from '../site';
-interface Props { img: ImageMetadata; alt: string; title: string; text: string; no?: number; link?: { href: string; label: string } }
-const { img, alt, title, text, no, link } = Astro.props;
+interface Props { img: ImageMetadata; alt: string; title: string; text: string; no?: number; link?: { href: string; label: string }; cover?: boolean } // cover: 그림을 칸에 꽉 채움(정사각형, 여백 없음)
+const { img, alt, title, text, no, link, cover = false } = Astro.props;
 ---
 
 <li class="flex flex-col overflow-hidden rounded-3xl border border-border bg-background">
-  <Image src={img} alt={alt} widths={[400, 800]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" class="aspect-[4/3] h-auto w-full bg-white object-contain p-4" />
+  <Image src={img} alt={alt} widths={[400, 800]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" class:list={['h-auto w-full', cover ? 'aspect-square object-cover' : 'aspect-[4/3] bg-white object-contain p-4']} />
   <div class="flex flex-1 flex-col border-t border-border p-6">
     <h3 class="flex items-center gap-2.5 t-head font-bold">
       {no && <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary t-body font-bold text-primary-foreground">{no}</span>}

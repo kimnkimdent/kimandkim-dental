@@ -60,7 +60,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
         [first1, '무엇을 할지 말합니다', '오늘 무엇을 할지 아이 눈높이에 맞는 말로 먼저 이야기합니다.'],
         [first2, '기구를 보여 줍니다', '쓰는 기구를 직접 보고 만져 보게 해, 낯선 두려움을 줄입니다.'],
         [first3, '준비될 때까지 기다립니다', '아이가 괜찮다고 할 때 시작하고, 첫날은 치과와 친해지는 데서 끝나기도 합니다.'],
-      ] as const).map(([img, t, d], i) => <ImageCard img={img} alt={t + ' 그림'} no={i + 1} title={t} text={d} />)}
+      ] as const).map(([img, t, d], i) => <ImageCard img={img} alt={t + ' 그림'} no={i + 1} title={t} text={d} cover />)}
     </ol>
   </Section>
 
@@ -71,7 +71,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
       {
         checkups.map((c, i) => (
           <li class="overflow-hidden rounded-3xl border border-border pb-7 text-center">
-            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="mb-5 aspect-[4/5] h-auto w-full object-cover" />
+            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="mb-5 aspect-square h-auto w-full object-cover" />
             <p class="t-head font-bold text-primary">{c.t}</p>
             <p class="mt-2 px-7 t-mid whitespace-pre-line">{br(c.d)}</p>
             <p class="mt-3 px-7 t-body leading-relaxed text-foreground-muted">{c.x}</p>
