@@ -1,4 +1,5 @@
 ---
+import Disclaimer from '../components/Disclaimer.astro';
 import Container from '../components/Container.astro';
 import imgMedicine from '../assets/safe/medicine.jpg';
 import { SITE, br } from '../site';
@@ -184,6 +185,8 @@ const homeTips = [
       </ul>
     </div>
   </Section>
+
+  <Disclaimer />
 
   <Section eyebrow="자주 묻는 질문" title="부모님 치아, 이것이 궁금해요">
     <FaqLinks group="silver" />

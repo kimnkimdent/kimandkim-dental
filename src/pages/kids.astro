@@ -1,4 +1,5 @@
 ---
+import Disclaimer from '../components/Disclaimer.astro';
 import checkup1 from '../assets/kids/checkup1-v6.jpg';
 import checkup2 from '../assets/kids/checkup2-v7.jpg';
 import checkup3 from '../assets/kids/checkup3-v5.jpg';
@@ -143,6 +144,8 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
       </ul>
     </div>
   </Section>
+
+  <Disclaimer />
 
   <Section eyebrow="자주 묻는 질문" title="우리 아이 치아">
     <FaqLinks group="kids" />

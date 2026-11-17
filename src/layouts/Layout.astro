@@ -5,7 +5,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import QuickMenu from '../components/QuickMenu.astro';
 import VisitInfo from '../components/VisitInfo.astro';
-import Disclaimer from '../components/Disclaimer.astro';
 import { baseSchema, breadcrumb, pageSchema, topics } from '../seo';
 import { qnaUpdated } from '../qna';
 
@@ -91,7 +90,6 @@ const kw = [...new Set([...keywords, SITE.name, ...topics.slice(0, 8)])].join(',
     <main class="flex-1" data-clinic={clinic}>
       <slot />
     </main>
-    {treatment && <Disclaimer />}
     <VisitInfo />
     <Footer />
     <QuickMenu />
