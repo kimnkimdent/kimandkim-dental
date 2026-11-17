@@ -67,3 +67,13 @@
 - 사용자가 실제 문구를 넣을 때 표시광고법을 지킨다. "상위노출 100% 보장", "업계 1위", "매출 N배", "최고·최초·유일" 같은 결과 보장이나 근거 없는 최상급 표현은 넣지 않는다. 사용자가 요청해도 사실 위주 표현으로 바꿔 제안한다. 고객사 이름·후기는 동의받은 것만 싣는다.
 - `astro.config.mjs`, `.github/workflows/deploy.yml`, `package.json`은 사용자가 요청한 기능에 꼭 필요할 때만 건드린다. `seligent-landing-page/` 폴더는 참고용이니 수정하지 않는다.
 - 수정이 끝나면 `npm run build`로 깨진 곳이 없는지 확인한다.
+
+## 김앤김치과 작업 규칙(다른 컴퓨터에서도 지킬 것)
+- 저장소: GitHub `kimnkimdent/kimandkim-dental`(비공개). 작업 시작 전 `git pull`, 끝나면 저장 후 `git push`. 다른 컴퓨터에서 처음이면 Git·Node(LTS)·GitHub CLI를 winget으로 설치하고 `gh auth login` 뒤 `gh repo clone kimnkimdent/kimandkim-dental C:\kimandkim-dental`, `npm install`.
+- 도메인은 www.kimnkim.co.kr(DNS: 호스트코코아). 도메인 연결을 검색 등록보다 먼저 한다.
+- 김앤김치과는 교정 진료를 하지 않는다. 교정이 필요하면 교정 전문 치과를 안내한다는 식으로만 쓴다.
+- 사이트 글은 합니다체(~니다)로 쓴다. 원장님 인터뷰·역지사지 노트 인용, 환자 말투 질문, '이런 고민 있으신가요?' 말풍선만 예외.
+- 모든 정보는 김앤김치과 것이어야 한다(루트 템플릿 흔적 금지). 페이지마다 Layout에 title·description(80–150자, 파주/운정 포함)·keywords·crumbs, 진료 페이지는 treatment·procedures까지. 병원 정보는 src/site.ts, 원장·진료는 src/seo.ts, Q&A는 src/data/qna.json.
+- 궁금해요 Q&A는 Pages CMS(app.pagescms.org, `.pages.yml`)로 원장님이 직접 편집한다. 배포 후 원장님 이메일을 Collaborators로 초대.
+- 사진 속 인물은 모델·직원이며 "연출 사진" 표시는 넣지 않는다. 캐릭터 인형이 나온 사진은 쓰지 않는다.
+- 이 컴퓨터엔 진짜 Python이 없을 수 있다. 그림 작업은 node + sharp로 한다.
