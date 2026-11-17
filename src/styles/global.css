@@ -241,6 +241,7 @@
   font-size: 3rem;
   line-height: 1.35;
   @variant md { font-size: 4.6rem; }
+  @variant lg { font-size: 5.6rem; }
 }
 
 /* 첫 화면 배경 영상: "동작 줄이기" 설정이면 영상을 숨기고 첫 장면 사진을 배경으로 보여 준다 */
