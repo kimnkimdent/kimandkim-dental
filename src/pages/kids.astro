@@ -23,6 +23,7 @@ import chTreat from '../assets/photos/band-scanner.jpg';
 import chTeen from '../assets/photos/xray-explain.jpg';
 import kidCheckup from '../assets/photos/kid-checkup.jpg';
 import frontInjury from '../assets/kids/front-injury-v2.jpg';
+import teenBg from '../assets/kids/teen-bg.jpg';
 import between from '../assets/kids/between-v4.jpg';
 import crooked from '../assets/kids/crooked-v2.jpg';
 
@@ -123,8 +124,9 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
   <ChapterHead id="teen" photo={chTeen} position="50% 40%" index={4} title="청소년 치아 관리" lead="바쁜 중·고등학생 시기에도" items={chapters} />
 
   <Section title="공부로 바쁜 시기에도,|한 번 올 때 필요한 것을 꼼꼼히 확인합니다">
-    <Photo alt="청소년 치아 검진 사진" ratio="aspect-[21/9]" class="mb-8" />
-    <div class="rounded-3xl border border-border bg-background p-7 shadow-sm md:p-10">
+    <div class="relative isolate overflow-hidden rounded-3xl p-7 text-background shadow-sm md:p-12">
+      <Image src={teenBg} alt="" widths={[800, 1400]} sizes="100vw" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <div class="absolute inset-0 -z-10 bg-foreground/75" aria-hidden="true"></div>
       <p class="t-head font-bold">이럴 때 한 번 확인해 보세요</p>
       <ul class="mt-6 grid gap-x-10 gap-y-6 md:grid-cols-2">
         {teenChecks.map(([t, d]) => (
@@ -134,7 +136,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
             </span>
             <div>
               <h3 class="t-mid font-bold">{t}</h3>
-              <p class="mt-1.5 t-body leading-relaxed text-foreground-muted">{d}</p>
+              <p class="mt-1.5 t-body leading-relaxed text-background/85">{d}</p>
             </div>
           </li>
         ))}
