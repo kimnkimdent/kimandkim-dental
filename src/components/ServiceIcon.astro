@@ -2,6 +2,12 @@
 // 홈 진료 안내 카드 픽토그램(내용에 맞춘 그림). 진한색 = 감싼 곳의 primary(진료 과목 색), 연한색 = primary-surface.
 // about(치아+의료 십자) · philosophy(겹친 두 하트) · silver(할머니·할아버지 얼굴) · adult(엄마·아빠 얼굴) · kids(아이 얼굴) · qna(물음 말풍선)
 // outline: 안을 비우고 테두리·눈·입만(영상 위처럼 어두운 바탕에 흰색으로 쓸 때). 얼굴 뒤로 비치는 뒷머리는 그리지 않는다.
+import { Image } from 'astro:assets';
+import faceSilver from '../assets/clinic/silver.png';
+import faceAdult from '../assets/clinic/adult.png';
+import faceKids from '../assets/clinic/kids.png';
+// 실버·청장년·어린이는 얼굴 일러스트(동그라미)로 보여 준다.
+const FACES = { silver: faceSilver, adult: faceAdult, kids: faceKids } as const;
 interface Props { name: 'about' | 'philosophy' | 'silver' | 'adult' | 'kids' | 'qna'; class?: string; outline?: boolean }
 const { name, class: className = 'size-12', outline = false } = Astro.props;
 const D = 'var(--primary)';
@@ -11,6 +17,9 @@ const W = outline ? 'none' : '#fff';
 const VB: Record<Props['name'], string> = {"about":"3.7 2.3 44.5 44.5","philosophy":"1.6 -0.95 46.8 46.8","silver":"6.42 3.92 35.17 35.17","adult":"5.54 6.54 36.42 36.42","kids":"2.4 3.4 43.2 43.2","qna":"2.4 3.9 43.2 43.2"};
 ---
 
+{name in FACES ? (
+  <Image src={FACES[name as keyof typeof FACES]} alt='' aria-hidden='true' width={240} height={240} class:list={['shrink-0 rounded-full object-cover', className]} />
+) : (
 <svg aria-hidden="true" viewBox={VB[name]} class={className} overflow="visible" fill="none" stroke-linecap="round" stroke-linejoin="round">
   {name === 'about' && (
     <>
@@ -85,3 +94,4 @@ const VB: Record<Props['name'], string> = {"about":"3.7 2.3 44.5 44.5","philosop
     </>
   )}
 </svg>
+)}
