@@ -1,7 +1,7 @@
 ---
 import checkup1 from '../assets/kids/checkup1.jpg';
-import checkup2 from '../assets/kids/checkup2.jpg';
-import checkup3 from '../assets/kids/checkup3.jpg';
+import checkup2 from '../assets/kids/checkup2-v2.jpg';
+import checkup3 from '../assets/kids/checkup3-v2.jpg';
 const checkupImgs = [checkup1, checkup2, checkup3];
 import ImageCard from '../components/ImageCard.astro';
 import first1 from '../assets/kids/first1-v2.jpg';
@@ -71,7 +71,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
       {
         checkups.map((c, i) => (
           <li class="overflow-hidden rounded-3xl border border-border pb-7 text-center">
-            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="mb-5 aspect-[4/5] h-auto w-full object-cover md:aspect-square" />
+            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="mb-5 aspect-[4/5] h-auto w-full object-cover" />
             <p class="t-head font-bold text-primary">{c.t}</p>
             <p class="mt-2 px-7 t-mid whitespace-pre-line">{br(c.d)}</p>
             <p class="mt-3 px-7 t-body leading-relaxed text-foreground-muted">{c.x}</p>
