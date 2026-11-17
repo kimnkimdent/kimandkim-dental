@@ -43,7 +43,7 @@ const face = !!pictogram && ['silver', 'adult', 'kids'].includes(pictogram);
       {face ? (
         <div class="relative mt-6 flex items-center gap-4 md:gap-5">
           <ServiceIcon name={pictogram!} class="size-20 shrink-0 md:size-24" />
-          <Tag class:list={['relative t-display font-bold whitespace-pre-line', 'mt-0']}>{parts.map((p) => (accent.includes(p) ? <span class="text-primary-bright">{p}</span> : p))}{suffix && <span class="ml-3 align-baseline t-mid font-semibold text-foreground-muted">{suffix}</span>}</Tag>
+          <Tag class:list={['relative t-display font-bold whitespace-pre-line', 'mt-0']}>{parts.map((p) => (accent.includes(p) ? <span class="text-primary-bright">{p}</span> : p))}{suffix && <span class="mt-1 block t-mid font-semibold text-foreground-muted">{suffix}</span>}</Tag>
         </div>
       ) : (
         <>
