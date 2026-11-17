@@ -43,6 +43,7 @@ const rules = [
 interface Props { home?: boolean }
 const { home = false } = Astro.props;
 const H = home ? 'h2' : 'h1';
+import markLogo from '../../assets/logo/mark.svg';
 ---
   <!-- 첫 화면: 왼쪽 易地思之 · 핵심 질문(h1) · 블로그 자세히 보기 / 오른쪽 원장 인터뷰(원문·줄바꿈 그대로) -->
   <section class="relative isolate overflow-hidden bg-gradient-to-b from-primary-surface to-background pt-14 pb-section md:pt-20" aria-labelledby="philosophy-title">
@@ -56,7 +57,7 @@ const H = home ? 'h2' : 'h1';
       <div class="mt-6 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
         <div class="relative md:sticky md:top-32 md:self-start">
           <p aria-hidden="true" class="pointer-events-none absolute top-[38%] left-[-0.06em] -z-10 -translate-y-1/2 font-serif text-[10rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.08] select-none sm:text-[14rem] md:text-[18rem]">易地思之</p>
-          <p class="flex items-center gap-2.5 t-mid font-semibold text-primary"><ServiceIcon name="philosophy" class="size-10 md:size-12" />김정민 원장의 역지사지</p>
+          <p class="flex items-center gap-2.5 t-mid font-semibold text-primary"><img src={markLogo.src} alt='' aria-hidden='true' class='h-10 w-auto md:h-12' />김정민 원장의 역지사지</p>
           <H id="philosophy-title" class="mt-6 font-serif text-[3.6rem] leading-[1.4] font-bold text-secondary md:text-[5.2rem]">
             <span class="head-line block">내가 환자라면…</span><span class="head-line head-line-2 block">내 가족이라면…</span>
           </H>
