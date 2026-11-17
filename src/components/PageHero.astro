@@ -6,6 +6,7 @@ import Container from './Container.astro';
 import { br } from '../site';
 import Mark from './Mark.astro';
 import ServiceIcon from './ServiceIcon.astro';
+import markLogo from '../assets/logo/mark.svg';
 interface Props {
   crumbs?: string[]; // 예: ['병원소개', '김앤김 이야기']
   eyebrow?: string;
@@ -47,7 +48,7 @@ const face = !!pictogram && ['silver', 'adult', 'kids'].includes(pictogram);
         </div>
       ) : (
         <>
-      {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{pictogram && <ServiceIcon name={pictogram} class={['silver','adult','kids'].includes(pictogram) ? 'size-20 md:size-24' : 'size-10 md:size-12'} />}{eyebrow}</p>}
+      {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{pictogram === 'about' ? <img src={markLogo.src} alt='' aria-hidden='true' class='h-10 w-auto md:h-12' /> : pictogram && <ServiceIcon name={pictogram} class={['silver','adult','kids'].includes(pictogram) ? 'size-20 md:size-24' : 'size-10 md:size-12'} />}{eyebrow}</p>}
       <Tag class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{parts.map((p) => (accent.includes(p) ? <span class="text-primary-bright">{p}</span> : p))}{suffix && <span class="ml-3 align-baseline t-mid font-semibold text-foreground-muted">{suffix}</span>}</Tag>
         </>
       )}
