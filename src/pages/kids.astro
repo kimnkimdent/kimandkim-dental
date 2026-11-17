@@ -1,4 +1,8 @@
 ---
+import checkup1 from '../assets/kids/checkup1.jpg';
+import checkup2 from '../assets/kids/checkup2.jpg';
+import checkup3 from '../assets/kids/checkup3.jpg';
+const checkupImgs = [checkup1, checkup2, checkup3];
 import ImageCard from '../components/ImageCard.astro';
 import first1 from '../assets/kids/first1-v2.jpg';
 import first2 from '../assets/kids/first2.jpg';
@@ -12,7 +16,6 @@ import SubTabs from '../components/SubTabs.astro';
 import ChapterHead from '../components/ChapterHead.astro';
 import FaqLinks from '../components/FaqLinks.astro';
 import Photo from '../components/Photo.astro';
-import Mark from '../components/Mark.astro';
 import { Image } from 'astro:assets';
 import tKids from '../assets/treat/treat-06.jpg';
 import kidFriendly from '../assets/photos/logo-wall.jpg';
@@ -66,12 +69,12 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
   <Section title="나라에서 지원하는 무료 영유아 구강검진으로,|시기에 맞춰 아이 치아를 꼼꼼히 살핍니다">
     <ol class="grid gap-3 md:grid-cols-3">
       {
-        checkups.map((c) => (
-          <li class="rounded-3xl border border-border p-7 text-center">
-            <Mark class="mx-auto mb-3 h-12 w-auto" />
+        checkups.map((c, i) => (
+          <li class="overflow-hidden rounded-3xl border border-border pb-7 text-center">
+            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="mb-5 aspect-[4/5] h-auto w-full object-cover md:aspect-square" />
             <p class="t-head font-bold text-primary">{c.t}</p>
-            <p class="mt-2 t-mid whitespace-pre-line">{br(c.d)}</p>
-            <p class="mt-3 t-body leading-relaxed text-foreground-muted">{c.x}</p>
+            <p class="mt-2 px-7 t-mid whitespace-pre-line">{br(c.d)}</p>
+            <p class="mt-3 px-7 t-body leading-relaxed text-foreground-muted">{c.x}</p>
           </li>
         ))
       }
