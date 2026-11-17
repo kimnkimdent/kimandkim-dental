@@ -39,7 +39,7 @@ const pictogram = icon ?? clinic;
           </p>
         )
       }
-      {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{pictogram && <ServiceIcon name={pictogram} class="size-10 md:size-12" />}{eyebrow}</p>}
+      {eyebrow && <p class="relative mt-6 flex items-center gap-2.5 t-mid font-semibold text-primary">{pictogram && <ServiceIcon name={pictogram} class={['silver','adult','kids'].includes(pictogram) ? 'size-20 md:size-24' : 'size-10 md:size-12'} />}{eyebrow}</p>}
       <Tag class:list={['relative t-display font-bold whitespace-pre-line', eyebrow ? 'mt-2' : 'mt-6']}>{parts.map((p) => (accent.includes(p) ? <span class="text-primary-bright">{p}</span> : p))}{suffix && <span class="ml-3 align-baseline t-mid font-semibold text-foreground-muted">{suffix}</span>}</Tag>
       {lead && <p data-speakable class="relative mt-5 max-w-prose t-mid whitespace-pre-line text-foreground-muted">{br(lead)}</p>}
     </div>

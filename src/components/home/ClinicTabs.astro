@@ -17,7 +17,7 @@ const tabs = [
     <div class="mt-6 flex flex-wrap justify-center gap-3 lg:mt-10 lg:gap-5">
       {tabs.map((t) => (
         <a href={url(`/${t.id}/`)} class="inline-flex min-h-12 items-center gap-2 rounded-full lg:min-h-[6.4rem] lg:gap-3 lg:px-10 lg:text-[2rem] border border-border-accent bg-background px-6 t-body font-semibold text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground">
-          <ServiceIcon name={t.id} class="size-7 lg:size-10" />{t.label}
+          <ServiceIcon name={t.id} class="size-14 lg:size-20" />{t.label}
         </a>
       ))}
     </div>
