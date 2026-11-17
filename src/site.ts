@@ -55,7 +55,7 @@ export const SITE = {
         { href: '/kids/#first', label: '처음 오는 아이' },
         { href: '/kids/#checkup', label: '영유아 구강검진' },
         { href: '/kids/#care', label: '어린이 충치 치료' },
-        { href: '/kids/#teen', label: '청소년 관리' },
+        { href: '/kids/#teen', label: '청소년 치아 관리' },
       ],
     },
     {
