@@ -21,6 +21,7 @@ import tKids from '../assets/treat/treat-06.jpg';
 import kidFriendly from '../assets/photos/logo-wall.jpg';
 import chTreat from '../assets/photos/band-scanner.jpg';
 import kidCheckup from '../assets/photos/kid-checkup.jpg';
+import crooked from '../assets/kids/crooked.jpg';
 
 const checkups = [
   { t: '1차', d: '생후 18~29개월', x: '첫 이가 잘 나고 있는지, 젖병·밤중 수유로 인한 충치는 없는지 살핍니다.' },
@@ -96,6 +97,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
         <p class="mt-3 t-body leading-relaxed text-foreground-muted">중·고등학생 때는 바빠서 검진을 놓치기 쉽습니다. 정기 검진과 함께 사랑니 위치, 이갈이·턱관절까지 한 번에 확인합니다.</p>
       </div>
       <div class="rounded-3xl bg-background p-8 shadow-sm">
+        <Image src={crooked} alt="유치가 빠지고 영구치가 나는 아이의 입 모양" widths={[480, 960]} sizes="(min-width: 768px) 40vw, 100vw" class="mb-5 aspect-[16/10] h-auto w-full rounded-2xl object-cover" />
         <h3 class="t-head font-bold">영구치가 삐뚤게 날 때</h3>
         <p class="mt-3 t-body leading-relaxed text-foreground-muted">유치가 늦게 빠지거나 영구치가 비켜 나면 엑스레이로 자리를 확인합니다. 지켜봐도 되는지 알려 드리고, 교정이 필요하면 교정 전문 치과를 안내해 드립니다.</p>
       </div>
