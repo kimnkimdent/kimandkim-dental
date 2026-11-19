@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import { SITE, tel, br } from '../site';
 import { qna, allQna, qnaUpdated, qnaAuthor } from '../qna';
 import { faqSchema } from '../seo';
@@ -19,6 +20,8 @@ const rows = [['/silver/', '#silver'], ['/adult/', '#implant'], ['/kids/', '#kid
   return { label: n.label, href, items: n.children!.map((c) => ({ label: c.label, href: '#' + target[c.href] })) };
 });
 // 분류마다 브랜드 색 안에서 진남색 → 하늘색으로 차례로 밝아진다(로고 남색 #0a659c · 하늘색 #1cb4e0 사이). 흰 글자가 읽히는 진하기까지만.
+// 분류 → 진료 안내 클리닉 캐릭터(실버·청장년·어린이)
+const face: Record<string, 'silver' | 'adult' | 'kids'> = { silver: 'silver', implant: 'adult', natural: 'adult', wisdom: 'adult', kids: 'kids' };
 const tone: Record<string, string> = {
   silver: '--primary: hsl(208, 85%, 20%); --primary-surface: hsl(208, 60%, 95%);',
   implant: '--primary: hsl(205, 88%, 27%); --primary-surface: hsl(205, 65%, 95%);',
@@ -62,8 +65,9 @@ const tone: Record<string, string> = {
           const [first, ...rest] = g.items;
           return (
           <section id={g.id} class="qna-group scroll-mt-28 pt-16 md:pt-20" style={tone[g.id] ?? ''}>
-            <div class="flex items-end gap-4">
+            <div class="flex items-center gap-4">
               <span aria-hidden="true" class="t-display leading-none font-extrabold text-primary/15">{String(gi + 1).padStart(2, '0')}</span>
+              <ServiceIcon name={face[g.id] ?? 'adult'} class="size-16 md:size-20" />
               <div>
                 <p class="inline-flex rounded-full bg-primary-surface px-4 py-1.5 text-13 font-semibold text-primary">{g.tab}</p>
                 <h2 class="mt-2 t-headline font-bold">“{g.title}”</h2>
