@@ -72,8 +72,8 @@ export const SITE = {
   ] as { href: string; label: string; children?: { href: string; label: string }[] }[],
   contact: {
     phone: '031-8071-2500',
-    // 네이버 플레이스(김앤김치과, 장소 번호 33535227). 플레이스 화면의 예약 버튼으로 예약한다. 2026-11-19 사용자가 준 주소.
-    booking: 'https://map.naver.com/p/entry/place/33535227',
+    // 네이버 예약(김앤김치과 예약 화면). 2026-11-19 사용자가 준 주소에서 날짜 등 뒷부분만 뺐다.
+    booking: 'https://m.booking.naver.com/booking/6/bizes/185829/items/2885642',
     map: 'https://map.naver.com/p/entry/place/33535227',
     kakaoMap: 'https://map.kakao.com/?q=%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
     blog: 'https://blog.naver.com/dent2500', // 네이버 블로그(공식)
