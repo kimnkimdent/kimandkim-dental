@@ -72,9 +72,9 @@ export const SITE = {
   ] as { href: string; label: string; children?: { href: string; label: string }[] }[],
   contact: {
     phone: '031-8071-2500',
-    // TODO(확인 필요): 네이버 예약 주소를 받으면 바꾼다. 지금은 네이버 지도 검색(플레이스에서 예약 가능)으로 연결.
-    booking: 'https://map.naver.com/p/search/%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
-    map: 'https://map.naver.com/p/search/%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
+    // 네이버 플레이스(김앤김치과, 장소 번호 33535227). 플레이스 화면의 예약 버튼으로 예약한다. 2026-11-19 사용자가 준 주소.
+    booking: 'https://map.naver.com/p/entry/place/33535227',
+    map: 'https://map.naver.com/p/entry/place/33535227',
     kakaoMap: 'https://map.kakao.com/?q=%EA%B9%80%EC%95%A4%EA%B9%80%EC%B9%98%EA%B3%BC',
     blog: 'https://blog.naver.com/dent2500', // 네이버 블로그(공식)
     blogPhilosophy: 'https://blog.naver.com/dent2500/224362690669', // 블로그 진료철학 글(진료철학 페이지 버튼)
