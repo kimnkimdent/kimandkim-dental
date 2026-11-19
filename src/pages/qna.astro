@@ -18,13 +18,13 @@ const rows = [['/silver/', '#silver'], ['/adult/', '#implant'], ['/kids/', '#kid
   const n = SITE.nav.find((x) => x.href === page)!;
   return { label: n.label, href, items: n.children!.map((c) => ({ label: c.label, href: '#' + target[c.href] })) };
 });
-// 분류마다 파란 계열 안에서 다른 색(진한 색 = 큰 카드·라벨, 연한 색 = 배지 배경)
+// 분류마다 브랜드 색 안에서 진남색 → 하늘색으로 차례로 밝아진다(로고 남색 #0a659c · 하늘색 #1cb4e0 사이). 흰 글자가 읽히는 진하기까지만.
 const tone: Record<string, string> = {
-  silver: '--primary: hsl(222, 58%, 25%); --primary-surface: hsl(220, 55%, 95%);',
-  implant: '--primary: hsl(212, 72%, 30%); --primary-surface: hsl(210, 75%, 95%);',
-  natural: '--primary: hsl(200, 80%, 31%); --primary-surface: hsl(198, 80%, 94.5%);',
-  wisdom: '--primary: hsl(232, 45%, 40%); --primary-surface: hsl(232, 60%, 96%);',
-  kids: '--primary: hsl(190, 85%, 30%); --primary-surface: hsl(190, 75%, 94%);',
+  silver: '--primary: hsl(208, 85%, 20%); --primary-surface: hsl(208, 60%, 95%);',
+  implant: '--primary: hsl(205, 88%, 27%); --primary-surface: hsl(205, 65%, 95%);',
+  natural: '--primary: hsl(203, 88%, 33%); --primary-surface: hsl(202, 70%, 94.5%);',
+  wisdom: '--primary: hsl(198, 85%, 36%); --primary-surface: hsl(197, 75%, 94%);',
+  kids: '--primary: hsl(194, 82%, 39%); --primary-surface: hsl(193, 80%, 93.5%);',
 };
 ---
 
