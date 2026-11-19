@@ -107,3 +107,6 @@ export const tel = `tel:${SITE.contact.phone.replace(/-/g, '')}`;
 // 문장이 끝나는 곳(. ? ! 뒤)에서 줄을 바꾼다. 화면에 보이는 설명 글에만 쓴다(검색용 설명에는 쓰지 않음).
 // 받는 쪽 글자에는 whitespace-pre-line이 있어야 줄바꿈이 보인다.
 export const br = (s?: string) => (s ?? '').replace(/([.?!…][”’"']?)\s+(?=[^\s])/g, '$1\n');
+
+// 오픈 전 원장님 확인용: true면 모든 페이지에 '검색에 나오지 않게' 표시. 정식 오픈 때 false로.
+export const prelaunch = true;

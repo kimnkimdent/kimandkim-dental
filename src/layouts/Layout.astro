@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE, url } from '../site';
+import { SITE, url, prelaunch } from '../site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import QuickMenu from '../components/QuickMenu.astro';
@@ -57,7 +57,7 @@ const kw = [...new Set([...keywords, SITE.name, ...topics.slice(0, 8)])].join(',
     <meta name="keywords" content={kw} />
     <meta name="author" content={SITE.fullName} />
     <link rel="canonical" href={canonical} />
-    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <meta name="robots" content={noindex || prelaunch ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     <meta name="geo.region" content="KR-41" />
     <meta name="geo.placename" content="경기도 파주시 야당동" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
