@@ -337,12 +337,7 @@ const { home = false } = Astro.props;
       }
       .from-left { --dx: -6rem; }
       .from-right { --dx: 6rem; }
-      /* 휴대폰: 화면이 좁아 옆 이동은 짧게(넘친 부분은 잘려 화면이 흔들리지 않음), 대신 아래에서 더 크게 올라와 잘 보이게 */
-      @media (max-width: 767px) {
-        .from-left { --dx: -3.2rem; }
-        .from-right { --dx: 3.2rem; }
-        .story-text { --dy: 4rem; }
-      }
+      /* 휴대폰도 PC와 같은 움직임(넘친 부분은 section의 overflow-x: clip으로 잘려 화면이 흔들리지 않음) */
     }
   }
   /* Family Dental Clinic 띠: 같은 문구 8개 중 절반(-50%)만큼 흐르면 처음과 같아져 끊김 없이 반복 */
