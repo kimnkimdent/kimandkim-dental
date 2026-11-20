@@ -15,7 +15,7 @@ const lines = quote.split('\n').map((l) => l.split('|'));
   <span aria-hidden="true" class="pointer-events-none absolute top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 font-serif text-[9rem] leading-none font-bold whitespace-nowrap text-primary opacity-[0.05] select-none md:text-[18rem]">易地思之</span>
 
   <!-- 사진 + 라벨 -->
-  <Image src={doctor} alt="대표원장 김정민" width={200} height={200} class="mx-auto size-20 rounded-full bg-primary-surface object-cover object-top shadow-lg ring-4 ring-background md:size-24" />
+  <span class="mx-auto block size-20 overflow-hidden rounded-full bg-primary-surface shadow-lg ring-4 ring-background md:size-24"><Image src={doctor} alt="대표원장 김정민" width={400} height={400} class="size-full origin-[50%_25%] translate-y-[6%] scale-[1.35] object-cover object-top" /></span>
   <p class="mt-5 t-body font-semibold tracking-[0.3em] text-primary">역지사지 진료 노트</p>
 
   <!-- 본문 -->
