@@ -3,6 +3,7 @@
 // id를 주면 메뉴에서 url('/#id')로 이동할 수 있다.
 import Container from './Container.astro';
 import { br } from '../site';
+import ServiceIcon from './ServiceIcon.astro';
 
 interface Props {
   id?: string;
@@ -12,9 +13,10 @@ interface Props {
   tone?: 'white' | 'surface'; // 배경색. surface=연회색
   align?: 'left' | 'center';
   narrow?: boolean;
+  face?: 'silver' | 'adult' | 'kids'; // 라벨·제목 왼쪽에 진료 과목 캐릭터 얼굴(예: 자주 묻는 질문)
   class?: string;
 }
-const { id, eyebrow, title, lead, tone = 'white', align = 'left', narrow = false, class: className = '' } = Astro.props;
+const { id, eyebrow, title, lead, tone = 'white', align = 'left', narrow = false, face, class: className = '' } = Astro.props;
 ---
 
 <section id={id} class:list={['scroll-mt-20 py-section', tone === 'surface' ? 'bg-surface' : 'bg-background', className]}>
@@ -22,7 +24,7 @@ const { id, eyebrow, title, lead, tone = 'white', align = 'left', narrow = false
     {
       (eyebrow || title || lead) && (
         <div class:list={['mb-12 max-w-prose lg:max-w-none', align === 'center' && 'mx-auto text-center']}>
-          {eyebrow && <p class="mb-3 t-body font-semibold text-primary">{eyebrow}</p>}
+          {eyebrow && (face ? <div class="mb-3 flex items-center gap-3"><span class="flex size-16 shrink-0 items-center justify-center rounded-full bg-[#f2ede9] md:size-[7.2rem]"><ServiceIcon name={face} class="size-[5.2rem] md:size-[5.8rem]" /></span><p class="t-body font-semibold text-primary">{eyebrow}</p></div> : <p class="mb-3 t-body font-semibold text-primary">{eyebrow}</p>)}
           {title && <h2 class="t-headline font-bold whitespace-pre-line">{title.split('|').map((t, i) => <>{i > 0 && <br class="max-lg:hidden" />}{i > 0 && <span class="lg:hidden"> </span>}{t}</>)}</h2>}
           {lead && <p class="mt-4 t-mid whitespace-pre-line text-foreground-muted">{br(lead)}</p>}
         </div>
