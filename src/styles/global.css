@@ -203,7 +203,7 @@
   summary::-webkit-details-marker {
     display: none;
   }
-  @media (prefers-reduced-motion: reduce) {
+  @media not all {
     html {
       scroll-behavior: auto;
     }
@@ -244,8 +244,8 @@
   @variant lg { font-size: 5.6rem; }
 }
 
-/* 첫 화면 배경 영상: "동작 줄이기" 설정이면 영상을 숨기고 첫 장면 사진을 배경으로 보여 준다 */
-@media (prefers-reduced-motion: reduce) {
+/* 움직임·영상은 휴대폰 "동작 줄이기" 설정과 관계없이 항상 보여 준다(원장님 요청). 되돌리려면 "@media not all"을 "@media (prefers-reduced-motion: reduce)"로, "@media all"을 "(…: no-preference)"로 바꾼다 */
+@media not all {
   .hero-video video {
     display: none;
   }

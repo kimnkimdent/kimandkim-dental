@@ -124,7 +124,7 @@ import markLogo from '../../assets/logo/mark.svg';
   /* 헤드 카피 움직임(스크롤에 따라). '동작 줄이기' 설정이면 움직이지 않는다.
      - 첫 화면 제목: 두 줄이 차례로 올라온다(스크롤해도 그대로 보인다).
      - 섹션 제목(h2)·질문 원 안 제목: 화면에 들어올 때 아래에서 올라오며 또렷해진다. */
-  @media (prefers-reduced-motion: no-preference) {
+  @media all {
     .head-line { animation: head-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
     .head-line-2 { animation-delay: 0.25s; }
     :global(main section h2), .head-move { animation: head-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }

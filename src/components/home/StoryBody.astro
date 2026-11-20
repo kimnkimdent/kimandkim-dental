@@ -255,7 +255,7 @@ const { home = false } = Astro.props;
     mask-image: linear-gradient(to right, black 0%, black 35%, transparent 100%);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
+  @media all {
     @keyframes count {
       from { --n: 0; }
     }
@@ -349,14 +349,14 @@ const { home = false } = Astro.props;
 
   /* 대표원장 사진: 세로축을 기준으로 뒤집혀 있다가 화면에 들어오면 빠르게 펴진다(왼쪽으로 넘기듯) */
   .doctor-fold { transform-origin: center; backface-visibility: hidden; }
-  @media (prefers-reduced-motion: no-preference) {
+  @media all {
     .doctor-fold { animation: doctor-flip linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
   }
   @keyframes doctor-flip {
     from { transform: perspective(250rem) rotateY(-100deg); }
     to { transform: perspective(250rem) rotateY(0); }
   }
-  @media (prefers-reduced-motion: reduce) {
+  @media not all {
     .family-track { animation: none; }
   }
 </style>
