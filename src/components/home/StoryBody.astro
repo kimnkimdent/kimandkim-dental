@@ -136,7 +136,7 @@ const { home = false } = Astro.props;
                 </div>
 
                 {/* 글 */}
-                <div class:list={['story-text relative z-10 col-start-2 mt-6', 'from-right md:col-start-3 md:row-start-1 md:mt-0 md:self-center']}>
+                <div class:list={['story-text relative z-10 col-start-2 mt-4', 'from-right md:col-start-3 md:row-start-1 md:mt-0 md:self-center']}>
                   {c.now ? (
                     <p class="text-[4.8rem] leading-none font-extrabold tabular-nums tracking-tight text-primary md:text-[7.6rem]">NOW</p>
                   ) : c.year ? (
@@ -278,7 +278,7 @@ const { home = false } = Astro.props;
       to { transform: scale(1.02) translateY(3%); }
     }
     @keyframes text-in {
-      from { opacity: 0; transform: translateX(var(--dx)) translateY(2rem); }
+      from { opacity: 0; transform: translateX(var(--dx)) translateY(var(--dy, 2rem)); }
     }
     @keyframes pop {
       from { transform: scale(0.4); }
@@ -337,9 +337,11 @@ const { home = false } = Astro.props;
       }
       .from-left { --dx: -6rem; }
       .from-right { --dx: 6rem; }
-      /* 휴대폰: 옆으로 밀리면 화면이 좌우로 흔들리므로 아래에서만 올라온다 */
+      /* 휴대폰: 화면이 좁아 옆 이동은 짧게(넘친 부분은 잘려 화면이 흔들리지 않음), 대신 아래에서 더 크게 올라와 잘 보이게 */
       @media (max-width: 767px) {
-        .from-left, .from-right { --dx: 0rem; }
+        .from-left { --dx: -3.2rem; }
+        .from-right { --dx: 3.2rem; }
+        .story-text { --dy: 4rem; }
       }
     }
   }
