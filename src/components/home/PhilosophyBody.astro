@@ -125,11 +125,17 @@ import markLogo from '../../assets/logo/mark.svg';
      - 첫 화면 제목: 두 줄이 차례로 올라온다(스크롤해도 그대로 보인다).
      - 섹션 제목(h2)·질문 원 안 제목: 화면에 들어올 때 아래에서 올라오며 또렷해진다. */
   @media all {
-    .head-line { animation: head-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-    .head-line-2 { animation-delay: 0.25s; }
+    .head-line { animation: head-loop 6s cubic-bezier(0.2, 0.7, 0.2, 1) infinite both; }
+    .head-line-2 { animation-delay: 0.4s; }
     :global(main section h2), .head-move { animation: head-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
   }
   @keyframes head-in { from { opacity: 0; translate: 0 2.4rem; } }
+  /* 첫 화면 두 줄 제목: 스크롤과 상관없이 아래에서 올라와 잠시 머물렀다가 위로 사라지기를 반복(6초) */
+  @keyframes head-loop {
+    0% { opacity: 0; translate: 0 2.4rem; }
+    15%, 78% { opacity: 1; translate: 0 0; }
+    92%, 100% { opacity: 0; translate: 0 -1.6rem; }
+  }
   @keyframes head-rise { from { opacity: 0; transform: translateY(3rem); letter-spacing: 0.08em; } }
 
   /* 4가지 원칙: 사진이 저절로 천천히 확대·축소를 반복한다(카드마다 시작 시점을 엇갈리게).

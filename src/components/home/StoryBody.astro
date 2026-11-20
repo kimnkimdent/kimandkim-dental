@@ -98,7 +98,7 @@ const { home = false } = Astro.props;
   </section>
 
   <!-- 왼쪽 세로 줄을 따라 내려가는 연대기: 표지 · 사진 · 글이 한 줄에 나란히 -->
-  <section class="story bg-background pt-10 pb-section" aria-label={`${SITE.since}년부터 ${NOW}년까지`}>
+  <section class="story bg-background pt-10 pb-4 md:pb-section" aria-label={`${SITE.since}년부터 ${NOW}년까지`}>
     <Container>
       <ol class="relative">
         {
@@ -160,7 +160,7 @@ const { home = false } = Astro.props;
   <!-- 대표원장 소개(같은 페이지 아래). 메뉴의 '대표원장 소개'가 여기(#doctor)로 온다 -->
   <!-- 대표원장 소개: 사진(왼쪽) · 명조체 인사말과 서명(오른쪽) · 아래 약력/학회 두 칸 -->
   <!-- 대표원장 소개 위: 'Family Dental Clinic'이 옆으로 천천히 흐르는 띠(장식) -->
-  <div aria-hidden="true" class="family-flow overflow-hidden bg-background py-8 md:py-12">
+  <div aria-hidden="true" class="family-flow overflow-hidden bg-background py-4 md:py-12">
     <div class="family-track flex w-max items-center">
       {Array.from({ length: 6 }).map(() => (
         <span class:list={['flex shrink-0 items-center gap-6 pr-6 text-[5.6rem] leading-none font-extrabold tracking-tight whitespace-nowrap text-foreground-subtle/25 md:gap-10 md:pr-10 md:text-[11rem]']}>
@@ -170,7 +170,7 @@ const { home = false } = Astro.props;
     </div>
   </div>
 
-  <section id="doctor" class="scroll-mt-28 bg-background py-section">
+  <section id="doctor" class="scroll-mt-28 bg-background pt-10 pb-section md:pt-section">
     <Container>
       <p class="t-body font-semibold tracking-wide text-primary">대표원장 소개</p>
 
