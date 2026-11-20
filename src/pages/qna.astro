@@ -69,7 +69,7 @@ const tone: Record<string, string> = {
               <span aria-hidden="true" class="t-display leading-none font-extrabold text-primary/15">{String(gi + 1).padStart(2, '0')}</span>
               <ServiceIcon name={face[g.id] ?? 'adult'} class="size-16 md:size-20" />
               <div>
-                <p class="inline-flex rounded-full bg-primary-surface px-4 py-1.5 text-13 font-semibold text-primary">{g.tab}</p>
+                <p class="inline-flex rounded-full bg-primary-surface px-4 py-1.5 text-14 md:text-13 font-semibold text-primary">{g.tab}</p>
                 <h2 class="mt-2 t-headline font-bold">“{g.title}”</h2>
               </div>
             </div>
@@ -77,7 +77,7 @@ const tone: Record<string, string> = {
               {first && (
                 <li id={first.id} class="qna-item relative scroll-mt-28 overflow-hidden rounded-3xl bg-primary p-8 text-primary-foreground shadow-sm md:col-span-2 md:p-10">
                   <span aria-hidden="true" class="pointer-events-none absolute -right-4 -bottom-12 text-[18rem] leading-none font-extrabold opacity-10">Q</span>
-                  <span class="relative inline-flex w-fit items-center rounded-full bg-primary-foreground/15 px-4 py-1.5 text-13 font-semibold">자주 묻는 질문</span>
+                  <span class="relative inline-flex w-fit items-center rounded-full bg-primary-foreground/15 px-4 py-1.5 text-14 md:text-13 font-semibold">자주 묻는 질문</span>
                   <h3 class="relative mt-5 t-head font-bold leading-snug whitespace-pre-line"><span aria-hidden="true">Q. </span>{br(first.q)}</h3>
                   <p class="relative mt-4 t-mid leading-relaxed whitespace-pre-line opacity-90"><span class="font-bold">A. </span>{br(first.a)}</p>
                 </li>

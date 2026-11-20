@@ -157,8 +157,10 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
         cavity.map((c) => (
           <li class="flex flex-col rounded-3xl bg-background p-6 shadow-sm">
             <Image src={c.img} alt={`${c.t} 그림`} widths={[300, 600]} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw" class="mx-auto aspect-square h-auto w-full max-w-[22rem] object-contain" />
-            <span class="mt-4 self-start rounded-full bg-primary-surface px-3 py-1 t-body font-bold text-primary">{c.s}</span>
-            <h3 class="mt-3 t-head font-bold">{c.t}</h3>
+            <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span class="rounded-full bg-primary-surface px-3 py-1 t-body font-bold whitespace-nowrap text-primary">{c.s}</span>
+              <h3 class="t-head font-bold">{c.t}</h3>
+            </div>
             <p class="mt-2 t-body leading-relaxed text-foreground-muted">{c.d}</p>
           </li>
         ))
@@ -198,7 +200,7 @@ const worries = ["이를 빼야 한다는데, 정말 살릴 방법은 없을까�
       <p class="t-mid leading-relaxed text-foreground-muted">사랑니는 반듯하게 난 경우부터 비스듬히 눕거나 뼈 속에 묻힌 경우(매복)까지 다양합니다. 신경과 가깝다면 CT로 거리를 먼저 확인하고 계획합니다.</p>
     </div>
     <h3 class="mt-10 mb-4 t-head font-bold">발치 과정</h3>
-    <Process items={[{ img: ws1, title: '위치·신경 확인', text: 'CT로 사랑니 방향과 신경까지의 거리를 확인합니다.' }, { img: ws2, title: '마취', text: '충분히 마취가 된 것을 확인한 뒤 시작합니다.' }, { img: ws3, title: '발치·봉합', text: '필요하면 나눠서 빼고, 잇몸을 꿰매 마무리합니다.' }, { img: ws4, title: '실밥 제거', text: '7~10일 뒤 실밥을 풀고 아문 상태를 확인합니다.' }]} />
+    <Process trim items={[{ img: ws1, title: '위치·신경 확인', text: 'CT로 사랑니 방향과 신경까지의 거리를 확인합니다.' }, { img: ws2, title: '마취', text: '충분히 마취가 된 것을 확인한 뒤 시작합니다.' }, { img: ws3, title: '발치·봉합', text: '필요하면 나눠서 빼고, 잇몸을 꿰매 마무리합니다.' }, { img: ws4, title: '실밥 제거', text: '7~10일 뒤 실밥을 풀고 아문 상태를 확인합니다.' }]} />
     <h3 class="mt-10 mb-4 t-head font-bold">뽑은 뒤에는 이렇게 해 주세요</h3>
     <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {['거즈는 1~2시간 꼭 물고 계셔 주세요.', '첫날은 얼음찜질로 부기를 줄여 주세요.', '2~3일은 빨대·흡연·음주를 피해 주세요.', '피가 계속 나거나 부기가 심해지면 바로 연락해 주세요.'].map((t) => <li class="flex gap-3 rounded-2xl bg-surface px-5 py-4 t-body"><span aria-hidden="true" class="font-bold text-primary">✓</span>{t}</li>)}

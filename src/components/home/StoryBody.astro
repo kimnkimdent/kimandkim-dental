@@ -115,7 +115,7 @@ const { home = false } = Astro.props;
                   {!c.teeth && (
                   <span class:list={[
                     'story-dot flex items-center justify-center rounded-full border-4 border-background font-bold shadow-md',
-                    c.year ? 'size-14 bg-primary text-[1.3rem] text-primary-foreground md:size-24 md:text-[2rem]' : 'size-14 bg-primary-surface text-[1.1rem] text-primary md:size-24 md:text-[1.4rem]',
+                    c.year ? 'size-14 bg-primary text-[1.4rem] text-primary-foreground md:size-24 md:text-[2rem]' : 'size-14 bg-primary-surface text-[1.2rem] text-primary md:size-24 md:text-[1.4rem]',
                   ]}>
                     {c.now ? <Mark tone="white" class="h-8 w-auto md:h-12" /> : c.teeth ? (
                       <span role="img" aria-label={c.mark} class="flex items-center justify-center"><FamilyTeeth count={c.teeth} class="size-[3.4rem] md:size-[6rem]" /></span>

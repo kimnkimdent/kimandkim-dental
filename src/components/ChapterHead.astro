@@ -12,10 +12,10 @@ const { id, index, title, lead, items, photo, position = '50% 40%' } = Astro.pro
 const no = (n: number) => String(n).padStart(2, '0');
 ---
 
-<section id={id} class="relative isolate scroll-mt-20 overflow-hidden bg-secondary text-white" aria-labelledby={`${id}-title`}>
+<section id={id} class="relative isolate flex min-h-[31.4rem] scroll-mt-20 items-center overflow-hidden bg-secondary text-white md:block md:min-h-0" aria-labelledby={`${id}-title`}>
   {photo && <Image src={photo} alt="" aria-hidden="true" widths={[800, 1600]} sizes="100vw" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${position}`} />}
   {photo && <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-secondary/90 via-secondary/75 to-secondary/45"></div>}
-  <Container class="grid gap-8 py-16 md:grid-cols-[1fr_auto] md:items-end md:py-24">
+  <Container class="grid w-full gap-6 py-10 md:gap-8 md:grid-cols-[1fr_auto] md:items-end md:py-24">
     <div class="flex items-end gap-5 md:gap-8">
       <span aria-hidden="true" class="text-[6.4rem] leading-[0.8] font-extrabold tracking-tight text-primary-bright tabular-nums md:text-[10rem]">{no(index)}</span>
       <div>
