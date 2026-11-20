@@ -43,18 +43,18 @@ const no = (n: number) => String(n).padStart(2, '0');
     .ch-no {
       animation: ch-no-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
       animation-timeline: view();
-      animation-range: entry 10% cover 40%;
+      animation-range: entry 0% cover 60%;
     }
     .ch-copy {
       animation: ch-copy-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
       animation-timeline: view();
-      animation-range: entry 20% cover 45%;
+      animation-range: entry 10% cover 65%;
     }
   }
   @keyframes ch-no-in {
-    from { opacity: 0; transform: translateX(-4rem) scale(0.6); }
+    from { opacity: 0; transform: translateX(-10rem) scale(0.3); }
   }
   @keyframes ch-copy-in {
-    from { opacity: 0; transform: translateY(3.2rem); }
+    from { opacity: 0; transform: translateY(6.4rem); }
   }
 </style>
