@@ -132,9 +132,20 @@ import markLogo from '../../assets/logo/mark.svg';
   @keyframes head-in { from { opacity: 0; translate: 0 2.4rem; } }
   @keyframes head-rise { from { opacity: 0; transform: translateY(3rem); letter-spacing: 0.08em; } }
 
-  /* 4가지 원칙: 카드에 마우스를 올리면 사진이 천천히 확대된다 */
-  .rule-card :global(img) { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
-  .rule-card:hover :global(img) { transform: scale(1.08); }
+  /* 4가지 원칙: 사진이 저절로 천천히 확대·축소를 반복한다(카드마다 시작 시점을 엇갈리게).
+     PC에서 마우스를 올리면 조금 더 확대된다 */
+  .rule-card :global(img) {
+    animation: rule-zoom 9s ease-in-out infinite;
+    transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .rule-card:nth-child(2) :global(img) { animation-delay: -2.25s; }
+  .rule-card:nth-child(3) :global(img) { animation-delay: -4.5s; }
+  .rule-card:nth-child(4) :global(img) { animation-delay: -6.75s; }
+  .rule-card:hover :global(img) { transform: scale(1.05); }
+  @keyframes rule-zoom {
+    0%, 100% { scale: 1; }
+    50% { scale: 1.1; }
+  }
 
   :global(.soft-photo) {
     mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
