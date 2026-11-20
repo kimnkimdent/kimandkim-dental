@@ -178,7 +178,13 @@ const homeTips = [
       }
     </ul>
 
-    <div class="mt-6 rounded-3xl bg-primary-surface p-7 md:p-8">
+    <div class="relative isolate mt-6 overflow-hidden rounded-3xl bg-primary-surface p-7 md:p-8">
+      <!-- 배경 장식: 집 모양 픽토그램(오른쪽 아래에 크게, 연하게) -->
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none absolute -right-6 -bottom-8 -z-10 size-56 text-primary opacity-[0.08] md:size-72">
+        <path d="M3 10.5 12 3l9 7.5" />
+        <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5" />
+        <path d="M16 5.5V3.5h2v3.7" />
+      </svg>
       <h3 class="t-head font-bold text-primary">집에서는 이렇게 챙겨 주세요</h3>
       <ul class="mt-4 grid gap-2.5 md:grid-cols-2">
         {homeTips.map((t) => <li class="flex gap-2.5 t-body leading-relaxed text-foreground"><span aria-hidden="true" class="font-bold text-primary">✓</span>{t}</li>)}
