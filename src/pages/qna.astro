@@ -83,12 +83,12 @@ const tone: Record<string, string> = {
                 </li>
               )}
               {rest.map((it) => (
-                <li id={it.id} class="qna-item scroll-mt-28 rounded-3xl border border-border bg-background p-6 transition-colors hover:border-primary md:p-7">
-                  <h3 class="flex gap-3 t-mid font-bold leading-snug whitespace-pre-line">
+                <li id={it.id} class="qna-item scroll-mt-28 rounded-3xl border border-border bg-background px-4 py-5 transition-colors hover:border-primary md:p-7">
+                  <h3 class="flex gap-2.5 text-[1.8rem] font-bold leading-snug whitespace-pre-line md:gap-3 md:t-mid">
                     <span aria-hidden="true" class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-surface t-body font-extrabold text-primary">Q</span>
                     <span class="pt-0.5">{br(it.q)}</span>
                   </h3>
-                  <p class="mt-3 pl-11 t-body leading-relaxed whitespace-pre-line text-foreground-muted"><span class="font-bold text-primary">A. </span>{br(it.a)}</p>
+                  <p class="mt-3 pl-[4.2rem] text-[1.6rem] leading-relaxed whitespace-pre-line text-foreground-muted md:pl-11 md:t-body"><span class="font-bold text-primary">A. </span>{br(it.a)}</p>
                 </li>
               ))}
             </ul>
