@@ -83,11 +83,16 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
     <ol class="grid gap-3 md:grid-cols-3 lg:mx-auto lg:max-w-[96rem]">
       {
         checkups.map((c, i) => (
-          <li class="overflow-hidden rounded-3xl border border-border pb-7 text-center">
-            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="mb-5 aspect-square h-auto w-full object-cover" />
-            <p class="t-head font-bold text-primary">{c.t}</p>
-            <p class="mt-2 px-7 t-mid whitespace-pre-line">{br(c.d)}</p>
-            <p class="mt-3 px-7 t-body leading-relaxed text-foreground-muted">{c.x}</p>
+          <li class="flex flex-col overflow-hidden rounded-3xl border border-border bg-background">
+            {/* 글 크기·색은 위 '처음 오는 아이' 카드(ImageCard)와 같게: 제목 t-head 굵게, 설명 t-body 회색 */}
+            <Image src={checkupImgs[i]} alt={`${c.t} 영유아 구강검진 그림`} widths={[320, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="aspect-square h-auto w-full object-cover" />
+            <div class="flex flex-1 flex-col border-t border-border p-6">
+              <h3 class="flex items-center gap-2.5 t-head font-bold">
+                <span class="flex h-8 shrink-0 items-center justify-center rounded-full bg-primary px-3 t-body font-bold text-primary-foreground">{c.t}</span>
+                {br(c.d)}
+              </h3>
+              <p class="mt-2 t-body leading-relaxed text-foreground-muted">{c.x}</p>
+            </div>
           </li>
         ))
       }
