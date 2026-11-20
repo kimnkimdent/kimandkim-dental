@@ -17,8 +17,8 @@ const no = (n: number) => String(n).padStart(2, '0');
   {photo && <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-secondary/90 via-secondary/75 to-secondary/45"></div>}
   <Container class="grid w-full gap-6 py-10 md:gap-8 md:grid-cols-[1fr_auto] md:items-end md:py-24">
     <div class="flex items-end gap-5 md:gap-8">
-      <span aria-hidden="true" class="text-[6.4rem] leading-[0.8] font-extrabold tracking-tight text-primary-bright tabular-nums md:text-[10rem]">{no(index)}</span>
-      <div>
+      <span aria-hidden="true" class="ch-no text-[6.4rem] leading-[0.8] font-extrabold tracking-tight text-primary-bright tabular-nums md:text-[10rem]">{no(index)}</span>
+      <div class="ch-copy">
         <p class="t-body font-semibold tracking-[0.2em] text-white/60">{no(index)} / {no(items.length)}</p>
         <h2 id={`${id}-title`} class="mt-1 text-[2.8rem] leading-tight font-bold md:text-[4rem]">{title}</h2>
         {lead && <p class="mt-2 t-mid text-white/80">{lead}</p>}
@@ -35,3 +35,26 @@ const no = (n: number) => String(n).padStart(2, '0');
     </ol>
   </Container>
 </section>
+
+<style>
+  /* 스크롤 움직임: 띠지가 화면에 들어오면 큰 숫자는 왼쪽에서 커지며 들어오고, 제목 묶음은 조금 늦게 아래에서 올라온다.
+     띠지마다 새 단락이 시작된다는 느낌을 준다. 지원하지 않는 브라우저에서는 움직임 없이 그대로 보인다. */
+  @supports (animation-timeline: view()) {
+    .ch-no {
+      animation: ch-no-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+    .ch-copy {
+      animation: ch-copy-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+  }
+  @keyframes ch-no-in {
+    from { opacity: 0; transform: translateX(-4rem) scale(0.6); }
+  }
+  @keyframes ch-copy-in {
+    from { opacity: 0; transform: translateY(3.2rem); }
+  }
+</style>
