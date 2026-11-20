@@ -281,3 +281,8 @@
   --primary-bright: hsl(193, 85%, 56%);
   --primary-surface: hsl(193, 85%, 94.5%);
 }
+
+/* 제목 속 하늘색 핵심 단어: 제목보다 2px 크게 */
+.accent-word {
+  font-size: calc(1em + 2px);
+}

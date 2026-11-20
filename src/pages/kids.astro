@@ -67,7 +67,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 
   <ChapterHead id="first" photo={kidCheckup} position="60% 40%" index={1} title="처음 오는 아이" lead="치과가 무서운 아이를 위해" items={chapters} />
 
-  <Section tone="surface" title="치과가 무서운 아이도 편안해지도록,|먼저 말하고 보여 주고 준비될 때까지 기다립니다">
+  <Section tone="surface" title="치과가 무서운 아이도 *편안해지도록*,|먼저 말하고 보여 주고 준비될 때까지 *기다립니다*">
     <ol class="grid gap-4 md:grid-cols-3 lg:mx-auto lg:max-w-[96rem]">
       {([
         [first1, '무엇을 할지 말합니다', '오늘 무엇을 할지 아이 눈높이에 맞는 말로 먼저 이야기합니다.'],
@@ -79,7 +79,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 
   <ChapterHead id="checkup" photo={chTreat} position="50% 28%" index={2} title="영유아 구강검진" lead="무료 국가 검진과 충치 예방" items={chapters} />
 
-  <Section title="나라에서 지원하는 무료 영유아 구강검진으로,|시기에 맞춰 아이 치아를 꼼꼼히 살핍니다">
+  <Section title="나라에서 지원하는 *무료 영유아 구강검진*으로,|시기에 맞춰 아이 치아를 꼼꼼히 살핍니다">
     <ol class="grid gap-3 md:grid-cols-3 lg:mx-auto lg:max-w-[96rem]">
       {
         checkups.map((c, i) => (
@@ -97,7 +97,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 
   <ChapterHead id="care" photo={kidFriendly} position="65% 40%" index={3} title="어린이 치료" lead="유치부터 영구치까지 아이 눈높이로" items={chapters} />
 
-  <Section tone="surface" title="충치부터 삐뚤게 나는 이, 다친 앞니까지,|아이가 덜 힘들도록 차근차근 살핍니다">
+  <Section tone="surface" title="충치부터 삐뚤게 나는 이, 다친 앞니까지,|아이가 *덜 힘들도록* 차근차근 살핍니다">
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div class="rounded-3xl bg-background p-6 shadow-sm">
         <Image src={tKids} alt="치과에서 아이 치아에 빛을 쬐어 치료하는 모습" widths={[480, 960]} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw" class="mb-4 aspect-[3/2] h-auto w-full rounded-2xl object-cover" />
@@ -124,7 +124,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 
   <ChapterHead id="teen" photo={chTeen} position="50% 40%" index={4} title="청소년 치아 관리" lead="바쁜 중·고등학생 시기에도" items={chapters} />
 
-  <Section title="공부로 바쁜 시기에도,|한 번 올 때 필요한 것을 꼼꼼히 확인합니다">
+  <Section title="공부로 바쁜 시기에도,|한 번 올 때 필요한 것을 *꼼꼼히 확인*합니다">
     <div class="relative isolate overflow-hidden rounded-3xl p-7 text-background shadow-sm md:p-12">
       <Image src={teenBg} alt="" widths={[800, 1400]} sizes="100vw" class="absolute inset-0 -z-10 h-full w-full object-cover" />
       <div class="absolute inset-0 -z-10 bg-foreground/75" aria-hidden="true"></div>
@@ -147,7 +147,7 @@ const chapters = SITE.nav.find((n) => n.href === '/kids/')!.children!;
 
   <Disclaimer />
 
-  <Section face="kids" eyebrow="자주 묻는 질문" title="우리 아이 치아">
+  <Section face="kids" eyebrow="자주 묻는 질문" title="*우리 아이 치아*">
     <FaqLinks group="kids" />
   </Section>
 </Layout>

@@ -18,6 +18,7 @@ import deskConsult from '../../assets/photos/desk-consult.jpg';
 import deskSmile from '../../assets/photos/sofa-laugh.jpg';
 import kidFriendly from '../../assets/photos/kid-friendly.jpg';
 import exterior from '../../assets/photos/exterior.jpg';
+import Accent from '../Accent.astro';
 
 // 지금 연도: 사이트를 올릴(반영할) 때의 연도로 자동으로 바뀐다(2027년에 다시 올리면 2027).
 // 약력 = 학력·경력·수료(학회 회원 줄은 빼고), 학회 = memberOf(한글 이름 + 영문 약칭)
@@ -30,35 +31,35 @@ const chapters = [
   {
     mark: String(SITE.since),
     year: SITE.since,
-    title: '운정 야당동의\n작은 약속',
+    title: '운정 야당동의\n*작은 약속*',
     text: '우리 동네 가족들이 믿고 다닐 수 있는 치과. 2012년, 파주 운정 야당동에서 그 약속으로 문을 열었습니다.',
     photos: [{ src: exterior, alt: '김앤김치과가 있는 대흥프라자 건물 외관' }], // 사진 파일 위쪽 하늘을 잘라 건물이 더 보이게 맞춤
   },
   {
     mark: '처음엔 혼자',
     teeth: 1 as const, // 표지 안 치아 수 = 가족 수(혼자 → 가족 → 세 세대)
-    title: '처음엔\n혼자 오셨습니다',
+    title: '처음엔\n*혼자* 오셨습니다',
     text: '치과 문을 열기까지 망설이셨던 분이 상담을 받고, 치료를 마치고, 다음 검진 날짜를 잡고 가셨습니다.',
     photos: [{ src: deskConsult, alt: '상담실에서 엑스레이를 보며 여성 환자와 상담하는 대표원장' }],
   },
   {
     mark: '가족과 함께',
     teeth: 2 as const,
-    title: '다음엔\n가족과 함께',
+    title: '다음엔\n*가족과 함께*',
     text: '처음 혼자 오셨던 분이 어느새 배우자분과, 자녀분과, 부모님까지 모시고 오십니다.',
     photos: [{ src: whiteTreat, alt: '흰 가운을 입고 직원과 함께 진료하는 대표원장' }],
   },
   {
     mark: '3대 가족의 시간',
     teeth: 3 as const,
-    title: '할머니의 틀니,\n손주의 첫 불소',
+    title: '*할머니의 틀니*,\n*손주의 첫 불소*',
     text: '할머니가 틀니를 맞추시던 날, 손주는 첫 불소를 바르고 갑니다. 그 믿음이 쌓여 지금의 김앤김치과가 되었습니다.',
     photos: [{ src: kidFriendly, alt: '아이 눈높이에 맞춰 설명하는 대표원장' }],
   },
   {
     mark: String(NOW),
     year: NOW,
-    title: '지금도,\n같은 자리에서',
+    title: '지금도,\n*같은 자리*에서',
     text: '공감은 따뜻하게, 진단은 정확하게. 모두가 환하게 웃으며 인사하는 동네 치과로 함께하겠습니다.',
     photos: [{ src: deskSmile, alt: '대기실 소파에서 환자와 태블릿을 보며 함께 웃는 대표원장 김정민' }],
     now: true,
@@ -146,7 +147,7 @@ const { home = false } = Astro.props;
                   ) : (
                     <p class="t-body font-bold tracking-widest text-primary">{c.mark}</p>
                   )}
-                  <h2 class="mt-3 t-headline font-bold whitespace-pre-line">{c.title}</h2>
+                  <h2 class="mt-3 t-headline font-extrabold whitespace-pre-line"><Accent text={c.title} /></h2>
                   <p class="mt-4 max-w-[44rem] t-mid leading-relaxed text-foreground-muted whitespace-pre-line">{br(c.text)}</p>
                 </div>
               </li>
